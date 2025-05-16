@@ -7,17 +7,135 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.Xyz
+namespace Pulumi.Yandex
 {
     /// <summary>
-    /// The provider type for the xyz package. By default, resources use package-wide configuration
+    /// The provider type for the yandex package. By default, resources use package-wide configuration
     /// settings, however an explicit `Provider` instance may be created and passed during resource
     /// construction to achieve fine-grained programmatic control over provider settings. See the
     /// [documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.
     /// </summary>
-    [XyzResourceType("pulumi:providers:xyz")]
+    [YandexResourceType("pulumi:providers:yandex")]
     public partial class Provider : global::Pulumi.ProviderResource
     {
+        /// <summary>
+        /// The ID of the [Cloud](https://yandex.cloud/docs/resource-manager/concepts/resources-hierarchy#cloud) to apply any
+        /// resources to. This can also be specified using environment variable `YC_CLOUD_ID`.
+        /// </summary>
+        [Output("cloudId")]
+        public Output<string?> CloudId { get; private set; } = null!;
+
+        /// <summary>
+        /// The endpoint for API calls, default value is **api.cloud.yandex.net:443**. This can also be defined by environment
+        /// variable `YC_ENDPOINT`.
+        /// </summary>
+        [Output("endpoint")]
+        public Output<string?> Endpoint { get; private set; } = null!;
+
+        /// <summary>
+        /// The ID of the [Folder](https://yandex.cloud/docs/resource-manager/concepts/resources-hierarchy#folder) to operate under,
+        /// if not specified by a given resource. This can also be specified using environment variable `YC_FOLDER_ID`.
+        /// </summary>
+        [Output("folderId")]
+        public Output<string?> FolderId { get; private set; } = null!;
+
+        /// <summary>
+        /// The ID of the [Cloud Organization](https://yandex.cloud/docs/organization/quickstart) to operate under.
+        /// </summary>
+        [Output("organizationId")]
+        public Output<string?> OrganizationId { get; private set; } = null!;
+
+        /// <summary>
+        /// Profile name to use in the shared credentials file. Default value is `default`.
+        /// </summary>
+        [Output("profile")]
+        public Output<string?> Profile { get; private set; } = null!;
+
+        /// <summary>
+        /// [The region](https://yandex.cloud/docs/overview/concepts/region) where operations will take place. For example
+        /// `ru-central1`.
+        /// </summary>
+        [Output("regionId")]
+        public Output<string?> RegionId { get; private set; } = null!;
+
+        /// <summary>
+        /// Contains either a path to or the contents of the [Service Account
+        /// file](https://yandex.cloud/docs/iam/concepts/authorization/key) in JSON format. This can also be specified using
+        /// environment variable `YC_SERVICE_ACCOUNT_KEY_FILE`. You can read how to create service account key file
+        /// [here](https://yandex.cloud/docs/iam/operations/iam-token/create-for-sa#keys-create). &gt; Only one of `token` or
+        /// `service_account_key_file` must be specified. &gt; One can authenticate via instance service account from inside a compute
+        /// instance. In order to use this method, omit both `token`/`service_account_key_file` and attach service account to the
+        /// instance. [Working with Yandex Cloud from inside an
+        /// instance](https://yandex.cloud/docs/compute/operations/vm-connect/auth-inside-vm).
+        /// </summary>
+        [Output("serviceAccountKeyFile")]
+        public Output<string?> ServiceAccountKeyFile { get; private set; } = null!;
+
+        /// <summary>
+        /// Shared credentials file path. Supported keys: `storage_access_key` and `storage_secret_key`. &gt; The `storage_access_key`
+        /// and `storage_secret_key` attributes from the shared credentials file are used only when the provider and a storage
+        /// data/resource do not have an access/secret keys explicitly specified.
+        /// </summary>
+        [Output("sharedCredentialsFile")]
+        public Output<string?> SharedCredentialsFile { get; private set; } = null!;
+
+        /// <summary>
+        /// Yandex Cloud Object Storage access key, which is used when a storage data/resource doesn't have an access key explicitly
+        /// specified. This can also be specified using environment variable `YC_STORAGE_ACCESS_KEY`.
+        /// </summary>
+        [Output("storageAccessKey")]
+        public Output<string?> StorageAccessKey { get; private set; } = null!;
+
+        /// <summary>
+        /// Yandex Cloud [Object Storage Endpoint](https://yandex.cloud/docs/storage/s3/#request-url), which is used to connect to
+        /// `S3 API`. Default value is **storage.yandexcloud.net**.
+        /// </summary>
+        [Output("storageEndpoint")]
+        public Output<string?> StorageEndpoint { get; private set; } = null!;
+
+        /// <summary>
+        /// Yandex Cloud Object Storage secret key, which is used when a storage data/resource doesn't have a secret key explicitly
+        /// specified. This can also be specified using environment variable `YC_STORAGE_SECRET_KEY`.
+        /// </summary>
+        [Output("storageSecretKey")]
+        public Output<string?> StorageSecretKey { get; private set; } = null!;
+
+        /// <summary>
+        /// Security token or IAM token used for authentication in Yandex Cloud. Check
+        /// [documentation](https://yandex.cloud/docs/iam/operations/iam-token/create) about how to create IAM token. This can also
+        /// be specified using environment variable `YC_TOKEN`.
+        /// </summary>
+        [Output("token")]
+        public Output<string?> Token { get; private set; } = null!;
+
+        /// <summary>
+        /// Yandex Cloud Message Queue service access key, which is used when a YMQ queue resource doesn't have an access key
+        /// explicitly specified. This can also be specified using environment variable `YC_MESSAGE_QUEUE_ACCESS_KEY`.
+        /// </summary>
+        [Output("ymqAccessKey")]
+        public Output<string?> YmqAccessKey { get; private set; } = null!;
+
+        /// <summary>
+        /// Yandex Cloud Message Queue service endpoint. Default value is **message-queue.api.cloud.yandex.net**.
+        /// </summary>
+        [Output("ymqEndpoint")]
+        public Output<string?> YmqEndpoint { get; private set; } = null!;
+
+        /// <summary>
+        /// Yandex Cloud Message Queue service secret key, which is used when a YMQ queue resource doesn't have a secret key
+        /// explicitly specified. This can also be specified using environment variable `YC_MESSAGE_QUEUE_SECRET_KEY`.
+        /// </summary>
+        [Output("ymqSecretKey")]
+        public Output<string?> YmqSecretKey { get; private set; } = null!;
+
+        /// <summary>
+        /// The default [availability zone](https://yandex.cloud/docs/overview/concepts/geo-scope) to operate under, if not
+        /// specified by a given resource. This can also be specified using environment variable `YC_ZONE`.
+        /// </summary>
+        [Output("zone")]
+        public Output<string?> Zone { get; private set; } = null!;
+
+
         /// <summary>
         /// Create a Provider resource with the given unique name, arguments, and options.
         /// </summary>
@@ -26,7 +144,7 @@ namespace Pulumi.Xyz
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public Provider(string name, ProviderArgs? args = null, CustomResourceOptions? options = null)
-            : base("xyz", name, args ?? new ProviderArgs(), MakeResourceOptions(options, ""))
+            : base("yandex", name, args ?? new ProviderArgs(), MakeResourceOptions(options, ""))
         {
         }
 
@@ -35,6 +153,12 @@ namespace Pulumi.Xyz
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
+                AdditionalSecretOutputs =
+                {
+                    "storageSecretKey",
+                    "token",
+                    "ymqSecretKey",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -46,16 +170,176 @@ namespace Pulumi.Xyz
         /// This function returns a Terraform config object with terraform-namecased keys,to be used with the Terraform Module Provider.
         /// </summary>
         public global::Pulumi.Output<ProviderTerraformConfigResult> TerraformConfig()
-            => global::Pulumi.Deployment.Instance.Call<ProviderTerraformConfigResult>("pulumi:providers:xyz/terraformConfig", CallArgs.Empty, this);
+            => global::Pulumi.Deployment.Instance.Call<ProviderTerraformConfigResult>("pulumi:providers:yandex/terraformConfig", CallArgs.Empty, this);
     }
 
     public sealed class ProviderArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// A region which should be used.
+        /// The ID of the [Cloud](https://yandex.cloud/docs/resource-manager/concepts/resources-hierarchy#cloud) to apply any
+        /// resources to. This can also be specified using environment variable `YC_CLOUD_ID`.
         /// </summary>
-        [Input("region", json: true)]
-        public Input<Pulumi.Xyz.Region.Region>? Region { get; set; }
+        [Input("cloudId")]
+        public Input<string>? CloudId { get; set; }
+
+        /// <summary>
+        /// The endpoint for API calls, default value is **api.cloud.yandex.net:443**. This can also be defined by environment
+        /// variable `YC_ENDPOINT`.
+        /// </summary>
+        [Input("endpoint")]
+        public Input<string>? Endpoint { get; set; }
+
+        /// <summary>
+        /// The ID of the [Folder](https://yandex.cloud/docs/resource-manager/concepts/resources-hierarchy#folder) to operate under,
+        /// if not specified by a given resource. This can also be specified using environment variable `YC_FOLDER_ID`.
+        /// </summary>
+        [Input("folderId")]
+        public Input<string>? FolderId { get; set; }
+
+        /// <summary>
+        /// Explicitly allow the provider to perform "insecure" SSL requests. If omitted, default value is `false`.
+        /// </summary>
+        [Input("insecure", json: true)]
+        public Input<bool>? Insecure { get; set; }
+
+        /// <summary>
+        /// This is the maximum number of times an API call is retried, in the case where requests are being throttled or
+        /// experiencing transient failures. The delay between the subsequent API calls increases exponentially.
+        /// </summary>
+        [Input("maxRetries", json: true)]
+        public Input<int>? MaxRetries { get; set; }
+
+        /// <summary>
+        /// The ID of the [Cloud Organization](https://yandex.cloud/docs/organization/quickstart) to operate under.
+        /// </summary>
+        [Input("organizationId")]
+        public Input<string>? OrganizationId { get; set; }
+
+        /// <summary>
+        /// Disable use of TLS. Default value is `false`.
+        /// </summary>
+        [Input("plaintext", json: true)]
+        public Input<bool>? Plaintext { get; set; }
+
+        /// <summary>
+        /// Profile name to use in the shared credentials file. Default value is `default`.
+        /// </summary>
+        [Input("profile")]
+        public Input<string>? Profile { get; set; }
+
+        /// <summary>
+        /// [The region](https://yandex.cloud/docs/overview/concepts/region) where operations will take place. For example
+        /// `ru-central1`.
+        /// </summary>
+        [Input("regionId")]
+        public Input<string>? RegionId { get; set; }
+
+        /// <summary>
+        /// Contains either a path to or the contents of the [Service Account
+        /// file](https://yandex.cloud/docs/iam/concepts/authorization/key) in JSON format. This can also be specified using
+        /// environment variable `YC_SERVICE_ACCOUNT_KEY_FILE`. You can read how to create service account key file
+        /// [here](https://yandex.cloud/docs/iam/operations/iam-token/create-for-sa#keys-create). &gt; Only one of `token` or
+        /// `service_account_key_file` must be specified. &gt; One can authenticate via instance service account from inside a compute
+        /// instance. In order to use this method, omit both `token`/`service_account_key_file` and attach service account to the
+        /// instance. [Working with Yandex Cloud from inside an
+        /// instance](https://yandex.cloud/docs/compute/operations/vm-connect/auth-inside-vm).
+        /// </summary>
+        [Input("serviceAccountKeyFile")]
+        public Input<string>? ServiceAccountKeyFile { get; set; }
+
+        /// <summary>
+        /// Shared credentials file path. Supported keys: `storage_access_key` and `storage_secret_key`. &gt; The `storage_access_key`
+        /// and `storage_secret_key` attributes from the shared credentials file are used only when the provider and a storage
+        /// data/resource do not have an access/secret keys explicitly specified.
+        /// </summary>
+        [Input("sharedCredentialsFile")]
+        public Input<string>? SharedCredentialsFile { get; set; }
+
+        /// <summary>
+        /// Yandex Cloud Object Storage access key, which is used when a storage data/resource doesn't have an access key explicitly
+        /// specified. This can also be specified using environment variable `YC_STORAGE_ACCESS_KEY`.
+        /// </summary>
+        [Input("storageAccessKey")]
+        public Input<string>? StorageAccessKey { get; set; }
+
+        /// <summary>
+        /// Yandex Cloud [Object Storage Endpoint](https://yandex.cloud/docs/storage/s3/#request-url), which is used to connect to
+        /// `S3 API`. Default value is **storage.yandexcloud.net**.
+        /// </summary>
+        [Input("storageEndpoint")]
+        public Input<string>? StorageEndpoint { get; set; }
+
+        [Input("storageSecretKey")]
+        private Input<string>? _storageSecretKey;
+
+        /// <summary>
+        /// Yandex Cloud Object Storage secret key, which is used when a storage data/resource doesn't have a secret key explicitly
+        /// specified. This can also be specified using environment variable `YC_STORAGE_SECRET_KEY`.
+        /// </summary>
+        public Input<string>? StorageSecretKey
+        {
+            get => _storageSecretKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _storageSecretKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        [Input("token")]
+        private Input<string>? _token;
+
+        /// <summary>
+        /// Security token or IAM token used for authentication in Yandex Cloud. Check
+        /// [documentation](https://yandex.cloud/docs/iam/operations/iam-token/create) about how to create IAM token. This can also
+        /// be specified using environment variable `YC_TOKEN`.
+        /// </summary>
+        public Input<string>? Token
+        {
+            get => _token;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _token = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// Yandex Cloud Message Queue service access key, which is used when a YMQ queue resource doesn't have an access key
+        /// explicitly specified. This can also be specified using environment variable `YC_MESSAGE_QUEUE_ACCESS_KEY`.
+        /// </summary>
+        [Input("ymqAccessKey")]
+        public Input<string>? YmqAccessKey { get; set; }
+
+        /// <summary>
+        /// Yandex Cloud Message Queue service endpoint. Default value is **message-queue.api.cloud.yandex.net**.
+        /// </summary>
+        [Input("ymqEndpoint")]
+        public Input<string>? YmqEndpoint { get; set; }
+
+        [Input("ymqSecretKey")]
+        private Input<string>? _ymqSecretKey;
+
+        /// <summary>
+        /// Yandex Cloud Message Queue service secret key, which is used when a YMQ queue resource doesn't have a secret key
+        /// explicitly specified. This can also be specified using environment variable `YC_MESSAGE_QUEUE_SECRET_KEY`.
+        /// </summary>
+        public Input<string>? YmqSecretKey
+        {
+            get => _ymqSecretKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _ymqSecretKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// The default [availability zone](https://yandex.cloud/docs/overview/concepts/geo-scope) to operate under, if not
+        /// specified by a given resource. This can also be specified using environment variable `YC_ZONE`.
+        /// </summary>
+        [Input("zone")]
+        public Input<string>? Zone { get; set; }
 
         public ProviderArgs()
         {

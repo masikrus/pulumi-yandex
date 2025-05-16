@@ -4,7 +4,7 @@
 using System;
 using System.Collections.Immutable;
 
-namespace Pulumi.Xyz
+namespace Pulumi.Yandex
 {
     public static class Config
     {
@@ -30,16 +30,218 @@ namespace Pulumi.Xyz
             }
         }
 
-        private static readonly global::Pulumi.Config __config = new global::Pulumi.Config("xyz");
+        private static readonly global::Pulumi.Config __config = new global::Pulumi.Config("yandex");
 
-        private static readonly __Value<Pulumi.Xyz.Region.Region?> _region = new __Value<Pulumi.Xyz.Region.Region?>(() => __config.GetObject<Pulumi.Xyz.Region.Region>("region"));
+        private static readonly __Value<string?> _cloudId = new __Value<string?>(() => __config.Get("cloudId"));
         /// <summary>
-        /// A region which should be used.
+        /// The ID of the [Cloud](https://yandex.cloud/docs/resource-manager/concepts/resources-hierarchy#cloud) to apply any
+        /// resources to. This can also be specified using environment variable `YC_CLOUD_ID`.
         /// </summary>
-        public static Pulumi.Xyz.Region.Region? Region
+        public static string? CloudId
         {
-            get => _region.Get();
-            set => _region.Set(value);
+            get => _cloudId.Get();
+            set => _cloudId.Set(value);
+        }
+
+        private static readonly __Value<string?> _endpoint = new __Value<string?>(() => __config.Get("endpoint"));
+        /// <summary>
+        /// The endpoint for API calls, default value is **api.cloud.yandex.net:443**. This can also be defined by environment
+        /// variable `YC_ENDPOINT`.
+        /// </summary>
+        public static string? Endpoint
+        {
+            get => _endpoint.Get();
+            set => _endpoint.Set(value);
+        }
+
+        private static readonly __Value<string?> _folderId = new __Value<string?>(() => __config.Get("folderId"));
+        /// <summary>
+        /// The ID of the [Folder](https://yandex.cloud/docs/resource-manager/concepts/resources-hierarchy#folder) to operate under,
+        /// if not specified by a given resource. This can also be specified using environment variable `YC_FOLDER_ID`.
+        /// </summary>
+        public static string? FolderId
+        {
+            get => _folderId.Get();
+            set => _folderId.Set(value);
+        }
+
+        private static readonly __Value<bool?> _insecure = new __Value<bool?>(() => __config.GetBoolean("insecure"));
+        /// <summary>
+        /// Explicitly allow the provider to perform "insecure" SSL requests. If omitted, default value is `false`.
+        /// </summary>
+        public static bool? Insecure
+        {
+            get => _insecure.Get();
+            set => _insecure.Set(value);
+        }
+
+        private static readonly __Value<int?> _maxRetries = new __Value<int?>(() => __config.GetInt32("maxRetries"));
+        /// <summary>
+        /// This is the maximum number of times an API call is retried, in the case where requests are being throttled or
+        /// experiencing transient failures. The delay between the subsequent API calls increases exponentially.
+        /// </summary>
+        public static int? MaxRetries
+        {
+            get => _maxRetries.Get();
+            set => _maxRetries.Set(value);
+        }
+
+        private static readonly __Value<string?> _organizationId = new __Value<string?>(() => __config.Get("organizationId"));
+        /// <summary>
+        /// The ID of the [Cloud Organization](https://yandex.cloud/docs/organization/quickstart) to operate under.
+        /// </summary>
+        public static string? OrganizationId
+        {
+            get => _organizationId.Get();
+            set => _organizationId.Set(value);
+        }
+
+        private static readonly __Value<bool?> _plaintext = new __Value<bool?>(() => __config.GetBoolean("plaintext"));
+        /// <summary>
+        /// Disable use of TLS. Default value is `false`.
+        /// </summary>
+        public static bool? Plaintext
+        {
+            get => _plaintext.Get();
+            set => _plaintext.Set(value);
+        }
+
+        private static readonly __Value<string?> _profile = new __Value<string?>(() => __config.Get("profile"));
+        /// <summary>
+        /// Profile name to use in the shared credentials file. Default value is `default`.
+        /// </summary>
+        public static string? Profile
+        {
+            get => _profile.Get();
+            set => _profile.Set(value);
+        }
+
+        private static readonly __Value<string?> _regionId = new __Value<string?>(() => __config.Get("regionId"));
+        /// <summary>
+        /// [The region](https://yandex.cloud/docs/overview/concepts/region) where operations will take place. For example
+        /// `ru-central1`.
+        /// </summary>
+        public static string? RegionId
+        {
+            get => _regionId.Get();
+            set => _regionId.Set(value);
+        }
+
+        private static readonly __Value<string?> _serviceAccountKeyFile = new __Value<string?>(() => __config.Get("serviceAccountKeyFile"));
+        /// <summary>
+        /// Contains either a path to or the contents of the [Service Account
+        /// file](https://yandex.cloud/docs/iam/concepts/authorization/key) in JSON format. This can also be specified using
+        /// environment variable `YC_SERVICE_ACCOUNT_KEY_FILE`. You can read how to create service account key file
+        /// [here](https://yandex.cloud/docs/iam/operations/iam-token/create-for-sa#keys-create). &gt; Only one of `token` or
+        /// `service_account_key_file` must be specified. &gt; One can authenticate via instance service account from inside a compute
+        /// instance. In order to use this method, omit both `token`/`service_account_key_file` and attach service account to the
+        /// instance. [Working with Yandex Cloud from inside an
+        /// instance](https://yandex.cloud/docs/compute/operations/vm-connect/auth-inside-vm).
+        /// </summary>
+        public static string? ServiceAccountKeyFile
+        {
+            get => _serviceAccountKeyFile.Get();
+            set => _serviceAccountKeyFile.Set(value);
+        }
+
+        private static readonly __Value<string?> _sharedCredentialsFile = new __Value<string?>(() => __config.Get("sharedCredentialsFile"));
+        /// <summary>
+        /// Shared credentials file path. Supported keys: `storage_access_key` and `storage_secret_key`. &gt; The `storage_access_key`
+        /// and `storage_secret_key` attributes from the shared credentials file are used only when the provider and a storage
+        /// data/resource do not have an access/secret keys explicitly specified.
+        /// </summary>
+        public static string? SharedCredentialsFile
+        {
+            get => _sharedCredentialsFile.Get();
+            set => _sharedCredentialsFile.Set(value);
+        }
+
+        private static readonly __Value<string?> _storageAccessKey = new __Value<string?>(() => __config.Get("storageAccessKey"));
+        /// <summary>
+        /// Yandex Cloud Object Storage access key, which is used when a storage data/resource doesn't have an access key explicitly
+        /// specified. This can also be specified using environment variable `YC_STORAGE_ACCESS_KEY`.
+        /// </summary>
+        public static string? StorageAccessKey
+        {
+            get => _storageAccessKey.Get();
+            set => _storageAccessKey.Set(value);
+        }
+
+        private static readonly __Value<string?> _storageEndpoint = new __Value<string?>(() => __config.Get("storageEndpoint"));
+        /// <summary>
+        /// Yandex Cloud [Object Storage Endpoint](https://yandex.cloud/docs/storage/s3/#request-url), which is used to connect to
+        /// `S3 API`. Default value is **storage.yandexcloud.net**.
+        /// </summary>
+        public static string? StorageEndpoint
+        {
+            get => _storageEndpoint.Get();
+            set => _storageEndpoint.Set(value);
+        }
+
+        private static readonly __Value<string?> _storageSecretKey = new __Value<string?>(() => __config.Get("storageSecretKey"));
+        /// <summary>
+        /// Yandex Cloud Object Storage secret key, which is used when a storage data/resource doesn't have a secret key explicitly
+        /// specified. This can also be specified using environment variable `YC_STORAGE_SECRET_KEY`.
+        /// </summary>
+        public static string? StorageSecretKey
+        {
+            get => _storageSecretKey.Get();
+            set => _storageSecretKey.Set(value);
+        }
+
+        private static readonly __Value<string?> _token = new __Value<string?>(() => __config.Get("token"));
+        /// <summary>
+        /// Security token or IAM token used for authentication in Yandex Cloud. Check
+        /// [documentation](https://yandex.cloud/docs/iam/operations/iam-token/create) about how to create IAM token. This can also
+        /// be specified using environment variable `YC_TOKEN`.
+        /// </summary>
+        public static string? Token
+        {
+            get => _token.Get();
+            set => _token.Set(value);
+        }
+
+        private static readonly __Value<string?> _ymqAccessKey = new __Value<string?>(() => __config.Get("ymqAccessKey"));
+        /// <summary>
+        /// Yandex Cloud Message Queue service access key, which is used when a YMQ queue resource doesn't have an access key
+        /// explicitly specified. This can also be specified using environment variable `YC_MESSAGE_QUEUE_ACCESS_KEY`.
+        /// </summary>
+        public static string? YmqAccessKey
+        {
+            get => _ymqAccessKey.Get();
+            set => _ymqAccessKey.Set(value);
+        }
+
+        private static readonly __Value<string?> _ymqEndpoint = new __Value<string?>(() => __config.Get("ymqEndpoint"));
+        /// <summary>
+        /// Yandex Cloud Message Queue service endpoint. Default value is **message-queue.api.cloud.yandex.net**.
+        /// </summary>
+        public static string? YmqEndpoint
+        {
+            get => _ymqEndpoint.Get();
+            set => _ymqEndpoint.Set(value);
+        }
+
+        private static readonly __Value<string?> _ymqSecretKey = new __Value<string?>(() => __config.Get("ymqSecretKey"));
+        /// <summary>
+        /// Yandex Cloud Message Queue service secret key, which is used when a YMQ queue resource doesn't have a secret key
+        /// explicitly specified. This can also be specified using environment variable `YC_MESSAGE_QUEUE_SECRET_KEY`.
+        /// </summary>
+        public static string? YmqSecretKey
+        {
+            get => _ymqSecretKey.Get();
+            set => _ymqSecretKey.Set(value);
+        }
+
+        private static readonly __Value<string?> _zone = new __Value<string?>(() => __config.Get("zone"));
+        /// <summary>
+        /// The default [availability zone](https://yandex.cloud/docs/overview/concepts/geo-scope) to operate under, if not
+        /// specified by a given resource. This can also be specified using environment variable `YC_ZONE`.
+        /// </summary>
+        public static string? Zone
+        {
+            get => _zone.Get();
+            set => _zone.Set(value);
         }
 
     }

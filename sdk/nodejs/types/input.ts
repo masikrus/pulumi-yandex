@@ -4,5 +4,18439 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as inputs from "../types/input";
 import * as outputs from "../types/output";
-import * as enums from "../types/enums";
 
+export interface AlbBackendGroupGrpcBackend {
+    /**
+     * Healthcheck specification that will be used by this backend.
+     *
+     * > Only one of `streamHealthcheck` or `httpHealthcheck` or `grpcHealthcheck` should be specified.
+     */
+    healthcheck?: pulumi.Input<inputs.AlbBackendGroupGrpcBackendHealthcheck>;
+    /**
+     * Load Balancing Config specification that will be used by this backend.
+     */
+    loadBalancingConfig?: pulumi.Input<inputs.AlbBackendGroupGrpcBackendLoadBalancingConfig>;
+    /**
+     * Name of the backend.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * Port for incoming traffic.
+     */
+    port?: pulumi.Input<number>;
+    /**
+     * References target groups for the backend.
+     */
+    targetGroupIds: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * TLS specification that will be used by this backend.
+     *
+     * > Only one of `validation_context.0.trusted_ca_id` or `validation_context.0.trusted_ca_bytes` should be specified.
+     */
+    tls?: pulumi.Input<inputs.AlbBackendGroupGrpcBackendTls>;
+    /**
+     * Weight of the backend. Traffic will be split between backends of the same BackendGroup according to their weights.
+     */
+    weight?: pulumi.Input<number>;
+}
+
+export interface AlbBackendGroupGrpcBackendHealthcheck {
+    /**
+     * gRPC Healthcheck specification that will be used by this healthcheck.
+     */
+    grpcHealthcheck?: pulumi.Input<inputs.AlbBackendGroupGrpcBackendHealthcheckGrpcHealthcheck>;
+    /**
+     * Optional alternative port for health checking.
+     */
+    healthcheckPort?: pulumi.Input<number>;
+    /**
+     * Number of consecutive successful health checks required to promote endpoint into the healthy state. 0 means 1. Note that during startup, only a single successful health check is required to mark a host healthy.
+     */
+    healthyThreshold?: pulumi.Input<number>;
+    /**
+     * HTTP Healthcheck specification that will be used by this healthcheck.
+     */
+    httpHealthcheck?: pulumi.Input<inputs.AlbBackendGroupGrpcBackendHealthcheckHttpHealthcheck>;
+    /**
+     * Interval between health checks.
+     */
+    interval: pulumi.Input<string>;
+    /**
+     * An optional jitter amount as a percentage of interval. If specified, during every interval value of (interval_ms * intervalJitterPercent / 100) will be added to the wait time.
+     */
+    intervalJitterPercent?: pulumi.Input<number>;
+    /**
+     * Stream Healthcheck specification that will be used by this healthcheck.
+     */
+    streamHealthcheck?: pulumi.Input<inputs.AlbBackendGroupGrpcBackendHealthcheckStreamHealthcheck>;
+    /**
+     * Time to wait for a health check response.
+     */
+    timeout: pulumi.Input<string>;
+    /**
+     * Number of consecutive failed health checks required to demote endpoint into the unhealthy state. 0 means 1. Note that for HTTP health checks, a single 503 immediately makes endpoint unhealthy.
+     */
+    unhealthyThreshold?: pulumi.Input<number>;
+}
+
+export interface AlbBackendGroupGrpcBackendHealthcheckGrpcHealthcheck {
+    /**
+     * Service name for `grpc.health.v1.HealthCheckRequest` message.
+     */
+    serviceName?: pulumi.Input<string>;
+}
+
+export interface AlbBackendGroupGrpcBackendHealthcheckHttpHealthcheck {
+    /**
+     * A list of HTTP response statuses considered healthy.
+     */
+    expectedStatuses?: pulumi.Input<pulumi.Input<number>[]>;
+    /**
+     * `Host` HTTP header value.
+     */
+    host?: pulumi.Input<string>;
+    /**
+     * If set, health checks will use HTTP2.
+     */
+    http2?: pulumi.Input<boolean>;
+    /**
+     * HTTP path.
+     */
+    path: pulumi.Input<string>;
+}
+
+export interface AlbBackendGroupGrpcBackendHealthcheckStreamHealthcheck {
+    /**
+     * Data that must be contained in the messages received from targets for a successful health check. If not specified, no messages are expected from targets, and those that are received are not checked.
+     */
+    receive?: pulumi.Input<string>;
+    /**
+     * Message sent to targets during TCP data transfer. If not specified, no data is sent to the target.
+     */
+    send?: pulumi.Input<string>;
+}
+
+export interface AlbBackendGroupGrpcBackendLoadBalancingConfig {
+    /**
+     * Percent of traffic to be sent to the same availability zone. The rest will be equally divided between other zones.
+     */
+    localityAwareRoutingPercent?: pulumi.Input<number>;
+    /**
+     * Load balancing mode for the backend. Possible values: `ROUND_ROBIN`, `RANDOM`, `LEAST_REQUEST`, `MAGLEV_HASH`.
+     */
+    mode?: pulumi.Input<string>;
+    /**
+     * If percentage of healthy hosts in the backend is lower than panic_threshold, traffic will be routed to all backends no matter what the health status is. This helps to avoid healthy backends overloading when everything is bad. Zero means no panic threshold.
+     */
+    panicThreshold?: pulumi.Input<number>;
+    /**
+     * If set, will route requests only to the same availability zone. Balancer won't know about endpoints in other zones.
+     */
+    strictLocality?: pulumi.Input<boolean>;
+}
+
+export interface AlbBackendGroupGrpcBackendTls {
+    /**
+     * [SNI](https://en.wikipedia.org/wiki/Server_Name_Indication) string for TLS connections.
+     */
+    sni?: pulumi.Input<string>;
+    validationContext?: pulumi.Input<inputs.AlbBackendGroupGrpcBackendTlsValidationContext>;
+}
+
+export interface AlbBackendGroupGrpcBackendTlsValidationContext {
+    /**
+     * PEM-encoded trusted CA certificate chain.
+     */
+    trustedCaBytes?: pulumi.Input<string>;
+    /**
+     * Trusted CA certificate ID in the Certificate Manager.
+     */
+    trustedCaId?: pulumi.Input<string>;
+}
+
+export interface AlbBackendGroupHttpBackend {
+    /**
+     * Healthcheck specification that will be used by this backend.
+     *
+     * > Only one of `streamHealthcheck` or `httpHealthcheck` or `grpcHealthcheck` should be specified.
+     */
+    healthcheck?: pulumi.Input<inputs.AlbBackendGroupHttpBackendHealthcheck>;
+    /**
+     * Enables HTTP2 for upstream requests. If not set, HTTP 1.1 will be used by default.
+     */
+    http2?: pulumi.Input<boolean>;
+    /**
+     * Load Balancing Config specification that will be used by this backend.
+     */
+    loadBalancingConfig?: pulumi.Input<inputs.AlbBackendGroupHttpBackendLoadBalancingConfig>;
+    /**
+     * Name of the backend.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * Port for incoming traffic.
+     */
+    port?: pulumi.Input<number>;
+    /**
+     * Name of bucket which should be used as a backend.
+     */
+    storageBucket?: pulumi.Input<string>;
+    /**
+     * References target groups for the backend.
+     */
+    targetGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * TLS specification that will be used by this backend.
+     *
+     * > Only one of `validation_context.0.trusted_ca_id` or `validation_context.0.trusted_ca_bytes` should be specified.
+     */
+    tls?: pulumi.Input<inputs.AlbBackendGroupHttpBackendTls>;
+    /**
+     * Weight of the backend. Traffic will be split between backends of the same BackendGroup according to their weights.
+     */
+    weight?: pulumi.Input<number>;
+}
+
+export interface AlbBackendGroupHttpBackendHealthcheck {
+    /**
+     * gRPC Healthcheck specification that will be used by this healthcheck.
+     */
+    grpcHealthcheck?: pulumi.Input<inputs.AlbBackendGroupHttpBackendHealthcheckGrpcHealthcheck>;
+    /**
+     * Optional alternative port for health checking.
+     */
+    healthcheckPort?: pulumi.Input<number>;
+    /**
+     * Number of consecutive successful health checks required to promote endpoint into the healthy state. 0 means 1. Note that during startup, only a single successful health check is required to mark a host healthy.
+     */
+    healthyThreshold?: pulumi.Input<number>;
+    /**
+     * HTTP Healthcheck specification that will be used by this healthcheck.
+     */
+    httpHealthcheck?: pulumi.Input<inputs.AlbBackendGroupHttpBackendHealthcheckHttpHealthcheck>;
+    /**
+     * Interval between health checks.
+     */
+    interval: pulumi.Input<string>;
+    /**
+     * An optional jitter amount as a percentage of interval. If specified, during every interval value of (interval_ms * intervalJitterPercent / 100) will be added to the wait time.
+     */
+    intervalJitterPercent?: pulumi.Input<number>;
+    /**
+     * Stream Healthcheck specification that will be used by this healthcheck.
+     */
+    streamHealthcheck?: pulumi.Input<inputs.AlbBackendGroupHttpBackendHealthcheckStreamHealthcheck>;
+    /**
+     * Time to wait for a health check response.
+     */
+    timeout: pulumi.Input<string>;
+    /**
+     * Number of consecutive failed health checks required to demote endpoint into the unhealthy state. 0 means 1. Note that for HTTP health checks, a single 503 immediately makes endpoint unhealthy.
+     */
+    unhealthyThreshold?: pulumi.Input<number>;
+}
+
+export interface AlbBackendGroupHttpBackendHealthcheckGrpcHealthcheck {
+    /**
+     * Service name for `grpc.health.v1.HealthCheckRequest` message.
+     */
+    serviceName?: pulumi.Input<string>;
+}
+
+export interface AlbBackendGroupHttpBackendHealthcheckHttpHealthcheck {
+    /**
+     * A list of HTTP response statuses considered healthy.
+     */
+    expectedStatuses?: pulumi.Input<pulumi.Input<number>[]>;
+    /**
+     * `Host` HTTP header value.
+     */
+    host?: pulumi.Input<string>;
+    /**
+     * If set, health checks will use HTTP2.
+     */
+    http2?: pulumi.Input<boolean>;
+    /**
+     * HTTP path.
+     */
+    path: pulumi.Input<string>;
+}
+
+export interface AlbBackendGroupHttpBackendHealthcheckStreamHealthcheck {
+    /**
+     * Data that must be contained in the messages received from targets for a successful health check. If not specified, no messages are expected from targets, and those that are received are not checked.
+     */
+    receive?: pulumi.Input<string>;
+    /**
+     * Message sent to targets during TCP data transfer. If not specified, no data is sent to the target.
+     */
+    send?: pulumi.Input<string>;
+}
+
+export interface AlbBackendGroupHttpBackendLoadBalancingConfig {
+    /**
+     * Percent of traffic to be sent to the same availability zone. The rest will be equally divided between other zones.
+     */
+    localityAwareRoutingPercent?: pulumi.Input<number>;
+    /**
+     * Load balancing mode for the backend. Possible values: `ROUND_ROBIN`, `RANDOM`, `LEAST_REQUEST`, `MAGLEV_HASH`.
+     */
+    mode?: pulumi.Input<string>;
+    /**
+     * If percentage of healthy hosts in the backend is lower than panic_threshold, traffic will be routed to all backends no matter what the health status is. This helps to avoid healthy backends overloading when everything is bad. Zero means no panic threshold.
+     */
+    panicThreshold?: pulumi.Input<number>;
+    /**
+     * If set, will route requests only to the same availability zone. Balancer won't know about endpoints in other zones.
+     */
+    strictLocality?: pulumi.Input<boolean>;
+}
+
+export interface AlbBackendGroupHttpBackendTls {
+    /**
+     * [SNI](https://en.wikipedia.org/wiki/Server_Name_Indication) string for TLS connections.
+     */
+    sni?: pulumi.Input<string>;
+    validationContext?: pulumi.Input<inputs.AlbBackendGroupHttpBackendTlsValidationContext>;
+}
+
+export interface AlbBackendGroupHttpBackendTlsValidationContext {
+    /**
+     * PEM-encoded trusted CA certificate chain.
+     */
+    trustedCaBytes?: pulumi.Input<string>;
+    /**
+     * Trusted CA certificate ID in the Certificate Manager.
+     */
+    trustedCaId?: pulumi.Input<string>;
+}
+
+export interface AlbBackendGroupSessionAffinity {
+    /**
+     * Requests received from the same IP are combined into a session. Stream backend groups only support session affinity by client IP address.
+     */
+    connection?: pulumi.Input<inputs.AlbBackendGroupSessionAffinityConnection>;
+    /**
+     * Requests with the same cookie value and the specified file name are combined into a session. Allowed only for `HTTP` and `gRPC` backend groups.
+     */
+    cookie?: pulumi.Input<inputs.AlbBackendGroupSessionAffinityCookie>;
+    /**
+     * Requests with the same value of the specified HTTP header, such as with user authentication data, are combined into a session. Allowed only for `HTTP` and `gRPC` backend groups.
+     */
+    header?: pulumi.Input<inputs.AlbBackendGroupSessionAffinityHeader>;
+}
+
+export interface AlbBackendGroupSessionAffinityConnection {
+    /**
+     * Source IP address to use with affinity.
+     */
+    sourceIp?: pulumi.Input<boolean>;
+}
+
+export interface AlbBackendGroupSessionAffinityCookie {
+    /**
+     * Name of the HTTP cookie to use with affinity.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * TTL for the cookie (if not set, session cookie will be used).
+     */
+    ttl?: pulumi.Input<string>;
+}
+
+export interface AlbBackendGroupSessionAffinityHeader {
+    /**
+     * The name of the request header that will be used with affinity.
+     */
+    headerName: pulumi.Input<string>;
+}
+
+export interface AlbBackendGroupStreamBackend {
+    enableProxyProtocol?: pulumi.Input<boolean>;
+    /**
+     * Healthcheck specification that will be used by this backend.
+     *
+     * > Only one of `streamHealthcheck` or `httpHealthcheck` or `grpcHealthcheck` should be specified.
+     */
+    healthcheck?: pulumi.Input<inputs.AlbBackendGroupStreamBackendHealthcheck>;
+    /**
+     * If set, when a backend host becomes unhealthy (as determined by the configured health checks), keep connections to the failed host.
+     */
+    keepConnectionsOnHostHealthFailure?: pulumi.Input<boolean>;
+    /**
+     * Load Balancing Config specification that will be used by this backend.
+     */
+    loadBalancingConfig?: pulumi.Input<inputs.AlbBackendGroupStreamBackendLoadBalancingConfig>;
+    /**
+     * Name of the backend.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * Port for incoming traffic.
+     */
+    port?: pulumi.Input<number>;
+    /**
+     * References target groups for the backend.
+     */
+    targetGroupIds: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * TLS specification that will be used by this backend.
+     *
+     * > Only one of `validation_context.0.trusted_ca_id` or `validation_context.0.trusted_ca_bytes` should be specified.
+     */
+    tls?: pulumi.Input<inputs.AlbBackendGroupStreamBackendTls>;
+    /**
+     * Weight of the backend. Traffic will be split between backends of the same BackendGroup according to their weights.
+     */
+    weight?: pulumi.Input<number>;
+}
+
+export interface AlbBackendGroupStreamBackendHealthcheck {
+    /**
+     * gRPC Healthcheck specification that will be used by this healthcheck.
+     */
+    grpcHealthcheck?: pulumi.Input<inputs.AlbBackendGroupStreamBackendHealthcheckGrpcHealthcheck>;
+    /**
+     * Optional alternative port for health checking.
+     */
+    healthcheckPort?: pulumi.Input<number>;
+    /**
+     * Number of consecutive successful health checks required to promote endpoint into the healthy state. 0 means 1. Note that during startup, only a single successful health check is required to mark a host healthy.
+     */
+    healthyThreshold?: pulumi.Input<number>;
+    /**
+     * HTTP Healthcheck specification that will be used by this healthcheck.
+     */
+    httpHealthcheck?: pulumi.Input<inputs.AlbBackendGroupStreamBackendHealthcheckHttpHealthcheck>;
+    /**
+     * Interval between health checks.
+     */
+    interval: pulumi.Input<string>;
+    /**
+     * An optional jitter amount as a percentage of interval. If specified, during every interval value of (interval_ms * intervalJitterPercent / 100) will be added to the wait time.
+     */
+    intervalJitterPercent?: pulumi.Input<number>;
+    /**
+     * Stream Healthcheck specification that will be used by this healthcheck.
+     */
+    streamHealthcheck?: pulumi.Input<inputs.AlbBackendGroupStreamBackendHealthcheckStreamHealthcheck>;
+    /**
+     * Time to wait for a health check response.
+     */
+    timeout: pulumi.Input<string>;
+    /**
+     * Number of consecutive failed health checks required to demote endpoint into the unhealthy state. 0 means 1. Note that for HTTP health checks, a single 503 immediately makes endpoint unhealthy.
+     */
+    unhealthyThreshold?: pulumi.Input<number>;
+}
+
+export interface AlbBackendGroupStreamBackendHealthcheckGrpcHealthcheck {
+    /**
+     * Service name for `grpc.health.v1.HealthCheckRequest` message.
+     */
+    serviceName?: pulumi.Input<string>;
+}
+
+export interface AlbBackendGroupStreamBackendHealthcheckHttpHealthcheck {
+    /**
+     * A list of HTTP response statuses considered healthy.
+     */
+    expectedStatuses?: pulumi.Input<pulumi.Input<number>[]>;
+    /**
+     * `Host` HTTP header value.
+     */
+    host?: pulumi.Input<string>;
+    /**
+     * If set, health checks will use HTTP2.
+     */
+    http2?: pulumi.Input<boolean>;
+    /**
+     * HTTP path.
+     */
+    path: pulumi.Input<string>;
+}
+
+export interface AlbBackendGroupStreamBackendHealthcheckStreamHealthcheck {
+    /**
+     * Data that must be contained in the messages received from targets for a successful health check. If not specified, no messages are expected from targets, and those that are received are not checked.
+     */
+    receive?: pulumi.Input<string>;
+    /**
+     * Message sent to targets during TCP data transfer. If not specified, no data is sent to the target.
+     */
+    send?: pulumi.Input<string>;
+}
+
+export interface AlbBackendGroupStreamBackendLoadBalancingConfig {
+    /**
+     * Percent of traffic to be sent to the same availability zone. The rest will be equally divided between other zones.
+     */
+    localityAwareRoutingPercent?: pulumi.Input<number>;
+    /**
+     * Load balancing mode for the backend. Possible values: `ROUND_ROBIN`, `RANDOM`, `LEAST_REQUEST`, `MAGLEV_HASH`.
+     */
+    mode?: pulumi.Input<string>;
+    /**
+     * If percentage of healthy hosts in the backend is lower than panic_threshold, traffic will be routed to all backends no matter what the health status is. This helps to avoid healthy backends overloading when everything is bad. Zero means no panic threshold.
+     */
+    panicThreshold?: pulumi.Input<number>;
+    /**
+     * If set, will route requests only to the same availability zone. Balancer won't know about endpoints in other zones.
+     */
+    strictLocality?: pulumi.Input<boolean>;
+}
+
+export interface AlbBackendGroupStreamBackendTls {
+    /**
+     * [SNI](https://en.wikipedia.org/wiki/Server_Name_Indication) string for TLS connections.
+     */
+    sni?: pulumi.Input<string>;
+    validationContext?: pulumi.Input<inputs.AlbBackendGroupStreamBackendTlsValidationContext>;
+}
+
+export interface AlbBackendGroupStreamBackendTlsValidationContext {
+    /**
+     * PEM-encoded trusted CA certificate chain.
+     */
+    trustedCaBytes?: pulumi.Input<string>;
+    /**
+     * Trusted CA certificate ID in the Certificate Manager.
+     */
+    trustedCaId?: pulumi.Input<string>;
+}
+
+export interface AlbHttpRouterRouteOptions {
+    /**
+     * RBAC configuration.
+     */
+    rbac?: pulumi.Input<inputs.AlbHttpRouterRouteOptionsRbac>;
+    /**
+     * SWS profile ID.
+     */
+    securityProfileId?: pulumi.Input<string>;
+}
+
+export interface AlbHttpRouterRouteOptionsRbac {
+    action?: pulumi.Input<string>;
+    principals: pulumi.Input<pulumi.Input<inputs.AlbHttpRouterRouteOptionsRbacPrincipal>[]>;
+}
+
+export interface AlbHttpRouterRouteOptionsRbacPrincipal {
+    andPrincipals: pulumi.Input<pulumi.Input<inputs.AlbHttpRouterRouteOptionsRbacPrincipalAndPrincipal>[]>;
+}
+
+export interface AlbHttpRouterRouteOptionsRbacPrincipalAndPrincipal {
+    any?: pulumi.Input<boolean>;
+    header?: pulumi.Input<inputs.AlbHttpRouterRouteOptionsRbacPrincipalAndPrincipalHeader>;
+    remoteIp?: pulumi.Input<string>;
+}
+
+export interface AlbHttpRouterRouteOptionsRbacPrincipalAndPrincipalHeader {
+    name: pulumi.Input<string>;
+    /**
+     * The `path` and `fqmn` blocks.
+     *
+     * > Exactly one type of string matches `exact`, `prefix` or `regex` should be specified.
+     */
+    value?: pulumi.Input<inputs.AlbHttpRouterRouteOptionsRbacPrincipalAndPrincipalHeaderValue>;
+}
+
+export interface AlbHttpRouterRouteOptionsRbacPrincipalAndPrincipalHeaderValue {
+    /**
+     * Match exactly.
+     */
+    exact?: pulumi.Input<string>;
+    /**
+     * Match prefix.
+     */
+    prefix?: pulumi.Input<string>;
+    /**
+     * Match regex.
+     */
+    regex?: pulumi.Input<string>;
+}
+
+export interface AlbLoadBalancerAllocationPolicy {
+    /**
+     * Unique set of locations.
+     */
+    locations: pulumi.Input<pulumi.Input<inputs.AlbLoadBalancerAllocationPolicyLocation>[]>;
+}
+
+export interface AlbLoadBalancerAllocationPolicyLocation {
+    /**
+     * If set, will disable all L7 instances in the zone for request handling.
+     */
+    disableTraffic?: pulumi.Input<boolean>;
+    /**
+     * ID of the subnet that location is located at.
+     */
+    subnetId: pulumi.Input<string>;
+    /**
+     * The [availability zone](https://yandex.cloud/docs/overview/concepts/geo-scope) where resource is located. If it is not provided, the default provider zone will be used.
+     */
+    zoneId: pulumi.Input<string>;
+}
+
+export interface AlbLoadBalancerListener {
+    /**
+     * Network endpoint (addresses and ports) of the listener.
+     */
+    endpoints?: pulumi.Input<pulumi.Input<inputs.AlbLoadBalancerListenerEndpoint>[]>;
+    /**
+     * HTTP handler that sets plain text HTTP router.
+     */
+    http?: pulumi.Input<inputs.AlbLoadBalancerListenerHttp>;
+    /**
+     * Name of the listener.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * Stream configuration
+     */
+    stream?: pulumi.Input<inputs.AlbLoadBalancerListenerStream>;
+    /**
+     * TLS configuration
+     */
+    tls?: pulumi.Input<inputs.AlbLoadBalancerListenerTls>;
+}
+
+export interface AlbLoadBalancerListenerEndpoint {
+    /**
+     * One or more addresses to listen on.
+     */
+    addresses: pulumi.Input<pulumi.Input<inputs.AlbLoadBalancerListenerEndpointAddress>[]>;
+    /**
+     * One or more ports to listen on.
+     */
+    ports: pulumi.Input<pulumi.Input<number>[]>;
+}
+
+export interface AlbLoadBalancerListenerEndpointAddress {
+    /**
+     * External IPv4 address.
+     */
+    externalIpv4Address?: pulumi.Input<inputs.AlbLoadBalancerListenerEndpointAddressExternalIpv4Address>;
+    /**
+     * External IPv6 address.
+     */
+    externalIpv6Address?: pulumi.Input<inputs.AlbLoadBalancerListenerEndpointAddressExternalIpv6Address>;
+    /**
+     * Internal IPv4 address.
+     */
+    internalIpv4Address?: pulumi.Input<inputs.AlbLoadBalancerListenerEndpointAddressInternalIpv4Address>;
+}
+
+export interface AlbLoadBalancerListenerEndpointAddressExternalIpv4Address {
+    /**
+     * Provided by the client or computed automatically.
+     */
+    address?: pulumi.Input<string>;
+}
+
+export interface AlbLoadBalancerListenerEndpointAddressExternalIpv6Address {
+    /**
+     * Provided by the client or computed automatically.
+     */
+    address?: pulumi.Input<string>;
+}
+
+export interface AlbLoadBalancerListenerEndpointAddressInternalIpv4Address {
+    /**
+     * Provided by the client or computed automatically.
+     */
+    address?: pulumi.Input<string>;
+    /**
+     * ID of the subnet that the address belongs to.
+     */
+    subnetId?: pulumi.Input<string>;
+}
+
+export interface AlbLoadBalancerListenerHttp {
+    /**
+     * HTTP handler.
+     */
+    handler?: pulumi.Input<inputs.AlbLoadBalancerListenerHttpHandler>;
+    /**
+     * Shortcut for adding http > https redirects.
+     */
+    redirects?: pulumi.Input<inputs.AlbLoadBalancerListenerHttpRedirects>;
+}
+
+export interface AlbLoadBalancerListenerHttpHandler {
+    /**
+     * If set, will enable only HTTP1 protocol with HTTP1.0 support.
+     */
+    allowHttp10?: pulumi.Input<boolean>;
+    /**
+     * If set, will enable HTTP2 protocol for the handler.
+     */
+    http2Options?: pulumi.Input<inputs.AlbLoadBalancerListenerHttpHandlerHttp2Options>;
+    /**
+     * HTTP router id.
+     */
+    httpRouterId?: pulumi.Input<string>;
+    /**
+     * When unset, will preserve the incoming `x-request-id` header, otherwise would rewrite it with a new value.
+     */
+    rewriteRequestId?: pulumi.Input<boolean>;
+}
+
+export interface AlbLoadBalancerListenerHttpHandlerHttp2Options {
+    /**
+     * Maximum number of concurrent streams.
+     */
+    maxConcurrentStreams?: pulumi.Input<number>;
+}
+
+export interface AlbLoadBalancerListenerHttpRedirects {
+    /**
+     * If set redirects all unencrypted HTTP requests to the same URI with scheme changed to `https`.
+     */
+    httpToHttps?: pulumi.Input<boolean>;
+}
+
+export interface AlbLoadBalancerListenerStream {
+    /**
+     * Stream handler resource.
+     */
+    handler?: pulumi.Input<inputs.AlbLoadBalancerListenerStreamHandler>;
+}
+
+export interface AlbLoadBalancerListenerStreamHandler {
+    /**
+     * Backend Group ID.
+     */
+    backendGroupId?: pulumi.Input<string>;
+    /**
+     * The idle timeout is the interval after which the connection will be forcibly closed if no data has been transmitted or received on either the upstream or downstream connection. If not configured, the default idle timeout is 1 hour. Setting it to 0 disables the timeout.
+     */
+    idleTimeout?: pulumi.Input<string>;
+}
+
+export interface AlbLoadBalancerListenerTls {
+    /**
+     * TLS handler resource.
+     */
+    defaultHandler: pulumi.Input<inputs.AlbLoadBalancerListenerTlsDefaultHandler>;
+    /**
+     * Settings for handling requests with Server Name Indication (SNI)
+     */
+    sniHandlers?: pulumi.Input<pulumi.Input<inputs.AlbLoadBalancerListenerTlsSniHandler>[]>;
+}
+
+export interface AlbLoadBalancerListenerTlsDefaultHandler {
+    /**
+     * Certificate IDs in the Certificate Manager. Multiple TLS certificates can be associated with the same context to allow both RSA and ECDSA certificates. Only the first certificate of each type will be used.
+     */
+    certificateIds: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * HTTP handler.
+     */
+    httpHandler?: pulumi.Input<inputs.AlbLoadBalancerListenerTlsDefaultHandlerHttpHandler>;
+    /**
+     * Stream handler resource.
+     */
+    streamHandler?: pulumi.Input<inputs.AlbLoadBalancerListenerTlsDefaultHandlerStreamHandler>;
+}
+
+export interface AlbLoadBalancerListenerTlsDefaultHandlerHttpHandler {
+    /**
+     * If set, will enable only HTTP1 protocol with HTTP1.0 support.
+     */
+    allowHttp10?: pulumi.Input<boolean>;
+    /**
+     * If set, will enable HTTP2 protocol for the handler.
+     */
+    http2Options?: pulumi.Input<inputs.AlbLoadBalancerListenerTlsDefaultHandlerHttpHandlerHttp2Options>;
+    /**
+     * HTTP router id.
+     */
+    httpRouterId?: pulumi.Input<string>;
+    /**
+     * When unset, will preserve the incoming `x-request-id` header, otherwise would rewrite it with a new value.
+     */
+    rewriteRequestId?: pulumi.Input<boolean>;
+}
+
+export interface AlbLoadBalancerListenerTlsDefaultHandlerHttpHandlerHttp2Options {
+    /**
+     * Maximum number of concurrent streams.
+     */
+    maxConcurrentStreams?: pulumi.Input<number>;
+}
+
+export interface AlbLoadBalancerListenerTlsDefaultHandlerStreamHandler {
+    /**
+     * Backend Group ID.
+     */
+    backendGroupId?: pulumi.Input<string>;
+    /**
+     * The idle timeout is the interval after which the connection will be forcibly closed if no data has been transmitted or received on either the upstream or downstream connection. If not configured, the default idle timeout is 1 hour. Setting it to 0 disables the timeout.
+     */
+    idleTimeout?: pulumi.Input<string>;
+}
+
+export interface AlbLoadBalancerListenerTlsSniHandler {
+    /**
+     * TLS handler resource.
+     */
+    handler: pulumi.Input<inputs.AlbLoadBalancerListenerTlsSniHandlerHandler>;
+    /**
+     * Name of the SNI handler
+     */
+    name: pulumi.Input<string>;
+    /**
+     * Server names that are matched by the SNI handler
+     */
+    serverNames: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface AlbLoadBalancerListenerTlsSniHandlerHandler {
+    /**
+     * Certificate IDs in the Certificate Manager. Multiple TLS certificates can be associated with the same context to allow both RSA and ECDSA certificates. Only the first certificate of each type will be used.
+     */
+    certificateIds: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * HTTP handler.
+     */
+    httpHandler?: pulumi.Input<inputs.AlbLoadBalancerListenerTlsSniHandlerHandlerHttpHandler>;
+    /**
+     * Stream handler resource.
+     */
+    streamHandler?: pulumi.Input<inputs.AlbLoadBalancerListenerTlsSniHandlerHandlerStreamHandler>;
+}
+
+export interface AlbLoadBalancerListenerTlsSniHandlerHandlerHttpHandler {
+    /**
+     * If set, will enable only HTTP1 protocol with HTTP1.0 support.
+     */
+    allowHttp10?: pulumi.Input<boolean>;
+    /**
+     * If set, will enable HTTP2 protocol for the handler.
+     */
+    http2Options?: pulumi.Input<inputs.AlbLoadBalancerListenerTlsSniHandlerHandlerHttpHandlerHttp2Options>;
+    /**
+     * HTTP router id.
+     */
+    httpRouterId?: pulumi.Input<string>;
+    /**
+     * When unset, will preserve the incoming `x-request-id` header, otherwise would rewrite it with a new value.
+     */
+    rewriteRequestId?: pulumi.Input<boolean>;
+}
+
+export interface AlbLoadBalancerListenerTlsSniHandlerHandlerHttpHandlerHttp2Options {
+    /**
+     * Maximum number of concurrent streams.
+     */
+    maxConcurrentStreams?: pulumi.Input<number>;
+}
+
+export interface AlbLoadBalancerListenerTlsSniHandlerHandlerStreamHandler {
+    /**
+     * Backend Group ID.
+     */
+    backendGroupId?: pulumi.Input<string>;
+    /**
+     * The idle timeout is the interval after which the connection will be forcibly closed if no data has been transmitted or received on either the upstream or downstream connection. If not configured, the default idle timeout is 1 hour. Setting it to 0 disables the timeout.
+     */
+    idleTimeout?: pulumi.Input<string>;
+}
+
+export interface AlbLoadBalancerLogOptions {
+    /**
+     * Set to `true` to disable Cloud Logging for the balancer.
+     */
+    disable?: pulumi.Input<boolean>;
+    /**
+     * List of rules to discard a fraction of logs.
+     */
+    discardRules?: pulumi.Input<pulumi.Input<inputs.AlbLoadBalancerLogOptionsDiscardRule>[]>;
+    /**
+     * Cloud Logging group ID to send logs to. Leave empty to use the balancer folder default log group.
+     */
+    logGroupId?: pulumi.Input<string>;
+}
+
+export interface AlbLoadBalancerLogOptionsDiscardRule {
+    /**
+     * The percent of logs which will be discarded.
+     */
+    discardPercent?: pulumi.Input<number>;
+    /**
+     * list of grpc codes by name, e.g, [**NOT_FOUND**, **RESOURCE_EXHAUSTED**].
+     */
+    grpcCodes?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * List of http code intervals *1XX*-*5XX* or *ALL*
+     */
+    httpCodeIntervals?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * List of http codes *100*-*599*.
+     */
+    httpCodes?: pulumi.Input<pulumi.Input<number>[]>;
+}
+
+export interface AlbTargetGroupTarget {
+    /**
+     * IP address of the target.
+     */
+    ipAddress: pulumi.Input<string>;
+    privateIpv4Address?: pulumi.Input<boolean>;
+    /**
+     * ID of the subnet that targets are connected to. All targets in the target group must be connected to the same subnet within a single availability zone.
+     */
+    subnetId?: pulumi.Input<string>;
+}
+
+export interface AlbVirtualHostModifyRequestHeader {
+    /**
+     * Append string to the header value.
+     */
+    append?: pulumi.Input<string>;
+    /**
+     * Name of the header to modify.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * If set, remove the header.
+     */
+    remove?: pulumi.Input<boolean>;
+    /**
+     * New value for a header. Header values support the following [formatters](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_conn_man/headers#custom-request-response-headers).
+     */
+    replace?: pulumi.Input<string>;
+}
+
+export interface AlbVirtualHostModifyResponseHeader {
+    /**
+     * Append string to the header value.
+     */
+    append?: pulumi.Input<string>;
+    /**
+     * Name of the header to modify.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * If set, remove the header.
+     */
+    remove?: pulumi.Input<boolean>;
+    /**
+     * New value for a header. Header values support the following [formatters](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_conn_man/headers#custom-request-response-headers).
+     */
+    replace?: pulumi.Input<string>;
+}
+
+export interface AlbVirtualHostRateLimit {
+    /**
+     * Rate limit configuration applied to all incoming requests
+     */
+    allRequests?: pulumi.Input<inputs.AlbVirtualHostRateLimitAllRequests>;
+    /**
+     * Rate limit configuration applied separately for each set of requests grouped by client IP address
+     */
+    requestsPerIp?: pulumi.Input<inputs.AlbVirtualHostRateLimitRequestsPerIp>;
+}
+
+export interface AlbVirtualHostRateLimitAllRequests {
+    /**
+     * Limit value specified with per minute time unit
+     */
+    perMinute?: pulumi.Input<number>;
+    /**
+     * Limit value specified with per second time unit
+     */
+    perSecond?: pulumi.Input<number>;
+}
+
+export interface AlbVirtualHostRateLimitRequestsPerIp {
+    /**
+     * Limit value specified with per minute time unit
+     */
+    perMinute?: pulumi.Input<number>;
+    /**
+     * Limit value specified with per second time unit
+     */
+    perSecond?: pulumi.Input<number>;
+}
+
+export interface AlbVirtualHostRoute {
+    /**
+     * gRPC route resource.
+     *
+     * > Exactly one type of actions `grpcRouteAction` or `grpcStatusResponseAction` should be specified.
+     */
+    grpcRoute?: pulumi.Input<inputs.AlbVirtualHostRouteGrpcRoute>;
+    /**
+     * HTTP route resource.
+     *
+     * > Exactly one type of actions `httpRouteAction` or `redirectAction` or `directResponseAction` should be specified.
+     */
+    httpRoute?: pulumi.Input<inputs.AlbVirtualHostRouteHttpRoute>;
+    /**
+     * Name of the route.
+     */
+    name?: pulumi.Input<string>;
+    /**
+     * Route options for the virtual host.
+     */
+    routeOptions?: pulumi.Input<inputs.AlbVirtualHostRouteRouteOptions>;
+}
+
+export interface AlbVirtualHostRouteGrpcRoute {
+    /**
+     * Checks `/` prefix by default.
+     */
+    grpcMatches?: pulumi.Input<pulumi.Input<inputs.AlbVirtualHostRouteGrpcRouteGrpcMatch>[]>;
+    /**
+     * gRPC route action resource.
+     *
+     * > Only one type of host rewrite specifiers `hostRewrite` or `autoHostRewrite` should be specified.
+     */
+    grpcRouteAction?: pulumi.Input<inputs.AlbVirtualHostRouteGrpcRouteGrpcRouteAction>;
+    /**
+     * gRPC status response action resource.
+     */
+    grpcStatusResponseAction?: pulumi.Input<inputs.AlbVirtualHostRouteGrpcRouteGrpcStatusResponseAction>;
+}
+
+export interface AlbVirtualHostRouteGrpcRouteGrpcMatch {
+    /**
+     * The `path` and `fqmn` blocks.
+     *
+     * > Exactly one type of string matches `exact`, `prefix` or `regex` should be specified.
+     */
+    fqmn?: pulumi.Input<inputs.AlbVirtualHostRouteGrpcRouteGrpcMatchFqmn>;
+}
+
+export interface AlbVirtualHostRouteGrpcRouteGrpcMatchFqmn {
+    /**
+     * Match exactly.
+     */
+    exact?: pulumi.Input<string>;
+    /**
+     * Match prefix.
+     */
+    prefix?: pulumi.Input<string>;
+    /**
+     * Match regex.
+     */
+    regex?: pulumi.Input<string>;
+}
+
+export interface AlbVirtualHostRouteGrpcRouteGrpcRouteAction {
+    /**
+     * If set, will automatically rewrite host.
+     */
+    autoHostRewrite?: pulumi.Input<boolean>;
+    /**
+     * Backend group to route requests.
+     */
+    backendGroupId: pulumi.Input<string>;
+    /**
+     * Host rewrite specifier.
+     */
+    hostRewrite?: pulumi.Input<string>;
+    /**
+     * Specifies the idle timeout (time without any data transfer for the active request) for the route. It is useful for streaming scenarios - one should set idleTimeout to something meaningful and maxTimeout to the maximum time the stream is allowed to be alive. If not specified, there is no per-route idle timeout.
+     */
+    idleTimeout?: pulumi.Input<string>;
+    /**
+     * Lower timeout may be specified by the client (using grpc-timeout header). If not set, default is 60 seconds.
+     */
+    maxTimeout?: pulumi.Input<string>;
+    /**
+     * Rate limit configuration applied for a whole virtual host
+     */
+    rateLimit?: pulumi.Input<inputs.AlbVirtualHostRouteGrpcRouteGrpcRouteActionRateLimit>;
+}
+
+export interface AlbVirtualHostRouteGrpcRouteGrpcRouteActionRateLimit {
+    /**
+     * Rate limit configuration applied to all incoming requests
+     */
+    allRequests?: pulumi.Input<inputs.AlbVirtualHostRouteGrpcRouteGrpcRouteActionRateLimitAllRequests>;
+    /**
+     * Rate limit configuration applied separately for each set of requests grouped by client IP address
+     */
+    requestsPerIp?: pulumi.Input<inputs.AlbVirtualHostRouteGrpcRouteGrpcRouteActionRateLimitRequestsPerIp>;
+}
+
+export interface AlbVirtualHostRouteGrpcRouteGrpcRouteActionRateLimitAllRequests {
+    /**
+     * Limit value specified with per minute time unit
+     */
+    perMinute?: pulumi.Input<number>;
+    /**
+     * Limit value specified with per second time unit
+     */
+    perSecond?: pulumi.Input<number>;
+}
+
+export interface AlbVirtualHostRouteGrpcRouteGrpcRouteActionRateLimitRequestsPerIp {
+    /**
+     * Limit value specified with per minute time unit
+     */
+    perMinute?: pulumi.Input<number>;
+    /**
+     * Limit value specified with per second time unit
+     */
+    perSecond?: pulumi.Input<number>;
+}
+
+export interface AlbVirtualHostRouteGrpcRouteGrpcStatusResponseAction {
+    /**
+     * The status of the response. Supported values are: ok, invalid_argumet, not_found, permission_denied, unauthenticated, unimplemented, internal, unavailable.
+     */
+    status?: pulumi.Input<string>;
+}
+
+export interface AlbVirtualHostRouteHttpRoute {
+    /**
+     * Direct response action resource.
+     */
+    directResponseAction?: pulumi.Input<inputs.AlbVirtualHostRouteHttpRouteDirectResponseAction>;
+    /**
+     * Checks `/` prefix by default.
+     */
+    httpMatches?: pulumi.Input<pulumi.Input<inputs.AlbVirtualHostRouteHttpRouteHttpMatch>[]>;
+    /**
+     * HTTP route action resource.
+     *
+     * > Only one type of host rewrite specifiers `hostRewrite` or `autoHostRewrite` should be specified.
+     */
+    httpRouteAction?: pulumi.Input<inputs.AlbVirtualHostRouteHttpRouteHttpRouteAction>;
+    /**
+     * Redirect action resource.
+     *
+     * > Only one type of paths `replacePath` or `replacePrefix` should be specified.
+     */
+    redirectAction?: pulumi.Input<inputs.AlbVirtualHostRouteHttpRouteRedirectAction>;
+}
+
+export interface AlbVirtualHostRouteHttpRouteDirectResponseAction {
+    /**
+     * Response body text.
+     */
+    body?: pulumi.Input<string>;
+    /**
+     * HTTP response status. Should be between `100` and `599`.
+     */
+    status?: pulumi.Input<number>;
+}
+
+export interface AlbVirtualHostRouteHttpRouteHttpMatch {
+    /**
+     * List of methods (strings).
+     */
+    httpMethods?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The `path` and `fqmn` blocks.
+     *
+     * > Exactly one type of string matches `exact`, `prefix` or `regex` should be specified.
+     */
+    path?: pulumi.Input<inputs.AlbVirtualHostRouteHttpRouteHttpMatchPath>;
+}
+
+export interface AlbVirtualHostRouteHttpRouteHttpMatchPath {
+    /**
+     * Match exactly.
+     */
+    exact?: pulumi.Input<string>;
+    /**
+     * Match prefix.
+     */
+    prefix?: pulumi.Input<string>;
+    /**
+     * Match regex.
+     */
+    regex?: pulumi.Input<string>;
+}
+
+export interface AlbVirtualHostRouteHttpRouteHttpRouteAction {
+    /**
+     * If set, will automatically rewrite host.
+     */
+    autoHostRewrite?: pulumi.Input<boolean>;
+    /**
+     * Backend group to route requests.
+     */
+    backendGroupId: pulumi.Input<string>;
+    /**
+     * Host rewrite specifier.
+     */
+    hostRewrite?: pulumi.Input<string>;
+    /**
+     * Specifies the idle timeout (time without any data transfer for the active request) for the route. It is useful for streaming scenarios (i.e. long-polling, server-sent events) - one should set idleTimeout to something meaningful and timeout to the maximum time the stream is allowed to be alive. If not specified, there is no per-route idle timeout.
+     */
+    idleTimeout?: pulumi.Input<string>;
+    /**
+     * If not empty, matched path prefix will be replaced by this value.
+     */
+    prefixRewrite?: pulumi.Input<string>;
+    /**
+     * Rate limit configuration applied for a whole virtual host
+     */
+    rateLimit?: pulumi.Input<inputs.AlbVirtualHostRouteHttpRouteHttpRouteActionRateLimit>;
+    /**
+     * Specifies the request timeout (overall time request processing is allowed to take) for the route. If not set, default is 60 seconds.
+     */
+    timeout?: pulumi.Input<string>;
+    /**
+     * List of upgrade types. Only specified upgrade types will be allowed. For example, `websocket`.
+     */
+    upgradeTypes?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface AlbVirtualHostRouteHttpRouteHttpRouteActionRateLimit {
+    /**
+     * Rate limit configuration applied to all incoming requests
+     */
+    allRequests?: pulumi.Input<inputs.AlbVirtualHostRouteHttpRouteHttpRouteActionRateLimitAllRequests>;
+    /**
+     * Rate limit configuration applied separately for each set of requests grouped by client IP address
+     */
+    requestsPerIp?: pulumi.Input<inputs.AlbVirtualHostRouteHttpRouteHttpRouteActionRateLimitRequestsPerIp>;
+}
+
+export interface AlbVirtualHostRouteHttpRouteHttpRouteActionRateLimitAllRequests {
+    /**
+     * Limit value specified with per minute time unit
+     */
+    perMinute?: pulumi.Input<number>;
+    /**
+     * Limit value specified with per second time unit
+     */
+    perSecond?: pulumi.Input<number>;
+}
+
+export interface AlbVirtualHostRouteHttpRouteHttpRouteActionRateLimitRequestsPerIp {
+    /**
+     * Limit value specified with per minute time unit
+     */
+    perMinute?: pulumi.Input<number>;
+    /**
+     * Limit value specified with per second time unit
+     */
+    perSecond?: pulumi.Input<number>;
+}
+
+export interface AlbVirtualHostRouteHttpRouteRedirectAction {
+    /**
+     * If set, remove query part.
+     */
+    removeQuery?: pulumi.Input<boolean>;
+    /**
+     * Replaces hostname.
+     */
+    replaceHost?: pulumi.Input<string>;
+    /**
+     * Replace path.
+     */
+    replacePath?: pulumi.Input<string>;
+    /**
+     * Replaces port.
+     */
+    replacePort?: pulumi.Input<number>;
+    /**
+     * Replace only matched prefix. Example:<br/> match:{ prefix_match: `/some` } <br/> redirect: { replace_prefix: `/other` } <br/> will redirect `/something` to `/otherthing`.
+     */
+    replacePrefix?: pulumi.Input<string>;
+    /**
+     * Replaces scheme. If the original scheme is `http` or `https`, will also remove the 80 or 443 port, if present.
+     */
+    replaceScheme?: pulumi.Input<string>;
+    /**
+     * The HTTP status code to use in the redirect response. Supported values are: `movedPermanently`, `found`, `seeOther`, `temporaryRedirect`, `permanentRedirect`.
+     */
+    responseCode?: pulumi.Input<string>;
+}
+
+export interface AlbVirtualHostRouteOptions {
+    /**
+     * RBAC configuration.
+     */
+    rbac?: pulumi.Input<inputs.AlbVirtualHostRouteOptionsRbac>;
+    /**
+     * SWS profile ID.
+     */
+    securityProfileId?: pulumi.Input<string>;
+}
+
+export interface AlbVirtualHostRouteOptionsRbac {
+    action?: pulumi.Input<string>;
+    principals: pulumi.Input<pulumi.Input<inputs.AlbVirtualHostRouteOptionsRbacPrincipal>[]>;
+}
+
+export interface AlbVirtualHostRouteOptionsRbacPrincipal {
+    andPrincipals: pulumi.Input<pulumi.Input<inputs.AlbVirtualHostRouteOptionsRbacPrincipalAndPrincipal>[]>;
+}
+
+export interface AlbVirtualHostRouteOptionsRbacPrincipalAndPrincipal {
+    any?: pulumi.Input<boolean>;
+    header?: pulumi.Input<inputs.AlbVirtualHostRouteOptionsRbacPrincipalAndPrincipalHeader>;
+    remoteIp?: pulumi.Input<string>;
+}
+
+export interface AlbVirtualHostRouteOptionsRbacPrincipalAndPrincipalHeader {
+    name: pulumi.Input<string>;
+    /**
+     * The `path` and `fqmn` blocks.
+     *
+     * > Exactly one type of string matches `exact`, `prefix` or `regex` should be specified.
+     */
+    value?: pulumi.Input<inputs.AlbVirtualHostRouteOptionsRbacPrincipalAndPrincipalHeaderValue>;
+}
+
+export interface AlbVirtualHostRouteOptionsRbacPrincipalAndPrincipalHeaderValue {
+    /**
+     * Match exactly.
+     */
+    exact?: pulumi.Input<string>;
+    /**
+     * Match prefix.
+     */
+    prefix?: pulumi.Input<string>;
+    /**
+     * Match regex.
+     */
+    regex?: pulumi.Input<string>;
+}
+
+export interface AlbVirtualHostRouteRouteOptions {
+    /**
+     * RBAC configuration.
+     */
+    rbac?: pulumi.Input<inputs.AlbVirtualHostRouteRouteOptionsRbac>;
+    /**
+     * SWS profile ID.
+     */
+    securityProfileId?: pulumi.Input<string>;
+}
+
+export interface AlbVirtualHostRouteRouteOptionsRbac {
+    action?: pulumi.Input<string>;
+    principals: pulumi.Input<pulumi.Input<inputs.AlbVirtualHostRouteRouteOptionsRbacPrincipal>[]>;
+}
+
+export interface AlbVirtualHostRouteRouteOptionsRbacPrincipal {
+    andPrincipals: pulumi.Input<pulumi.Input<inputs.AlbVirtualHostRouteRouteOptionsRbacPrincipalAndPrincipal>[]>;
+}
+
+export interface AlbVirtualHostRouteRouteOptionsRbacPrincipalAndPrincipal {
+    any?: pulumi.Input<boolean>;
+    header?: pulumi.Input<inputs.AlbVirtualHostRouteRouteOptionsRbacPrincipalAndPrincipalHeader>;
+    remoteIp?: pulumi.Input<string>;
+}
+
+export interface AlbVirtualHostRouteRouteOptionsRbacPrincipalAndPrincipalHeader {
+    name: pulumi.Input<string>;
+    /**
+     * The `path` and `fqmn` blocks.
+     *
+     * > Exactly one type of string matches `exact`, `prefix` or `regex` should be specified.
+     */
+    value?: pulumi.Input<inputs.AlbVirtualHostRouteRouteOptionsRbacPrincipalAndPrincipalHeaderValue>;
+}
+
+export interface AlbVirtualHostRouteRouteOptionsRbacPrincipalAndPrincipalHeaderValue {
+    /**
+     * Match exactly.
+     */
+    exact?: pulumi.Input<string>;
+    /**
+     * Match prefix.
+     */
+    prefix?: pulumi.Input<string>;
+    /**
+     * Match regex.
+     */
+    regex?: pulumi.Input<string>;
+}
+
+export interface ApiGatewayCanary {
+    /**
+     * A list of values for variables in gateway specification of canary release.
+     */
+    variables?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    /**
+     * Percentage of requests, which will be processed by canary release.
+     */
+    weight?: pulumi.Input<number>;
+}
+
+export interface ApiGatewayConnectivity {
+    /**
+     * Network the gateway will have access to. It's essential to specify network with subnets in all availability zones.
+     */
+    networkId: pulumi.Input<string>;
+}
+
+export interface ApiGatewayCustomDomain {
+    certificateId: pulumi.Input<string>;
+    domainId?: pulumi.Input<string>;
+    fqdn: pulumi.Input<string>;
+}
+
+export interface ApiGatewayLogOptions {
+    /**
+     * Is logging from Yandex Cloud API Gateway disabled.
+     */
+    disabled?: pulumi.Input<boolean>;
+    /**
+     * Log entries are written to default log group for specified folder.
+     */
+    folderId?: pulumi.Input<string>;
+    /**
+     * Log entries are written to specified log group.
+     */
+    logGroupId?: pulumi.Input<string>;
+    /**
+     * Minimum log entry level.
+     */
+    minLevel?: pulumi.Input<string>;
+}
+
+export interface AuditTrailsTrailDataStreamDestination {
+    /**
+     * ID of the [YDB](https://yandex.cloud/docs/ydb/concepts/resources) hosting the destination data stream.
+     */
+    databaseId: pulumi.Input<string>;
+    /**
+     * Name of the [YDS stream](https://yandex.cloud/docs/data-streams/concepts/glossary#stream-concepts) belonging to the specified YDB.
+     */
+    streamName: pulumi.Input<string>;
+}
+
+export interface AuditTrailsTrailFilter {
+    /**
+     * Structure describing filtering process for the service-specific data plane events.
+     */
+    eventFilters?: pulumi.Input<pulumi.Input<inputs.AuditTrailsTrailFilterEventFilter>[]>;
+    /**
+     * Structure describing filtering process for default control plane events. If omitted, the trail will not deliver this category.
+     */
+    pathFilter?: pulumi.Input<inputs.AuditTrailsTrailFilterPathFilter>;
+}
+
+export interface AuditTrailsTrailFilterEventFilter {
+    /**
+     * List of structures describing categories of gathered data plane events.
+     */
+    categories: pulumi.Input<pulumi.Input<inputs.AuditTrailsTrailFilterEventFilterCategory>[]>;
+    /**
+     * Structure describing filtering process based on cloud resources for the described event set. Structurally equal to the `filter.path_filter`.
+     */
+    pathFilter: pulumi.Input<inputs.AuditTrailsTrailFilterEventFilterPathFilter>;
+    /**
+     * ID of the service which events will be gathered.
+     */
+    service: pulumi.Input<string>;
+}
+
+export interface AuditTrailsTrailFilterEventFilterCategory {
+    /**
+     * Type of the event by its relation to the cloud resource model. Possible values: `CONTROL_PLANE`/`DATA_PLANE`.
+     */
+    plane: pulumi.Input<string>;
+    /**
+     * Type of the event by its operation effect on the resource. Possible values: `READ`/`WRITE`.
+     */
+    type: pulumi.Input<string>;
+}
+
+export interface AuditTrailsTrailFilterEventFilterPathFilter {
+    anyFilter?: pulumi.Input<inputs.AuditTrailsTrailFilterEventFilterPathFilterAnyFilter>;
+    someFilter?: pulumi.Input<inputs.AuditTrailsTrailFilterEventFilterPathFilterSomeFilter>;
+}
+
+export interface AuditTrailsTrailFilterEventFilterPathFilterAnyFilter {
+    /**
+     * ID of the child resource.
+     */
+    resourceId: pulumi.Input<string>;
+    /**
+     * Resource type of the child resource.
+     */
+    resourceType: pulumi.Input<string>;
+}
+
+export interface AuditTrailsTrailFilterEventFilterPathFilterSomeFilter {
+    anyFilters: pulumi.Input<pulumi.Input<inputs.AuditTrailsTrailFilterEventFilterPathFilterSomeFilterAnyFilter>[]>;
+    resourceId: pulumi.Input<string>;
+    resourceType: pulumi.Input<string>;
+}
+
+export interface AuditTrailsTrailFilterEventFilterPathFilterSomeFilterAnyFilter {
+    /**
+     * ID of the child resource.
+     */
+    resourceId: pulumi.Input<string>;
+    /**
+     * Resource type of the child resource.
+     */
+    resourceType: pulumi.Input<string>;
+}
+
+export interface AuditTrailsTrailFilterPathFilter {
+    /**
+     * Structure describing that events will be gathered from all cloud resources that belong to the parent resource. Mutually exclusive with `someFilter`.
+     */
+    anyFilter?: pulumi.Input<inputs.AuditTrailsTrailFilterPathFilterAnyFilter>;
+    someFilter?: pulumi.Input<inputs.AuditTrailsTrailFilterPathFilterSomeFilter>;
+}
+
+export interface AuditTrailsTrailFilterPathFilterAnyFilter {
+    /**
+     * ID of the child resource.
+     */
+    resourceId: pulumi.Input<string>;
+    /**
+     * Resource type of the child resource.
+     */
+    resourceType: pulumi.Input<string>;
+}
+
+export interface AuditTrailsTrailFilterPathFilterSomeFilter {
+    /**
+     * List of child resources from which events will be gathered.
+     */
+    anyFilters: pulumi.Input<pulumi.Input<inputs.AuditTrailsTrailFilterPathFilterSomeFilterAnyFilter>[]>;
+    /**
+     * ID of the parent resource.
+     */
+    resourceId: pulumi.Input<string>;
+    /**
+     * Resource type of the parent resource.
+     */
+    resourceType: pulumi.Input<string>;
+}
+
+export interface AuditTrailsTrailFilterPathFilterSomeFilterAnyFilter {
+    /**
+     * ID of the child resource.
+     */
+    resourceId: pulumi.Input<string>;
+    /**
+     * Resource type of the child resource.
+     */
+    resourceType: pulumi.Input<string>;
+}
+
+export interface AuditTrailsTrailFilteringPolicy {
+    /**
+     * Structure describing filtering process for the service-specific data events.
+     */
+    dataEventsFilters?: pulumi.Input<pulumi.Input<inputs.AuditTrailsTrailFilteringPolicyDataEventsFilter>[]>;
+    /**
+     * Structure describing filtering process for management events.
+     */
+    managementEventsFilter?: pulumi.Input<inputs.AuditTrailsTrailFilteringPolicyManagementEventsFilter>;
+}
+
+export interface AuditTrailsTrailFilteringPolicyDataEventsFilter {
+    /**
+     * A list of events that won't be gathered by the trail from this service. New events will be automatically gathered when this option is specified. Mutually exclusive with `includedEvents`.
+     */
+    excludedEvents?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * A list of events that will be gathered by the trail from this service. New events won't be gathered by default when this option is specified. Mutually exclusive with `excludedEvents`.
+     */
+    includedEvents?: pulumi.Input<pulumi.Input<string>[]>;
+    resourceScopes: pulumi.Input<pulumi.Input<inputs.AuditTrailsTrailFilteringPolicyDataEventsFilterResourceScope>[]>;
+    /**
+     * ID of the service which events will be gathered.
+     */
+    service: pulumi.Input<string>;
+}
+
+export interface AuditTrailsTrailFilteringPolicyDataEventsFilterResourceScope {
+    /**
+     * ID of the child resource.
+     */
+    resourceId: pulumi.Input<string>;
+    /**
+     * Resource type of the child resource.
+     */
+    resourceType: pulumi.Input<string>;
+}
+
+export interface AuditTrailsTrailFilteringPolicyManagementEventsFilter {
+    /**
+     * Structure describing that events will be gathered from the specified resource.
+     */
+    resourceScopes: pulumi.Input<pulumi.Input<inputs.AuditTrailsTrailFilteringPolicyManagementEventsFilterResourceScope>[]>;
+}
+
+export interface AuditTrailsTrailFilteringPolicyManagementEventsFilterResourceScope {
+    /**
+     * ID of the child resource.
+     */
+    resourceId: pulumi.Input<string>;
+    /**
+     * Resource type of the child resource.
+     */
+    resourceType: pulumi.Input<string>;
+}
+
+export interface AuditTrailsTrailLoggingDestination {
+    /**
+     * ID of the destination [Cloud Logging Group](https://yandex.cloud/docs/logging/concepts/log-group).
+     */
+    logGroupId: pulumi.Input<string>;
+}
+
+export interface AuditTrailsTrailStorageDestination {
+    /**
+     * Name of the [destination bucket](https://yandex.cloud/docs/storage/concepts/bucket).
+     */
+    bucketName: pulumi.Input<string>;
+    /**
+     * Additional prefix of the uploaded objects. If not specified, objects will be uploaded with prefix equal to `trailId`.
+     */
+    objectPrefix?: pulumi.Input<string>;
+}
+
+export interface BackupPolicyFileFilters {
+    /**
+     * Do not backup files that match the following criteria.
+     */
+    exclusionMasks?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Backup only files that match the following criteria.
+     */
+    inclusionMasks?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface BackupPolicyReattempts {
+    /**
+     * Enable flag. Default `true`.
+     */
+    enabled?: pulumi.Input<boolean>;
+    /**
+     * Retry interval. See `intervalType` for available values. Default: `5m`.
+     */
+    interval?: pulumi.Input<string>;
+    /**
+     * Maximum number of attempts before throwing an error. Default `5`.
+     */
+    maxAttempts?: pulumi.Input<number>;
+}
+
+export interface BackupPolicyRetention {
+    /**
+     * Defines whether retention rule applies after creating backup or before.
+     */
+    afterBackup?: pulumi.Input<boolean>;
+    /**
+     * A list of retention rules.
+     */
+    rules?: pulumi.Input<pulumi.Input<inputs.BackupPolicyRetentionRule>[]>;
+}
+
+export interface BackupPolicyRetentionRule {
+    /**
+     * Deletes backups that older than `maxAge`. Exactly one of `maxCount` or `maxAge` should be set.
+     */
+    maxAge?: pulumi.Input<string>;
+    /**
+     * Deletes backups if it's count exceeds `maxCount`. Exactly one of `maxCount` or `maxAge` should be set.
+     */
+    maxCount?: pulumi.Input<number>;
+    /**
+     * Possible types: `REPEATE_PERIOD_UNSPECIFIED`, `HOURLY`, `DAILY`, `WEEKLY`, `MONTHLY`. Specifies repeat period of the backupset.
+     */
+    repeatPeriods?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface BackupPolicyScheduling {
+    /**
+     * A list of schedules with backup sets that compose the whole scheme.
+     */
+    backupSets?: pulumi.Input<pulumi.Input<inputs.BackupPolicySchedulingBackupSet>[]>;
+    /**
+     * Enables or disables scheduling. Default `true`.
+     */
+    enabled?: pulumi.Input<boolean>;
+    /**
+     * Perform backup by interval, since last backup of the host. Maximum value is: 9999 days. See `intervalType` for available values. Exactly on of options should be set: `executeByInterval` or `executeByTime`.
+     *
+     * @deprecated The 'execute_by_interval' field has been deprecated. Please use 'backup_sets' instead.
+     */
+    executeByInterval?: pulumi.Input<number>;
+    /**
+     * Perform backup periodically at specific time. Exactly on of options should be set: `executeByInterval` or `executeByTime`.
+     *
+     * @deprecated The 'execute_by_time' field has been deprecated. Please use 'backup_sets' instead.
+     */
+    executeByTimes?: pulumi.Input<pulumi.Input<inputs.BackupPolicySchedulingExecuteByTime>[]>;
+    /**
+     * Maximum number of backup processes allowed to run in parallel. 0 for unlimited. Default `0`.
+     */
+    maxParallelBackups?: pulumi.Input<number>;
+    /**
+     * Configuration of the random delay between the execution of parallel tasks. See `intervalType` for available values. Default `30m`.
+     */
+    randomMaxDelay?: pulumi.Input<string>;
+    /**
+     * Scheme of the backups. Available values are: `ALWAYS_INCREMENTAL`, `ALWAYS_FULL`, `WEEKLY_FULL_DAILY_INCREMENTAL`, `WEEKLY_INCREMENTAL`. Default `ALWAYS_INCREMENTAL`.
+     */
+    scheme?: pulumi.Input<string>;
+    /**
+     * A day of week to start weekly backups. See `dayType` for available values. Default `MONDAY`.
+     */
+    weeklyBackupDay?: pulumi.Input<string>;
+}
+
+export interface BackupPolicySchedulingBackupSet {
+    /**
+     * Perform backup by interval, since last backup of the host. Maximum value is: 9999 days. See `intervalType` for available values. Exactly on of options should be set: `executeByInterval` or `executeByTime`.
+     */
+    executeByInterval?: pulumi.Input<number>;
+    /**
+     * Perform backup periodically at specific time. Exactly on of options should be set: `executeByInterval` or `executeByTime`.
+     */
+    executeByTimes?: pulumi.Input<pulumi.Input<inputs.BackupPolicySchedulingBackupSetExecuteByTime>[]>;
+    /**
+     * BackupSet type. See `backupSetType` for available values. Default `TYPE_AUTO`.
+     */
+    type?: pulumi.Input<string>;
+}
+
+export interface BackupPolicySchedulingBackupSetExecuteByTime {
+    /**
+     * If true, schedule will be applied on the last day of month. See `dayType` for available values. Default `true`.
+     */
+    includeLastDayOfMonth?: pulumi.Input<boolean>;
+    /**
+     * List of days when schedule applies. Used in `MONTHLY` type.
+     */
+    monthdays?: pulumi.Input<pulumi.Input<number>[]>;
+    /**
+     * Set of values. Allowed values form 1 to 12.
+     */
+    months?: pulumi.Input<pulumi.Input<number>[]>;
+    /**
+     * List of time in format `HH:MM` (24-hours format), when the schedule applies.
+     */
+    repeatAts?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Frequency of backup repetition. See `intervalType` for available values.
+     */
+    repeatEvery?: pulumi.Input<string>;
+    /**
+     * Type of the scheduling. Available values are: `HOURLY`, `DAILY`, `WEEKLY`, `MONTHLY`.
+     */
+    type: pulumi.Input<string>;
+    /**
+     * List of weekdays when the backup will be applied. Used in `WEEKLY` type.
+     */
+    weekdays?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface BackupPolicySchedulingExecuteByTime {
+    /**
+     * If true, schedule will be applied on the last day of month. See `dayType` for available values. Default `true`.
+     */
+    includeLastDayOfMonth?: pulumi.Input<boolean>;
+    /**
+     * List of days when schedule applies. Used in `MONTHLY` type.
+     */
+    monthdays?: pulumi.Input<pulumi.Input<number>[]>;
+    /**
+     * Set of values. Allowed values form 1 to 12.
+     */
+    months?: pulumi.Input<pulumi.Input<number>[]>;
+    /**
+     * List of time in format `HH:MM` (24-hours format), when the schedule applies.
+     */
+    repeatAts?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Frequency of backup repetition. See `intervalType` for available values.
+     */
+    repeatEvery?: pulumi.Input<string>;
+    /**
+     * Type of the scheduling. Available values are: `HOURLY`, `DAILY`, `WEEKLY`, `MONTHLY`.
+     */
+    type: pulumi.Input<string>;
+    /**
+     * List of weekdays when the backup will be applied. Used in `WEEKLY` type.
+     */
+    weekdays?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface BackupPolicyVmSnapshotReattempts {
+    /**
+     * Enable flag. Default `true`.
+     */
+    enabled?: pulumi.Input<boolean>;
+    /**
+     * Retry interval. See `intervalType` for available values. Default: `5m`.
+     */
+    interval?: pulumi.Input<string>;
+    /**
+     * Maximum number of attempts before throwing an error. Default `5`.
+     */
+    maxAttempts?: pulumi.Input<number>;
+}
+
+export interface CdnOriginGroupOrigin {
+    /**
+     * Specifies whether the origin is used in its origin group as backup. A backup origin is used when one of active origins becomes unavailable.
+     */
+    backup?: pulumi.Input<boolean>;
+    /**
+     * The origin is enabled and used as a source for the CDN. Default `enabled`.
+     */
+    enabled?: pulumi.Input<boolean>;
+    originGroupId?: pulumi.Input<number>;
+    /**
+     * IP address or Domain name of your origin and the port.
+     */
+    source: pulumi.Input<string>;
+}
+
+export interface CdnResourceOptions {
+    /**
+     * HTTP methods for your CDN content. By default the following methods are allowed: GET, HEAD, POST, PUT, PATCH, DELETE, OPTIONS. In case some methods are not allowed to the user, they will get the 405 (Method Not Allowed) response. If the method is not supported, the user gets the 501 (Not Implemented) response.
+     */
+    allowedHttpMethods?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Set up a cache period for the end-users browser. Content will be cached due to origin settings. If there are no cache settings on your origin, the content will not be cached. The list of HTTP response codes that can be cached in browsers: 200, 201, 204, 206, 301, 302, 303, 304, 307, 308. Other response codes will not be cached. The default value is 4 days.
+     */
+    browserCacheSettings?: pulumi.Input<number>;
+    /**
+     * List HTTP headers that must be included in responses to clients.
+     */
+    cacheHttpHeaders?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Parameter that lets browsers get access to selected resources from a domain different to a domain from which the request is received.
+     */
+    cors?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Custom value for the Host header. Your server must be able to process requests with the chosen header.
+     */
+    customHostHeader?: pulumi.Input<string>;
+    /**
+     * Wildcard additional CNAME. If a resource has a wildcard additional CNAME, you can use your own certificate for content delivery via HTTPS.
+     */
+    customServerName?: pulumi.Input<string>;
+    /**
+     * Setup a cache status.
+     */
+    disableCache?: pulumi.Input<boolean>;
+    /**
+     * Disabling proxy force ranges.
+     */
+    disableProxyForceRanges?: pulumi.Input<boolean>;
+    /**
+     * Content will be cached according to origin cache settings. The value applies for a response with codes 200, 201, 204, 206, 301, 302, 303, 304, 307, 308 if an origin server does not have caching HTTP headers. Responses with other codes will not be cached.
+     */
+    edgeCacheSettings?: pulumi.Input<number>;
+    /**
+     * Enable access limiting by IP addresses, option available only with setting secure_key.
+     */
+    enableIpUrlSigning?: pulumi.Input<boolean>;
+    /**
+     * Option helps you to reduce the bandwidth between origin and CDN servers. Also, content delivery speed becomes higher because of reducing the time for compressing files in a CDN.
+     */
+    fetchedCompressed?: pulumi.Input<boolean>;
+    /**
+     * Choose the Forward Host header option if is important to send in the request to the Origin the same Host header as was sent in the request to CDN server.
+     */
+    forwardHostHeader?: pulumi.Input<boolean>;
+    /**
+     * GZip compression at CDN servers reduces file size by 70% and can be as high as 90%.
+     */
+    gzipOn?: pulumi.Input<boolean>;
+    /**
+     * Set for ignoring cookie.
+     */
+    ignoreCookie?: pulumi.Input<boolean>;
+    /**
+     * Files with different query parameters are cached as objects with the same key regardless of the parameter value. selected by default.
+     */
+    ignoreQueryParams?: pulumi.Input<boolean>;
+    ipAddressAcl?: pulumi.Input<inputs.CdnResourceOptionsIpAddressAcl>;
+    /**
+     * Allows caching for GET, HEAD and POST requests.
+     */
+    proxyCacheMethodsSet?: pulumi.Input<boolean>;
+    /**
+     * Files with the specified query parameters are cached as objects with the same key, files with other parameters are cached as objects with different keys.
+     */
+    queryParamsBlacklists?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Files with the specified query parameters are cached as objects with different keys, files with other parameters are cached as objects with the same key.
+     */
+    queryParamsWhitelists?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Set up a redirect from HTTP to HTTPS.
+     */
+    redirectHttpToHttps?: pulumi.Input<boolean>;
+    /**
+     * Set up a redirect from HTTPS to HTTP.
+     */
+    redirectHttpsToHttp?: pulumi.Input<boolean>;
+    /**
+     * Set secure key for url encoding to protect contect and limit access by IP addresses and time limits.
+     */
+    secureKey?: pulumi.Input<string>;
+    /**
+     * Files larger than 10 MB will be requested and cached in parts (no larger than 10 MB each part). It reduces time to first byte. The origin must support HTTP Range requests.
+     */
+    slice?: pulumi.Input<boolean>;
+    /**
+     * Set up custom headers that CDN servers will send in requests to origins.
+     */
+    staticRequestHeaders?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    staticResponseHeaders?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+}
+
+export interface CdnResourceOptionsIpAddressAcl {
+    /**
+     * The list of specified IP addresses to be allowed or denied depending on acl policy type.
+     */
+    exceptedValues?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The policy type for ACL. One of `allow` or `deny` values.
+     */
+    policyType?: pulumi.Input<string>;
+}
+
+export interface CdnResourceSslCertificate {
+    certificateManagerId?: pulumi.Input<string>;
+    status?: pulumi.Input<string>;
+    type: pulumi.Input<string>;
+}
+
+export interface CmCertificateChallenge {
+    /**
+     * Time the challenge was created.
+     */
+    createdAt?: pulumi.Input<string>;
+    /**
+     * DNS record name (only for DNS challenge).
+     */
+    dnsName?: pulumi.Input<string>;
+    /**
+     * DNS record type: `TXT` or `CNAME` (only for DNS challenge).
+     */
+    dnsType?: pulumi.Input<string>;
+    /**
+     * DNS record value (only for DNS challenge).
+     */
+    dnsValue?: pulumi.Input<string>;
+    /**
+     * Validated domain.
+     */
+    domain?: pulumi.Input<string>;
+    /**
+     * The content that should be made accessible with the given `httpUrl` (only for HTTP challenge).
+     */
+    httpContent?: pulumi.Input<string>;
+    /**
+     * URL where the challenge content httpContent should be placed (only for HTTP challenge).
+     */
+    httpUrl?: pulumi.Input<string>;
+    /**
+     * Current status message.
+     */
+    message?: pulumi.Input<string>;
+    /**
+     * Challenge type `DNS` or `HTTP`.
+     */
+    type?: pulumi.Input<string>;
+    /**
+     * Last time the challenge was updated.
+     */
+    updatedAt?: pulumi.Input<string>;
+}
+
+export interface CmCertificateManaged {
+    /**
+     * Expected number of challenge count needed to validate certificate. Resource creation will fail if the specified value does not match the actual number of challenges received from issue provider. This argument is helpful for safe automatic resource creation for passing challenges for multi-domain certificates.
+     */
+    challengeCount?: pulumi.Input<number>;
+    /**
+     * Domain owner-check method. Possible values:
+     * * `DNS_CNAME` - you will need to create a CNAME dns record with the specified value. Recommended for fully automated certificate renewal.
+     * * `DNS_TXT` - you will need to create a TXT dns record with specified value.
+     * * `HTTP` - you will need to place specified value into specified url.
+     */
+    challengeType: pulumi.Input<string>;
+}
+
+export interface CmCertificateSelfManaged {
+    /**
+     * Certificate with chain.
+     */
+    certificate: pulumi.Input<string>;
+    /**
+     * Private key of certificate.
+     */
+    privateKey?: pulumi.Input<string>;
+    /**
+     * Lockbox secret specification for getting private key.
+     */
+    privateKeyLockboxSecret?: pulumi.Input<inputs.CmCertificateSelfManagedPrivateKeyLockboxSecret>;
+}
+
+export interface CmCertificateSelfManagedPrivateKeyLockboxSecret {
+    /**
+     * Lockbox secret Id.
+     */
+    id: pulumi.Input<string>;
+    /**
+     * Key of the Lockbox secret, the value of which contains the private key of the certificate.
+     */
+    key: pulumi.Input<string>;
+}
+
+export interface ComputeDiskDiskPlacementPolicy {
+    /**
+     * Specifies Disk Placement Group id.
+     */
+    diskPlacementGroupId: pulumi.Input<string>;
+}
+
+export interface ComputeDiskHardwareGeneration {
+    /**
+     * A newer hardware generation, which always uses `PCI_TOPOLOGY_V2` and UEFI boot.
+     */
+    generation2Features?: pulumi.Input<inputs.ComputeDiskHardwareGenerationGeneration2Features>;
+    /**
+     * Defines the first known hardware generation and its features.
+     */
+    legacyFeatures?: pulumi.Input<inputs.ComputeDiskHardwareGenerationLegacyFeatures>;
+}
+
+export interface ComputeDiskHardwareGenerationGeneration2Features {
+}
+
+export interface ComputeDiskHardwareGenerationLegacyFeatures {
+    /**
+     * A variant of PCI topology, one of `PCI_TOPOLOGY_V1` or `PCI_TOPOLOGY_V2`.
+     */
+    pciTopology?: pulumi.Input<string>;
+}
+
+export interface ComputeImageHardwareGeneration {
+    /**
+     * A newer hardware generation, which always uses `PCI_TOPOLOGY_V2` and UEFI boot.
+     */
+    generation2Features?: pulumi.Input<inputs.ComputeImageHardwareGenerationGeneration2Features>;
+    /**
+     * Defines the first known hardware generation and its features.
+     */
+    legacyFeatures?: pulumi.Input<inputs.ComputeImageHardwareGenerationLegacyFeatures>;
+}
+
+export interface ComputeImageHardwareGenerationGeneration2Features {
+}
+
+export interface ComputeImageHardwareGenerationLegacyFeatures {
+    /**
+     * A variant of PCI topology, one of `PCI_TOPOLOGY_V1` or `PCI_TOPOLOGY_V2`.
+     */
+    pciTopology?: pulumi.Input<string>;
+}
+
+export interface ComputeInstanceBootDisk {
+    /**
+     * Defines whether the disk will be auto-deleted when the instance is deleted. The default value is `True`.
+     */
+    autoDelete?: pulumi.Input<boolean>;
+    /**
+     * Name that can be used to access an attached disk.
+     */
+    deviceName?: pulumi.Input<string>;
+    /**
+     * The ID of the existing disk (such as those managed by `yandex.ComputeDisk`) to attach as a boot disk.
+     */
+    diskId?: pulumi.Input<string>;
+    /**
+     * Parameters for a new disk that will be created alongside the new instance. Either `initializeParams` or `diskId` must be set. Either `imageId` or `snapshotId` must be specified.
+     */
+    initializeParams?: pulumi.Input<inputs.ComputeInstanceBootDiskInitializeParams>;
+    /**
+     * Type of access to the disk resource. By default, a disk is attached in `READ_WRITE` mode.
+     */
+    mode?: pulumi.Input<string>;
+}
+
+export interface ComputeInstanceBootDiskInitializeParams {
+    /**
+     * Block size of the disk, specified in bytes.
+     */
+    blockSize?: pulumi.Input<number>;
+    /**
+     * Description of the boot disk.
+     */
+    description?: pulumi.Input<string>;
+    /**
+     * A disk image to initialize this disk from.
+     */
+    imageId?: pulumi.Input<string>;
+    /**
+     * ID of KMS symmetric key used to encrypt disk.
+     */
+    kmsKeyId?: pulumi.Input<string>;
+    /**
+     * Name of the boot disk.
+     */
+    name?: pulumi.Input<string>;
+    /**
+     * Size of the disk in GB.
+     */
+    size?: pulumi.Input<number>;
+    /**
+     * A snapshot to initialize this disk from.
+     */
+    snapshotId?: pulumi.Input<string>;
+    /**
+     * Disk type.
+     */
+    type?: pulumi.Input<string>;
+}
+
+export interface ComputeInstanceFilesystem {
+    /**
+     * Name of the device representing the filesystem on the instance.
+     */
+    deviceName?: pulumi.Input<string>;
+    /**
+     * ID of the filesystem that should be attached.
+     */
+    filesystemId: pulumi.Input<string>;
+    /**
+     * Mode of access to the filesystem that should be attached. By default, filesystem is attached in `READ_WRITE` mode.
+     */
+    mode?: pulumi.Input<string>;
+}
+
+export interface ComputeInstanceGroupAllocationPolicy {
+    /**
+     * Array of availability zone IDs with list of instance tags.
+     */
+    instanceTagsPools?: pulumi.Input<pulumi.Input<inputs.ComputeInstanceGroupAllocationPolicyInstanceTagsPool>[]>;
+    /**
+     * A list of [availability zones](https://yandex.cloud/docs/overview/concepts/geo-scope).
+     */
+    zones: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface ComputeInstanceGroupAllocationPolicyInstanceTagsPool {
+    /**
+     * List of tags for instances in zone.
+     */
+    tags: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Availability zone.
+     */
+    zone: pulumi.Input<string>;
+}
+
+export interface ComputeInstanceGroupApplicationLoadBalancer {
+    /**
+     * Do not wait load balancer health checks.
+     */
+    ignoreHealthChecks?: pulumi.Input<boolean>;
+    /**
+     * Timeout for waiting for the VM to be checked by the load balancer. If the timeout is exceeded, the VM will be turned off based on the deployment policy. Specified in seconds.
+     */
+    maxOpeningTrafficDuration?: pulumi.Input<number>;
+    statusMessage?: pulumi.Input<string>;
+    /**
+     * A description of the target group.
+     */
+    targetGroupDescription?: pulumi.Input<string>;
+    targetGroupId?: pulumi.Input<string>;
+    /**
+     * A set of key/value label pairs.
+     */
+    targetGroupLabels?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    /**
+     * The name of the target group.
+     */
+    targetGroupName?: pulumi.Input<string>;
+}
+
+export interface ComputeInstanceGroupDeployPolicy {
+    /**
+     * The maximum number of instances that can be created at the same time.
+     */
+    maxCreating?: pulumi.Input<number>;
+    /**
+     * The maximum number of instances that can be deleted at the same time.
+     */
+    maxDeleting?: pulumi.Input<number>;
+    /**
+     * The maximum number of instances that can be temporarily allocated above the group's target size during the update process.
+     */
+    maxExpansion: pulumi.Input<number>;
+    /**
+     * The maximum number of running instances that can be taken offline (stopped or deleted) at the same time during the update process.
+     */
+    maxUnavailable: pulumi.Input<number>;
+    /**
+     * The amount of time in seconds to allow for an instance to start. Instance will be considered up and running (and start receiving traffic) only after the startupDuration has elapsed and all health checks are passed.
+     */
+    startupDuration?: pulumi.Input<number>;
+    /**
+     * Affects the lifecycle of the instance during deployment. If set to `proactive` (default), Instance Groups can forcefully stop a running instance. If `opportunistic`, Instance Groups does not stop a running instance. Instead, it will wait until the instance stops itself or becomes unhealthy.
+     */
+    strategy?: pulumi.Input<string>;
+}
+
+export interface ComputeInstanceGroupHealthCheck {
+    /**
+     * The number of successful health checks before the managed instance is declared healthy.
+     */
+    healthyThreshold?: pulumi.Input<number>;
+    /**
+     * HTTP check options.
+     */
+    httpOptions?: pulumi.Input<inputs.ComputeInstanceGroupHealthCheckHttpOptions>;
+    /**
+     * The interval to wait between health checks in seconds.
+     */
+    interval?: pulumi.Input<number>;
+    /**
+     * TCP check options.
+     */
+    tcpOptions?: pulumi.Input<inputs.ComputeInstanceGroupHealthCheckTcpOptions>;
+    /**
+     * The length of time to wait for a response before the health check times out in seconds.
+     */
+    timeout?: pulumi.Input<number>;
+    /**
+     * The number of failed health checks before the managed instance is declared unhealthy.
+     */
+    unhealthyThreshold?: pulumi.Input<number>;
+}
+
+export interface ComputeInstanceGroupHealthCheckHttpOptions {
+    /**
+     * The URL path used for health check requests.
+     */
+    path: pulumi.Input<string>;
+    /**
+     * The port used for HTTP health checks.
+     */
+    port: pulumi.Input<number>;
+}
+
+export interface ComputeInstanceGroupHealthCheckTcpOptions {
+    /**
+     * The port used for TCP health checks.
+     */
+    port: pulumi.Input<number>;
+}
+
+export interface ComputeInstanceGroupInstance {
+    /**
+     * The Fully Qualified Domain Name.
+     */
+    fqdn?: pulumi.Input<string>;
+    /**
+     * The ID of the instance.
+     */
+    instanceId?: pulumi.Input<string>;
+    instanceTag?: pulumi.Input<string>;
+    /**
+     * The name of the managed instance.
+     */
+    name?: pulumi.Input<string>;
+    /**
+     * An array with the network interfaces attached to the managed instance.
+     */
+    networkInterfaces?: pulumi.Input<pulumi.Input<inputs.ComputeInstanceGroupInstanceNetworkInterface>[]>;
+    status?: pulumi.Input<string>;
+    statusChangedAt?: pulumi.Input<string>;
+    /**
+     * The status message of the instance.
+     */
+    statusMessage?: pulumi.Input<string>;
+    /**
+     * The ID of the availability zone where the instance resides.
+     */
+    zoneId?: pulumi.Input<string>;
+}
+
+export interface ComputeInstanceGroupInstanceNetworkInterface {
+    /**
+     * The index of the network interface as generated by the server.
+     */
+    index?: pulumi.Input<number>;
+    /**
+     * The private IP address to assign to the instance. If empty, the address is automatically assigned from the specified subnet.
+     */
+    ipAddress?: pulumi.Input<string>;
+    /**
+     * `True` if IPv4 address allocated for the network interface.
+     */
+    ipv4?: pulumi.Input<boolean>;
+    ipv6?: pulumi.Input<boolean>;
+    ipv6Address?: pulumi.Input<string>;
+    /**
+     * The MAC address assigned to the network interface.
+     */
+    macAddress?: pulumi.Input<string>;
+    /**
+     * The instance's public address for accessing the internet over NAT.
+     */
+    nat?: pulumi.Input<boolean>;
+    /**
+     * The public IP address of the instance.
+     */
+    natIpAddress?: pulumi.Input<string>;
+    /**
+     * The IP version for the public address.
+     */
+    natIpVersion?: pulumi.Input<string>;
+    /**
+     * The ID of the subnet to attach this interface to. The subnet must reside in the same zone where this instance was created.
+     */
+    subnetId?: pulumi.Input<string>;
+}
+
+export interface ComputeInstanceGroupInstanceTemplate {
+    /**
+     * Boot disk specifications for the instance.
+     */
+    bootDisk: pulumi.Input<inputs.ComputeInstanceGroupInstanceTemplateBootDisk>;
+    /**
+     * A description of the instance.
+     */
+    description?: pulumi.Input<string>;
+    /**
+     * List of filesystems to attach to the instance.
+     */
+    filesystems?: pulumi.Input<pulumi.Input<inputs.ComputeInstanceGroupInstanceTemplateFilesystem>[]>;
+    /**
+     * Hostname template for the instance. This field is used to generate the FQDN value of instance. The `hostname` must be unique within the network and region. If not specified, the hostname will be equal to `id` of the instance and FQDN will be `<id>.auto.internal`. Otherwise FQDN will be `<hostname>.<region_id>.internal`.
+     * In order to be unique it must contain at least on of instance unique placeholders:
+     * * `{instance.short_id}`
+     * * {instance.index}
+     * * combination of `{instance.zone_id}` and `{instance.index_in_zone}`
+     * Example: `my-instance-{instance.index}`. If hostname is not set, `name` value will be used. It may also contain another placeholders, see `metadata` doc for full list.
+     */
+    hostname?: pulumi.Input<string>;
+    /**
+     * A set of key/value label pairs to assign to the instance.
+     */
+    labels?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    /**
+     * A set of metadata key/value pairs to make available from within the instance.
+     */
+    metadata?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    /**
+     * Options allow user to configure access to managed instances metadata
+     */
+    metadataOptions?: pulumi.Input<inputs.ComputeInstanceGroupInstanceTemplateMetadataOptions>;
+    /**
+     * Name template of the instance.
+     * In order to be unique it must contain at least one of instance unique placeholders:*`{instance.short_id}`
+     * * `{instance.index}`
+     * * combination of `{instance.zone_id}` and`{instance.index_in_zone}`.
+     * Example: `my-instance-{instance.index}`.
+     * If not set, default name is used: `{instance_group.id}-{instance.short_id}`. It may also contain another placeholders, see `metadata` doc for full list.
+     */
+    name?: pulumi.Input<string>;
+    /**
+     * Network specifications for the instance. This can be used multiple times for adding multiple interfaces.
+     */
+    networkInterfaces: pulumi.Input<pulumi.Input<inputs.ComputeInstanceGroupInstanceTemplateNetworkInterface>[]>;
+    /**
+     * Network acceleration type for instance.
+     */
+    networkSettings?: pulumi.Input<pulumi.Input<inputs.ComputeInstanceGroupInstanceTemplateNetworkSetting>[]>;
+    /**
+     * The placement policy configuration.
+     */
+    placementPolicy?: pulumi.Input<inputs.ComputeInstanceGroupInstanceTemplatePlacementPolicy>;
+    /**
+     * The ID of the hardware platform configuration for the instance.
+     */
+    platformId?: pulumi.Input<string>;
+    /**
+     * Compute resource specifications for the instance.
+     */
+    resources: pulumi.Input<inputs.ComputeInstanceGroupInstanceTemplateResources>;
+    /**
+     * The scheduling policy configuration.
+     */
+    schedulingPolicy?: pulumi.Input<inputs.ComputeInstanceGroupInstanceTemplateSchedulingPolicy>;
+    /**
+     * A list of disks to attach to the instance.
+     */
+    secondaryDisks?: pulumi.Input<pulumi.Input<inputs.ComputeInstanceGroupInstanceTemplateSecondaryDisk>[]>;
+    /**
+     * The ID of the service account authorized for this instance.
+     */
+    serviceAccountId?: pulumi.Input<string>;
+}
+
+export interface ComputeInstanceGroupInstanceTemplateBootDisk {
+    /**
+     * This value can be used to reference the device under `/dev/disk/by-id/`.
+     */
+    deviceName?: pulumi.Input<string>;
+    diskId?: pulumi.Input<string>;
+    /**
+     * Parameters for creating a disk alongside the instance.
+     *
+     * > `imageId` or `snapshotId` must be specified.
+     */
+    initializeParams?: pulumi.Input<inputs.ComputeInstanceGroupInstanceTemplateBootDiskInitializeParams>;
+    /**
+     * The access mode to the disk resource. By default a disk is attached in `READ_WRITE` mode.
+     */
+    mode?: pulumi.Input<string>;
+    /**
+     * When set can be later used to change DiskSpec of actual disk.
+     */
+    name?: pulumi.Input<string>;
+}
+
+export interface ComputeInstanceGroupInstanceTemplateBootDiskInitializeParams {
+    /**
+     * A description of the boot disk.
+     */
+    description?: pulumi.Input<string>;
+    /**
+     * The disk image to initialize this disk from.
+     */
+    imageId?: pulumi.Input<string>;
+    /**
+     * The size of the disk in GB.
+     */
+    size?: pulumi.Input<number>;
+    /**
+     * The snapshot to initialize this disk from.
+     */
+    snapshotId?: pulumi.Input<string>;
+    /**
+     * The disk type.
+     */
+    type?: pulumi.Input<string>;
+}
+
+export interface ComputeInstanceGroupInstanceTemplateFilesystem {
+    /**
+     * Name of the device representing the filesystem on the instance.
+     */
+    deviceName?: pulumi.Input<string>;
+    /**
+     * ID of the filesystem that should be attached.
+     */
+    filesystemId: pulumi.Input<string>;
+    /**
+     * Mode of access to the filesystem that should be attached. By default, filesystem is attached in `READ_WRITE` mode.
+     */
+    mode?: pulumi.Input<string>;
+}
+
+export interface ComputeInstanceGroupInstanceTemplateMetadataOptions {
+    awsV1HttpEndpoint?: pulumi.Input<number>;
+    awsV1HttpToken?: pulumi.Input<number>;
+    gceHttpEndpoint?: pulumi.Input<number>;
+    gceHttpToken?: pulumi.Input<number>;
+}
+
+export interface ComputeInstanceGroupInstanceTemplateNetworkInterface {
+    /**
+     * List of DNS records.
+     */
+    dnsRecords?: pulumi.Input<pulumi.Input<inputs.ComputeInstanceGroupInstanceTemplateNetworkInterfaceDnsRecord>[]>;
+    /**
+     * Manual set static IP address.
+     */
+    ipAddress?: pulumi.Input<string>;
+    ipv4?: pulumi.Input<boolean>;
+    ipv6?: pulumi.Input<boolean>;
+    /**
+     * Manual set static IPv6 address.
+     */
+    ipv6Address?: pulumi.Input<string>;
+    /**
+     * List of IPv6 DNS records.
+     */
+    ipv6DnsRecords?: pulumi.Input<pulumi.Input<inputs.ComputeInstanceGroupInstanceTemplateNetworkInterfaceIpv6DnsRecord>[]>;
+    /**
+     * Flag for using NAT.
+     */
+    nat?: pulumi.Input<boolean>;
+    /**
+     * List of NAT DNS records.
+     */
+    natDnsRecords?: pulumi.Input<pulumi.Input<inputs.ComputeInstanceGroupInstanceTemplateNetworkInterfaceNatDnsRecord>[]>;
+    /**
+     * A public address that can be used to access the internet over NAT. Use `variables` to set.
+     */
+    natIpAddress?: pulumi.Input<string>;
+    /**
+     * The ID of the network.
+     */
+    networkId?: pulumi.Input<string>;
+    /**
+     * Security group (SG) `IDs` for network interface.
+     */
+    securityGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The ID of the subnets to attach this interface to.
+     */
+    subnetIds?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface ComputeInstanceGroupInstanceTemplateNetworkInterfaceDnsRecord {
+    /**
+     * DNS zone id (if not set, private zone used).
+     */
+    dnsZoneId?: pulumi.Input<string>;
+    /**
+     * DNS record FQDN (must have dot at the end).
+     */
+    fqdn: pulumi.Input<string>;
+    /**
+     * When set to true, also create PTR DNS record.
+     */
+    ptr?: pulumi.Input<boolean>;
+    /**
+     * DNS record TTL.
+     */
+    ttl?: pulumi.Input<number>;
+}
+
+export interface ComputeInstanceGroupInstanceTemplateNetworkInterfaceIpv6DnsRecord {
+    /**
+     * DNS zone id (if not set, private zone used).
+     */
+    dnsZoneId?: pulumi.Input<string>;
+    /**
+     * DNS record FQDN (must have dot at the end).
+     */
+    fqdn: pulumi.Input<string>;
+    /**
+     * When set to true, also create PTR DNS record.
+     */
+    ptr?: pulumi.Input<boolean>;
+    /**
+     * DNS record TTL.
+     */
+    ttl?: pulumi.Input<number>;
+}
+
+export interface ComputeInstanceGroupInstanceTemplateNetworkInterfaceNatDnsRecord {
+    /**
+     * DNS zone id (if not set, private zone used).
+     */
+    dnsZoneId?: pulumi.Input<string>;
+    /**
+     * DNS record FQDN (must have dot at the end).
+     */
+    fqdn: pulumi.Input<string>;
+    /**
+     * When set to true, also create PTR DNS record.
+     */
+    ptr?: pulumi.Input<boolean>;
+    /**
+     * DNS record TTL.
+     */
+    ttl?: pulumi.Input<number>;
+}
+
+export interface ComputeInstanceGroupInstanceTemplateNetworkSetting {
+    /**
+     * Network acceleration type. By default a network is in `STANDARD` mode.
+     */
+    type?: pulumi.Input<string>;
+}
+
+export interface ComputeInstanceGroupInstanceTemplatePlacementPolicy {
+    /**
+     * Specifies the id of the Placement Group to assign to the instances.
+     */
+    placementGroupId: pulumi.Input<string>;
+}
+
+export interface ComputeInstanceGroupInstanceTemplateResources {
+    /**
+     * If provided, specifies baseline core performance as a percent.
+     */
+    coreFraction?: pulumi.Input<number>;
+    /**
+     * The number of CPU cores for the instance.
+     */
+    cores: pulumi.Input<number>;
+    gpus?: pulumi.Input<number>;
+    /**
+     * The memory size in GB.
+     */
+    memory: pulumi.Input<number>;
+}
+
+export interface ComputeInstanceGroupInstanceTemplateSchedulingPolicy {
+    /**
+     * Specifies if the instance is preemptible. Defaults to `false`.
+     */
+    preemptible?: pulumi.Input<boolean>;
+}
+
+export interface ComputeInstanceGroupInstanceTemplateSecondaryDisk {
+    /**
+     * This value can be used to reference the device under `/dev/disk/by-id/`.
+     */
+    deviceName?: pulumi.Input<string>;
+    /**
+     * ID of the existing disk. To set use variables.
+     */
+    diskId?: pulumi.Input<string>;
+    /**
+     * Parameters used for creating a disk alongside the instance.
+     *
+     * > `imageId` or `snapshotId` must be specified.
+     */
+    initializeParams?: pulumi.Input<inputs.ComputeInstanceGroupInstanceTemplateSecondaryDiskInitializeParams>;
+    /**
+     * The access mode to the disk resource. By default a disk is attached in `READ_WRITE` mode.
+     */
+    mode?: pulumi.Input<string>;
+    /**
+     * When set can be later used to change DiskSpec of actual disk.
+     */
+    name?: pulumi.Input<string>;
+}
+
+export interface ComputeInstanceGroupInstanceTemplateSecondaryDiskInitializeParams {
+    /**
+     * A description of the boot disk.
+     */
+    description?: pulumi.Input<string>;
+    /**
+     * The disk image to initialize this disk from.
+     */
+    imageId?: pulumi.Input<string>;
+    /**
+     * The size of the disk in GB.
+     */
+    size?: pulumi.Input<number>;
+    /**
+     * The snapshot to initialize this disk from.
+     */
+    snapshotId?: pulumi.Input<string>;
+    /**
+     * The disk type.
+     */
+    type?: pulumi.Input<string>;
+}
+
+export interface ComputeInstanceGroupLoadBalancer {
+    /**
+     * Do not wait load balancer health checks.
+     */
+    ignoreHealthChecks?: pulumi.Input<boolean>;
+    /**
+     * Timeout for waiting for the VM to be checked by the load balancer. If the timeout is exceeded, the VM will be turned off based on the deployment policy. Specified in seconds.
+     */
+    maxOpeningTrafficDuration?: pulumi.Input<number>;
+    /**
+     * The status message of the target group.
+     */
+    statusMessage?: pulumi.Input<string>;
+    /**
+     * A description of the target group.
+     */
+    targetGroupDescription?: pulumi.Input<string>;
+    /**
+     * The ID of the target group.
+     */
+    targetGroupId?: pulumi.Input<string>;
+    /**
+     * A set of key/value label pairs.
+     */
+    targetGroupLabels?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    /**
+     * The name of the target group.
+     */
+    targetGroupName?: pulumi.Input<string>;
+}
+
+export interface ComputeInstanceGroupScalePolicy {
+    /**
+     * The auto scaling policy of the instance group.
+     */
+    autoScale?: pulumi.Input<inputs.ComputeInstanceGroupScalePolicyAutoScale>;
+    /**
+     * The fixed scaling policy of the instance group.
+     */
+    fixedScale?: pulumi.Input<inputs.ComputeInstanceGroupScalePolicyFixedScale>;
+    /**
+     * The test auto scaling policy of the instance group. Use it to test how the auto scale works.
+     */
+    testAutoScale?: pulumi.Input<inputs.ComputeInstanceGroupScalePolicyTestAutoScale>;
+}
+
+export interface ComputeInstanceGroupScalePolicyAutoScale {
+    /**
+     * Autoscale type, can be `ZONAL` or `REGIONAL`. By default `ZONAL` type is used.
+     */
+    autoScaleType?: pulumi.Input<string>;
+    /**
+     * Target CPU load level.
+     */
+    cpuUtilizationTarget?: pulumi.Input<number>;
+    /**
+     * A list of custom rules.
+     */
+    customRules?: pulumi.Input<pulumi.Input<inputs.ComputeInstanceGroupScalePolicyAutoScaleCustomRule>[]>;
+    /**
+     * The initial number of instances in the instance group.
+     */
+    initialSize: pulumi.Input<number>;
+    /**
+     * The maximum number of virtual machines in the group.
+     */
+    maxSize?: pulumi.Input<number>;
+    /**
+     * The amount of time, in seconds, that metrics are averaged for. If the average value at the end of the interval is higher than the `cpuUtilizationTarget`, the instance group will increase the number of virtual machines in the group.
+     */
+    measurementDuration: pulumi.Input<number>;
+    /**
+     * The minimum number of virtual machines in a single availability zone.
+     */
+    minZoneSize?: pulumi.Input<number>;
+    /**
+     * The minimum time interval, in seconds, to monitor the load before an instance group can reduce the number of virtual machines in the group. During this time, the group will not decrease even if the average load falls below the value of `cpuUtilizationTarget`.
+     */
+    stabilizationDuration?: pulumi.Input<number>;
+    /**
+     * The warm-up time of the virtual machine, in seconds. During this time, traffic is fed to the virtual machine, but load metrics are not taken into account.
+     */
+    warmupDuration?: pulumi.Input<number>;
+}
+
+export interface ComputeInstanceGroupScalePolicyAutoScaleCustomRule {
+    folderId?: pulumi.Input<string>;
+    labels?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    metricName: pulumi.Input<string>;
+    metricType: pulumi.Input<string>;
+    ruleType: pulumi.Input<string>;
+    service?: pulumi.Input<string>;
+    target: pulumi.Input<number>;
+}
+
+export interface ComputeInstanceGroupScalePolicyFixedScale {
+    /**
+     * The number of instances in the instance group.
+     */
+    size: pulumi.Input<number>;
+}
+
+export interface ComputeInstanceGroupScalePolicyTestAutoScale {
+    /**
+     * Autoscale type, can be `ZONAL` or `REGIONAL`. By default `ZONAL` type is used.
+     */
+    autoScaleType?: pulumi.Input<string>;
+    /**
+     * Target CPU load level.
+     */
+    cpuUtilizationTarget?: pulumi.Input<number>;
+    /**
+     * A list of custom rules.
+     */
+    customRules?: pulumi.Input<pulumi.Input<inputs.ComputeInstanceGroupScalePolicyTestAutoScaleCustomRule>[]>;
+    /**
+     * The initial number of instances in the instance group.
+     */
+    initialSize: pulumi.Input<number>;
+    /**
+     * The maximum number of virtual machines in the group.
+     */
+    maxSize?: pulumi.Input<number>;
+    /**
+     * The amount of time, in seconds, that metrics are averaged for. If the average value at the end of the interval is higher than the `cpuUtilizationTarget`, the instance group will increase the number of virtual machines in the group.
+     */
+    measurementDuration: pulumi.Input<number>;
+    /**
+     * The minimum number of virtual machines in a single availability zone.
+     */
+    minZoneSize?: pulumi.Input<number>;
+    /**
+     * The minimum time interval, in seconds, to monitor the load before an instance group can reduce the number of virtual machines in the group. During this time, the group will not decrease even if the average load falls below the value of `cpuUtilizationTarget`.
+     */
+    stabilizationDuration?: pulumi.Input<number>;
+    /**
+     * The warm-up time of the virtual machine, in seconds. During this time, traffic is fed to the virtual machine, but load metrics are not taken into account.
+     */
+    warmupDuration?: pulumi.Input<number>;
+}
+
+export interface ComputeInstanceGroupScalePolicyTestAutoScaleCustomRule {
+    /**
+     * Folder ID of custom metric in Yandex Monitoring that should be used for scaling.
+     */
+    folderId?: pulumi.Input<string>;
+    /**
+     * A map of labels of metric.
+     */
+    labels?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    /**
+     * The name of metric.
+     */
+    metricName: pulumi.Input<string>;
+    /**
+     * Metric type, `GAUGE` or `COUNTER`.
+     */
+    metricType: pulumi.Input<string>;
+    /**
+     * Rule type: `UTILIZATION` - This type means that the metric applies to one instance. First, Instance Groups calculates the average metric value for each instance, then averages the values for instances in one availability zone. This type of metric must have the `instanceId` label. `WORKLOAD` - This type means that the metric applies to instances in one availability zone. This type of metric must have the `zoneId` label.
+     */
+    ruleType: pulumi.Input<string>;
+    /**
+     * Service of custom metric in Yandex Monitoring that should be used for scaling.
+     */
+    service?: pulumi.Input<string>;
+    /**
+     * Target metric value level.
+     */
+    target: pulumi.Input<number>;
+}
+
+export interface ComputeInstanceHardwareGeneration {
+    generation2Features?: pulumi.Input<pulumi.Input<inputs.ComputeInstanceHardwareGenerationGeneration2Feature>[]>;
+    legacyFeatures?: pulumi.Input<pulumi.Input<inputs.ComputeInstanceHardwareGenerationLegacyFeature>[]>;
+}
+
+export interface ComputeInstanceHardwareGenerationGeneration2Feature {
+}
+
+export interface ComputeInstanceHardwareGenerationLegacyFeature {
+    pciTopology?: pulumi.Input<string>;
+}
+
+export interface ComputeInstanceLocalDisk {
+    /**
+     * The name of the local disk device.
+     */
+    deviceName?: pulumi.Input<string>;
+    /**
+     * Size of the disk, specified in bytes.
+     */
+    sizeBytes: pulumi.Input<number>;
+}
+
+export interface ComputeInstanceMetadataOptions {
+    awsV1HttpEndpoint?: pulumi.Input<number>;
+    awsV1HttpToken?: pulumi.Input<number>;
+    gceHttpEndpoint?: pulumi.Input<number>;
+    gceHttpToken?: pulumi.Input<number>;
+}
+
+export interface ComputeInstanceNetworkInterface {
+    /**
+     * List of configurations for creating ipv4 DNS records.
+     */
+    dnsRecords?: pulumi.Input<pulumi.Input<inputs.ComputeInstanceNetworkInterfaceDnsRecord>[]>;
+    /**
+     * Index of network interface, will be calculated automatically for instance create or update operations if not specified. Required for attach/detach operations.
+     */
+    index?: pulumi.Input<number>;
+    /**
+     * The private IP address to assign to the instance. If empty, the address will be automatically assigned from the specified subnet.
+     */
+    ipAddress?: pulumi.Input<string>;
+    /**
+     * Allocate an IPv4 address for the interface. The default value is `true`.
+     */
+    ipv4?: pulumi.Input<boolean>;
+    /**
+     * If `true`, allocate an IPv6 address for the interface. The address will be automatically assigned from the specified subnet.
+     */
+    ipv6?: pulumi.Input<boolean>;
+    /**
+     * The private IPv6 address to assign to the instance.
+     */
+    ipv6Address?: pulumi.Input<string>;
+    /**
+     * List of configurations for creating ipv6 DNS records.
+     */
+    ipv6DnsRecords?: pulumi.Input<pulumi.Input<inputs.ComputeInstanceNetworkInterfaceIpv6DnsRecord>[]>;
+    macAddress?: pulumi.Input<string>;
+    /**
+     * Provide a public address, for instance, to access the internet over NAT.
+     */
+    nat?: pulumi.Input<boolean>;
+    /**
+     * List of configurations for creating ipv4 NAT DNS records.
+     */
+    natDnsRecords?: pulumi.Input<pulumi.Input<inputs.ComputeInstanceNetworkInterfaceNatDnsRecord>[]>;
+    /**
+     * Provide a public address, for instance, to access the internet over NAT. Address should be already reserved in web UI.
+     */
+    natIpAddress?: pulumi.Input<string>;
+    natIpVersion?: pulumi.Input<string>;
+    /**
+     * Security Group (SG) IDs for network interface.
+     */
+    securityGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * ID of the subnet to attach this interface to. The subnet must exist in the same zone where this instance will be created.
+     */
+    subnetId: pulumi.Input<string>;
+}
+
+export interface ComputeInstanceNetworkInterfaceDnsRecord {
+    /**
+     * DNS zone ID (if not set, private zone used).
+     */
+    dnsZoneId?: pulumi.Input<string>;
+    /**
+     * DNS record FQDN (must have a dot at the end).
+     */
+    fqdn: pulumi.Input<string>;
+    /**
+     * When set to `true`, also create a PTR DNS record.
+     */
+    ptr?: pulumi.Input<boolean>;
+    /**
+     * DNS record TTL in seconds.
+     */
+    ttl?: pulumi.Input<number>;
+}
+
+export interface ComputeInstanceNetworkInterfaceIpv6DnsRecord {
+    /**
+     * DNS zone ID (if not set, private zone used).
+     */
+    dnsZoneId?: pulumi.Input<string>;
+    /**
+     * DNS record FQDN (must have a dot at the end).
+     */
+    fqdn: pulumi.Input<string>;
+    /**
+     * When set to `true`, also create a PTR DNS record.
+     */
+    ptr?: pulumi.Input<boolean>;
+    /**
+     * DNS record TTL in seconds.
+     */
+    ttl?: pulumi.Input<number>;
+}
+
+export interface ComputeInstanceNetworkInterfaceNatDnsRecord {
+    /**
+     * DNS zone ID (if not set, private zone used).
+     */
+    dnsZoneId?: pulumi.Input<string>;
+    /**
+     * DNS record FQDN (must have a dot at the end).
+     */
+    fqdn: pulumi.Input<string>;
+    /**
+     * When set to `true`, also create a PTR DNS record.
+     */
+    ptr?: pulumi.Input<boolean>;
+    /**
+     * DNS record TTL in seconds.
+     */
+    ttl?: pulumi.Input<number>;
+}
+
+export interface ComputeInstancePlacementPolicy {
+    hostAffinityRules?: pulumi.Input<pulumi.Input<inputs.ComputeInstancePlacementPolicyHostAffinityRule>[]>;
+    /**
+     * Specifies the id of the Placement Group to assign to the instance.
+     */
+    placementGroupId?: pulumi.Input<string>;
+    placementGroupPartition?: pulumi.Input<number>;
+}
+
+export interface ComputeInstancePlacementPolicyHostAffinityRule {
+    /**
+     * Affinity label or one of reserved values - `yc.hostId`, `yc.hostGroupId`.
+     */
+    key: pulumi.Input<string>;
+    /**
+     * Affinity action. The only value supported is `IN`.
+     */
+    op: pulumi.Input<string>;
+    /**
+     * List of values (host IDs or host group IDs).
+     */
+    values: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface ComputeInstanceResources {
+    /**
+     * If provided, specifies baseline performance for a core as a percent.
+     */
+    coreFraction?: pulumi.Input<number>;
+    /**
+     * CPU cores for the instance.
+     */
+    cores: pulumi.Input<number>;
+    /**
+     * If provided, specifies the number of GPU devices for the instance.
+     */
+    gpus?: pulumi.Input<number>;
+    /**
+     * Memory size in GB.
+     */
+    memory: pulumi.Input<number>;
+}
+
+export interface ComputeInstanceSchedulingPolicy {
+    /**
+     * Specifies if the instance is preemptible. Defaults to `false`.
+     */
+    preemptible?: pulumi.Input<boolean>;
+}
+
+export interface ComputeInstanceSecondaryDisk {
+    /**
+     * Whether the disk is auto-deleted when the instance is deleted. The default value is `false`.
+     */
+    autoDelete?: pulumi.Input<boolean>;
+    /**
+     * Name that can be used to access an attached disk under `/dev/disk/by-id/`.
+     */
+    deviceName?: pulumi.Input<string>;
+    /**
+     * ID of the disk that is attached to the instance.
+     */
+    diskId: pulumi.Input<string>;
+    /**
+     * Type of access to the disk resource. By default, a disk is attached in `READ_WRITE` mode.
+     */
+    mode?: pulumi.Input<string>;
+}
+
+export interface ComputeSnapshotHardwareGeneration {
+    /**
+     * A newer hardware generation, which always uses `PCI_TOPOLOGY_V2` and UEFI boot.
+     */
+    generation2Features?: pulumi.Input<inputs.ComputeSnapshotHardwareGenerationGeneration2Features>;
+    /**
+     * Defines the first known hardware generation and its features.
+     */
+    legacyFeatures?: pulumi.Input<inputs.ComputeSnapshotHardwareGenerationLegacyFeatures>;
+}
+
+export interface ComputeSnapshotHardwareGenerationGeneration2Features {
+}
+
+export interface ComputeSnapshotHardwareGenerationLegacyFeatures {
+    /**
+     * A variant of PCI topology, one of `PCI_TOPOLOGY_V1` or `PCI_TOPOLOGY_V2`.
+     */
+    pciTopology?: pulumi.Input<string>;
+}
+
+export interface ComputeSnapshotScheduleSchedulePolicy {
+    /**
+     * Cron expression to schedule snapshots (in cron format `" * ****"`).
+     */
+    expression?: pulumi.Input<string>;
+    /**
+     * Time to start the snapshot schedule (in format RFC3339 `2006-01-02T15:04:05Z07:00`). If empty current time will be used. Unlike an `expression` that specifies regularity rules, the `startAt` parameter determines from what point these rules will be applied.
+     */
+    startAt?: pulumi.Input<string>;
+}
+
+export interface ComputeSnapshotScheduleSnapshotSpec {
+    /**
+     * Description to assign to snapshots created by this snapshot schedule.
+     */
+    description?: pulumi.Input<string>;
+    /**
+     * A set of key/value label pairs to assign to snapshots created by this snapshot schedule.
+     */
+    labels?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+}
+
+export interface ContainerRepositoryLifecyclePolicyRule {
+    /**
+     * Description of the lifecycle policy.
+     */
+    description?: pulumi.Input<string>;
+    /**
+     * The period of time that must pass after creating a image for it to suit the automatic deletion criteria. It must be a multiple of 24 hours.
+     */
+    expirePeriod?: pulumi.Input<string>;
+    /**
+     * The number of images to be retained even if the `expirePeriod` already expired.
+     */
+    retainedTop?: pulumi.Input<number>;
+    /**
+     * Tag to specify a filter as a regular expression. For example `.*` - all images with tags.
+     */
+    tagRegexp?: pulumi.Input<string>;
+    /**
+     * If enabled, rules apply to untagged Docker images.
+     */
+    untagged?: pulumi.Input<boolean>;
+}
+
+export interface DataprocClusterClusterConfig {
+    /**
+     * Yandex Data Processing specific options.
+     */
+    hadoop?: pulumi.Input<inputs.DataprocClusterClusterConfigHadoop>;
+    /**
+     * Configuration of the Yandex Data Processing subcluster.
+     */
+    subclusterSpecs: pulumi.Input<pulumi.Input<inputs.DataprocClusterClusterConfigSubclusterSpec>[]>;
+    /**
+     * Version of Yandex Data Processing image.
+     */
+    versionId?: pulumi.Input<string>;
+}
+
+export interface DataprocClusterClusterConfigHadoop {
+    /**
+     * List of initialization scripts.
+     */
+    initializationActions?: pulumi.Input<pulumi.Input<inputs.DataprocClusterClusterConfigHadoopInitializationAction>[]>;
+    /**
+     * A set of key/value pairs that are used to configure cluster services.
+     */
+    properties?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    /**
+     * List of services to run on Yandex Data Processing cluster.
+     */
+    services?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * List of SSH public keys to put to the hosts of the cluster. For information on how to connect to the cluster, see [the official documentation](https://yandex.cloud/docs/data-proc/operations/connect).
+     */
+    sshPublicKeys?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface DataprocClusterClusterConfigHadoopInitializationAction {
+    /**
+     * List of arguments of the initialization script.
+     */
+    args?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Script execution timeout, in seconds.
+     */
+    timeout?: pulumi.Input<string>;
+    /**
+     * Script URI.
+     */
+    uri: pulumi.Input<string>;
+}
+
+export interface DataprocClusterClusterConfigSubclusterSpec {
+    /**
+     * If `true` then assign public IP addresses to the hosts of the subclusters.
+     */
+    assignPublicIp?: pulumi.Input<boolean>;
+    /**
+     * Autoscaling configuration for compute subclusters.
+     */
+    autoscalingConfig?: pulumi.Input<inputs.DataprocClusterClusterConfigSubclusterSpecAutoscalingConfig>;
+    /**
+     * Number of hosts within Yandex Data Processing subcluster.
+     */
+    hostsCount: pulumi.Input<number>;
+    /**
+     * ID of the subcluster.
+     */
+    id?: pulumi.Input<string>;
+    /**
+     * Name of the Yandex Data Processing subcluster.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * Resources allocated to each host of the Yandex Data Processing subcluster.
+     */
+    resources: pulumi.Input<inputs.DataprocClusterClusterConfigSubclusterSpecResources>;
+    /**
+     * Role of the subcluster in the Yandex Data Processing cluster.
+     */
+    role: pulumi.Input<string>;
+    /**
+     * The ID of the subnet, to which hosts of the subcluster belong. Subnets of all the subclusters must belong to the same VPC network.
+     */
+    subnetId: pulumi.Input<string>;
+}
+
+export interface DataprocClusterClusterConfigSubclusterSpecAutoscalingConfig {
+    /**
+     * Defines an autoscaling rule based on the average CPU utilization of the instance group. If not set default autoscaling metric will be used.
+     */
+    cpuUtilizationTarget?: pulumi.Input<string>;
+    /**
+     * Timeout to gracefully decommission nodes during downscaling. In seconds.
+     */
+    decommissionTimeout?: pulumi.Input<string>;
+    /**
+     * Maximum number of nodes in autoscaling subclusters.
+     */
+    maxHostsCount: pulumi.Input<number>;
+    /**
+     * Time in seconds allotted for averaging metrics.
+     */
+    measurementDuration?: pulumi.Input<string>;
+    /**
+     * Use preemptible compute instances. Preemptible instances are stopped at least once every 24 hours, and can be stopped at any time if their resources are needed by Compute. For more information, see [Preemptible Virtual Machines](https://yandex.cloud/docs/compute/concepts/preemptible-vm).
+     */
+    preemptible?: pulumi.Input<boolean>;
+    /**
+     * Minimum amount of time in seconds allotted for monitoring before Instance Groups can reduce the number of instances in the group. During this time, the group size doesn't decrease, even if the new metric values indicate that it should.
+     */
+    stabilizationDuration?: pulumi.Input<string>;
+    /**
+     * The warmup time of the instance in seconds. During this time, traffic is sent to the instance, but instance metrics are not collected.
+     */
+    warmupDuration?: pulumi.Input<string>;
+}
+
+export interface DataprocClusterClusterConfigSubclusterSpecResources {
+    /**
+     * Volume of the storage available to a host, in gigabytes.
+     */
+    diskSize: pulumi.Input<number>;
+    /**
+     * Type of the storage of a host. One of `network-hdd` (default) or `network-ssd`.
+     */
+    diskTypeId?: pulumi.Input<string>;
+    /**
+     * The ID of the preset for computational resources available to a host. All available presets are listed in the [documentation](https://yandex.cloud/docs/data-proc/concepts/instance-types).
+     */
+    resourcePresetId: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettings {
+    /**
+     * Settings specific to the ClickHouse source endpoint.
+     */
+    clickhouseSource?: pulumi.Input<inputs.DatatransferEndpointSettingsClickhouseSource>;
+    /**
+     * Settings specific to the ClickHouse target endpoint.
+     */
+    clickhouseTarget?: pulumi.Input<inputs.DatatransferEndpointSettingsClickhouseTarget>;
+    /**
+     * Settings specific to the Kafka source endpoint.
+     */
+    kafkaSource?: pulumi.Input<inputs.DatatransferEndpointSettingsKafkaSource>;
+    /**
+     * Settings specific to the Kafka target endpoint.
+     */
+    kafkaTarget?: pulumi.Input<inputs.DatatransferEndpointSettingsKafkaTarget>;
+    /**
+     * Settings specific to the Yandex Metrika source endpoint.
+     */
+    metrikaSource?: pulumi.Input<inputs.DatatransferEndpointSettingsMetrikaSource>;
+    /**
+     * Settings specific to the MongoDB source endpoint.
+     */
+    mongoSource?: pulumi.Input<inputs.DatatransferEndpointSettingsMongoSource>;
+    /**
+     * Settings specific to the MongoDB target endpoint.
+     */
+    mongoTarget?: pulumi.Input<inputs.DatatransferEndpointSettingsMongoTarget>;
+    /**
+     * Settings specific to the MySQL source endpoint.
+     */
+    mysqlSource?: pulumi.Input<inputs.DatatransferEndpointSettingsMysqlSource>;
+    /**
+     * Settings specific to the MySQL target endpoint.
+     */
+    mysqlTarget?: pulumi.Input<inputs.DatatransferEndpointSettingsMysqlTarget>;
+    /**
+     * Settings specific to the PostgreSQL source endpoint.
+     */
+    postgresSource?: pulumi.Input<inputs.DatatransferEndpointSettingsPostgresSource>;
+    /**
+     * Settings specific to the PostgreSQL target endpoint.
+     */
+    postgresTarget?: pulumi.Input<inputs.DatatransferEndpointSettingsPostgresTarget>;
+    /**
+     * Settings specific to the YDB source endpoint.
+     */
+    ydbSource?: pulumi.Input<inputs.DatatransferEndpointSettingsYdbSource>;
+    /**
+     * Settings specific to the YDB target endpoint.
+     */
+    ydbTarget?: pulumi.Input<inputs.DatatransferEndpointSettingsYdbTarget>;
+    /**
+     * Settings specific to the YDS source endpoint.
+     */
+    ydsSource?: pulumi.Input<inputs.DatatransferEndpointSettingsYdsSource>;
+    /**
+     * Settings specific to the YDS target endpoint.
+     */
+    ydsTarget?: pulumi.Input<inputs.DatatransferEndpointSettingsYdsTarget>;
+}
+
+export interface DatatransferEndpointSettingsClickhouseSource {
+    clickhouseClusterName?: pulumi.Input<string>;
+    /**
+     * Connection settings.
+     */
+    connection?: pulumi.Input<inputs.DatatransferEndpointSettingsClickhouseSourceConnection>;
+    /**
+     * The list of tables that should not be transferred.
+     */
+    excludeTables?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The list of tables that should be transferred. Leave empty if all tables should be transferred.
+     */
+    includeTables?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * List of security groups that the transfer associated with this endpoint should use.
+     */
+    securityGroups?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Identifier of the Yandex Cloud VPC subnetwork to user for accessing the database. If omitted, the server has to be accessible via Internet.
+     */
+    subnetId?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsClickhouseSourceConnection {
+    connectionOptions?: pulumi.Input<inputs.DatatransferEndpointSettingsClickhouseSourceConnectionConnectionOptions>;
+}
+
+export interface DatatransferEndpointSettingsClickhouseSourceConnectionConnectionOptions {
+    database?: pulumi.Input<string>;
+    mdbClusterId?: pulumi.Input<string>;
+    onPremise?: pulumi.Input<inputs.DatatransferEndpointSettingsClickhouseSourceConnectionConnectionOptionsOnPremise>;
+    password?: pulumi.Input<inputs.DatatransferEndpointSettingsClickhouseSourceConnectionConnectionOptionsPassword>;
+    user?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsClickhouseSourceConnectionConnectionOptionsOnPremise {
+    httpPort?: pulumi.Input<number>;
+    nativePort?: pulumi.Input<number>;
+    shards?: pulumi.Input<pulumi.Input<inputs.DatatransferEndpointSettingsClickhouseSourceConnectionConnectionOptionsOnPremiseShard>[]>;
+    tlsMode?: pulumi.Input<inputs.DatatransferEndpointSettingsClickhouseSourceConnectionConnectionOptionsOnPremiseTlsMode>;
+}
+
+export interface DatatransferEndpointSettingsClickhouseSourceConnectionConnectionOptionsOnPremiseShard {
+    hosts?: pulumi.Input<pulumi.Input<string>[]>;
+    name?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsClickhouseSourceConnectionConnectionOptionsOnPremiseTlsMode {
+    disabled?: pulumi.Input<inputs.DatatransferEndpointSettingsClickhouseSourceConnectionConnectionOptionsOnPremiseTlsModeDisabled>;
+    enabled?: pulumi.Input<inputs.DatatransferEndpointSettingsClickhouseSourceConnectionConnectionOptionsOnPremiseTlsModeEnabled>;
+}
+
+export interface DatatransferEndpointSettingsClickhouseSourceConnectionConnectionOptionsOnPremiseTlsModeDisabled {
+}
+
+export interface DatatransferEndpointSettingsClickhouseSourceConnectionConnectionOptionsOnPremiseTlsModeEnabled {
+    caCertificate?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsClickhouseSourceConnectionConnectionOptionsPassword {
+    raw?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsClickhouseTarget {
+    /**
+     * Table renaming rules.
+     */
+    altNames?: pulumi.Input<pulumi.Input<inputs.DatatransferEndpointSettingsClickhouseTargetAltName>[]>;
+    /**
+     * How to clean collections when activating the transfer. One of `CLICKHOUSE_CLEANUP_POLICY_DISABLED` or `CLICKHOUSE_CLEANUP_POLICY_DROP`.
+     */
+    cleanupPolicy?: pulumi.Input<string>;
+    /**
+     * Name of the ClickHouse cluster. For managed ClickHouse clusters defaults to managed cluster ID.
+     */
+    clickhouseClusterName?: pulumi.Input<string>;
+    /**
+     * Connection settings.
+     */
+    connection?: pulumi.Input<inputs.DatatransferEndpointSettingsClickhouseTargetConnection>;
+    /**
+     * List of security groups that the transfer associated with this endpoint should use.
+     */
+    securityGroups?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Shard selection rules for the data being transferred.
+     */
+    sharding?: pulumi.Input<inputs.DatatransferEndpointSettingsClickhouseTargetSharding>;
+    /**
+     * Identifier of the Yandex Cloud VPC subnetwork to user for accessing the database. If omitted, the server has to be accessible via Internet.
+     */
+    subnetId?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsClickhouseTargetAltName {
+    fromName?: pulumi.Input<string>;
+    toName?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsClickhouseTargetConnection {
+    /**
+     * Connection options.
+     */
+    connectionOptions?: pulumi.Input<inputs.DatatransferEndpointSettingsClickhouseTargetConnectionConnectionOptions>;
+}
+
+export interface DatatransferEndpointSettingsClickhouseTargetConnectionConnectionOptions {
+    /**
+     * Database name.
+     */
+    database?: pulumi.Input<string>;
+    /**
+     * Identifier of the Managed ClickHouse cluster.
+     */
+    mdbClusterId?: pulumi.Input<string>;
+    /**
+     * Connection settings of the on-premise ClickHouse server.
+     */
+    onPremise?: pulumi.Input<inputs.DatatransferEndpointSettingsClickhouseTargetConnectionConnectionOptionsOnPremise>;
+    /**
+     * Password for the database access.
+     */
+    password?: pulumi.Input<inputs.DatatransferEndpointSettingsClickhouseTargetConnectionConnectionOptionsPassword>;
+    /**
+     * User for database access.
+     */
+    user?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsClickhouseTargetConnectionConnectionOptionsOnPremise {
+    /**
+     * TCP port number for the HTTP interface of the ClickHouse server.
+     */
+    httpPort?: pulumi.Input<number>;
+    /**
+     * TCP port number for the native interface of the ClickHouse server.
+     */
+    nativePort?: pulumi.Input<number>;
+    /**
+     * The list of ClickHouse shards.
+     */
+    shards?: pulumi.Input<pulumi.Input<inputs.DatatransferEndpointSettingsClickhouseTargetConnectionConnectionOptionsOnPremiseShard>[]>;
+    /**
+     * TLS settings for the server connection.
+     */
+    tlsMode?: pulumi.Input<inputs.DatatransferEndpointSettingsClickhouseTargetConnectionConnectionOptionsOnPremiseTlsMode>;
+}
+
+export interface DatatransferEndpointSettingsClickhouseTargetConnectionConnectionOptionsOnPremiseShard {
+    /**
+     * List of ClickHouse server host names.
+     */
+    hosts?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Arbitrary shard name. This name may be used in `sharding` block to specify custom sharding rules.
+     */
+    name?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsClickhouseTargetConnectionConnectionOptionsOnPremiseTlsMode {
+    disabled?: pulumi.Input<inputs.DatatransferEndpointSettingsClickhouseTargetConnectionConnectionOptionsOnPremiseTlsModeDisabled>;
+    enabled?: pulumi.Input<inputs.DatatransferEndpointSettingsClickhouseTargetConnectionConnectionOptionsOnPremiseTlsModeEnabled>;
+}
+
+export interface DatatransferEndpointSettingsClickhouseTargetConnectionConnectionOptionsOnPremiseTlsModeDisabled {
+}
+
+export interface DatatransferEndpointSettingsClickhouseTargetConnectionConnectionOptionsOnPremiseTlsModeEnabled {
+    caCertificate?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsClickhouseTargetConnectionConnectionOptionsPassword {
+    /**
+     * Password for the database access.
+     */
+    raw?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsClickhouseTargetSharding {
+    /**
+     * Shard data by the hash value of the specified column.
+     */
+    columnValueHash?: pulumi.Input<inputs.DatatransferEndpointSettingsClickhouseTargetShardingColumnValueHash>;
+    /**
+     * A custom shard mapping by the value of the specified column.
+     */
+    customMapping?: pulumi.Input<inputs.DatatransferEndpointSettingsClickhouseTargetShardingCustomMapping>;
+    /**
+     * Distribute incoming rows between ClickHouse shards in a round-robin manner. Specify as an empty block to enable.
+     */
+    roundRobin?: pulumi.Input<inputs.DatatransferEndpointSettingsClickhouseTargetShardingRoundRobin>;
+    /**
+     * Shard data by ID of the transfer.
+     */
+    transferId?: pulumi.Input<inputs.DatatransferEndpointSettingsClickhouseTargetShardingTransferId>;
+}
+
+export interface DatatransferEndpointSettingsClickhouseTargetShardingColumnValueHash {
+    /**
+     * The name of the column to calculate hash from.
+     */
+    columnName?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsClickhouseTargetShardingCustomMapping {
+    /**
+     * The name of the column to inspect when deciding the shard to chose for an incoming row.
+     */
+    columnName?: pulumi.Input<string>;
+    /**
+     * The mapping of the specified column values to the shard names.
+     */
+    mappings?: pulumi.Input<pulumi.Input<inputs.DatatransferEndpointSettingsClickhouseTargetShardingCustomMappingMapping>[]>;
+}
+
+export interface DatatransferEndpointSettingsClickhouseTargetShardingCustomMappingMapping {
+    /**
+     * The value of the column. Currently only the string columns are supported.
+     */
+    columnValue?: pulumi.Input<inputs.DatatransferEndpointSettingsClickhouseTargetShardingCustomMappingMappingColumnValue>;
+    /**
+     * The name of the shard into which all the rows with the specified `columnValue` will be written.
+     */
+    shardName?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsClickhouseTargetShardingCustomMappingMappingColumnValue {
+    /**
+     * The string value of the column.
+     */
+    stringValue?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsClickhouseTargetShardingRoundRobin {
+}
+
+export interface DatatransferEndpointSettingsClickhouseTargetShardingTransferId {
+}
+
+export interface DatatransferEndpointSettingsKafkaSource {
+    /**
+     * Authentication data.
+     */
+    auth?: pulumi.Input<inputs.DatatransferEndpointSettingsKafkaSourceAuth>;
+    /**
+     * Connection settings.
+     */
+    connection?: pulumi.Input<inputs.DatatransferEndpointSettingsKafkaSourceConnection>;
+    /**
+     * Data parsing parameters. If not set, the source messages are read in raw.
+     */
+    parser?: pulumi.Input<inputs.DatatransferEndpointSettingsKafkaSourceParser>;
+    /**
+     * List of security groups that the transfer associated with this endpoint should use.
+     */
+    securityGroups?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * **Deprecated**. Please use `topicNames` instead.
+     */
+    topicName?: pulumi.Input<string>;
+    /**
+     * The list of full source topic names.
+     */
+    topicNames?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Transform data with a custom Cloud Function.
+     */
+    transformer?: pulumi.Input<inputs.DatatransferEndpointSettingsKafkaSourceTransformer>;
+}
+
+export interface DatatransferEndpointSettingsKafkaSourceAuth {
+    noAuth?: pulumi.Input<inputs.DatatransferEndpointSettingsKafkaSourceAuthNoAuth>;
+    sasl?: pulumi.Input<inputs.DatatransferEndpointSettingsKafkaSourceAuthSasl>;
+}
+
+export interface DatatransferEndpointSettingsKafkaSourceAuthNoAuth {
+}
+
+export interface DatatransferEndpointSettingsKafkaSourceAuthSasl {
+    mechanism?: pulumi.Input<string>;
+    password?: pulumi.Input<inputs.DatatransferEndpointSettingsKafkaSourceAuthSaslPassword>;
+    user?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsKafkaSourceAuthSaslPassword {
+    raw?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsKafkaSourceConnection {
+    clusterId?: pulumi.Input<string>;
+    onPremise?: pulumi.Input<inputs.DatatransferEndpointSettingsKafkaSourceConnectionOnPremise>;
+}
+
+export interface DatatransferEndpointSettingsKafkaSourceConnectionOnPremise {
+    brokerUrls?: pulumi.Input<pulumi.Input<string>[]>;
+    subnetId?: pulumi.Input<string>;
+    tlsMode?: pulumi.Input<inputs.DatatransferEndpointSettingsKafkaSourceConnectionOnPremiseTlsMode>;
+}
+
+export interface DatatransferEndpointSettingsKafkaSourceConnectionOnPremiseTlsMode {
+    /**
+     * Empty block designating that the connection is not secured, i.e. plaintext connection.
+     */
+    disabled?: pulumi.Input<inputs.DatatransferEndpointSettingsKafkaSourceConnectionOnPremiseTlsModeDisabled>;
+    /**
+     * If this attribute is not an empty block, then TLS is used for the server connection.
+     */
+    enabled?: pulumi.Input<inputs.DatatransferEndpointSettingsKafkaSourceConnectionOnPremiseTlsModeEnabled>;
+}
+
+export interface DatatransferEndpointSettingsKafkaSourceConnectionOnPremiseTlsModeDisabled {
+}
+
+export interface DatatransferEndpointSettingsKafkaSourceConnectionOnPremiseTlsModeEnabled {
+    /**
+     * X.509 certificate of the certificate authority which issued the server's certificate, in PEM format. If empty, the server's certificate must be signed by a well-known CA.
+     */
+    caCertificate?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsKafkaSourceParser {
+    /**
+     * Parse Audit Trails data. Empty struct.
+     */
+    auditTrailsV1Parser?: pulumi.Input<inputs.DatatransferEndpointSettingsKafkaSourceParserAuditTrailsV1Parser>;
+    /**
+     * Parse Cloud Logging data. Empty struct.
+     */
+    cloudLoggingParser?: pulumi.Input<inputs.DatatransferEndpointSettingsKafkaSourceParserCloudLoggingParser>;
+    /**
+     * Parse data in `JSON` format.
+     */
+    jsonParser?: pulumi.Input<inputs.DatatransferEndpointSettingsKafkaSourceParserJsonParser>;
+    /**
+     * Parse data if `TSKV` format.
+     */
+    tskvParser?: pulumi.Input<inputs.DatatransferEndpointSettingsKafkaSourceParserTskvParser>;
+}
+
+export interface DatatransferEndpointSettingsKafkaSourceParserAuditTrailsV1Parser {
+}
+
+export interface DatatransferEndpointSettingsKafkaSourceParserCloudLoggingParser {
+}
+
+export interface DatatransferEndpointSettingsKafkaSourceParserJsonParser {
+    /**
+     * Add fields, that are not in the schema, into the _rest column.
+     */
+    addRestColumn?: pulumi.Input<boolean>;
+    /**
+     * Data parsing scheme.
+     */
+    dataSchema?: pulumi.Input<inputs.DatatransferEndpointSettingsKafkaSourceParserJsonParserDataSchema>;
+    /**
+     * Allow null keys. If `false` - null keys will be putted to unparsed data.
+     */
+    nullKeysAllowed?: pulumi.Input<boolean>;
+    /**
+     * Allow unescape string values.
+     */
+    unescapeStringValues?: pulumi.Input<boolean>;
+}
+
+export interface DatatransferEndpointSettingsKafkaSourceParserJsonParserDataSchema {
+    fields?: pulumi.Input<inputs.DatatransferEndpointSettingsKafkaSourceParserJsonParserDataSchemaFields>;
+    /**
+     * Description of the data schema as JSON specification.
+     */
+    jsonFields?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsKafkaSourceParserJsonParserDataSchemaFields {
+    /**
+     * Description of the data schema in the array of `fields` structure.
+     */
+    fields?: pulumi.Input<pulumi.Input<inputs.DatatransferEndpointSettingsKafkaSourceParserJsonParserDataSchemaFieldsField>[]>;
+}
+
+export interface DatatransferEndpointSettingsKafkaSourceParserJsonParserDataSchemaFieldsField {
+    /**
+     * Mark field as Primary Key.
+     */
+    key?: pulumi.Input<boolean>;
+    /**
+     * Field name.
+     */
+    name?: pulumi.Input<string>;
+    /**
+     * Path to the field.
+     */
+    path?: pulumi.Input<string>;
+    /**
+     * Mark field as required.
+     */
+    required?: pulumi.Input<boolean>;
+    /**
+     * Field type, one of: `INT64`, `INT32`, `INT16`, `INT8`, `UINT64`, `UINT32`, `UINT16`, `UINT8`, `DOUBLE`, `BOOLEAN`, `STRING`, `UTF8`, `ANY`, `DATETIME`.
+     */
+    type?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsKafkaSourceParserTskvParser {
+    /**
+     * Add fields, that are not in the schema, into the _rest column.
+     */
+    addRestColumn?: pulumi.Input<boolean>;
+    /**
+     * Data parsing scheme.
+     */
+    dataSchema?: pulumi.Input<inputs.DatatransferEndpointSettingsKafkaSourceParserTskvParserDataSchema>;
+    /**
+     * Allow null keys. If `false` - null keys will be putted to unparsed data.
+     */
+    nullKeysAllowed?: pulumi.Input<boolean>;
+    /**
+     * Allow unescape string values.
+     */
+    unescapeStringValues?: pulumi.Input<boolean>;
+}
+
+export interface DatatransferEndpointSettingsKafkaSourceParserTskvParserDataSchema {
+    /**
+     * Description of the data schema in the array of `fields` structure.
+     */
+    fields?: pulumi.Input<inputs.DatatransferEndpointSettingsKafkaSourceParserTskvParserDataSchemaFields>;
+    /**
+     * Description of the data schema as JSON specification.
+     */
+    jsonFields?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsKafkaSourceParserTskvParserDataSchemaFields {
+    fields?: pulumi.Input<pulumi.Input<inputs.DatatransferEndpointSettingsKafkaSourceParserTskvParserDataSchemaFieldsField>[]>;
+}
+
+export interface DatatransferEndpointSettingsKafkaSourceParserTskvParserDataSchemaFieldsField {
+    /**
+     * Mark field as Primary Key.
+     */
+    key?: pulumi.Input<boolean>;
+    /**
+     * Field name.
+     */
+    name?: pulumi.Input<string>;
+    /**
+     * Path to the field.
+     */
+    path?: pulumi.Input<string>;
+    /**
+     * Mark field as required.
+     */
+    required?: pulumi.Input<boolean>;
+    /**
+     * Field type, one of: `INT64`, `INT32`, `INT16`, `INT8`, `UINT64`, `UINT32`, `UINT16`, `UINT8`, `DOUBLE`, `BOOLEAN`, `STRING`, `UTF8`, `ANY`, `DATETIME`.
+     */
+    type?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsKafkaSourceTransformer {
+    bufferFlushInterval?: pulumi.Input<string>;
+    bufferSize?: pulumi.Input<string>;
+    cloudFunction?: pulumi.Input<string>;
+    invocationTimeout?: pulumi.Input<string>;
+    numberOfRetries?: pulumi.Input<number>;
+    serviceAccountId?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsKafkaTarget {
+    /**
+     * Authentication data.
+     */
+    auth?: pulumi.Input<inputs.DatatransferEndpointSettingsKafkaTargetAuth>;
+    /**
+     * Connection settings.
+     */
+    connection?: pulumi.Input<inputs.DatatransferEndpointSettingsKafkaTargetConnection>;
+    /**
+     * List of security groups that the transfer associated with this endpoint should use.
+     */
+    securityGroups?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Data serialization settings.
+     */
+    serializer?: pulumi.Input<inputs.DatatransferEndpointSettingsKafkaTargetSerializer>;
+    /**
+     * Target topic settings.
+     */
+    topicSettings?: pulumi.Input<inputs.DatatransferEndpointSettingsKafkaTargetTopicSettings>;
+}
+
+export interface DatatransferEndpointSettingsKafkaTargetAuth {
+    /**
+     * Connection without authentication data.
+     */
+    noAuth?: pulumi.Input<inputs.DatatransferEndpointSettingsKafkaTargetAuthNoAuth>;
+    /**
+     * Authentication using sasl.
+     */
+    sasl?: pulumi.Input<inputs.DatatransferEndpointSettingsKafkaTargetAuthSasl>;
+}
+
+export interface DatatransferEndpointSettingsKafkaTargetAuthNoAuth {
+}
+
+export interface DatatransferEndpointSettingsKafkaTargetAuthSasl {
+    mechanism?: pulumi.Input<string>;
+    password?: pulumi.Input<inputs.DatatransferEndpointSettingsKafkaTargetAuthSaslPassword>;
+    user?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsKafkaTargetAuthSaslPassword {
+    raw?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsKafkaTargetConnection {
+    /**
+     * Identifier of the Managed Kafka cluster.
+     */
+    clusterId?: pulumi.Input<string>;
+    /**
+     * Connection settings of the on-premise Kafka server.
+     */
+    onPremise?: pulumi.Input<inputs.DatatransferEndpointSettingsKafkaTargetConnectionOnPremise>;
+}
+
+export interface DatatransferEndpointSettingsKafkaTargetConnectionOnPremise {
+    /**
+     * List of Kafka broker URLs.
+     */
+    brokerUrls?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Identifier of the Yandex Cloud VPC subnetwork to user for accessing the database. If omitted, the server has to be accessible via Internet.
+     */
+    subnetId?: pulumi.Input<string>;
+    /**
+     * TLS settings for the server connection. Empty implies plaintext connection.
+     */
+    tlsMode?: pulumi.Input<inputs.DatatransferEndpointSettingsKafkaTargetConnectionOnPremiseTlsMode>;
+}
+
+export interface DatatransferEndpointSettingsKafkaTargetConnectionOnPremiseTlsMode {
+    disabled?: pulumi.Input<inputs.DatatransferEndpointSettingsKafkaTargetConnectionOnPremiseTlsModeDisabled>;
+    enabled?: pulumi.Input<inputs.DatatransferEndpointSettingsKafkaTargetConnectionOnPremiseTlsModeEnabled>;
+}
+
+export interface DatatransferEndpointSettingsKafkaTargetConnectionOnPremiseTlsModeDisabled {
+}
+
+export interface DatatransferEndpointSettingsKafkaTargetConnectionOnPremiseTlsModeEnabled {
+    caCertificate?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsKafkaTargetSerializer {
+    /**
+     * Empty block. Select data serialization format automatically.
+     */
+    serializerAuto?: pulumi.Input<inputs.DatatransferEndpointSettingsKafkaTargetSerializerSerializerAuto>;
+    /**
+     * Serialize data in json format.
+     */
+    serializerDebezium?: pulumi.Input<inputs.DatatransferEndpointSettingsKafkaTargetSerializerSerializerDebezium>;
+    /**
+     * Empty block. Serialize data in json format.
+     */
+    serializerJson?: pulumi.Input<inputs.DatatransferEndpointSettingsKafkaTargetSerializerSerializerJson>;
+}
+
+export interface DatatransferEndpointSettingsKafkaTargetSerializerSerializerAuto {
+}
+
+export interface DatatransferEndpointSettingsKafkaTargetSerializerSerializerDebezium {
+    /**
+     * A list of Debezium parameters set by the structure of the `key` and `value` string fields.
+     */
+    serializerParameters?: pulumi.Input<pulumi.Input<inputs.DatatransferEndpointSettingsKafkaTargetSerializerSerializerDebeziumSerializerParameter>[]>;
+}
+
+export interface DatatransferEndpointSettingsKafkaTargetSerializerSerializerDebeziumSerializerParameter {
+    key?: pulumi.Input<string>;
+    value?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsKafkaTargetSerializerSerializerJson {
+}
+
+export interface DatatransferEndpointSettingsKafkaTargetTopicSettings {
+    /**
+     * All messages will be sent to one topic.
+     */
+    topic?: pulumi.Input<inputs.DatatransferEndpointSettingsKafkaTargetTopicSettingsTopic>;
+    /**
+     * Topic name prefix. Messages will be sent to topic with name <topic_prefix>.<schema>.<table_name>.
+     */
+    topicPrefix?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsKafkaTargetTopicSettingsTopic {
+    /**
+     * Not to split events queue into separate per-table queues.
+     */
+    saveTxOrder?: pulumi.Input<boolean>;
+    /**
+     * Full topic name.
+     */
+    topicName?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsMetrikaSource {
+    counterIds?: pulumi.Input<pulumi.Input<number>[]>;
+    streams?: pulumi.Input<pulumi.Input<inputs.DatatransferEndpointSettingsMetrikaSourceStream>[]>;
+    token?: pulumi.Input<inputs.DatatransferEndpointSettingsMetrikaSourceToken>;
+}
+
+export interface DatatransferEndpointSettingsMetrikaSourceStream {
+    columns?: pulumi.Input<pulumi.Input<string>[]>;
+    type?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsMetrikaSourceToken {
+    raw?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsMongoSource {
+    /**
+     * The list of the MongoDB collections that should be transferred. If omitted, all available collections will be transferred.
+     */
+    collections?: pulumi.Input<pulumi.Input<inputs.DatatransferEndpointSettingsMongoSourceCollection>[]>;
+    /**
+     * Connection settings.
+     */
+    connection?: pulumi.Input<inputs.DatatransferEndpointSettingsMongoSourceConnection>;
+    /**
+     * The list of the MongoDB collections that should not be transferred.
+     */
+    excludedCollections?: pulumi.Input<pulumi.Input<inputs.DatatransferEndpointSettingsMongoSourceExcludedCollection>[]>;
+    /**
+     * Whether the secondary server should be preferred to the primary when copying data.
+     */
+    secondaryPreferredMode?: pulumi.Input<boolean>;
+    /**
+     * List of security groups that the transfer associated with this endpoint should use.
+     */
+    securityGroups?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Identifier of the Yandex Cloud VPC subnetwork to user for accessing the database. If omitted, the server has to be accessible via Internet.
+     */
+    subnetId?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsMongoSourceCollection {
+    collectionName?: pulumi.Input<string>;
+    databaseName?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsMongoSourceConnection {
+    connectionOptions?: pulumi.Input<inputs.DatatransferEndpointSettingsMongoSourceConnectionConnectionOptions>;
+}
+
+export interface DatatransferEndpointSettingsMongoSourceConnectionConnectionOptions {
+    /**
+     * Name of the database associated with the credentials.
+     */
+    authSource?: pulumi.Input<string>;
+    /**
+     * Identifier of the Managed MongoDB cluster.
+     */
+    mdbClusterId?: pulumi.Input<string>;
+    /**
+     * Connection settings of the on-premise MongoDB server.
+     */
+    onPremise?: pulumi.Input<inputs.DatatransferEndpointSettingsMongoSourceConnectionConnectionOptionsOnPremise>;
+    password?: pulumi.Input<inputs.DatatransferEndpointSettingsMongoSourceConnectionConnectionOptionsPassword>;
+    user?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsMongoSourceConnectionConnectionOptionsOnPremise {
+    /**
+     * Host names of the replica set.
+     */
+    hosts?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * TCP Port number.
+     */
+    port?: pulumi.Input<number>;
+    /**
+     * Replica set name.
+     */
+    replicaSet?: pulumi.Input<string>;
+    /**
+     * TLS settings for the server connection. Empty implies plaintext connection.
+     */
+    tlsMode?: pulumi.Input<inputs.DatatransferEndpointSettingsMongoSourceConnectionConnectionOptionsOnPremiseTlsMode>;
+}
+
+export interface DatatransferEndpointSettingsMongoSourceConnectionConnectionOptionsOnPremiseTlsMode {
+    disabled?: pulumi.Input<inputs.DatatransferEndpointSettingsMongoSourceConnectionConnectionOptionsOnPremiseTlsModeDisabled>;
+    enabled?: pulumi.Input<inputs.DatatransferEndpointSettingsMongoSourceConnectionConnectionOptionsOnPremiseTlsModeEnabled>;
+}
+
+export interface DatatransferEndpointSettingsMongoSourceConnectionConnectionOptionsOnPremiseTlsModeDisabled {
+}
+
+export interface DatatransferEndpointSettingsMongoSourceConnectionConnectionOptionsOnPremiseTlsModeEnabled {
+    caCertificate?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsMongoSourceConnectionConnectionOptionsPassword {
+    raw?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsMongoSourceExcludedCollection {
+    collectionName?: pulumi.Input<string>;
+    databaseName?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsMongoTarget {
+    /**
+     * How to clean collections when activating the transfer. One of `DISABLED`, `DROP` or `TRUNCATE`.
+     */
+    cleanupPolicy?: pulumi.Input<string>;
+    /**
+     * Connection settings.
+     */
+    connection?: pulumi.Input<inputs.DatatransferEndpointSettingsMongoTargetConnection>;
+    /**
+     * If not empty, then all the data will be written to the database with the specified name; otherwise the database name is the same as in the source endpoint.
+     */
+    database?: pulumi.Input<string>;
+    /**
+     * List of security groups that the transfer associated with this endpoint should use.
+     */
+    securityGroups?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Identifier of the Yandex Cloud VPC subnetwork to user for accessing the database. If omitted, the server has to be accessible via Internet.
+     */
+    subnetId?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsMongoTargetConnection {
+    /**
+     * Connection options.
+     */
+    connectionOptions?: pulumi.Input<inputs.DatatransferEndpointSettingsMongoTargetConnectionConnectionOptions>;
+}
+
+export interface DatatransferEndpointSettingsMongoTargetConnectionConnectionOptions {
+    /**
+     * Name of the database associated with the credentials.
+     */
+    authSource?: pulumi.Input<string>;
+    /**
+     * Identifier of the Managed MongoDB cluster.
+     */
+    mdbClusterId?: pulumi.Input<string>;
+    /**
+     * Connection settings of the on-premise MongoDB server.
+     */
+    onPremise?: pulumi.Input<inputs.DatatransferEndpointSettingsMongoTargetConnectionConnectionOptionsOnPremise>;
+    /**
+     * Password for the database access.
+     */
+    password?: pulumi.Input<inputs.DatatransferEndpointSettingsMongoTargetConnectionConnectionOptionsPassword>;
+    /**
+     * User for database access.
+     */
+    user?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsMongoTargetConnectionConnectionOptionsOnPremise {
+    /**
+     * Host names of the replica set.
+     */
+    hosts?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * TCP Port number.
+     */
+    port?: pulumi.Input<number>;
+    /**
+     * Replica set name.
+     */
+    replicaSet?: pulumi.Input<string>;
+    /**
+     * TLS settings for the server connection. Empty implies plaintext connection.
+     */
+    tlsMode?: pulumi.Input<inputs.DatatransferEndpointSettingsMongoTargetConnectionConnectionOptionsOnPremiseTlsMode>;
+}
+
+export interface DatatransferEndpointSettingsMongoTargetConnectionConnectionOptionsOnPremiseTlsMode {
+    disabled?: pulumi.Input<inputs.DatatransferEndpointSettingsMongoTargetConnectionConnectionOptionsOnPremiseTlsModeDisabled>;
+    enabled?: pulumi.Input<inputs.DatatransferEndpointSettingsMongoTargetConnectionConnectionOptionsOnPremiseTlsModeEnabled>;
+}
+
+export interface DatatransferEndpointSettingsMongoTargetConnectionConnectionOptionsOnPremiseTlsModeDisabled {
+}
+
+export interface DatatransferEndpointSettingsMongoTargetConnectionConnectionOptionsOnPremiseTlsModeEnabled {
+    caCertificate?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsMongoTargetConnectionConnectionOptionsPassword {
+    /**
+     * Password for the database access.
+     */
+    raw?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsMysqlSource {
+    /**
+     * Connection settings.
+     */
+    connection?: pulumi.Input<inputs.DatatransferEndpointSettingsMysqlSourceConnection>;
+    /**
+     * Name of the database to transfer.
+     */
+    database?: pulumi.Input<string>;
+    /**
+     * Opposite of `includeTableRegex`. The tables matching the specified regular expressions will not be transferred.
+     */
+    excludeTablesRegexes?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * List of regular expressions of table names which should be transferred. A table name is formatted as schemaname.tablename. For example, a single regular expression may look like `^mydb.employees$`.
+     */
+    includeTablesRegexes?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Defines which database schema objects should be transferred, e.g. views, routines, etc. All of the attrubutes in the block are optional and should be either `BEFORE_DATA`, `AFTER_DATA` or `NEVER`.
+     */
+    objectTransferSettings?: pulumi.Input<inputs.DatatransferEndpointSettingsMysqlSourceObjectTransferSettings>;
+    /**
+     * Password for the database access.
+     */
+    password?: pulumi.Input<inputs.DatatransferEndpointSettingsMysqlSourcePassword>;
+    /**
+     * List of security groups that the transfer associated with this endpoint should use.
+     */
+    securityGroups?: pulumi.Input<pulumi.Input<string>[]>;
+    serviceDatabase?: pulumi.Input<string>;
+    /**
+     * Timezone to use for parsing timestamps for saving source timezones. Accepts values from IANA timezone database. Default: `local timezone`.
+     */
+    timezone?: pulumi.Input<string>;
+    /**
+     * User for the database access.
+     */
+    user?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsMysqlSourceConnection {
+    /**
+     * Identifier of the Managed MySQL cluster.
+     */
+    mdbClusterId?: pulumi.Input<string>;
+    /**
+     * Connection settings of the on-premise MySQL server.
+     */
+    onPremise?: pulumi.Input<inputs.DatatransferEndpointSettingsMysqlSourceConnectionOnPremise>;
+}
+
+export interface DatatransferEndpointSettingsMysqlSourceConnectionOnPremise {
+    /**
+     * List of host names of the MySQL server. Exactly one host is expected currently.
+     */
+    hosts?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Port for the database connection.
+     */
+    port?: pulumi.Input<number>;
+    /**
+     * Identifier of the Yandex Cloud VPC subnetwork to user for accessing the database. If omitted, the server has to be accessible via Internet.
+     */
+    subnetId?: pulumi.Input<string>;
+    /**
+     * TLS settings for the server connection. Empty implies plaintext connection.
+     */
+    tlsMode?: pulumi.Input<inputs.DatatransferEndpointSettingsMysqlSourceConnectionOnPremiseTlsMode>;
+}
+
+export interface DatatransferEndpointSettingsMysqlSourceConnectionOnPremiseTlsMode {
+    disabled?: pulumi.Input<inputs.DatatransferEndpointSettingsMysqlSourceConnectionOnPremiseTlsModeDisabled>;
+    enabled?: pulumi.Input<inputs.DatatransferEndpointSettingsMysqlSourceConnectionOnPremiseTlsModeEnabled>;
+}
+
+export interface DatatransferEndpointSettingsMysqlSourceConnectionOnPremiseTlsModeDisabled {
+}
+
+export interface DatatransferEndpointSettingsMysqlSourceConnectionOnPremiseTlsModeEnabled {
+    caCertificate?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsMysqlSourceObjectTransferSettings {
+    routine?: pulumi.Input<string>;
+    tables?: pulumi.Input<string>;
+    trigger?: pulumi.Input<string>;
+    view?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsMysqlSourcePassword {
+    /**
+     * Password for the database access.
+     */
+    raw?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsMysqlTarget {
+    /**
+     * How to clean tables when activating the transfer. One of `DISABLED`, `DROP` or `TRUNCATE`.
+     */
+    cleanupPolicy?: pulumi.Input<string>;
+    /**
+     * Connection settings.
+     */
+    connection?: pulumi.Input<inputs.DatatransferEndpointSettingsMysqlTargetConnection>;
+    /**
+     * Name of the database to transfer.
+     */
+    database?: pulumi.Input<string>;
+    /**
+     * Password for the database access.
+     */
+    password?: pulumi.Input<inputs.DatatransferEndpointSettingsMysqlTargetPassword>;
+    /**
+     * List of security groups that the transfer associated with this endpoint should use.
+     */
+    securityGroups?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The name of the database where technical tables (`__tm_keeper`, `__tm_gtid_keeper`) will be created. Default is the value of the attribute `database`.
+     */
+    serviceDatabase?: pulumi.Input<string>;
+    /**
+     * When `true`, disables foreign key checks. See [foreignKeyChecks](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_foreign_key_checks). `False` by default.
+     */
+    skipConstraintChecks?: pulumi.Input<boolean>;
+    /**
+     * [sqlMode](https://dev.mysql.com/doc/refman/5.7/en/sql-mode.html) to use when interacting with the server. Defaults to `NO_AUTO_VALUE_ON_ZERO,NO_DIR_IN_CREATE,NO_ENGINE_SUBSTITUTION`.
+     */
+    sqlMode?: pulumi.Input<string>;
+    /**
+     * Timezone to use for parsing timestamps for saving source timezones. Accepts values from IANA timezone database. Default: `local timezone`.
+     */
+    timezone?: pulumi.Input<string>;
+    /**
+     * User for the database access.
+     */
+    user?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsMysqlTargetConnection {
+    /**
+     * Identifier of the Managed MySQL cluster.
+     */
+    mdbClusterId?: pulumi.Input<string>;
+    /**
+     * Connection settings of the on-premise MySQL server.
+     */
+    onPremise?: pulumi.Input<inputs.DatatransferEndpointSettingsMysqlTargetConnectionOnPremise>;
+}
+
+export interface DatatransferEndpointSettingsMysqlTargetConnectionOnPremise {
+    /**
+     * List of host names of the MySQL server. Exactly one host is expected currently.
+     */
+    hosts?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Port for the database connection.
+     */
+    port?: pulumi.Input<number>;
+    /**
+     * Identifier of the Yandex Cloud VPC subnetwork to user for accessing the database. If omitted, the server has to be accessible via Internet.
+     */
+    subnetId?: pulumi.Input<string>;
+    /**
+     * TLS settings for the server connection. Empty implies plaintext connection.
+     */
+    tlsMode?: pulumi.Input<inputs.DatatransferEndpointSettingsMysqlTargetConnectionOnPremiseTlsMode>;
+}
+
+export interface DatatransferEndpointSettingsMysqlTargetConnectionOnPremiseTlsMode {
+    disabled?: pulumi.Input<inputs.DatatransferEndpointSettingsMysqlTargetConnectionOnPremiseTlsModeDisabled>;
+    enabled?: pulumi.Input<inputs.DatatransferEndpointSettingsMysqlTargetConnectionOnPremiseTlsModeEnabled>;
+}
+
+export interface DatatransferEndpointSettingsMysqlTargetConnectionOnPremiseTlsModeDisabled {
+}
+
+export interface DatatransferEndpointSettingsMysqlTargetConnectionOnPremiseTlsModeEnabled {
+    caCertificate?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsMysqlTargetPassword {
+    /**
+     * Password for the database access.
+     */
+    raw?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsPostgresSource {
+    /**
+     * Connection settings.
+     */
+    connection?: pulumi.Input<inputs.DatatransferEndpointSettingsPostgresSourceConnection>;
+    /**
+     * Name of the database to transfer.
+     */
+    database?: pulumi.Input<string>;
+    /**
+     * List of tables which will not be transfered, formatted as `schemaname.tablename`.
+     */
+    excludeTables?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * List of tables to transfer, formatted as `schemaname.tablename`. If omitted or an empty list is specified, all tables will be transferred.
+     */
+    includeTables?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Defines which database schema objects should be transferred, e.g. views, functions, etc. All of the attributes in this block are optional and should be either `BEFORE_DATA`, `AFTER_DATA` or `NEVER`.
+     */
+    objectTransferSettings?: pulumi.Input<inputs.DatatransferEndpointSettingsPostgresSourceObjectTransferSettings>;
+    /**
+     * Password for the database access.
+     */
+    password?: pulumi.Input<inputs.DatatransferEndpointSettingsPostgresSourcePassword>;
+    /**
+     * List of security groups that the transfer associated with this endpoint should use.
+     */
+    securityGroups?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Name of the database schema in which auxiliary tables needed for the transfer will be created. Empty `serviceSchema` implies schema `public`.
+     */
+    serviceSchema?: pulumi.Input<string>;
+    /**
+     * Maximum WAL size held by the replication slot, in gigabytes. Exceeding this limit will result in a replication failure and deletion of the replication slot. `Unlimited` by default.
+     */
+    slotGigabyteLagLimit?: pulumi.Input<number>;
+    /**
+     * User for the database access.
+     */
+    user?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsPostgresSourceConnection {
+    mdbClusterId?: pulumi.Input<string>;
+    onPremise?: pulumi.Input<inputs.DatatransferEndpointSettingsPostgresSourceConnectionOnPremise>;
+}
+
+export interface DatatransferEndpointSettingsPostgresSourceConnectionOnPremise {
+    hosts?: pulumi.Input<pulumi.Input<string>[]>;
+    port?: pulumi.Input<number>;
+    subnetId?: pulumi.Input<string>;
+    tlsMode?: pulumi.Input<inputs.DatatransferEndpointSettingsPostgresSourceConnectionOnPremiseTlsMode>;
+}
+
+export interface DatatransferEndpointSettingsPostgresSourceConnectionOnPremiseTlsMode {
+    disabled?: pulumi.Input<inputs.DatatransferEndpointSettingsPostgresSourceConnectionOnPremiseTlsModeDisabled>;
+    enabled?: pulumi.Input<inputs.DatatransferEndpointSettingsPostgresSourceConnectionOnPremiseTlsModeEnabled>;
+}
+
+export interface DatatransferEndpointSettingsPostgresSourceConnectionOnPremiseTlsModeDisabled {
+}
+
+export interface DatatransferEndpointSettingsPostgresSourceConnectionOnPremiseTlsModeEnabled {
+    caCertificate?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsPostgresSourceObjectTransferSettings {
+    cast?: pulumi.Input<string>;
+    collation?: pulumi.Input<string>;
+    constraint?: pulumi.Input<string>;
+    defaultValues?: pulumi.Input<string>;
+    fkConstraint?: pulumi.Input<string>;
+    function?: pulumi.Input<string>;
+    index?: pulumi.Input<string>;
+    materializedView?: pulumi.Input<string>;
+    policy?: pulumi.Input<string>;
+    primaryKey?: pulumi.Input<string>;
+    rule?: pulumi.Input<string>;
+    sequence?: pulumi.Input<string>;
+    sequenceOwnedBy?: pulumi.Input<string>;
+    sequenceSet?: pulumi.Input<string>;
+    table?: pulumi.Input<string>;
+    trigger?: pulumi.Input<string>;
+    type?: pulumi.Input<string>;
+    view?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsPostgresSourcePassword {
+    /**
+     * Password for the database access.
+     */
+    raw?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsPostgresTarget {
+    cleanupPolicy?: pulumi.Input<string>;
+    /**
+     * Connection settings.
+     */
+    connection?: pulumi.Input<inputs.DatatransferEndpointSettingsPostgresTargetConnection>;
+    /**
+     * Name of the database to transfer.
+     */
+    database?: pulumi.Input<string>;
+    /**
+     * Password for the database access.
+     */
+    password?: pulumi.Input<inputs.DatatransferEndpointSettingsPostgresTargetPassword>;
+    /**
+     * List of security groups that the transfer associated with this endpoint should use.
+     */
+    securityGroups?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * User for the database access.
+     */
+    user?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsPostgresTargetConnection {
+    /**
+     * Identifier of the Managed PostgreSQL cluster.
+     */
+    mdbClusterId?: pulumi.Input<string>;
+    /**
+     * Connection settings of the on-premise PostgreSQL server.
+     */
+    onPremise?: pulumi.Input<inputs.DatatransferEndpointSettingsPostgresTargetConnectionOnPremise>;
+}
+
+export interface DatatransferEndpointSettingsPostgresTargetConnectionOnPremise {
+    /**
+     * List of host names of the PostgreSQL server. Exactly one host is expected currently.
+     */
+    hosts?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Port for the database connection.
+     */
+    port?: pulumi.Input<number>;
+    /**
+     * Identifier of the Yandex Cloud VPC subnetwork to user for accessing the database. If omitted, the server has to be accessible via Internet.
+     */
+    subnetId?: pulumi.Input<string>;
+    /**
+     * TLS settings for the server connection. Empty implies plaintext connection.
+     */
+    tlsMode?: pulumi.Input<inputs.DatatransferEndpointSettingsPostgresTargetConnectionOnPremiseTlsMode>;
+}
+
+export interface DatatransferEndpointSettingsPostgresTargetConnectionOnPremiseTlsMode {
+    disabled?: pulumi.Input<inputs.DatatransferEndpointSettingsPostgresTargetConnectionOnPremiseTlsModeDisabled>;
+    enabled?: pulumi.Input<inputs.DatatransferEndpointSettingsPostgresTargetConnectionOnPremiseTlsModeEnabled>;
+}
+
+export interface DatatransferEndpointSettingsPostgresTargetConnectionOnPremiseTlsModeDisabled {
+}
+
+export interface DatatransferEndpointSettingsPostgresTargetConnectionOnPremiseTlsModeEnabled {
+    caCertificate?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsPostgresTargetPassword {
+    /**
+     * Password for the database access.
+     */
+    raw?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsYdbSource {
+    /**
+     * Custom name for changefeed.
+     */
+    changefeedCustomName?: pulumi.Input<string>;
+    /**
+     * Database path in YDB where tables are stored. Example: `/ru/transfer_manager/prod/data-transfer-yt`.
+     */
+    database?: pulumi.Input<string>;
+    /**
+     * Instance of YDB. Example: `my-cute-ydb.yandex.cloud:2135`.
+     */
+    instance?: pulumi.Input<string>;
+    /**
+     * A list of paths which should be uploaded. When not specified, all available tables are uploaded.
+     */
+    paths?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Authentication key.
+     */
+    saKeyContent?: pulumi.Input<string>;
+    /**
+     * List of security groups that the transfer associated with this endpoint should use.
+     */
+    securityGroups?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Service account ID for interaction with database.
+     */
+    serviceAccountId?: pulumi.Input<string>;
+    /**
+     * Identifier of the Yandex Cloud VPC subnetwork to user for accessing the database. If omitted, the server has to be accessible via Internet.
+     */
+    subnetId?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsYdbTarget {
+    /**
+     * How to clean collections when activating the transfer. One of `YDB_CLEANUP_POLICY_DISABLED` or `YDB_CLEANUP_POLICY_DROP`.
+     */
+    cleanupPolicy?: pulumi.Input<string>;
+    /**
+     * Database path in YDB where tables are stored. Example: `/ru/transfer_manager/prod/data-transfer-yt`.
+     */
+    database?: pulumi.Input<string>;
+    /**
+     * Compression that will be used for default columns family on YDB table creation One of `YDB_DEFAULT_COMPRESSION_UNSPECIFIED`, `YDB_DEFAULT_COMPRESSION_DISABLED`, `YDB_DEFAULT_COMPRESSION_LZ4`.
+     */
+    defaultCompression?: pulumi.Input<string>;
+    /**
+     * Instance of YDB. Example: `my-cute-ydb.yandex.cloud:2135`.
+     */
+    instance?: pulumi.Input<string>;
+    /**
+     * Whether a column-oriented (i.e. OLAP) tables should be created. Default is `false` (create row-oriented OLTP tables).
+     */
+    isTableColumnOriented?: pulumi.Input<boolean>;
+    /**
+     * A path where resulting tables are stored.
+     */
+    path?: pulumi.Input<string>;
+    /**
+     * Authentication key.
+     */
+    saKeyContent?: pulumi.Input<string>;
+    /**
+     * List of security groups that the transfer associated with this endpoint should use.
+     */
+    securityGroups?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Service account ID for interaction with database.
+     */
+    serviceAccountId?: pulumi.Input<string>;
+    /**
+     * Identifier of the Yandex Cloud VPC subnetwork to user for accessing the database. If omitted, the server has to be accessible via Internet.
+     */
+    subnetId?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsYdsSource {
+    /**
+     * Should continue working, if consumer read lag exceed TTL of topic.
+     */
+    allowTtlRewind?: pulumi.Input<boolean>;
+    /**
+     * Consumer.
+     */
+    consumer?: pulumi.Input<string>;
+    /**
+     * Database name.
+     */
+    database?: pulumi.Input<string>;
+    /**
+     * YDS Endpoint.
+     */
+    endpoint?: pulumi.Input<string>;
+    /**
+     * Data parsing rules.
+     */
+    parser?: pulumi.Input<inputs.DatatransferEndpointSettingsYdsSourceParser>;
+    /**
+     * List of security groups that the transfer associated with this endpoint should use.
+     */
+    securityGroups?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Service account ID for interaction with database.
+     */
+    serviceAccountId?: pulumi.Input<string>;
+    /**
+     * Stream.
+     */
+    stream?: pulumi.Input<string>;
+    /**
+     * Identifier of the Yandex Cloud VPC subnetwork to user for accessing the database. If omitted, the server has to be accessible via Internet.
+     */
+    subnetId?: pulumi.Input<string>;
+    /**
+     * List of supported compression codec.
+     */
+    supportedCodecs?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface DatatransferEndpointSettingsYdsSourceParser {
+    /**
+     * Parse Audit Trails data. Empty struct.
+     */
+    auditTrailsV1Parser?: pulumi.Input<inputs.DatatransferEndpointSettingsYdsSourceParserAuditTrailsV1Parser>;
+    /**
+     * Parse Cloud Logging data. Empty struct.
+     */
+    cloudLoggingParser?: pulumi.Input<inputs.DatatransferEndpointSettingsYdsSourceParserCloudLoggingParser>;
+    /**
+     * Parse data in json format.
+     */
+    jsonParser?: pulumi.Input<inputs.DatatransferEndpointSettingsYdsSourceParserJsonParser>;
+    tskvParser?: pulumi.Input<inputs.DatatransferEndpointSettingsYdsSourceParserTskvParser>;
+}
+
+export interface DatatransferEndpointSettingsYdsSourceParserAuditTrailsV1Parser {
+}
+
+export interface DatatransferEndpointSettingsYdsSourceParserCloudLoggingParser {
+}
+
+export interface DatatransferEndpointSettingsYdsSourceParserJsonParser {
+    addRestColumn?: pulumi.Input<boolean>;
+    /**
+     * Data parsing scheme.
+     */
+    dataSchema?: pulumi.Input<inputs.DatatransferEndpointSettingsYdsSourceParserJsonParserDataSchema>;
+    nullKeysAllowed?: pulumi.Input<boolean>;
+    unescapeStringValues?: pulumi.Input<boolean>;
+}
+
+export interface DatatransferEndpointSettingsYdsSourceParserJsonParserDataSchema {
+    /**
+     * Description of the data schema in the array of `fields` structure.
+     */
+    fields?: pulumi.Input<inputs.DatatransferEndpointSettingsYdsSourceParserJsonParserDataSchemaFields>;
+    /**
+     * Description of the data schema as JSON specification.
+     */
+    jsonFields?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsYdsSourceParserJsonParserDataSchemaFields {
+    /**
+     * Description of the data schema in the array of `fields` structure.
+     */
+    fields?: pulumi.Input<pulumi.Input<inputs.DatatransferEndpointSettingsYdsSourceParserJsonParserDataSchemaFieldsField>[]>;
+}
+
+export interface DatatransferEndpointSettingsYdsSourceParserJsonParserDataSchemaFieldsField {
+    /**
+     * Mark field as Primary Key.
+     */
+    key?: pulumi.Input<boolean>;
+    /**
+     * Field name.
+     */
+    name?: pulumi.Input<string>;
+    /**
+     * Path to the field.
+     */
+    path?: pulumi.Input<string>;
+    /**
+     * Mark field as required.
+     */
+    required?: pulumi.Input<boolean>;
+    /**
+     * Field type, one of: `INT64`, `INT32`, `INT16`, `INT8`, `UINT64`, `UINT32`, `UINT16`, `UINT8`, `DOUBLE`, `BOOLEAN`, `STRING`, `UTF8`, `ANY`, `DATETIME`.
+     */
+    type?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsYdsSourceParserTskvParser {
+    addRestColumn?: pulumi.Input<boolean>;
+    dataSchema?: pulumi.Input<inputs.DatatransferEndpointSettingsYdsSourceParserTskvParserDataSchema>;
+    nullKeysAllowed?: pulumi.Input<boolean>;
+    unescapeStringValues?: pulumi.Input<boolean>;
+}
+
+export interface DatatransferEndpointSettingsYdsSourceParserTskvParserDataSchema {
+    fields?: pulumi.Input<inputs.DatatransferEndpointSettingsYdsSourceParserTskvParserDataSchemaFields>;
+    jsonFields?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsYdsSourceParserTskvParserDataSchemaFields {
+    fields?: pulumi.Input<pulumi.Input<inputs.DatatransferEndpointSettingsYdsSourceParserTskvParserDataSchemaFieldsField>[]>;
+}
+
+export interface DatatransferEndpointSettingsYdsSourceParserTskvParserDataSchemaFieldsField {
+    key?: pulumi.Input<boolean>;
+    name?: pulumi.Input<string>;
+    path?: pulumi.Input<string>;
+    required?: pulumi.Input<boolean>;
+    type?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsYdsTarget {
+    /**
+     * Database.
+     */
+    database?: pulumi.Input<string>;
+    /**
+     * YDS Endpoint.
+     */
+    endpoint?: pulumi.Input<string>;
+    /**
+     * Save transaction order.
+     */
+    saveTxOrder?: pulumi.Input<boolean>;
+    /**
+     * List of security groups that the transfer associated with this endpoint should use.
+     */
+    securityGroups?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Data serialization format.
+     */
+    serializer?: pulumi.Input<inputs.DatatransferEndpointSettingsYdsTargetSerializer>;
+    /**
+     * Service account ID for interaction with database.
+     */
+    serviceAccountId?: pulumi.Input<string>;
+    /**
+     * Stream.
+     */
+    stream?: pulumi.Input<string>;
+    /**
+     * Identifier of the Yandex Cloud VPC subnetwork to user for accessing the database. If omitted, the server has to be accessible via Internet.
+     */
+    subnetId?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsYdsTargetSerializer {
+    /**
+     * Empty block. Select data serialization format automatically.
+     */
+    serializerAuto?: pulumi.Input<inputs.DatatransferEndpointSettingsYdsTargetSerializerSerializerAuto>;
+    /**
+     * Serialize data in json format.
+     */
+    serializerDebezium?: pulumi.Input<inputs.DatatransferEndpointSettingsYdsTargetSerializerSerializerDebezium>;
+    /**
+     * Empty block. Serialize data in json format.
+     */
+    serializerJson?: pulumi.Input<inputs.DatatransferEndpointSettingsYdsTargetSerializerSerializerJson>;
+}
+
+export interface DatatransferEndpointSettingsYdsTargetSerializerSerializerAuto {
+}
+
+export interface DatatransferEndpointSettingsYdsTargetSerializerSerializerDebezium {
+    /**
+     * A list of Debezium parameters set by the structure of the `key` and `value` string fields.
+     */
+    serializerParameters?: pulumi.Input<pulumi.Input<inputs.DatatransferEndpointSettingsYdsTargetSerializerSerializerDebeziumSerializerParameter>[]>;
+}
+
+export interface DatatransferEndpointSettingsYdsTargetSerializerSerializerDebeziumSerializerParameter {
+    key?: pulumi.Input<string>;
+    value?: pulumi.Input<string>;
+}
+
+export interface DatatransferEndpointSettingsYdsTargetSerializerSerializerJson {
+}
+
+export interface DatatransferTransferRuntime {
+    /**
+     * YC Runtime parameters for the transfer.
+     */
+    ycRuntime?: pulumi.Input<inputs.DatatransferTransferRuntimeYcRuntime>;
+}
+
+export interface DatatransferTransferRuntimeYcRuntime {
+    /**
+     * Number of workers in parallel replication.
+     */
+    jobCount?: pulumi.Input<number>;
+    /**
+     * Parallel snapshot parameters.
+     */
+    uploadShardParams?: pulumi.Input<inputs.DatatransferTransferRuntimeYcRuntimeUploadShardParams>;
+}
+
+export interface DatatransferTransferRuntimeYcRuntimeUploadShardParams {
+    /**
+     * Number of workers.
+     */
+    jobCount?: pulumi.Input<number>;
+    /**
+     * Number of threads.
+     */
+    processCount?: pulumi.Input<number>;
+}
+
+export interface DatatransferTransferTransformation {
+    /**
+     * A list of transformers. You can specify exactly 1 transformer in each element of list.
+     */
+    transformers?: pulumi.Input<pulumi.Input<inputs.DatatransferTransferTransformationTransformer>[]>;
+}
+
+export interface DatatransferTransferTransformationTransformer {
+    /**
+     * Convert column values to strings.
+     */
+    convertToString?: pulumi.Input<inputs.DatatransferTransferTransformationTransformerConvertToString>;
+    /**
+     * Set up a list of table columns to transfer.
+     */
+    filterColumns?: pulumi.Input<inputs.DatatransferTransferTransformationTransformerFilterColumns>;
+    /**
+     * This filter only applies to transfers with queues (Apache Kafka®) as a data source. When running a transfer, only the strings meeting the specified criteria remain in a changefeed.
+     */
+    filterRows?: pulumi.Input<inputs.DatatransferTransferTransformationTransformerFilterRows>;
+    /**
+     * Mask field transformer allows you to hash data.
+     */
+    maskField?: pulumi.Input<inputs.DatatransferTransferTransformationTransformerMaskField>;
+    /**
+     * Set rules for renaming tables by specifying the current names of the tables in the source and new names for these tables in the target.
+     */
+    renameTables?: pulumi.Input<inputs.DatatransferTransferTransformationTransformerRenameTables>;
+    /**
+     * Override primary keys.
+     */
+    replacePrimaryKey?: pulumi.Input<inputs.DatatransferTransferTransformationTransformerReplacePrimaryKey>;
+    /**
+     * Set the number of shards for particular tables and a list of columns whose values will be used for calculating a hash to determine a shard.
+     */
+    sharderTransformer?: pulumi.Input<inputs.DatatransferTransferTransformationTransformerSharderTransformer>;
+    /**
+     * Splits the X table into multiple tables (X_1, X_2, ..., X_n) based on data.
+     */
+    tableSplitterTransformer?: pulumi.Input<inputs.DatatransferTransferTransformationTransformerTableSplitterTransformer>;
+}
+
+export interface DatatransferTransferTransformationTransformerConvertToString {
+    /**
+     * List of the columns to transfer to the target tables using lists of included and excluded columns.
+     */
+    columns?: pulumi.Input<inputs.DatatransferTransferTransformationTransformerConvertToStringColumns>;
+    /**
+     * Table filter.
+     */
+    tables?: pulumi.Input<inputs.DatatransferTransferTransformationTransformerConvertToStringTables>;
+}
+
+export interface DatatransferTransferTransformationTransformerConvertToStringColumns {
+    /**
+     * List of columns that will be excluded to transfer.
+     */
+    excludeColumns?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * List of columns that will be included to transfer.
+     */
+    includeColumns?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface DatatransferTransferTransformationTransformerConvertToStringTables {
+    /**
+     * List of tables that will be excluded to transfer.
+     */
+    excludeTables?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * List of tables that will be included to transfer.
+     */
+    includeTables?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface DatatransferTransferTransformationTransformerFilterColumns {
+    /**
+     * List of the columns to transfer to the target tables using lists of included and excluded columns.
+     */
+    columns?: pulumi.Input<inputs.DatatransferTransferTransformationTransformerFilterColumnsColumns>;
+    /**
+     * Table filter.
+     */
+    tables?: pulumi.Input<inputs.DatatransferTransferTransformationTransformerFilterColumnsTables>;
+}
+
+export interface DatatransferTransferTransformationTransformerFilterColumnsColumns {
+    excludeColumns?: pulumi.Input<pulumi.Input<string>[]>;
+    includeColumns?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface DatatransferTransferTransformationTransformerFilterColumnsTables {
+    excludeTables?: pulumi.Input<pulumi.Input<string>[]>;
+    includeTables?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface DatatransferTransferTransformationTransformerFilterRows {
+    /**
+     * Filtering criterion. This can be comparison operators for numeric, string, and Boolean values, comparison to NULL, and checking whether a substring is part of a string. See details [here](https://yandex.cloud/docs/data-transfer/concepts/data-transformation#append-only-sources).
+     */
+    filter?: pulumi.Input<string>;
+    /**
+     * Table filter.
+     */
+    tables?: pulumi.Input<inputs.DatatransferTransferTransformationTransformerFilterRowsTables>;
+}
+
+export interface DatatransferTransferTransformationTransformerFilterRowsTables {
+    excludeTables?: pulumi.Input<pulumi.Input<string>[]>;
+    includeTables?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface DatatransferTransferTransformationTransformerMaskField {
+    /**
+     * List of strings that specify the name of the column for data masking (a regular expression).
+     */
+    columns?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Mask function.
+     */
+    function?: pulumi.Input<inputs.DatatransferTransferTransformationTransformerMaskFieldFunction>;
+    /**
+     * Table filter.
+     */
+    tables?: pulumi.Input<inputs.DatatransferTransferTransformationTransformerMaskFieldTables>;
+}
+
+export interface DatatransferTransferTransformationTransformerMaskFieldFunction {
+    /**
+     * Hash mask function.
+     */
+    maskFunctionHash?: pulumi.Input<inputs.DatatransferTransferTransformationTransformerMaskFieldFunctionMaskFunctionHash>;
+}
+
+export interface DatatransferTransferTransformationTransformerMaskFieldFunctionMaskFunctionHash {
+    /**
+     * This string will be used in the HMAC(sha256, salt) function applied to the column data.
+     */
+    userDefinedSalt?: pulumi.Input<string>;
+}
+
+export interface DatatransferTransferTransformationTransformerMaskFieldTables {
+    excludeTables?: pulumi.Input<pulumi.Input<string>[]>;
+    includeTables?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface DatatransferTransferTransformationTransformerRenameTables {
+    /**
+     * List of renaming rules.
+     */
+    renameTables?: pulumi.Input<pulumi.Input<inputs.DatatransferTransferTransformationTransformerRenameTablesRenameTable>[]>;
+}
+
+export interface DatatransferTransferTransformationTransformerRenameTablesRenameTable {
+    /**
+     * Specify the new names for this table in the target.
+     */
+    newName?: pulumi.Input<inputs.DatatransferTransferTransformationTransformerRenameTablesRenameTableNewName>;
+    /**
+     * Specify the current names of the table in the source.
+     */
+    originalName?: pulumi.Input<inputs.DatatransferTransferTransformationTransformerRenameTablesRenameTableOriginalName>;
+}
+
+export interface DatatransferTransferTransformationTransformerRenameTablesRenameTableNewName {
+    name?: pulumi.Input<string>;
+    nameSpace?: pulumi.Input<string>;
+}
+
+export interface DatatransferTransferTransformationTransformerRenameTablesRenameTableOriginalName {
+    name?: pulumi.Input<string>;
+    nameSpace?: pulumi.Input<string>;
+}
+
+export interface DatatransferTransferTransformationTransformerReplacePrimaryKey {
+    /**
+     * List of columns to be used as primary keys.
+     */
+    keys?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Table filter.
+     */
+    tables?: pulumi.Input<inputs.DatatransferTransferTransformationTransformerReplacePrimaryKeyTables>;
+}
+
+export interface DatatransferTransferTransformationTransformerReplacePrimaryKeyTables {
+    excludeTables?: pulumi.Input<pulumi.Input<string>[]>;
+    includeTables?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface DatatransferTransferTransformationTransformerSharderTransformer {
+    /**
+     * List of the columns to transfer to the target tables using lists of included and excluded columns.
+     */
+    columns?: pulumi.Input<inputs.DatatransferTransferTransformationTransformerSharderTransformerColumns>;
+    /**
+     * Number of shards.
+     */
+    shardsCount?: pulumi.Input<number>;
+    /**
+     * Table filter.
+     */
+    tables?: pulumi.Input<inputs.DatatransferTransferTransformationTransformerSharderTransformerTables>;
+}
+
+export interface DatatransferTransferTransformationTransformerSharderTransformerColumns {
+    excludeColumns?: pulumi.Input<pulumi.Input<string>[]>;
+    includeColumns?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface DatatransferTransferTransformationTransformerSharderTransformerTables {
+    excludeTables?: pulumi.Input<pulumi.Input<string>[]>;
+    includeTables?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface DatatransferTransferTransformationTransformerTableSplitterTransformer {
+    /**
+     * List of strings that specify the columns in the tables to be partitioned.
+     */
+    columns?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Specify the split string to be used for merging components in a new table name.
+     */
+    splitter?: pulumi.Input<string>;
+    /**
+     * Table filter.
+     */
+    tables?: pulumi.Input<inputs.DatatransferTransferTransformationTransformerTableSplitterTransformerTables>;
+}
+
+export interface DatatransferTransferTransformationTransformerTableSplitterTransformerTables {
+    excludeTables?: pulumi.Input<pulumi.Input<string>[]>;
+    includeTables?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface FunctionAsyncInvocation {
+    /**
+     * Maximum number of retries for async invocation.
+     */
+    retriesCount?: pulumi.Input<number>;
+    /**
+     * Service account used for async invocation.
+     */
+    serviceAccountId?: pulumi.Input<string>;
+    /**
+     * Target for unsuccessful async invocation.
+     */
+    ymqFailureTarget?: pulumi.Input<inputs.FunctionAsyncInvocationYmqFailureTarget>;
+    /**
+     * Target for successful async invocation.
+     */
+    ymqSuccessTarget?: pulumi.Input<inputs.FunctionAsyncInvocationYmqSuccessTarget>;
+}
+
+export interface FunctionAsyncInvocationYmqFailureTarget {
+    /**
+     * YMQ ARN.
+     */
+    arn: pulumi.Input<string>;
+    /**
+     * Service account used for writing result to queue.
+     */
+    serviceAccountId: pulumi.Input<string>;
+}
+
+export interface FunctionAsyncInvocationYmqSuccessTarget {
+    /**
+     * YMQ ARN.
+     */
+    arn: pulumi.Input<string>;
+    /**
+     * Service account used for writing result to queue.
+     */
+    serviceAccountId: pulumi.Input<string>;
+}
+
+export interface FunctionConnectivity {
+    /**
+     * Network the version will have access to. It's essential to specify network with subnets in all availability zones.
+     */
+    networkId: pulumi.Input<string>;
+}
+
+export interface FunctionContent {
+    /**
+     * Filename to zip archive for the version.
+     */
+    zipFilename: pulumi.Input<string>;
+}
+
+export interface FunctionLogOptions {
+    /**
+     * Is logging from function disabled.
+     */
+    disabled?: pulumi.Input<boolean>;
+    /**
+     * Log entries are written to default log group for specified folder.
+     */
+    folderId?: pulumi.Input<string>;
+    /**
+     * Log entries are written to specified log group.
+     */
+    logGroupId?: pulumi.Input<string>;
+    /**
+     * Minimum log entry level.
+     */
+    minLevel?: pulumi.Input<string>;
+}
+
+export interface FunctionMetadataOptions {
+    /**
+     * Enables access to AWS flavored metadata (IMDSv1). Values: `0` - default, `1` - enabled, `2` - disabled.
+     */
+    awsV1HttpEndpoint?: pulumi.Input<number>;
+    /**
+     * Enables access to GCE flavored metadata. Values: `0`- default, `1` - enabled, `2` - disabled.
+     */
+    gceHttpEndpoint?: pulumi.Input<number>;
+}
+
+export interface FunctionMount {
+    /**
+     * One of the available mount types. Disk available during the function execution time.
+     */
+    ephemeralDisk?: pulumi.Input<inputs.FunctionMountEphemeralDisk>;
+    /**
+     * Mount’s accessibility mode. Valid values are `ro` and `rw`.
+     */
+    mode?: pulumi.Input<string>;
+    /**
+     * Name of the mount point. The directory where the target is mounted will be accessible at the `/function/storage/<mounts.0.name>` path.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * One of the available mount types. Object storage as a mount.
+     */
+    objectStorage?: pulumi.Input<inputs.FunctionMountObjectStorage>;
+}
+
+export interface FunctionMountEphemeralDisk {
+    /**
+     * Optional block size of the ephemeral disk in KB.
+     */
+    blockSizeKb?: pulumi.Input<number>;
+    /**
+     * Size of the ephemeral disk in GB.
+     */
+    sizeGb: pulumi.Input<number>;
+}
+
+export interface FunctionMountObjectStorage {
+    /**
+     * Name of the mounting bucket.
+     */
+    bucket: pulumi.Input<string>;
+    /**
+     * Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted.
+     */
+    prefix?: pulumi.Input<string>;
+}
+
+export interface FunctionPackage {
+    /**
+     * Name of the bucket that stores the code for the version.
+     */
+    bucketName: pulumi.Input<string>;
+    /**
+     * Name of the object in the bucket that stores the code for the version.
+     */
+    objectName: pulumi.Input<string>;
+    /**
+     * SHA256 hash of the version deployment package.
+     */
+    sha256?: pulumi.Input<string>;
+}
+
+export interface FunctionScalingPolicyPolicy {
+    /**
+     * Yandex Cloud Function version tag for Yandex Cloud Function scaling policy.
+     */
+    tag: pulumi.Input<string>;
+    /**
+     * Max number of instances in one zone for Yandex Cloud Function with tag.
+     */
+    zoneInstancesLimit?: pulumi.Input<number>;
+    /**
+     * Max number of requests in one zone for Yandex Cloud Function with tag.
+     */
+    zoneRequestsLimit?: pulumi.Input<number>;
+}
+
+export interface FunctionSecret {
+    /**
+     * Function's environment variable in which secret's value will be stored. Must begin with a letter (A-Z, a-z).
+     */
+    environmentVariable: pulumi.Input<string>;
+    /**
+     * Secret's ID.
+     */
+    id: pulumi.Input<string>;
+    /**
+     * Secret's entries key which value will be stored in environment variable.
+     */
+    key: pulumi.Input<string>;
+    /**
+     * Secret's version ID.
+     */
+    versionId: pulumi.Input<string>;
+}
+
+export interface FunctionStorageMount {
+    /**
+     * Name of the mounting bucket.
+     */
+    bucket: pulumi.Input<string>;
+    /**
+     * Name of the mount point. The directory where the bucket is mounted will be accessible at the `/function/storage/<mount_point>` path.
+     */
+    mountPointName: pulumi.Input<string>;
+    /**
+     * Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted.
+     */
+    prefix?: pulumi.Input<string>;
+    /**
+     * Mount the bucket in read-only mode.
+     */
+    readOnly?: pulumi.Input<boolean>;
+}
+
+export interface FunctionTriggerContainer {
+    /**
+     * Yandex Cloud Serverless Container ID for Yandex Cloud Functions Trigger.
+     */
+    id: pulumi.Input<string>;
+    /**
+     * Path for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+     */
+    path?: pulumi.Input<string>;
+    /**
+     * Retry attempts for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+     */
+    retryAttempts?: pulumi.Input<string>;
+    /**
+     * Retry interval in seconds for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+     */
+    retryInterval?: pulumi.Input<string>;
+    /**
+     * Service account ID for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+     */
+    serviceAccountId?: pulumi.Input<string>;
+}
+
+export interface FunctionTriggerContainerRegistry {
+    /**
+     * Batch Duration in seconds for Yandex Cloud Functions Trigger.
+     */
+    batchCutoff: pulumi.Input<string>;
+    /**
+     * Batch Size for Yandex Cloud Functions Trigger.
+     */
+    batchSize?: pulumi.Input<string>;
+    /**
+     * Boolean flag for setting `create image` event for Yandex Cloud Functions Trigger.
+     */
+    createImage?: pulumi.Input<boolean>;
+    /**
+     * Boolean flag for setting `create image tag` event for Yandex Cloud Functions Trigger.
+     */
+    createImageTag?: pulumi.Input<boolean>;
+    /**
+     * Boolean flag for setting `delete image` event for Yandex Cloud Functions Trigger.
+     */
+    deleteImage?: pulumi.Input<boolean>;
+    /**
+     * Boolean flag for setting `delete image tag` event for Yandex Cloud Functions Trigger.
+     */
+    deleteImageTag?: pulumi.Input<boolean>;
+    /**
+     * Image name filter setting for Yandex Cloud Functions Trigger.
+     */
+    imageName?: pulumi.Input<string>;
+    /**
+     * Container Registry ID for Yandex Cloud Functions Trigger.
+     */
+    registryId: pulumi.Input<string>;
+    /**
+     * Image tag filter setting for Yandex Cloud Functions Trigger.
+     */
+    tag?: pulumi.Input<string>;
+}
+
+export interface FunctionTriggerDataStreams {
+    /**
+     * Batch Duration in seconds for Yandex Cloud Functions Trigger.
+     */
+    batchCutoff: pulumi.Input<string>;
+    /**
+     * Batch Size for Yandex Cloud Functions Trigger.
+     */
+    batchSize?: pulumi.Input<string>;
+    /**
+     * Stream database for Yandex Cloud Functions Trigger.
+     */
+    database: pulumi.Input<string>;
+    /**
+     * Service account ID to access data stream for Yandex Cloud Functions Trigger.
+     */
+    serviceAccountId: pulumi.Input<string>;
+    /**
+     * Stream name for Yandex Cloud Functions Trigger.
+     */
+    streamName: pulumi.Input<string>;
+}
+
+export interface FunctionTriggerDlq {
+    /**
+     * ID of Dead Letter Queue for Trigger (Queue ARN).
+     */
+    queueId: pulumi.Input<string>;
+    /**
+     * Service Account ID for Dead Letter Queue for Yandex Cloud Functions Trigger.
+     */
+    serviceAccountId: pulumi.Input<string>;
+}
+
+export interface FunctionTriggerFunction {
+    /**
+     * Yandex Cloud Function ID.
+     */
+    id: pulumi.Input<string>;
+    /**
+     * Retry attempts for Yandex Cloud Function for Yandex Cloud Functions Trigger.
+     */
+    retryAttempts?: pulumi.Input<string>;
+    /**
+     * Retry interval in seconds for Yandex Cloud Function for Yandex Cloud Functions Trigger.
+     */
+    retryInterval?: pulumi.Input<string>;
+    /**
+     * Service account ID for Yandex Cloud Function.
+     */
+    serviceAccountId?: pulumi.Input<string>;
+    /**
+     * Tag for Yandex Cloud Function for Yandex Cloud Functions Trigger.
+     */
+    tag?: pulumi.Input<string>;
+}
+
+export interface FunctionTriggerIot {
+    /**
+     * Batch Duration in seconds for Yandex Cloud Functions Trigger.
+     */
+    batchCutoff: pulumi.Input<string>;
+    /**
+     * Batch Size for Yandex Cloud Functions Trigger.
+     */
+    batchSize?: pulumi.Input<string>;
+    /**
+     * IoT Device ID for Yandex Cloud Functions Trigger.
+     */
+    deviceId?: pulumi.Input<string>;
+    /**
+     * IoT Registry ID for Yandex Cloud Functions Trigger.
+     */
+    registryId: pulumi.Input<string>;
+    /**
+     * IoT Topic for Yandex Cloud Functions Trigger.
+     */
+    topic?: pulumi.Input<string>;
+}
+
+export interface FunctionTriggerLogGroup {
+    batchCutoff: pulumi.Input<string>;
+    batchSize?: pulumi.Input<string>;
+    logGroupIds: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface FunctionTriggerLogging {
+    /**
+     * Batch Duration in seconds for Yandex Cloud Functions Trigger.
+     */
+    batchCutoff: pulumi.Input<string>;
+    /**
+     * Batch Size for Yandex Cloud Functions Trigger.
+     */
+    batchSize?: pulumi.Input<string>;
+    /**
+     * Logging group ID for Yandex Cloud Functions Trigger.
+     */
+    groupId: pulumi.Input<string>;
+    /**
+     * Logging level filter setting for Yandex Cloud Functions Trigger.
+     */
+    levels?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Resource ID filter setting for Yandex Cloud Functions Trigger.
+     */
+    resourceIds?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Resource type filter setting for Yandex Cloud Functions Trigger.
+     */
+    resourceTypes?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Logging stream name filter setting for Yandex Cloud Functions Trigger.
+     */
+    streamNames?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface FunctionTriggerMail {
+    /**
+     * Object Storage Bucket ID for Yandex Cloud Functions Trigger.
+     */
+    attachmentsBucketId?: pulumi.Input<string>;
+    /**
+     * Batch Duration in seconds for Yandex Cloud Functions Trigger.
+     */
+    batchCutoff: pulumi.Input<string>;
+    /**
+     * Batch Size for Yandex Cloud Functions Trigger.
+     */
+    batchSize?: pulumi.Input<string>;
+    /**
+     * Service account ID to access object storage for Yandex Cloud Functions Trigger.
+     */
+    serviceAccountId?: pulumi.Input<string>;
+}
+
+export interface FunctionTriggerMessageQueue {
+    /**
+     * Batch Duration in seconds for Yandex Cloud Functions Trigger.
+     */
+    batchCutoff: pulumi.Input<string>;
+    /**
+     * Batch Size for Yandex Cloud Functions Trigger.
+     */
+    batchSize?: pulumi.Input<string>;
+    /**
+     * Message Queue ID for Yandex Cloud Functions Trigger.
+     */
+    queueId: pulumi.Input<string>;
+    /**
+     * Message Queue Service Account ID for Yandex Cloud Functions Trigger.
+     */
+    serviceAccountId: pulumi.Input<string>;
+    /**
+     * Visibility timeout for Yandex Cloud Functions Trigger.
+     */
+    visibilityTimeout?: pulumi.Input<string>;
+}
+
+export interface FunctionTriggerObjectStorage {
+    /**
+     * Batch Duration in seconds for Yandex Cloud Functions Trigger.
+     */
+    batchCutoff: pulumi.Input<string>;
+    /**
+     * Batch Size for Yandex Cloud Functions Trigger.
+     */
+    batchSize?: pulumi.Input<string>;
+    /**
+     * Object Storage Bucket ID for Yandex Cloud Functions Trigger.
+     */
+    bucketId: pulumi.Input<string>;
+    /**
+     * Boolean flag for setting `create` event for Yandex Cloud Functions Trigger.
+     */
+    create?: pulumi.Input<boolean>;
+    /**
+     * Boolean flag for setting `delete` event for Yandex Cloud Functions Trigger.
+     */
+    delete?: pulumi.Input<boolean>;
+    /**
+     * Prefix for Object Storage for Yandex Cloud Functions Trigger.
+     */
+    prefix?: pulumi.Input<string>;
+    /**
+     * Suffix for Object Storage for Yandex Cloud Functions Trigger.
+     */
+    suffix?: pulumi.Input<string>;
+    /**
+     * Boolean flag for setting `update` event for Yandex Cloud Functions Trigger.
+     */
+    update?: pulumi.Input<boolean>;
+}
+
+export interface FunctionTriggerTimer {
+    /**
+     * Cron expression for timer for Yandex Cloud Functions Trigger.
+     */
+    cronExpression: pulumi.Input<string>;
+    /**
+     * Payload to be passed to function.
+     */
+    payload?: pulumi.Input<string>;
+}
+
+export interface GetAlbBackendGroupGrpcBackend {
+    healthcheck?: inputs.GetAlbBackendGroupGrpcBackendHealthcheck;
+    loadBalancingConfig?: inputs.GetAlbBackendGroupGrpcBackendLoadBalancingConfig;
+    name?: string;
+    port?: number;
+    targetGroupIds?: string[];
+    tls?: inputs.GetAlbBackendGroupGrpcBackendTls;
+    weight?: number;
+}
+
+export interface GetAlbBackendGroupGrpcBackendArgs {
+    healthcheck?: pulumi.Input<inputs.GetAlbBackendGroupGrpcBackendHealthcheckArgs>;
+    loadBalancingConfig?: pulumi.Input<inputs.GetAlbBackendGroupGrpcBackendLoadBalancingConfigArgs>;
+    name?: pulumi.Input<string>;
+    port?: pulumi.Input<number>;
+    targetGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    tls?: pulumi.Input<inputs.GetAlbBackendGroupGrpcBackendTlsArgs>;
+    weight?: pulumi.Input<number>;
+}
+
+export interface GetAlbBackendGroupGrpcBackendHealthcheck {
+    grpcHealthcheck?: inputs.GetAlbBackendGroupGrpcBackendHealthcheckGrpcHealthcheck;
+    healthcheckPort?: number;
+    healthyThreshold?: number;
+    httpHealthcheck?: inputs.GetAlbBackendGroupGrpcBackendHealthcheckHttpHealthcheck;
+    interval?: string;
+    intervalJitterPercent?: number;
+    streamHealthcheck?: inputs.GetAlbBackendGroupGrpcBackendHealthcheckStreamHealthcheck;
+    timeout?: string;
+    unhealthyThreshold?: number;
+}
+
+export interface GetAlbBackendGroupGrpcBackendHealthcheckArgs {
+    grpcHealthcheck?: pulumi.Input<inputs.GetAlbBackendGroupGrpcBackendHealthcheckGrpcHealthcheckArgs>;
+    healthcheckPort?: pulumi.Input<number>;
+    healthyThreshold?: pulumi.Input<number>;
+    httpHealthcheck?: pulumi.Input<inputs.GetAlbBackendGroupGrpcBackendHealthcheckHttpHealthcheckArgs>;
+    interval?: pulumi.Input<string>;
+    intervalJitterPercent?: pulumi.Input<number>;
+    streamHealthcheck?: pulumi.Input<inputs.GetAlbBackendGroupGrpcBackendHealthcheckStreamHealthcheckArgs>;
+    timeout?: pulumi.Input<string>;
+    unhealthyThreshold?: pulumi.Input<number>;
+}
+
+export interface GetAlbBackendGroupGrpcBackendHealthcheckGrpcHealthcheck {
+    serviceName?: string;
+}
+
+export interface GetAlbBackendGroupGrpcBackendHealthcheckGrpcHealthcheckArgs {
+    serviceName?: pulumi.Input<string>;
+}
+
+export interface GetAlbBackendGroupGrpcBackendHealthcheckHttpHealthcheck {
+    expectedStatuses?: number[];
+    host?: string;
+    http2?: boolean;
+    path?: string;
+}
+
+export interface GetAlbBackendGroupGrpcBackendHealthcheckHttpHealthcheckArgs {
+    expectedStatuses?: pulumi.Input<pulumi.Input<number>[]>;
+    host?: pulumi.Input<string>;
+    http2?: pulumi.Input<boolean>;
+    path?: pulumi.Input<string>;
+}
+
+export interface GetAlbBackendGroupGrpcBackendHealthcheckStreamHealthcheck {
+    receive?: string;
+    send?: string;
+}
+
+export interface GetAlbBackendGroupGrpcBackendHealthcheckStreamHealthcheckArgs {
+    receive?: pulumi.Input<string>;
+    send?: pulumi.Input<string>;
+}
+
+export interface GetAlbBackendGroupGrpcBackendLoadBalancingConfig {
+    localityAwareRoutingPercent?: number;
+    mode?: string;
+    panicThreshold?: number;
+    strictLocality?: boolean;
+}
+
+export interface GetAlbBackendGroupGrpcBackendLoadBalancingConfigArgs {
+    localityAwareRoutingPercent?: pulumi.Input<number>;
+    mode?: pulumi.Input<string>;
+    panicThreshold?: pulumi.Input<number>;
+    strictLocality?: pulumi.Input<boolean>;
+}
+
+export interface GetAlbBackendGroupGrpcBackendTls {
+    sni?: string;
+    validationContext?: inputs.GetAlbBackendGroupGrpcBackendTlsValidationContext;
+}
+
+export interface GetAlbBackendGroupGrpcBackendTlsArgs {
+    sni?: pulumi.Input<string>;
+    validationContext?: pulumi.Input<inputs.GetAlbBackendGroupGrpcBackendTlsValidationContextArgs>;
+}
+
+export interface GetAlbBackendGroupGrpcBackendTlsValidationContext {
+    trustedCaBytes?: string;
+    trustedCaId?: string;
+}
+
+export interface GetAlbBackendGroupGrpcBackendTlsValidationContextArgs {
+    trustedCaBytes?: pulumi.Input<string>;
+    trustedCaId?: pulumi.Input<string>;
+}
+
+export interface GetAlbBackendGroupHttpBackend {
+    healthcheck?: inputs.GetAlbBackendGroupHttpBackendHealthcheck;
+    http2?: boolean;
+    loadBalancingConfig?: inputs.GetAlbBackendGroupHttpBackendLoadBalancingConfig;
+    name?: string;
+    port?: number;
+    storageBucket?: string;
+    targetGroupIds?: string[];
+    tls?: inputs.GetAlbBackendGroupHttpBackendTls;
+    weight?: number;
+}
+
+export interface GetAlbBackendGroupHttpBackendArgs {
+    healthcheck?: pulumi.Input<inputs.GetAlbBackendGroupHttpBackendHealthcheckArgs>;
+    http2?: pulumi.Input<boolean>;
+    loadBalancingConfig?: pulumi.Input<inputs.GetAlbBackendGroupHttpBackendLoadBalancingConfigArgs>;
+    name?: pulumi.Input<string>;
+    port?: pulumi.Input<number>;
+    storageBucket?: pulumi.Input<string>;
+    targetGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    tls?: pulumi.Input<inputs.GetAlbBackendGroupHttpBackendTlsArgs>;
+    weight?: pulumi.Input<number>;
+}
+
+export interface GetAlbBackendGroupHttpBackendHealthcheck {
+    grpcHealthcheck?: inputs.GetAlbBackendGroupHttpBackendHealthcheckGrpcHealthcheck;
+    healthcheckPort?: number;
+    healthyThreshold?: number;
+    httpHealthcheck?: inputs.GetAlbBackendGroupHttpBackendHealthcheckHttpHealthcheck;
+    interval?: string;
+    intervalJitterPercent?: number;
+    streamHealthcheck?: inputs.GetAlbBackendGroupHttpBackendHealthcheckStreamHealthcheck;
+    timeout?: string;
+    unhealthyThreshold?: number;
+}
+
+export interface GetAlbBackendGroupHttpBackendHealthcheckArgs {
+    grpcHealthcheck?: pulumi.Input<inputs.GetAlbBackendGroupHttpBackendHealthcheckGrpcHealthcheckArgs>;
+    healthcheckPort?: pulumi.Input<number>;
+    healthyThreshold?: pulumi.Input<number>;
+    httpHealthcheck?: pulumi.Input<inputs.GetAlbBackendGroupHttpBackendHealthcheckHttpHealthcheckArgs>;
+    interval?: pulumi.Input<string>;
+    intervalJitterPercent?: pulumi.Input<number>;
+    streamHealthcheck?: pulumi.Input<inputs.GetAlbBackendGroupHttpBackendHealthcheckStreamHealthcheckArgs>;
+    timeout?: pulumi.Input<string>;
+    unhealthyThreshold?: pulumi.Input<number>;
+}
+
+export interface GetAlbBackendGroupHttpBackendHealthcheckGrpcHealthcheck {
+    serviceName?: string;
+}
+
+export interface GetAlbBackendGroupHttpBackendHealthcheckGrpcHealthcheckArgs {
+    serviceName?: pulumi.Input<string>;
+}
+
+export interface GetAlbBackendGroupHttpBackendHealthcheckHttpHealthcheck {
+    expectedStatuses?: number[];
+    host?: string;
+    http2?: boolean;
+    path?: string;
+}
+
+export interface GetAlbBackendGroupHttpBackendHealthcheckHttpHealthcheckArgs {
+    expectedStatuses?: pulumi.Input<pulumi.Input<number>[]>;
+    host?: pulumi.Input<string>;
+    http2?: pulumi.Input<boolean>;
+    path?: pulumi.Input<string>;
+}
+
+export interface GetAlbBackendGroupHttpBackendHealthcheckStreamHealthcheck {
+    receive?: string;
+    send?: string;
+}
+
+export interface GetAlbBackendGroupHttpBackendHealthcheckStreamHealthcheckArgs {
+    receive?: pulumi.Input<string>;
+    send?: pulumi.Input<string>;
+}
+
+export interface GetAlbBackendGroupHttpBackendLoadBalancingConfig {
+    localityAwareRoutingPercent?: number;
+    mode?: string;
+    panicThreshold?: number;
+    strictLocality?: boolean;
+}
+
+export interface GetAlbBackendGroupHttpBackendLoadBalancingConfigArgs {
+    localityAwareRoutingPercent?: pulumi.Input<number>;
+    mode?: pulumi.Input<string>;
+    panicThreshold?: pulumi.Input<number>;
+    strictLocality?: pulumi.Input<boolean>;
+}
+
+export interface GetAlbBackendGroupHttpBackendTls {
+    sni?: string;
+    validationContext?: inputs.GetAlbBackendGroupHttpBackendTlsValidationContext;
+}
+
+export interface GetAlbBackendGroupHttpBackendTlsArgs {
+    sni?: pulumi.Input<string>;
+    validationContext?: pulumi.Input<inputs.GetAlbBackendGroupHttpBackendTlsValidationContextArgs>;
+}
+
+export interface GetAlbBackendGroupHttpBackendTlsValidationContext {
+    trustedCaBytes?: string;
+    trustedCaId?: string;
+}
+
+export interface GetAlbBackendGroupHttpBackendTlsValidationContextArgs {
+    trustedCaBytes?: pulumi.Input<string>;
+    trustedCaId?: pulumi.Input<string>;
+}
+
+export interface GetAlbBackendGroupSessionAffinity {
+    /**
+     * IP address affinity
+     */
+    connection?: inputs.GetAlbBackendGroupSessionAffinityConnection;
+    /**
+     * Cookie affinity
+     */
+    cookie?: inputs.GetAlbBackendGroupSessionAffinityCookie;
+    /**
+     * Request header affinity
+     */
+    header?: inputs.GetAlbBackendGroupSessionAffinityHeader;
+}
+
+export interface GetAlbBackendGroupSessionAffinityArgs {
+    /**
+     * IP address affinity
+     */
+    connection?: pulumi.Input<inputs.GetAlbBackendGroupSessionAffinityConnectionArgs>;
+    /**
+     * Cookie affinity
+     */
+    cookie?: pulumi.Input<inputs.GetAlbBackendGroupSessionAffinityCookieArgs>;
+    /**
+     * Request header affinity
+     */
+    header?: pulumi.Input<inputs.GetAlbBackendGroupSessionAffinityHeaderArgs>;
+}
+
+export interface GetAlbBackendGroupSessionAffinityConnection {
+    /**
+     * Use source IP address
+     */
+    sourceIp?: boolean;
+}
+
+export interface GetAlbBackendGroupSessionAffinityConnectionArgs {
+    /**
+     * Use source IP address
+     */
+    sourceIp?: pulumi.Input<boolean>;
+}
+
+export interface GetAlbBackendGroupSessionAffinityCookie {
+    /**
+     * Name of the HTTP cookie
+     */
+    name?: string;
+    /**
+     * TTL for the cookie (if not set, session cookie will be used)
+     */
+    ttl?: string;
+}
+
+export interface GetAlbBackendGroupSessionAffinityCookieArgs {
+    /**
+     * Name of the HTTP cookie
+     */
+    name?: pulumi.Input<string>;
+    /**
+     * TTL for the cookie (if not set, session cookie will be used)
+     */
+    ttl?: pulumi.Input<string>;
+}
+
+export interface GetAlbBackendGroupSessionAffinityHeader {
+    /**
+     * The name of the request header that will be used
+     */
+    headerName?: string;
+}
+
+export interface GetAlbBackendGroupSessionAffinityHeaderArgs {
+    /**
+     * The name of the request header that will be used
+     */
+    headerName?: pulumi.Input<string>;
+}
+
+export interface GetAlbBackendGroupStreamBackend {
+    enableProxyProtocol?: boolean;
+    healthcheck?: inputs.GetAlbBackendGroupStreamBackendHealthcheck;
+    keepConnectionsOnHostHealthFailure?: boolean;
+    loadBalancingConfig?: inputs.GetAlbBackendGroupStreamBackendLoadBalancingConfig;
+    name?: string;
+    port?: number;
+    targetGroupIds?: string[];
+    tls?: inputs.GetAlbBackendGroupStreamBackendTls;
+    weight?: number;
+}
+
+export interface GetAlbBackendGroupStreamBackendArgs {
+    enableProxyProtocol?: pulumi.Input<boolean>;
+    healthcheck?: pulumi.Input<inputs.GetAlbBackendGroupStreamBackendHealthcheckArgs>;
+    keepConnectionsOnHostHealthFailure?: pulumi.Input<boolean>;
+    loadBalancingConfig?: pulumi.Input<inputs.GetAlbBackendGroupStreamBackendLoadBalancingConfigArgs>;
+    name?: pulumi.Input<string>;
+    port?: pulumi.Input<number>;
+    targetGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    tls?: pulumi.Input<inputs.GetAlbBackendGroupStreamBackendTlsArgs>;
+    weight?: pulumi.Input<number>;
+}
+
+export interface GetAlbBackendGroupStreamBackendHealthcheck {
+    grpcHealthcheck?: inputs.GetAlbBackendGroupStreamBackendHealthcheckGrpcHealthcheck;
+    healthcheckPort?: number;
+    healthyThreshold?: number;
+    httpHealthcheck?: inputs.GetAlbBackendGroupStreamBackendHealthcheckHttpHealthcheck;
+    interval?: string;
+    intervalJitterPercent?: number;
+    streamHealthcheck?: inputs.GetAlbBackendGroupStreamBackendHealthcheckStreamHealthcheck;
+    timeout?: string;
+    unhealthyThreshold?: number;
+}
+
+export interface GetAlbBackendGroupStreamBackendHealthcheckArgs {
+    grpcHealthcheck?: pulumi.Input<inputs.GetAlbBackendGroupStreamBackendHealthcheckGrpcHealthcheckArgs>;
+    healthcheckPort?: pulumi.Input<number>;
+    healthyThreshold?: pulumi.Input<number>;
+    httpHealthcheck?: pulumi.Input<inputs.GetAlbBackendGroupStreamBackendHealthcheckHttpHealthcheckArgs>;
+    interval?: pulumi.Input<string>;
+    intervalJitterPercent?: pulumi.Input<number>;
+    streamHealthcheck?: pulumi.Input<inputs.GetAlbBackendGroupStreamBackendHealthcheckStreamHealthcheckArgs>;
+    timeout?: pulumi.Input<string>;
+    unhealthyThreshold?: pulumi.Input<number>;
+}
+
+export interface GetAlbBackendGroupStreamBackendHealthcheckGrpcHealthcheck {
+    serviceName?: string;
+}
+
+export interface GetAlbBackendGroupStreamBackendHealthcheckGrpcHealthcheckArgs {
+    serviceName?: pulumi.Input<string>;
+}
+
+export interface GetAlbBackendGroupStreamBackendHealthcheckHttpHealthcheck {
+    expectedStatuses?: number[];
+    host?: string;
+    http2?: boolean;
+    path?: string;
+}
+
+export interface GetAlbBackendGroupStreamBackendHealthcheckHttpHealthcheckArgs {
+    expectedStatuses?: pulumi.Input<pulumi.Input<number>[]>;
+    host?: pulumi.Input<string>;
+    http2?: pulumi.Input<boolean>;
+    path?: pulumi.Input<string>;
+}
+
+export interface GetAlbBackendGroupStreamBackendHealthcheckStreamHealthcheck {
+    receive?: string;
+    send?: string;
+}
+
+export interface GetAlbBackendGroupStreamBackendHealthcheckStreamHealthcheckArgs {
+    receive?: pulumi.Input<string>;
+    send?: pulumi.Input<string>;
+}
+
+export interface GetAlbBackendGroupStreamBackendLoadBalancingConfig {
+    localityAwareRoutingPercent?: number;
+    mode?: string;
+    panicThreshold?: number;
+    strictLocality?: boolean;
+}
+
+export interface GetAlbBackendGroupStreamBackendLoadBalancingConfigArgs {
+    localityAwareRoutingPercent?: pulumi.Input<number>;
+    mode?: pulumi.Input<string>;
+    panicThreshold?: pulumi.Input<number>;
+    strictLocality?: pulumi.Input<boolean>;
+}
+
+export interface GetAlbBackendGroupStreamBackendTls {
+    sni?: string;
+    validationContext?: inputs.GetAlbBackendGroupStreamBackendTlsValidationContext;
+}
+
+export interface GetAlbBackendGroupStreamBackendTlsArgs {
+    sni?: pulumi.Input<string>;
+    validationContext?: pulumi.Input<inputs.GetAlbBackendGroupStreamBackendTlsValidationContextArgs>;
+}
+
+export interface GetAlbBackendGroupStreamBackendTlsValidationContext {
+    trustedCaBytes?: string;
+    trustedCaId?: string;
+}
+
+export interface GetAlbBackendGroupStreamBackendTlsValidationContextArgs {
+    trustedCaBytes?: pulumi.Input<string>;
+    trustedCaId?: pulumi.Input<string>;
+}
+
+export interface GetApiGatewayCanary {
+    variables?: {[key: string]: string};
+    weight?: number;
+}
+
+export interface GetApiGatewayCanaryArgs {
+    variables?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    weight?: pulumi.Input<number>;
+}
+
+export interface GetApiGatewayConnectivity {
+    networkId: string;
+}
+
+export interface GetApiGatewayConnectivityArgs {
+    networkId: pulumi.Input<string>;
+}
+
+export interface GetApiGatewayCustomDomain {
+    certificateId: string;
+    domainId?: string;
+    fqdn: string;
+}
+
+export interface GetApiGatewayCustomDomainArgs {
+    certificateId: pulumi.Input<string>;
+    domainId?: pulumi.Input<string>;
+    fqdn: pulumi.Input<string>;
+}
+
+export interface GetCdnResourceOptions {
+    /**
+     * HTTP methods for your CDN content. By default the following methods are allowed: GET, HEAD, POST, PUT, PATCH, DELETE, OPTIONS. In case some methods are not allowed to the user, they will get the 405 (Method Not Allowed) response. If the method is not supported, the user gets the 501 (Not Implemented) response.
+     */
+    allowedHttpMethods?: string[];
+    /**
+     * Set up a cache period for the end-users browser. Content will be cached due to origin settings. If there are no cache settings on your origin, the content will not be cached. The list of HTTP response codes that can be cached in browsers: 200, 201, 204, 206, 301, 302, 303, 304, 307, 308. Other response codes will not be cached. The default value is 4 days.
+     */
+    browserCacheSettings?: number;
+    /**
+     * List HTTP headers that must be included in responses to clients.
+     */
+    cacheHttpHeaders?: string[];
+    /**
+     * Parameter that lets browsers get access to selected resources from a domain different to a domain from which the request is received.
+     */
+    cors?: string[];
+    /**
+     * Custom value for the Host header. Your server must be able to process requests with the chosen header.
+     */
+    customHostHeader?: string;
+    /**
+     * Wildcard additional CNAME. If a resource has a wildcard additional CNAME, you can use your own certificate for content delivery via HTTPS.
+     */
+    customServerName?: string;
+    /**
+     * Setup a cache status.
+     */
+    disableCache?: boolean;
+    /**
+     * Disabling proxy force ranges.
+     */
+    disableProxyForceRanges?: boolean;
+    /**
+     * Content will be cached according to origin cache settings. The value applies for a response with codes 200, 201, 204, 206, 301, 302, 303, 304, 307, 308 if an origin server does not have caching HTTP headers. Responses with other codes will not be cached.
+     */
+    edgeCacheSettings?: number;
+    /**
+     * Enable access limiting by IP addresses, option available only with setting secure_key.
+     */
+    enableIpUrlSigning?: boolean;
+    /**
+     * Option helps you to reduce the bandwidth between origin and CDN servers. Also, content delivery speed becomes higher because of reducing the time for compressing files in a CDN.
+     */
+    fetchedCompressed?: boolean;
+    /**
+     * Choose the Forward Host header option if is important to send in the request to the Origin the same Host header as was sent in the request to CDN server.
+     */
+    forwardHostHeader?: boolean;
+    /**
+     * GZip compression at CDN servers reduces file size by 70% and can be as high as 90%.
+     */
+    gzipOn?: boolean;
+    /**
+     * Set for ignoring cookie.
+     */
+    ignoreCookie?: boolean;
+    /**
+     * Files with different query parameters are cached as objects with the same key regardless of the parameter value. selected by default.
+     */
+    ignoreQueryParams?: boolean;
+    ipAddressAcl?: inputs.GetCdnResourceOptionsIpAddressAcl;
+    /**
+     * Allows caching for GET, HEAD and POST requests.
+     */
+    proxyCacheMethodsSet?: boolean;
+    /**
+     * Files with the specified query parameters are cached as objects with the same key, files with other parameters are cached as objects with different keys.
+     */
+    queryParamsBlacklists?: string[];
+    /**
+     * Files with the specified query parameters are cached as objects with different keys, files with other parameters are cached as objects with the same key.
+     */
+    queryParamsWhitelists?: string[];
+    /**
+     * Set up a redirect from HTTP to HTTPS.
+     */
+    redirectHttpToHttps?: boolean;
+    /**
+     * Set up a redirect from HTTPS to HTTP.
+     */
+    redirectHttpsToHttp?: boolean;
+    /**
+     * Set secure key for url encoding to protect contect and limit access by IP addresses and time limits.
+     */
+    secureKey?: string;
+    /**
+     * Files larger than 10 MB will be requested and cached in parts (no larger than 10 MB each part). It reduces time to first byte. The origin must support HTTP Range requests.
+     */
+    slice?: boolean;
+    /**
+     * Set up custom headers that CDN servers will send in requests to origins.
+     */
+    staticRequestHeaders?: {[key: string]: string};
+    staticResponseHeaders?: {[key: string]: string};
+}
+
+export interface GetCdnResourceOptionsArgs {
+    /**
+     * HTTP methods for your CDN content. By default the following methods are allowed: GET, HEAD, POST, PUT, PATCH, DELETE, OPTIONS. In case some methods are not allowed to the user, they will get the 405 (Method Not Allowed) response. If the method is not supported, the user gets the 501 (Not Implemented) response.
+     */
+    allowedHttpMethods?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Set up a cache period for the end-users browser. Content will be cached due to origin settings. If there are no cache settings on your origin, the content will not be cached. The list of HTTP response codes that can be cached in browsers: 200, 201, 204, 206, 301, 302, 303, 304, 307, 308. Other response codes will not be cached. The default value is 4 days.
+     */
+    browserCacheSettings?: pulumi.Input<number>;
+    /**
+     * List HTTP headers that must be included in responses to clients.
+     */
+    cacheHttpHeaders?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Parameter that lets browsers get access to selected resources from a domain different to a domain from which the request is received.
+     */
+    cors?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Custom value for the Host header. Your server must be able to process requests with the chosen header.
+     */
+    customHostHeader?: pulumi.Input<string>;
+    /**
+     * Wildcard additional CNAME. If a resource has a wildcard additional CNAME, you can use your own certificate for content delivery via HTTPS.
+     */
+    customServerName?: pulumi.Input<string>;
+    /**
+     * Setup a cache status.
+     */
+    disableCache?: pulumi.Input<boolean>;
+    /**
+     * Disabling proxy force ranges.
+     */
+    disableProxyForceRanges?: pulumi.Input<boolean>;
+    /**
+     * Content will be cached according to origin cache settings. The value applies for a response with codes 200, 201, 204, 206, 301, 302, 303, 304, 307, 308 if an origin server does not have caching HTTP headers. Responses with other codes will not be cached.
+     */
+    edgeCacheSettings?: pulumi.Input<number>;
+    /**
+     * Enable access limiting by IP addresses, option available only with setting secure_key.
+     */
+    enableIpUrlSigning?: pulumi.Input<boolean>;
+    /**
+     * Option helps you to reduce the bandwidth between origin and CDN servers. Also, content delivery speed becomes higher because of reducing the time for compressing files in a CDN.
+     */
+    fetchedCompressed?: pulumi.Input<boolean>;
+    /**
+     * Choose the Forward Host header option if is important to send in the request to the Origin the same Host header as was sent in the request to CDN server.
+     */
+    forwardHostHeader?: pulumi.Input<boolean>;
+    /**
+     * GZip compression at CDN servers reduces file size by 70% and can be as high as 90%.
+     */
+    gzipOn?: pulumi.Input<boolean>;
+    /**
+     * Set for ignoring cookie.
+     */
+    ignoreCookie?: pulumi.Input<boolean>;
+    /**
+     * Files with different query parameters are cached as objects with the same key regardless of the parameter value. selected by default.
+     */
+    ignoreQueryParams?: pulumi.Input<boolean>;
+    ipAddressAcl?: pulumi.Input<inputs.GetCdnResourceOptionsIpAddressAclArgs>;
+    /**
+     * Allows caching for GET, HEAD and POST requests.
+     */
+    proxyCacheMethodsSet?: pulumi.Input<boolean>;
+    /**
+     * Files with the specified query parameters are cached as objects with the same key, files with other parameters are cached as objects with different keys.
+     */
+    queryParamsBlacklists?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Files with the specified query parameters are cached as objects with different keys, files with other parameters are cached as objects with the same key.
+     */
+    queryParamsWhitelists?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Set up a redirect from HTTP to HTTPS.
+     */
+    redirectHttpToHttps?: pulumi.Input<boolean>;
+    /**
+     * Set up a redirect from HTTPS to HTTP.
+     */
+    redirectHttpsToHttp?: pulumi.Input<boolean>;
+    /**
+     * Set secure key for url encoding to protect contect and limit access by IP addresses and time limits.
+     */
+    secureKey?: pulumi.Input<string>;
+    /**
+     * Files larger than 10 MB will be requested and cached in parts (no larger than 10 MB each part). It reduces time to first byte. The origin must support HTTP Range requests.
+     */
+    slice?: pulumi.Input<boolean>;
+    /**
+     * Set up custom headers that CDN servers will send in requests to origins.
+     */
+    staticRequestHeaders?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    staticResponseHeaders?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+}
+
+export interface GetCdnResourceOptionsIpAddressAcl {
+    /**
+     * The list of specified IP addresses to be allowed or denied depending on acl policy type.
+     */
+    exceptedValues?: string[];
+    /**
+     * The policy type for ACL. One of `allow` or `deny` values.
+     */
+    policyType?: string;
+}
+
+export interface GetCdnResourceOptionsIpAddressAclArgs {
+    /**
+     * The list of specified IP addresses to be allowed or denied depending on acl policy type.
+     */
+    exceptedValues?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The policy type for ACL. One of `allow` or `deny` values.
+     */
+    policyType?: pulumi.Input<string>;
+}
+
+export interface GetCdnResourceSslCertificate {
+    certificateManagerId?: string;
+    status?: string;
+    type: string;
+}
+
+export interface GetCdnResourceSslCertificateArgs {
+    certificateManagerId?: pulumi.Input<string>;
+    status?: pulumi.Input<string>;
+    type: pulumi.Input<string>;
+}
+
+export interface GetComputeDiskDiskPlacementPolicy {
+    diskPlacementGroupId: string;
+}
+
+export interface GetComputeDiskDiskPlacementPolicyArgs {
+    diskPlacementGroupId: pulumi.Input<string>;
+}
+
+export interface GetComputeInstanceFilesystem {
+    deviceName?: string;
+    filesystemId?: string;
+    mode?: string;
+}
+
+export interface GetComputeInstanceFilesystemArgs {
+    deviceName?: pulumi.Input<string>;
+    filesystemId?: pulumi.Input<string>;
+    mode?: pulumi.Input<string>;
+}
+
+export interface GetComputeInstanceLocalDisk {
+    deviceName?: string;
+    sizeBytes: number;
+}
+
+export interface GetComputeInstanceLocalDiskArgs {
+    deviceName?: pulumi.Input<string>;
+    sizeBytes: pulumi.Input<number>;
+}
+
+export interface GetComputeInstanceMetadataOptions {
+    awsV1HttpEndpoint?: number;
+    awsV1HttpToken?: number;
+    gceHttpEndpoint?: number;
+    gceHttpToken?: number;
+}
+
+export interface GetComputeInstanceMetadataOptionsArgs {
+    awsV1HttpEndpoint?: pulumi.Input<number>;
+    awsV1HttpToken?: pulumi.Input<number>;
+    gceHttpEndpoint?: pulumi.Input<number>;
+    gceHttpToken?: pulumi.Input<number>;
+}
+
+export interface GetComputeInstancePlacementPolicy {
+    hostAffinityRules?: inputs.GetComputeInstancePlacementPolicyHostAffinityRule[];
+    placementGroupId?: string;
+    placementGroupPartition?: number;
+}
+
+export interface GetComputeInstancePlacementPolicyArgs {
+    hostAffinityRules?: pulumi.Input<pulumi.Input<inputs.GetComputeInstancePlacementPolicyHostAffinityRuleArgs>[]>;
+    placementGroupId?: pulumi.Input<string>;
+    placementGroupPartition?: pulumi.Input<number>;
+}
+
+export interface GetComputeInstancePlacementPolicyHostAffinityRule {
+    key: string;
+    op: string;
+    values: string[];
+}
+
+export interface GetComputeInstancePlacementPolicyHostAffinityRuleArgs {
+    key: pulumi.Input<string>;
+    op: pulumi.Input<string>;
+    values: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface GetComputeSnapshotScheduleSchedulePolicy {
+    expression?: string;
+    startAt?: string;
+}
+
+export interface GetComputeSnapshotScheduleSchedulePolicyArgs {
+    expression?: pulumi.Input<string>;
+    startAt?: pulumi.Input<string>;
+}
+
+export interface GetComputeSnapshotScheduleSnapshotSpec {
+    description?: string;
+    labels?: {[key: string]: string};
+}
+
+export interface GetComputeSnapshotScheduleSnapshotSpecArgs {
+    description?: pulumi.Input<string>;
+    labels?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+}
+
+export interface GetFunctionConnectivity {
+    networkId: string;
+}
+
+export interface GetFunctionConnectivityArgs {
+    networkId: pulumi.Input<string>;
+}
+
+export interface GetFunctionMetadataOptions {
+    awsV1HttpEndpoint?: number;
+    gceHttpEndpoint?: number;
+}
+
+export interface GetFunctionMetadataOptionsArgs {
+    awsV1HttpEndpoint?: pulumi.Input<number>;
+    gceHttpEndpoint?: pulumi.Input<number>;
+}
+
+export interface GetFunctionMount {
+    ephemeralDisk?: inputs.GetFunctionMountEphemeralDisk;
+    mode?: string;
+    name: string;
+    objectStorage?: inputs.GetFunctionMountObjectStorage;
+}
+
+export interface GetFunctionMountArgs {
+    ephemeralDisk?: pulumi.Input<inputs.GetFunctionMountEphemeralDiskArgs>;
+    mode?: pulumi.Input<string>;
+    name: pulumi.Input<string>;
+    objectStorage?: pulumi.Input<inputs.GetFunctionMountObjectStorageArgs>;
+}
+
+export interface GetFunctionMountEphemeralDisk {
+    blockSizeKb?: number;
+    sizeGb: number;
+}
+
+export interface GetFunctionMountEphemeralDiskArgs {
+    blockSizeKb?: pulumi.Input<number>;
+    sizeGb: pulumi.Input<number>;
+}
+
+export interface GetFunctionMountObjectStorage {
+    bucket: string;
+    prefix?: string;
+}
+
+export interface GetFunctionMountObjectStorageArgs {
+    bucket: pulumi.Input<string>;
+    prefix?: pulumi.Input<string>;
+}
+
+export interface GetFunctionScalingPolicyPolicy {
+    tag?: string;
+    zoneInstancesLimit?: number;
+    zoneRequestsLimit?: number;
+}
+
+export interface GetFunctionScalingPolicyPolicyArgs {
+    tag?: pulumi.Input<string>;
+    zoneInstancesLimit?: pulumi.Input<number>;
+    zoneRequestsLimit?: pulumi.Input<number>;
+}
+
+export interface GetFunctionSecret {
+    environmentVariable: string;
+    id: string;
+    key: string;
+    versionId: string;
+}
+
+export interface GetFunctionSecretArgs {
+    environmentVariable: pulumi.Input<string>;
+    id: pulumi.Input<string>;
+    key: pulumi.Input<string>;
+    versionId: pulumi.Input<string>;
+}
+
+export interface GetFunctionStorageMount {
+    bucket: string;
+    mountPointName: string;
+    prefix?: string;
+    readOnly?: boolean;
+}
+
+export interface GetFunctionStorageMountArgs {
+    bucket: pulumi.Input<string>;
+    mountPointName: pulumi.Input<string>;
+    prefix?: pulumi.Input<string>;
+    readOnly?: pulumi.Input<boolean>;
+}
+
+export interface GetIamPolicyBinding {
+    /**
+     * An array of identities that will be granted the privilege in the `role`. Each entry can have one of the following values:
+     * * **userAccount:{user_id}**: A unique user ID that represents a specific Yandex account.
+     * * **serviceAccount:{service_account_id}**: A unique service account ID.
+     * * **federatedUser:{federated_user_id}:**: A unique saml federation user account ID.
+     * * **group:{group_id}**: A unique group ID.
+     * * **system:group:federation:{federation_id}:users**: All users in federation.
+     * * **system:group:organization:{organization_id}:users**: All users in organization.
+     * * **system:allAuthenticatedUsers**: All authenticated users.
+     * * **system:allUsers**: All users, including unauthenticated ones.
+     *
+     * > For more information about system groups, see the [documentation](https://yandex.cloud/docs/iam/concepts/access-control/system-group).
+     */
+    members: string[];
+    /**
+     * The role/permission that will be granted to the members. See the [IAM Roles](https://yandex.cloud/docs/iam/concepts/access-control/roles) documentation for a complete list of roles.
+     */
+    role: string;
+}
+
+export interface GetIamPolicyBindingArgs {
+    /**
+     * An array of identities that will be granted the privilege in the `role`. Each entry can have one of the following values:
+     * * **userAccount:{user_id}**: A unique user ID that represents a specific Yandex account.
+     * * **serviceAccount:{service_account_id}**: A unique service account ID.
+     * * **federatedUser:{federated_user_id}:**: A unique saml federation user account ID.
+     * * **group:{group_id}**: A unique group ID.
+     * * **system:group:federation:{federation_id}:users**: All users in federation.
+     * * **system:group:organization:{organization_id}:users**: All users in organization.
+     * * **system:allAuthenticatedUsers**: All authenticated users.
+     * * **system:allUsers**: All users, including unauthenticated ones.
+     *
+     * > For more information about system groups, see the [documentation](https://yandex.cloud/docs/iam/concepts/access-control/system-group).
+     */
+    members: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The role/permission that will be granted to the members. See the [IAM Roles](https://yandex.cloud/docs/iam/concepts/access-control/roles) documentation for a complete list of roles.
+     */
+    role: pulumi.Input<string>;
+}
+
+export interface GetLoadtestingAgentLogSettings {
+    logGroupId?: string;
+}
+
+export interface GetLoadtestingAgentLogSettingsArgs {
+    logGroupId?: pulumi.Input<string>;
+}
+
+export interface GetMdbClickhouseClusterAccess {
+    /**
+     * Allow access for DataLens.
+     */
+    dataLens?: boolean;
+    /**
+     * Allow access for DataTransfer.
+     */
+    dataTransfer?: boolean;
+    /**
+     * Allow access for Yandex.Metrika.
+     */
+    metrika?: boolean;
+    /**
+     * Allow access for Serverless.
+     */
+    serverless?: boolean;
+    /**
+     * Allow access for Web SQL.
+     */
+    webSql?: boolean;
+    /**
+     * Allow access for YandexQuery.
+     */
+    yandexQuery?: boolean;
+}
+
+export interface GetMdbClickhouseClusterAccessArgs {
+    /**
+     * Allow access for DataLens.
+     */
+    dataLens?: pulumi.Input<boolean>;
+    /**
+     * Allow access for DataTransfer.
+     */
+    dataTransfer?: pulumi.Input<boolean>;
+    /**
+     * Allow access for Yandex.Metrika.
+     */
+    metrika?: pulumi.Input<boolean>;
+    /**
+     * Allow access for Serverless.
+     */
+    serverless?: pulumi.Input<boolean>;
+    /**
+     * Allow access for Web SQL.
+     */
+    webSql?: pulumi.Input<boolean>;
+    /**
+     * Allow access for YandexQuery.
+     */
+    yandexQuery?: pulumi.Input<boolean>;
+}
+
+export interface GetMdbClickhouseClusterBackupWindowStart {
+    /**
+     * The hour at which backup will be started.
+     */
+    hours?: number;
+    /**
+     * The minute at which backup will be started.
+     */
+    minutes?: number;
+}
+
+export interface GetMdbClickhouseClusterBackupWindowStartArgs {
+    /**
+     * The hour at which backup will be started.
+     */
+    hours?: pulumi.Input<number>;
+    /**
+     * The minute at which backup will be started.
+     */
+    minutes?: pulumi.Input<number>;
+}
+
+export interface GetMdbClickhouseClusterClickhouse {
+    /**
+     * ClickHouse server parameters. For more information, see [the official documentation](https://yandex.cloud/docs/managed-clickhouse/concepts/settings-list).
+     */
+    config?: inputs.GetMdbClickhouseClusterClickhouseConfig;
+    /**
+     * Resources allocated to hosts of the ClickHouse subcluster.
+     */
+    resources?: inputs.GetMdbClickhouseClusterClickhouseResources;
+}
+
+export interface GetMdbClickhouseClusterClickhouseArgs {
+    /**
+     * ClickHouse server parameters. For more information, see [the official documentation](https://yandex.cloud/docs/managed-clickhouse/concepts/settings-list).
+     */
+    config?: pulumi.Input<inputs.GetMdbClickhouseClusterClickhouseConfigArgs>;
+    /**
+     * Resources allocated to hosts of the ClickHouse subcluster.
+     */
+    resources?: pulumi.Input<inputs.GetMdbClickhouseClusterClickhouseResourcesArgs>;
+}
+
+export interface GetMdbClickhouseClusterClickhouseConfig {
+    /**
+     * Enable or disable asynchronousInsertLog system table.
+     */
+    asynchronousInsertLogEnabled?: boolean;
+    /**
+     * The maximum size that asynchronousInsertLog can grow to before old data will be removed.
+     */
+    asynchronousInsertLogRetentionSize?: number;
+    /**
+     * The maximum time that asynchronousInsertLog records will be retained before removal.
+     */
+    asynchronousInsertLogRetentionTime?: number;
+    /**
+     * Enable or disable asynchronousMetricLog system table.
+     */
+    asynchronousMetricLogEnabled?: boolean;
+    /**
+     * The maximum size that asynchronousMetricLog can grow to before old data will be removed.
+     */
+    asynchronousMetricLogRetentionSize?: number;
+    /**
+     * The maximum time that asynchronousMetricLog records will be retained before removal.
+     */
+    asynchronousMetricLogRetentionTime?: number;
+    /**
+     * The maximum number of threads that will be used for performing flush operations for Buffer-engine tables in the background.
+     */
+    backgroundBufferFlushSchedulePoolSize?: number;
+    /**
+     * The maximum number of threads that will be used for performing a variety of operations (mostly garbage collection) for MergeTree-engine tables in a background.
+     */
+    backgroundCommonPoolSize?: number;
+    /**
+     * The maximum number of threads that will be used for executing distributed sends.
+     */
+    backgroundDistributedSchedulePoolSize?: number;
+    /**
+     * The maximum number of threads that will be used for fetching data parts from another replica for MergeTree-engine tables in a background.
+     */
+    backgroundFetchesPoolSize?: number;
+    /**
+     * Sets a ratio between the number of threads and the number of background merges and mutations that can be executed concurrently.
+     */
+    backgroundMergesMutationsConcurrencyRatio?: number;
+    /**
+     * The maximum number of threads that will be used for executing background operations for message streaming.
+     */
+    backgroundMessageBrokerSchedulePoolSize?: number;
+    /**
+     * The maximum number of threads that will be used for moving data parts to another disk or volume for MergeTree-engine tables in a background.
+     */
+    backgroundMovePoolSize?: number;
+    /**
+     * Sets the number of threads performing background merges and mutations for MergeTree-engine tables.
+     */
+    backgroundPoolSize?: number;
+    /**
+     * The maximum number of threads that will be used for constantly executing some lightweight periodic operations for replicated tables, Kafka streaming, and DNS cache updates.
+     */
+    backgroundSchedulePoolSize?: number;
+    /**
+     * Data compression configuration.
+     */
+    compressions?: inputs.GetMdbClickhouseClusterClickhouseConfigCompression[];
+    /**
+     * Default database name.
+     */
+    defaultDatabase?: string;
+    /**
+     * Lazy loading of dictionaries. If true, then each dictionary is loaded on the first use.
+     */
+    dictionariesLazyLoad?: boolean;
+    /**
+     * Enable or disable geobase.
+     */
+    geobaseEnabled?: boolean;
+    /**
+     * Address of the archive with the user geobase in Object Storage.
+     */
+    geobaseUri?: string;
+    /**
+     * Graphite rollup configuration.
+     */
+    graphiteRollups?: inputs.GetMdbClickhouseClusterClickhouseConfigGraphiteRollup[];
+    /**
+     * JDBC bridge configuration.
+     */
+    jdbcBridge?: inputs.GetMdbClickhouseClusterClickhouseConfigJdbcBridge;
+    /**
+     * Kafka connection configuration.
+     */
+    kafka?: inputs.GetMdbClickhouseClusterClickhouseConfigKafka;
+    /**
+     * Kafka topic connection configuration.
+     */
+    kafkaTopics?: inputs.GetMdbClickhouseClusterClickhouseConfigKafkaTopic[];
+    /**
+     * The number of seconds that ClickHouse waits for incoming requests for HTTP protocol before closing the connection.
+     */
+    keepAliveTimeout?: number;
+    /**
+     * Logging level.
+     */
+    logLevel?: string;
+    /**
+     * Maximum size of cache for marks
+     */
+    markCacheSize?: number;
+    /**
+     * Limit on total number of concurrently executed queries.
+     */
+    maxConcurrentQueries?: number;
+    /**
+     * Max server connections.
+     */
+    maxConnections?: number;
+    /**
+     * Restriction on dropping partitions.
+     */
+    maxPartitionSizeToDrop?: number;
+    /**
+     * Restriction on deleting tables.
+     */
+    maxTableSizeToDrop?: number;
+    /**
+     * MergeTree engine configuration.
+     */
+    mergeTree?: inputs.GetMdbClickhouseClusterClickhouseConfigMergeTree;
+    /**
+     * Enable or disable metricLog system table.
+     */
+    metricLogEnabled?: boolean;
+    /**
+     * The maximum size that metricLog can grow to before old data will be removed.
+     */
+    metricLogRetentionSize?: number;
+    /**
+     * The maximum time that metricLog records will be retained before removal.
+     */
+    metricLogRetentionTime?: number;
+    /**
+     * Enable or disable opentelemetrySpanLog system table.
+     */
+    opentelemetrySpanLogEnabled?: boolean;
+    /**
+     * The maximum size that opentelemetrySpanLog can grow to before old data will be removed.
+     */
+    opentelemetrySpanLogRetentionSize?: number;
+    /**
+     * The maximum time that opentelemetrySpanLog records will be retained before removal.
+     */
+    opentelemetrySpanLogRetentionTime?: number;
+    /**
+     * The maximum size that partLog can grow to before old data will be removed.
+     */
+    partLogRetentionSize?: number;
+    /**
+     * The maximum time that partLog records will be retained before removal.
+     */
+    partLogRetentionTime?: number;
+    /**
+     * Query cache configuration.
+     */
+    queryCache?: inputs.GetMdbClickhouseClusterClickhouseConfigQueryCache;
+    /**
+     * The maximum size that queryLog can grow to before old data will be removed.
+     */
+    queryLogRetentionSize?: number;
+    /**
+     * The maximum time that queryLog records will be retained before removal.
+     */
+    queryLogRetentionTime?: number;
+    /**
+     * Query masking rules configuration.
+     */
+    queryMaskingRules?: inputs.GetMdbClickhouseClusterClickhouseConfigQueryMaskingRule[];
+    /**
+     * Enable or disable queryThreadLog system table.
+     */
+    queryThreadLogEnabled?: boolean;
+    /**
+     * The maximum size that queryThreadLog can grow to before old data will be removed.
+     */
+    queryThreadLogRetentionSize?: number;
+    /**
+     * The maximum time that queryThreadLog records will be retained before removal.
+     */
+    queryThreadLogRetentionTime?: number;
+    /**
+     * Enable or disable queryViewsLog system table.
+     */
+    queryViewsLogEnabled?: boolean;
+    /**
+     * The maximum size that queryViewsLog can grow to before old data will be removed.
+     */
+    queryViewsLogRetentionSize?: number;
+    /**
+     * The maximum time that queryViewsLog records will be retained before removal.
+     */
+    queryViewsLogRetentionTime?: number;
+    /**
+     * RabbitMQ connection configuration.
+     */
+    rabbitmq?: inputs.GetMdbClickhouseClusterClickhouseConfigRabbitmq;
+    /**
+     * Enable or disable sessionLog system table.
+     */
+    sessionLogEnabled?: boolean;
+    /**
+     * The maximum size that sessionLog can grow to before old data will be removed.
+     */
+    sessionLogRetentionSize?: number;
+    /**
+     * The maximum time that sessionLog records will be retained before removal.
+     */
+    sessionLogRetentionTime?: number;
+    /**
+     * Enable or disable textLog system table.
+     */
+    textLogEnabled?: boolean;
+    /**
+     * Logging level for textLog system table.
+     */
+    textLogLevel?: string;
+    /**
+     * The maximum size that textLog can grow to before old data will be removed.
+     */
+    textLogRetentionSize?: number;
+    /**
+     * The maximum time that textLog records will be retained before removal.
+     */
+    textLogRetentionTime?: number;
+    /**
+     * The server's time zone.
+     */
+    timezone?: string;
+    /**
+     * Whenever server memory usage becomes larger than every next step in number of bytes the memory profiler will collect the allocating stack trace.
+     */
+    totalMemoryProfilerStep?: number;
+    /**
+     * Enable or disable traceLog system table.
+     */
+    traceLogEnabled?: boolean;
+    /**
+     * The maximum size that traceLog can grow to before old data will be removed.
+     */
+    traceLogRetentionSize?: number;
+    /**
+     * The maximum time that traceLog records will be retained before removal.
+     */
+    traceLogRetentionTime?: number;
+    /**
+     * Cache size (in bytes) for uncompressed data used by table engines from the MergeTree family. Zero means disabled.
+     */
+    uncompressedCacheSize?: number;
+    /**
+     * Enable or disable zookeeperLog system table.
+     */
+    zookeeperLogEnabled?: boolean;
+    /**
+     * The maximum size that zookeeperLog can grow to before old data will be removed.
+     */
+    zookeeperLogRetentionSize?: number;
+    /**
+     * The maximum time that zookeeperLog records will be retained before removal.
+     */
+    zookeeperLogRetentionTime?: number;
+}
+
+export interface GetMdbClickhouseClusterClickhouseConfigArgs {
+    /**
+     * Enable or disable asynchronousInsertLog system table.
+     */
+    asynchronousInsertLogEnabled?: pulumi.Input<boolean>;
+    /**
+     * The maximum size that asynchronousInsertLog can grow to before old data will be removed.
+     */
+    asynchronousInsertLogRetentionSize?: pulumi.Input<number>;
+    /**
+     * The maximum time that asynchronousInsertLog records will be retained before removal.
+     */
+    asynchronousInsertLogRetentionTime?: pulumi.Input<number>;
+    /**
+     * Enable or disable asynchronousMetricLog system table.
+     */
+    asynchronousMetricLogEnabled?: pulumi.Input<boolean>;
+    /**
+     * The maximum size that asynchronousMetricLog can grow to before old data will be removed.
+     */
+    asynchronousMetricLogRetentionSize?: pulumi.Input<number>;
+    /**
+     * The maximum time that asynchronousMetricLog records will be retained before removal.
+     */
+    asynchronousMetricLogRetentionTime?: pulumi.Input<number>;
+    /**
+     * The maximum number of threads that will be used for performing flush operations for Buffer-engine tables in the background.
+     */
+    backgroundBufferFlushSchedulePoolSize?: pulumi.Input<number>;
+    /**
+     * The maximum number of threads that will be used for performing a variety of operations (mostly garbage collection) for MergeTree-engine tables in a background.
+     */
+    backgroundCommonPoolSize?: pulumi.Input<number>;
+    /**
+     * The maximum number of threads that will be used for executing distributed sends.
+     */
+    backgroundDistributedSchedulePoolSize?: pulumi.Input<number>;
+    /**
+     * The maximum number of threads that will be used for fetching data parts from another replica for MergeTree-engine tables in a background.
+     */
+    backgroundFetchesPoolSize?: pulumi.Input<number>;
+    /**
+     * Sets a ratio between the number of threads and the number of background merges and mutations that can be executed concurrently.
+     */
+    backgroundMergesMutationsConcurrencyRatio?: pulumi.Input<number>;
+    /**
+     * The maximum number of threads that will be used for executing background operations for message streaming.
+     */
+    backgroundMessageBrokerSchedulePoolSize?: pulumi.Input<number>;
+    /**
+     * The maximum number of threads that will be used for moving data parts to another disk or volume for MergeTree-engine tables in a background.
+     */
+    backgroundMovePoolSize?: pulumi.Input<number>;
+    /**
+     * Sets the number of threads performing background merges and mutations for MergeTree-engine tables.
+     */
+    backgroundPoolSize?: pulumi.Input<number>;
+    /**
+     * The maximum number of threads that will be used for constantly executing some lightweight periodic operations for replicated tables, Kafka streaming, and DNS cache updates.
+     */
+    backgroundSchedulePoolSize?: pulumi.Input<number>;
+    /**
+     * Data compression configuration.
+     */
+    compressions?: pulumi.Input<pulumi.Input<inputs.GetMdbClickhouseClusterClickhouseConfigCompressionArgs>[]>;
+    /**
+     * Default database name.
+     */
+    defaultDatabase?: pulumi.Input<string>;
+    /**
+     * Lazy loading of dictionaries. If true, then each dictionary is loaded on the first use.
+     */
+    dictionariesLazyLoad?: pulumi.Input<boolean>;
+    /**
+     * Enable or disable geobase.
+     */
+    geobaseEnabled?: pulumi.Input<boolean>;
+    /**
+     * Address of the archive with the user geobase in Object Storage.
+     */
+    geobaseUri?: pulumi.Input<string>;
+    /**
+     * Graphite rollup configuration.
+     */
+    graphiteRollups?: pulumi.Input<pulumi.Input<inputs.GetMdbClickhouseClusterClickhouseConfigGraphiteRollupArgs>[]>;
+    /**
+     * JDBC bridge configuration.
+     */
+    jdbcBridge?: pulumi.Input<inputs.GetMdbClickhouseClusterClickhouseConfigJdbcBridgeArgs>;
+    /**
+     * Kafka connection configuration.
+     */
+    kafka?: pulumi.Input<inputs.GetMdbClickhouseClusterClickhouseConfigKafkaArgs>;
+    /**
+     * Kafka topic connection configuration.
+     */
+    kafkaTopics?: pulumi.Input<pulumi.Input<inputs.GetMdbClickhouseClusterClickhouseConfigKafkaTopicArgs>[]>;
+    /**
+     * The number of seconds that ClickHouse waits for incoming requests for HTTP protocol before closing the connection.
+     */
+    keepAliveTimeout?: pulumi.Input<number>;
+    /**
+     * Logging level.
+     */
+    logLevel?: pulumi.Input<string>;
+    /**
+     * Maximum size of cache for marks
+     */
+    markCacheSize?: pulumi.Input<number>;
+    /**
+     * Limit on total number of concurrently executed queries.
+     */
+    maxConcurrentQueries?: pulumi.Input<number>;
+    /**
+     * Max server connections.
+     */
+    maxConnections?: pulumi.Input<number>;
+    /**
+     * Restriction on dropping partitions.
+     */
+    maxPartitionSizeToDrop?: pulumi.Input<number>;
+    /**
+     * Restriction on deleting tables.
+     */
+    maxTableSizeToDrop?: pulumi.Input<number>;
+    /**
+     * MergeTree engine configuration.
+     */
+    mergeTree?: pulumi.Input<inputs.GetMdbClickhouseClusterClickhouseConfigMergeTreeArgs>;
+    /**
+     * Enable or disable metricLog system table.
+     */
+    metricLogEnabled?: pulumi.Input<boolean>;
+    /**
+     * The maximum size that metricLog can grow to before old data will be removed.
+     */
+    metricLogRetentionSize?: pulumi.Input<number>;
+    /**
+     * The maximum time that metricLog records will be retained before removal.
+     */
+    metricLogRetentionTime?: pulumi.Input<number>;
+    /**
+     * Enable or disable opentelemetrySpanLog system table.
+     */
+    opentelemetrySpanLogEnabled?: pulumi.Input<boolean>;
+    /**
+     * The maximum size that opentelemetrySpanLog can grow to before old data will be removed.
+     */
+    opentelemetrySpanLogRetentionSize?: pulumi.Input<number>;
+    /**
+     * The maximum time that opentelemetrySpanLog records will be retained before removal.
+     */
+    opentelemetrySpanLogRetentionTime?: pulumi.Input<number>;
+    /**
+     * The maximum size that partLog can grow to before old data will be removed.
+     */
+    partLogRetentionSize?: pulumi.Input<number>;
+    /**
+     * The maximum time that partLog records will be retained before removal.
+     */
+    partLogRetentionTime?: pulumi.Input<number>;
+    /**
+     * Query cache configuration.
+     */
+    queryCache?: pulumi.Input<inputs.GetMdbClickhouseClusterClickhouseConfigQueryCacheArgs>;
+    /**
+     * The maximum size that queryLog can grow to before old data will be removed.
+     */
+    queryLogRetentionSize?: pulumi.Input<number>;
+    /**
+     * The maximum time that queryLog records will be retained before removal.
+     */
+    queryLogRetentionTime?: pulumi.Input<number>;
+    /**
+     * Query masking rules configuration.
+     */
+    queryMaskingRules?: pulumi.Input<pulumi.Input<inputs.GetMdbClickhouseClusterClickhouseConfigQueryMaskingRuleArgs>[]>;
+    /**
+     * Enable or disable queryThreadLog system table.
+     */
+    queryThreadLogEnabled?: pulumi.Input<boolean>;
+    /**
+     * The maximum size that queryThreadLog can grow to before old data will be removed.
+     */
+    queryThreadLogRetentionSize?: pulumi.Input<number>;
+    /**
+     * The maximum time that queryThreadLog records will be retained before removal.
+     */
+    queryThreadLogRetentionTime?: pulumi.Input<number>;
+    /**
+     * Enable or disable queryViewsLog system table.
+     */
+    queryViewsLogEnabled?: pulumi.Input<boolean>;
+    /**
+     * The maximum size that queryViewsLog can grow to before old data will be removed.
+     */
+    queryViewsLogRetentionSize?: pulumi.Input<number>;
+    /**
+     * The maximum time that queryViewsLog records will be retained before removal.
+     */
+    queryViewsLogRetentionTime?: pulumi.Input<number>;
+    /**
+     * RabbitMQ connection configuration.
+     */
+    rabbitmq?: pulumi.Input<inputs.GetMdbClickhouseClusterClickhouseConfigRabbitmqArgs>;
+    /**
+     * Enable or disable sessionLog system table.
+     */
+    sessionLogEnabled?: pulumi.Input<boolean>;
+    /**
+     * The maximum size that sessionLog can grow to before old data will be removed.
+     */
+    sessionLogRetentionSize?: pulumi.Input<number>;
+    /**
+     * The maximum time that sessionLog records will be retained before removal.
+     */
+    sessionLogRetentionTime?: pulumi.Input<number>;
+    /**
+     * Enable or disable textLog system table.
+     */
+    textLogEnabled?: pulumi.Input<boolean>;
+    /**
+     * Logging level for textLog system table.
+     */
+    textLogLevel?: pulumi.Input<string>;
+    /**
+     * The maximum size that textLog can grow to before old data will be removed.
+     */
+    textLogRetentionSize?: pulumi.Input<number>;
+    /**
+     * The maximum time that textLog records will be retained before removal.
+     */
+    textLogRetentionTime?: pulumi.Input<number>;
+    /**
+     * The server's time zone.
+     */
+    timezone?: pulumi.Input<string>;
+    /**
+     * Whenever server memory usage becomes larger than every next step in number of bytes the memory profiler will collect the allocating stack trace.
+     */
+    totalMemoryProfilerStep?: pulumi.Input<number>;
+    /**
+     * Enable or disable traceLog system table.
+     */
+    traceLogEnabled?: pulumi.Input<boolean>;
+    /**
+     * The maximum size that traceLog can grow to before old data will be removed.
+     */
+    traceLogRetentionSize?: pulumi.Input<number>;
+    /**
+     * The maximum time that traceLog records will be retained before removal.
+     */
+    traceLogRetentionTime?: pulumi.Input<number>;
+    /**
+     * Cache size (in bytes) for uncompressed data used by table engines from the MergeTree family. Zero means disabled.
+     */
+    uncompressedCacheSize?: pulumi.Input<number>;
+    /**
+     * Enable or disable zookeeperLog system table.
+     */
+    zookeeperLogEnabled?: pulumi.Input<boolean>;
+    /**
+     * The maximum size that zookeeperLog can grow to before old data will be removed.
+     */
+    zookeeperLogRetentionSize?: pulumi.Input<number>;
+    /**
+     * The maximum time that zookeeperLog records will be retained before removal.
+     */
+    zookeeperLogRetentionTime?: pulumi.Input<number>;
+}
+
+export interface GetMdbClickhouseClusterClickhouseConfigCompression {
+    /**
+     * Compression level for `ZSTD` method.
+     */
+    level?: number;
+    /**
+     * Compression method. Two methods are available: `LZ4` and `zstd`.
+     */
+    method?: string;
+    /**
+     * Min part size: Minimum size (in bytes) of a data part in a table. ClickHouse only applies the rule to tables with data parts greater than or equal to the Min part size value.
+     */
+    minPartSize?: number;
+    /**
+     * Min part size ratio: Minimum table part size to total table size ratio. ClickHouse only applies the rule to tables in which this ratio is greater than or equal to the Min part size ratio value.
+     */
+    minPartSizeRatio?: number;
+}
+
+export interface GetMdbClickhouseClusterClickhouseConfigCompressionArgs {
+    /**
+     * Compression level for `ZSTD` method.
+     */
+    level?: pulumi.Input<number>;
+    /**
+     * Compression method. Two methods are available: `LZ4` and `zstd`.
+     */
+    method?: pulumi.Input<string>;
+    /**
+     * Min part size: Minimum size (in bytes) of a data part in a table. ClickHouse only applies the rule to tables with data parts greater than or equal to the Min part size value.
+     */
+    minPartSize?: pulumi.Input<number>;
+    /**
+     * Min part size ratio: Minimum table part size to total table size ratio. ClickHouse only applies the rule to tables in which this ratio is greater than or equal to the Min part size ratio value.
+     */
+    minPartSizeRatio?: pulumi.Input<number>;
+}
+
+export interface GetMdbClickhouseClusterClickhouseConfigGraphiteRollup {
+    /**
+     * Graphite rollup configuration name.
+     */
+    name?: string;
+    /**
+     * The name of the column storing the metric name (Graphite sensor). Default value: Path.
+     */
+    pathColumnName?: string;
+    /**
+     * Set of thinning rules.
+     */
+    patterns?: inputs.GetMdbClickhouseClusterClickhouseConfigGraphiteRollupPattern[];
+    /**
+     * The name of the column storing the time of measuring the metric. Default value: Time.
+     */
+    timeColumnName?: string;
+    /**
+     * The name of the column storing the value of the metric at the time set in `timeColumnName`. Default value: Value.
+     */
+    valueColumnName?: string;
+    /**
+     * The name of the column storing the version of the metric. Default value: Timestamp.
+     */
+    versionColumnName?: string;
+}
+
+export interface GetMdbClickhouseClusterClickhouseConfigGraphiteRollupArgs {
+    /**
+     * Graphite rollup configuration name.
+     */
+    name?: pulumi.Input<string>;
+    /**
+     * The name of the column storing the metric name (Graphite sensor). Default value: Path.
+     */
+    pathColumnName?: pulumi.Input<string>;
+    /**
+     * Set of thinning rules.
+     */
+    patterns?: pulumi.Input<pulumi.Input<inputs.GetMdbClickhouseClusterClickhouseConfigGraphiteRollupPatternArgs>[]>;
+    /**
+     * The name of the column storing the time of measuring the metric. Default value: Time.
+     */
+    timeColumnName?: pulumi.Input<string>;
+    /**
+     * The name of the column storing the value of the metric at the time set in `timeColumnName`. Default value: Value.
+     */
+    valueColumnName?: pulumi.Input<string>;
+    /**
+     * The name of the column storing the version of the metric. Default value: Timestamp.
+     */
+    versionColumnName?: pulumi.Input<string>;
+}
+
+export interface GetMdbClickhouseClusterClickhouseConfigGraphiteRollupPattern {
+    /**
+     * Aggregation function name.
+     */
+    function?: string;
+    /**
+     * Regular expression that the metric name must match.
+     */
+    regexp?: string;
+    /**
+     * Retain parameters.
+     */
+    retentions?: inputs.GetMdbClickhouseClusterClickhouseConfigGraphiteRollupPatternRetention[];
+}
+
+export interface GetMdbClickhouseClusterClickhouseConfigGraphiteRollupPatternArgs {
+    /**
+     * Aggregation function name.
+     */
+    function?: pulumi.Input<string>;
+    /**
+     * Regular expression that the metric name must match.
+     */
+    regexp?: pulumi.Input<string>;
+    /**
+     * Retain parameters.
+     */
+    retentions?: pulumi.Input<pulumi.Input<inputs.GetMdbClickhouseClusterClickhouseConfigGraphiteRollupPatternRetentionArgs>[]>;
+}
+
+export interface GetMdbClickhouseClusterClickhouseConfigGraphiteRollupPatternRetention {
+    /**
+     * Minimum data age in seconds.
+     */
+    age?: number;
+    /**
+     * Accuracy of determining the age of the data in seconds.
+     */
+    precision?: number;
+}
+
+export interface GetMdbClickhouseClusterClickhouseConfigGraphiteRollupPatternRetentionArgs {
+    /**
+     * Minimum data age in seconds.
+     */
+    age?: pulumi.Input<number>;
+    /**
+     * Accuracy of determining the age of the data in seconds.
+     */
+    precision?: pulumi.Input<number>;
+}
+
+export interface GetMdbClickhouseClusterClickhouseConfigJdbcBridge {
+    /**
+     * Host of jdbc bridge.
+     */
+    host?: string;
+    /**
+     * Port of jdbc bridge. Default value: 9019.
+     */
+    port?: number;
+}
+
+export interface GetMdbClickhouseClusterClickhouseConfigJdbcBridgeArgs {
+    /**
+     * Host of jdbc bridge.
+     */
+    host?: pulumi.Input<string>;
+    /**
+     * Port of jdbc bridge. Default value: 9019.
+     */
+    port?: pulumi.Input<number>;
+}
+
+export interface GetMdbClickhouseClusterClickhouseConfigKafka {
+    /**
+     * Action to take when there is no initial offset in offset store or the desired offset is out of range: 'smallest','earliest' - automatically reset the offset to the smallest offset, 'largest','latest' - automatically reset the offset to the largest offset, 'error' - trigger an error (ERR__AUTO_OFFSET_RESET) which is retrieved by consuming messages and checking 'message->err'.
+     */
+    autoOffsetReset?: string;
+    /**
+     * A comma-separated list of debug contexts to enable.
+     */
+    debug?: string;
+    /**
+     * Enable verification of SSL certificates.
+     */
+    enableSslCertificateVerification?: boolean;
+    /**
+     * Maximum allowed time between calls to consume messages (e.g., `rd_kafka_consumer_poll()` for high-level consumers. If this interval is exceeded the consumer is considered failed and the group will rebalance in order to reassign the partitions to another consumer group member.
+     */
+    maxPollIntervalMs?: number;
+    /**
+     * SASL mechanism used in kafka authentication.
+     */
+    saslMechanism?: string;
+    /**
+     * User password on kafka server.
+     */
+    saslPassword?: string;
+    /**
+     * Username on kafka server.
+     */
+    saslUsername?: string;
+    /**
+     * Security protocol used to connect to kafka server.
+     */
+    securityProtocol?: string;
+    /**
+     * Client group session and failure detection timeout. The consumer sends periodic heartbeats (heartbeat.interval.ms) to indicate its liveness to the broker. If no hearts are received by the broker for a group member within the session timeout, the broker will remove the consumer from the group and trigger a rebalance.
+     */
+    sessionTimeoutMs?: number;
+}
+
+export interface GetMdbClickhouseClusterClickhouseConfigKafkaArgs {
+    /**
+     * Action to take when there is no initial offset in offset store or the desired offset is out of range: 'smallest','earliest' - automatically reset the offset to the smallest offset, 'largest','latest' - automatically reset the offset to the largest offset, 'error' - trigger an error (ERR__AUTO_OFFSET_RESET) which is retrieved by consuming messages and checking 'message->err'.
+     */
+    autoOffsetReset?: pulumi.Input<string>;
+    /**
+     * A comma-separated list of debug contexts to enable.
+     */
+    debug?: pulumi.Input<string>;
+    /**
+     * Enable verification of SSL certificates.
+     */
+    enableSslCertificateVerification?: pulumi.Input<boolean>;
+    /**
+     * Maximum allowed time between calls to consume messages (e.g., `rd_kafka_consumer_poll()` for high-level consumers. If this interval is exceeded the consumer is considered failed and the group will rebalance in order to reassign the partitions to another consumer group member.
+     */
+    maxPollIntervalMs?: pulumi.Input<number>;
+    /**
+     * SASL mechanism used in kafka authentication.
+     */
+    saslMechanism?: pulumi.Input<string>;
+    /**
+     * User password on kafka server.
+     */
+    saslPassword?: pulumi.Input<string>;
+    /**
+     * Username on kafka server.
+     */
+    saslUsername?: pulumi.Input<string>;
+    /**
+     * Security protocol used to connect to kafka server.
+     */
+    securityProtocol?: pulumi.Input<string>;
+    /**
+     * Client group session and failure detection timeout. The consumer sends periodic heartbeats (heartbeat.interval.ms) to indicate its liveness to the broker. If no hearts are received by the broker for a group member within the session timeout, the broker will remove the consumer from the group and trigger a rebalance.
+     */
+    sessionTimeoutMs?: pulumi.Input<number>;
+}
+
+export interface GetMdbClickhouseClusterClickhouseConfigKafkaTopic {
+    /**
+     * Kafka topic name.
+     */
+    name?: string;
+    /**
+     * Kafka connection settings.
+     */
+    settings?: inputs.GetMdbClickhouseClusterClickhouseConfigKafkaTopicSettings;
+}
+
+export interface GetMdbClickhouseClusterClickhouseConfigKafkaTopicArgs {
+    /**
+     * Kafka topic name.
+     */
+    name?: pulumi.Input<string>;
+    /**
+     * Kafka connection settings.
+     */
+    settings?: pulumi.Input<inputs.GetMdbClickhouseClusterClickhouseConfigKafkaTopicSettingsArgs>;
+}
+
+export interface GetMdbClickhouseClusterClickhouseConfigKafkaTopicSettings {
+    /**
+     * Action to take when there is no initial offset in offset store or the desired offset is out of range: 'smallest','earliest' - automatically reset the offset to the smallest offset, 'largest','latest' - automatically reset the offset to the largest offset, 'error' - trigger an error (ERR__AUTO_OFFSET_RESET) which is retrieved by consuming messages and checking 'message->err'.
+     */
+    autoOffsetReset?: string;
+    /**
+     * A comma-separated list of debug contexts to enable.
+     */
+    debug?: string;
+    /**
+     * Enable verification of SSL certificates.
+     */
+    enableSslCertificateVerification?: boolean;
+    /**
+     * Maximum allowed time between calls to consume messages (e.g., `rd_kafka_consumer_poll()` for high-level consumers. If this interval is exceeded the consumer is considered failed and the group will rebalance in order to reassign the partitions to another consumer group member.
+     */
+    maxPollIntervalMs?: number;
+    /**
+     * SASL mechanism used in kafka authentication.
+     */
+    saslMechanism?: string;
+    /**
+     * User password on kafka server.
+     */
+    saslPassword?: string;
+    /**
+     * Username on kafka server.
+     */
+    saslUsername?: string;
+    /**
+     * Security protocol used to connect to kafka server.
+     */
+    securityProtocol?: string;
+    /**
+     * Client group session and failure detection timeout. The consumer sends periodic heartbeats (heartbeat.interval.ms) to indicate its liveness to the broker. If no hearts are received by the broker for a group member within the session timeout, the broker will remove the consumer from the group and trigger a rebalance.
+     */
+    sessionTimeoutMs?: number;
+}
+
+export interface GetMdbClickhouseClusterClickhouseConfigKafkaTopicSettingsArgs {
+    /**
+     * Action to take when there is no initial offset in offset store or the desired offset is out of range: 'smallest','earliest' - automatically reset the offset to the smallest offset, 'largest','latest' - automatically reset the offset to the largest offset, 'error' - trigger an error (ERR__AUTO_OFFSET_RESET) which is retrieved by consuming messages and checking 'message->err'.
+     */
+    autoOffsetReset?: pulumi.Input<string>;
+    /**
+     * A comma-separated list of debug contexts to enable.
+     */
+    debug?: pulumi.Input<string>;
+    /**
+     * Enable verification of SSL certificates.
+     */
+    enableSslCertificateVerification?: pulumi.Input<boolean>;
+    /**
+     * Maximum allowed time between calls to consume messages (e.g., `rd_kafka_consumer_poll()` for high-level consumers. If this interval is exceeded the consumer is considered failed and the group will rebalance in order to reassign the partitions to another consumer group member.
+     */
+    maxPollIntervalMs?: pulumi.Input<number>;
+    /**
+     * SASL mechanism used in kafka authentication.
+     */
+    saslMechanism?: pulumi.Input<string>;
+    /**
+     * User password on kafka server.
+     */
+    saslPassword?: pulumi.Input<string>;
+    /**
+     * Username on kafka server.
+     */
+    saslUsername?: pulumi.Input<string>;
+    /**
+     * Security protocol used to connect to kafka server.
+     */
+    securityProtocol?: pulumi.Input<string>;
+    /**
+     * Client group session and failure detection timeout. The consumer sends periodic heartbeats (heartbeat.interval.ms) to indicate its liveness to the broker. If no hearts are received by the broker for a group member within the session timeout, the broker will remove the consumer from the group and trigger a rebalance.
+     */
+    sessionTimeoutMs?: pulumi.Input<number>;
+}
+
+export interface GetMdbClickhouseClusterClickhouseConfigMergeTree {
+    /**
+     * When this setting has a value greater than zero only a single replica starts the merge immediately if merged part on shared storage and allowRemoteFsZeroCopyReplication is enabled.
+     */
+    allowRemoteFsZeroCopyReplication?: boolean;
+    /**
+     * Enables the check at table creation, that the data type of a column for sampling or sampling expression is correct. The data type must be one of unsigned integer types: UInt8, UInt16, UInt32, UInt64. Default value: true.
+     */
+    checkSampleColumnIsCorrect?: boolean;
+    /**
+     * Minimum period to clean old queue logs, blocks hashes and parts.
+     */
+    cleanupDelayPeriod?: number;
+    /**
+     * If the number of inactive parts in a single partition in the table at least that many the inactivePartsToDelayInsert value, an INSERT artificially slows down. It is useful when a server fails to clean up parts quickly enough.
+     */
+    inactivePartsToDelayInsert?: number;
+    /**
+     * If the number of inactive parts in a single partition more than the inactivePartsToThrowInsert value, INSERT is interrupted with the `Too many inactive parts (N). Parts cleaning are processing significantly slower than inserts` exception.
+     */
+    inactivePartsToThrowInsert?: number;
+    /**
+     * The `too many parts` check according to `partsToDelayInsert` and `partsToThrowInsert` will be active only if the average part size (in the relevant partition) is not larger than the specified threshold. If it is larger than the specified threshold, the INSERTs will be neither delayed or rejected. This allows to have hundreds of terabytes in a single table on a single server if the parts are successfully merged to larger parts. This does not affect the thresholds on inactive parts or total parts.
+     */
+    maxAvgPartSizeForTooManyParts?: number;
+    /**
+     * The maximum total parts size (in bytes) to be merged into one part, if there are enough resources available. maxBytesToMergeAtMaxSpaceInPool -- roughly corresponds to the maximum possible part size created by an automatic background merge.
+     */
+    maxBytesToMergeAtMaxSpaceInPool?: number;
+    /**
+     * Max bytes to merge at min space in pool: Maximum total size of a data part to merge when the number of free threads in the background pool is minimum.
+     */
+    maxBytesToMergeAtMinSpaceInPool?: number;
+    /**
+     * Maximum period to clean old queue logs, blocks hashes and parts. Default value: 300 seconds.
+     */
+    maxCleanupDelayPeriod?: number;
+    /**
+     * Maximum sleep time for merge selecting, a lower setting will trigger selecting tasks in backgroundSchedulePool frequently which result in large amount of requests to zookeeper in large-scale clusters. Default value: 60000 milliseconds (60 seconds).
+     */
+    maxMergeSelectingSleepMs?: number;
+    /**
+     * When there is more than specified number of merges with TTL entries in pool, do not assign new merge with TTL.
+     */
+    maxNumberOfMergesWithTtlInPool?: number;
+    /**
+     * Maximum number of parts in all partitions.
+     */
+    maxPartsInTotal?: number;
+    /**
+     * Max replicated merges in queue: Maximum number of merge tasks that can be in the ReplicatedMergeTree queue at the same time.
+     */
+    maxReplicatedMergesInQueue?: number;
+    /**
+     * The number of rows that are read from the merged parts into memory. Default value: 8192.
+     */
+    mergeMaxBlockSize?: number;
+    /**
+     * Sleep time for merge selecting when no part is selected. A lower setting triggers selecting tasks in backgroundSchedulePool frequently, which results in a large number of requests to ClickHouse Keeper in large-scale clusters.
+     */
+    mergeSelectingSleepMs?: number;
+    /**
+     * Minimum delay in seconds before repeating a merge with recompression TTL. Default value: 14400 seconds (4 hours).
+     */
+    mergeWithRecompressionTtlTimeout?: number;
+    /**
+     * Minimum delay in seconds before repeating a merge with delete TTL. Default value: 14400 seconds (4 hours).
+     */
+    mergeWithTtlTimeout?: number;
+    /**
+     * Whether minAgeToForceMergeSeconds should be applied only on the entire partition and not on subset.
+     */
+    minAgeToForceMergeOnPartitionOnly?: boolean;
+    /**
+     * Merge parts if every part in the range is older than the value of `minAgeToForceMergeSeconds`.
+     */
+    minAgeToForceMergeSeconds?: number;
+    /**
+     * Minimum number of bytes in a data part that can be stored in Wide format. You can set one, both or none of these settings.
+     */
+    minBytesForWidePart?: number;
+    /**
+     * Minimum number of rows in a data part that can be stored in Wide format. You can set one, both or none of these settings.
+     */
+    minRowsForWidePart?: number;
+    /**
+     * When there is less than specified number of free entries in pool, do not execute part mutations. This is to leave free threads for regular merges and avoid `Too many parts`. Default value: 20.
+     */
+    numberOfFreeEntriesInPoolToExecuteMutation?: number;
+    /**
+     * Number of free entries in pool to lower max size of merge: Threshold value of free entries in the pool. If the number of entries in the pool falls below this value, ClickHouse reduces the maximum size of a data part to merge. This helps handle small merges faster, rather than filling the pool with lengthy merges.
+     */
+    numberOfFreeEntriesInPoolToLowerMaxSizeOfMerge?: number;
+    /**
+     * Parts to delay insert: Number of active data parts in a table, on exceeding which ClickHouse starts artificially reduce the rate of inserting data into the table
+     */
+    partsToDelayInsert?: number;
+    /**
+     * Parts to throw insert: Threshold value of active data parts in a table, on exceeding which ClickHouse throws the 'Too many parts ...' exception.
+     */
+    partsToThrowInsert?: number;
+    /**
+     * Replicated deduplication window: Number of recent hash blocks that ZooKeeper will store (the old ones will be deleted).
+     */
+    replicatedDeduplicationWindow?: number;
+    /**
+     * Replicated deduplication window seconds: Time during which ZooKeeper stores the hash blocks (the old ones wil be deleted).
+     */
+    replicatedDeduplicationWindowSeconds?: number;
+    /**
+     * Enables zero-copy replication when a replica is located on a remote filesystem.
+     */
+    ttlOnlyDropParts?: boolean;
+}
+
+export interface GetMdbClickhouseClusterClickhouseConfigMergeTreeArgs {
+    /**
+     * When this setting has a value greater than zero only a single replica starts the merge immediately if merged part on shared storage and allowRemoteFsZeroCopyReplication is enabled.
+     */
+    allowRemoteFsZeroCopyReplication?: pulumi.Input<boolean>;
+    /**
+     * Enables the check at table creation, that the data type of a column for sampling or sampling expression is correct. The data type must be one of unsigned integer types: UInt8, UInt16, UInt32, UInt64. Default value: true.
+     */
+    checkSampleColumnIsCorrect?: pulumi.Input<boolean>;
+    /**
+     * Minimum period to clean old queue logs, blocks hashes and parts.
+     */
+    cleanupDelayPeriod?: pulumi.Input<number>;
+    /**
+     * If the number of inactive parts in a single partition in the table at least that many the inactivePartsToDelayInsert value, an INSERT artificially slows down. It is useful when a server fails to clean up parts quickly enough.
+     */
+    inactivePartsToDelayInsert?: pulumi.Input<number>;
+    /**
+     * If the number of inactive parts in a single partition more than the inactivePartsToThrowInsert value, INSERT is interrupted with the `Too many inactive parts (N). Parts cleaning are processing significantly slower than inserts` exception.
+     */
+    inactivePartsToThrowInsert?: pulumi.Input<number>;
+    /**
+     * The `too many parts` check according to `partsToDelayInsert` and `partsToThrowInsert` will be active only if the average part size (in the relevant partition) is not larger than the specified threshold. If it is larger than the specified threshold, the INSERTs will be neither delayed or rejected. This allows to have hundreds of terabytes in a single table on a single server if the parts are successfully merged to larger parts. This does not affect the thresholds on inactive parts or total parts.
+     */
+    maxAvgPartSizeForTooManyParts?: pulumi.Input<number>;
+    /**
+     * The maximum total parts size (in bytes) to be merged into one part, if there are enough resources available. maxBytesToMergeAtMaxSpaceInPool -- roughly corresponds to the maximum possible part size created by an automatic background merge.
+     */
+    maxBytesToMergeAtMaxSpaceInPool?: pulumi.Input<number>;
+    /**
+     * Max bytes to merge at min space in pool: Maximum total size of a data part to merge when the number of free threads in the background pool is minimum.
+     */
+    maxBytesToMergeAtMinSpaceInPool?: pulumi.Input<number>;
+    /**
+     * Maximum period to clean old queue logs, blocks hashes and parts. Default value: 300 seconds.
+     */
+    maxCleanupDelayPeriod?: pulumi.Input<number>;
+    /**
+     * Maximum sleep time for merge selecting, a lower setting will trigger selecting tasks in backgroundSchedulePool frequently which result in large amount of requests to zookeeper in large-scale clusters. Default value: 60000 milliseconds (60 seconds).
+     */
+    maxMergeSelectingSleepMs?: pulumi.Input<number>;
+    /**
+     * When there is more than specified number of merges with TTL entries in pool, do not assign new merge with TTL.
+     */
+    maxNumberOfMergesWithTtlInPool?: pulumi.Input<number>;
+    /**
+     * Maximum number of parts in all partitions.
+     */
+    maxPartsInTotal?: pulumi.Input<number>;
+    /**
+     * Max replicated merges in queue: Maximum number of merge tasks that can be in the ReplicatedMergeTree queue at the same time.
+     */
+    maxReplicatedMergesInQueue?: pulumi.Input<number>;
+    /**
+     * The number of rows that are read from the merged parts into memory. Default value: 8192.
+     */
+    mergeMaxBlockSize?: pulumi.Input<number>;
+    /**
+     * Sleep time for merge selecting when no part is selected. A lower setting triggers selecting tasks in backgroundSchedulePool frequently, which results in a large number of requests to ClickHouse Keeper in large-scale clusters.
+     */
+    mergeSelectingSleepMs?: pulumi.Input<number>;
+    /**
+     * Minimum delay in seconds before repeating a merge with recompression TTL. Default value: 14400 seconds (4 hours).
+     */
+    mergeWithRecompressionTtlTimeout?: pulumi.Input<number>;
+    /**
+     * Minimum delay in seconds before repeating a merge with delete TTL. Default value: 14400 seconds (4 hours).
+     */
+    mergeWithTtlTimeout?: pulumi.Input<number>;
+    /**
+     * Whether minAgeToForceMergeSeconds should be applied only on the entire partition and not on subset.
+     */
+    minAgeToForceMergeOnPartitionOnly?: pulumi.Input<boolean>;
+    /**
+     * Merge parts if every part in the range is older than the value of `minAgeToForceMergeSeconds`.
+     */
+    minAgeToForceMergeSeconds?: pulumi.Input<number>;
+    /**
+     * Minimum number of bytes in a data part that can be stored in Wide format. You can set one, both or none of these settings.
+     */
+    minBytesForWidePart?: pulumi.Input<number>;
+    /**
+     * Minimum number of rows in a data part that can be stored in Wide format. You can set one, both or none of these settings.
+     */
+    minRowsForWidePart?: pulumi.Input<number>;
+    /**
+     * When there is less than specified number of free entries in pool, do not execute part mutations. This is to leave free threads for regular merges and avoid `Too many parts`. Default value: 20.
+     */
+    numberOfFreeEntriesInPoolToExecuteMutation?: pulumi.Input<number>;
+    /**
+     * Number of free entries in pool to lower max size of merge: Threshold value of free entries in the pool. If the number of entries in the pool falls below this value, ClickHouse reduces the maximum size of a data part to merge. This helps handle small merges faster, rather than filling the pool with lengthy merges.
+     */
+    numberOfFreeEntriesInPoolToLowerMaxSizeOfMerge?: pulumi.Input<number>;
+    /**
+     * Parts to delay insert: Number of active data parts in a table, on exceeding which ClickHouse starts artificially reduce the rate of inserting data into the table
+     */
+    partsToDelayInsert?: pulumi.Input<number>;
+    /**
+     * Parts to throw insert: Threshold value of active data parts in a table, on exceeding which ClickHouse throws the 'Too many parts ...' exception.
+     */
+    partsToThrowInsert?: pulumi.Input<number>;
+    /**
+     * Replicated deduplication window: Number of recent hash blocks that ZooKeeper will store (the old ones will be deleted).
+     */
+    replicatedDeduplicationWindow?: pulumi.Input<number>;
+    /**
+     * Replicated deduplication window seconds: Time during which ZooKeeper stores the hash blocks (the old ones wil be deleted).
+     */
+    replicatedDeduplicationWindowSeconds?: pulumi.Input<number>;
+    /**
+     * Enables zero-copy replication when a replica is located on a remote filesystem.
+     */
+    ttlOnlyDropParts?: pulumi.Input<boolean>;
+}
+
+export interface GetMdbClickhouseClusterClickhouseConfigQueryCache {
+    /**
+     * The maximum number of SELECT query results stored in the cache. Default value: 1024.
+     */
+    maxEntries?: number;
+    /**
+     * The maximum size in bytes SELECT query results may have to be saved in the cache. Default value: 1048576 (1 MiB).
+     */
+    maxEntrySizeInBytes?: number;
+    /**
+     * The maximum number of rows SELECT query results may have to be saved in the cache. Default value: 30000000 (30 mil).
+     */
+    maxEntrySizeInRows?: number;
+    /**
+     * The maximum cache size in bytes. 0 means the query cache is disabled. Default value: 1073741824 (1 GiB).
+     */
+    maxSizeInBytes?: number;
+}
+
+export interface GetMdbClickhouseClusterClickhouseConfigQueryCacheArgs {
+    /**
+     * The maximum number of SELECT query results stored in the cache. Default value: 1024.
+     */
+    maxEntries?: pulumi.Input<number>;
+    /**
+     * The maximum size in bytes SELECT query results may have to be saved in the cache. Default value: 1048576 (1 MiB).
+     */
+    maxEntrySizeInBytes?: pulumi.Input<number>;
+    /**
+     * The maximum number of rows SELECT query results may have to be saved in the cache. Default value: 30000000 (30 mil).
+     */
+    maxEntrySizeInRows?: pulumi.Input<number>;
+    /**
+     * The maximum cache size in bytes. 0 means the query cache is disabled. Default value: 1073741824 (1 GiB).
+     */
+    maxSizeInBytes?: pulumi.Input<number>;
+}
+
+export interface GetMdbClickhouseClusterClickhouseConfigQueryMaskingRule {
+    /**
+     * Name for the rule.
+     */
+    name?: string;
+    /**
+     * RE2 compatible regular expression.
+     */
+    regexp?: string;
+    /**
+     * Substitution string for sensitive data. Default value: six asterisks.
+     */
+    replace?: string;
+}
+
+export interface GetMdbClickhouseClusterClickhouseConfigQueryMaskingRuleArgs {
+    /**
+     * Name for the rule.
+     */
+    name?: pulumi.Input<string>;
+    /**
+     * RE2 compatible regular expression.
+     */
+    regexp?: pulumi.Input<string>;
+    /**
+     * Substitution string for sensitive data. Default value: six asterisks.
+     */
+    replace?: pulumi.Input<string>;
+}
+
+export interface GetMdbClickhouseClusterClickhouseConfigRabbitmq {
+    /**
+     * RabbitMQ user password.
+     */
+    password?: string;
+    /**
+     * RabbitMQ username.
+     */
+    username?: string;
+    /**
+     * RabbitMQ vhost. Default: `\`.
+     */
+    vhost?: string;
+}
+
+export interface GetMdbClickhouseClusterClickhouseConfigRabbitmqArgs {
+    /**
+     * RabbitMQ user password.
+     */
+    password?: pulumi.Input<string>;
+    /**
+     * RabbitMQ username.
+     */
+    username?: pulumi.Input<string>;
+    /**
+     * RabbitMQ vhost. Default: `\`.
+     */
+    vhost?: pulumi.Input<string>;
+}
+
+export interface GetMdbClickhouseClusterClickhouseResources {
+    /**
+     * Volume of the storage available to a ClickHouse host, in gigabytes.
+     */
+    diskSize?: number;
+    /**
+     * Type of the storage of ClickHouse hosts. For more information see [the official documentation](https://yandex.cloud/docs/managed-clickhouse/concepts/storage).
+     */
+    diskTypeId?: string;
+    /**
+     * The ID of the preset for computational resources available to a ClickHouse host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-clickhouse/concepts).
+     */
+    resourcePresetId?: string;
+}
+
+export interface GetMdbClickhouseClusterClickhouseResourcesArgs {
+    /**
+     * Volume of the storage available to a ClickHouse host, in gigabytes.
+     */
+    diskSize?: pulumi.Input<number>;
+    /**
+     * Type of the storage of ClickHouse hosts. For more information see [the official documentation](https://yandex.cloud/docs/managed-clickhouse/concepts/storage).
+     */
+    diskTypeId?: pulumi.Input<string>;
+    /**
+     * The ID of the preset for computational resources available to a ClickHouse host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-clickhouse/concepts).
+     */
+    resourcePresetId?: pulumi.Input<string>;
+}
+
+export interface GetMdbClickhouseClusterCloudStorage {
+    /**
+     * Enables temporary storage in the cluster repository of data requested from the object repository.
+     */
+    dataCacheEnabled?: boolean;
+    /**
+     * Defines the maximum amount of memory (in bytes) allocated in the cluster storage for temporary storage of data requested from the object storage.
+     */
+    dataCacheMaxSize?: number;
+    /**
+     * Whether to use Yandex Object Storage for storing ClickHouse data. Can be either `true` or `false`.
+     */
+    enabled?: boolean;
+    /**
+     * Sets the minimum free space ratio in the cluster storage. If the free space is lower than this value, the data is transferred to Yandex Object Storage. Acceptable values are 0 to 1, inclusive.
+     */
+    moveFactor?: number;
+    /**
+     * Disables merging of data parts in `Yandex Object Storage`.
+     */
+    preferNotToMerge?: boolean;
+}
+
+export interface GetMdbClickhouseClusterCloudStorageArgs {
+    /**
+     * Enables temporary storage in the cluster repository of data requested from the object repository.
+     */
+    dataCacheEnabled?: pulumi.Input<boolean>;
+    /**
+     * Defines the maximum amount of memory (in bytes) allocated in the cluster storage for temporary storage of data requested from the object storage.
+     */
+    dataCacheMaxSize?: pulumi.Input<number>;
+    /**
+     * Whether to use Yandex Object Storage for storing ClickHouse data. Can be either `true` or `false`.
+     */
+    enabled?: pulumi.Input<boolean>;
+    /**
+     * Sets the minimum free space ratio in the cluster storage. If the free space is lower than this value, the data is transferred to Yandex Object Storage. Acceptable values are 0 to 1, inclusive.
+     */
+    moveFactor?: pulumi.Input<number>;
+    /**
+     * Disables merging of data parts in `Yandex Object Storage`.
+     */
+    preferNotToMerge?: pulumi.Input<boolean>;
+}
+
+export interface GetMdbClickhouseClusterDatabase {
+    /**
+     * The name of the database.
+     */
+    name?: string;
+}
+
+export interface GetMdbClickhouseClusterDatabaseArgs {
+    /**
+     * The name of the database.
+     */
+    name?: pulumi.Input<string>;
+}
+
+export interface GetMdbClickhouseClusterFormatSchema {
+    /**
+     * The name of the format schema.
+     */
+    name?: string;
+    /**
+     * Type of the format schema.
+     */
+    type?: string;
+    /**
+     * Format schema file URL. You can only use format schemas stored in Yandex Object Storage.
+     */
+    uri?: string;
+}
+
+export interface GetMdbClickhouseClusterFormatSchemaArgs {
+    /**
+     * The name of the format schema.
+     */
+    name?: pulumi.Input<string>;
+    /**
+     * Type of the format schema.
+     */
+    type?: pulumi.Input<string>;
+    /**
+     * Format schema file URL. You can only use format schemas stored in Yandex Object Storage.
+     */
+    uri?: pulumi.Input<string>;
+}
+
+export interface GetMdbClickhouseClusterHost {
+    /**
+     * Sets whether the host should get a public IP address on creation. Can be either `true` or `false`.
+     */
+    assignPublicIp?: boolean;
+    /**
+     * The fully qualified domain name of the host.
+     */
+    fqdn?: string;
+    /**
+     * The name of the shard to which the host belongs.
+     */
+    shardName?: string;
+    /**
+     * The ID of the subnet, to which the host belongs. The subnet must be a part of the network to which the cluster belongs.
+     */
+    subnetId?: string;
+    /**
+     * The type of the host to be deployed. Can be either `CLICKHOUSE` or `ZOOKEEPER`.
+     */
+    type?: string;
+    /**
+     * The [availability zone](https://yandex.cloud/docs/overview/concepts/geo-scope) where resource is located. If it is not provided, the default provider zone will be used.
+     */
+    zone?: string;
+}
+
+export interface GetMdbClickhouseClusterHostArgs {
+    /**
+     * Sets whether the host should get a public IP address on creation. Can be either `true` or `false`.
+     */
+    assignPublicIp?: pulumi.Input<boolean>;
+    /**
+     * The fully qualified domain name of the host.
+     */
+    fqdn?: pulumi.Input<string>;
+    /**
+     * The name of the shard to which the host belongs.
+     */
+    shardName?: pulumi.Input<string>;
+    /**
+     * The ID of the subnet, to which the host belongs. The subnet must be a part of the network to which the cluster belongs.
+     */
+    subnetId?: pulumi.Input<string>;
+    /**
+     * The type of the host to be deployed. Can be either `CLICKHOUSE` or `ZOOKEEPER`.
+     */
+    type?: pulumi.Input<string>;
+    /**
+     * The [availability zone](https://yandex.cloud/docs/overview/concepts/geo-scope) where resource is located. If it is not provided, the default provider zone will be used.
+     */
+    zone?: pulumi.Input<string>;
+}
+
+export interface GetMdbClickhouseClusterMaintenanceWindow {
+    /**
+     * Day of week for maintenance window if window type is weekly. Possible values: `MON`, `TUE`, `WED`, `THU`, `FRI`, `SAT`, `SUN`.
+     */
+    day?: string;
+    /**
+     * Hour of day in UTC time zone (1-24) for maintenance window if window type is weekly.
+     */
+    hour?: number;
+    /**
+     * Type of maintenance window. Can be either `ANYTIME` or `WEEKLY`. A day and hour of window need to be specified with weekly window.
+     */
+    type?: string;
+}
+
+export interface GetMdbClickhouseClusterMaintenanceWindowArgs {
+    /**
+     * Day of week for maintenance window if window type is weekly. Possible values: `MON`, `TUE`, `WED`, `THU`, `FRI`, `SAT`, `SUN`.
+     */
+    day?: pulumi.Input<string>;
+    /**
+     * Hour of day in UTC time zone (1-24) for maintenance window if window type is weekly.
+     */
+    hour?: pulumi.Input<number>;
+    /**
+     * Type of maintenance window. Can be either `ANYTIME` or `WEEKLY`. A day and hour of window need to be specified with weekly window.
+     */
+    type?: pulumi.Input<string>;
+}
+
+export interface GetMdbClickhouseClusterMlModel {
+    /**
+     * The name of the ml model.
+     */
+    name?: string;
+    /**
+     * Type of the model.
+     */
+    type?: string;
+    /**
+     * Model file URL. You can only use models stored in Yandex Object Storage.
+     */
+    uri?: string;
+}
+
+export interface GetMdbClickhouseClusterMlModelArgs {
+    /**
+     * The name of the ml model.
+     */
+    name?: pulumi.Input<string>;
+    /**
+     * Type of the model.
+     */
+    type?: pulumi.Input<string>;
+    /**
+     * Model file URL. You can only use models stored in Yandex Object Storage.
+     */
+    uri?: pulumi.Input<string>;
+}
+
+export interface GetMdbClickhouseClusterShard {
+    /**
+     * The name of shard.
+     */
+    name?: string;
+    /**
+     * Resources allocated to host of the shard. The resources specified for the shard takes precedence over the resources specified for the cluster.
+     */
+    resources?: inputs.GetMdbClickhouseClusterShardResources;
+    /**
+     * The weight of shard.
+     */
+    weight?: number;
+}
+
+export interface GetMdbClickhouseClusterShardArgs {
+    /**
+     * The name of shard.
+     */
+    name?: pulumi.Input<string>;
+    /**
+     * Resources allocated to host of the shard. The resources specified for the shard takes precedence over the resources specified for the cluster.
+     */
+    resources?: pulumi.Input<inputs.GetMdbClickhouseClusterShardResourcesArgs>;
+    /**
+     * The weight of shard.
+     */
+    weight?: pulumi.Input<number>;
+}
+
+export interface GetMdbClickhouseClusterShardGroup {
+    /**
+     * Description of the shard group.
+     */
+    description?: string;
+    /**
+     * The name of the shard group, used as cluster name in Distributed tables.
+     */
+    name?: string;
+    /**
+     * List of shards names that belong to the shard group.
+     */
+    shardNames?: string[];
+}
+
+export interface GetMdbClickhouseClusterShardGroupArgs {
+    /**
+     * Description of the shard group.
+     */
+    description?: pulumi.Input<string>;
+    /**
+     * The name of the shard group, used as cluster name in Distributed tables.
+     */
+    name?: pulumi.Input<string>;
+    /**
+     * List of shards names that belong to the shard group.
+     */
+    shardNames?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface GetMdbClickhouseClusterShardResources {
+    /**
+     * Volume of the storage available to a ClickHouse host, in gigabytes.
+     */
+    diskSize?: number;
+    /**
+     * Type of the storage of ClickHouse hosts. For more information see [the official documentation](https://yandex.cloud/docs/managed-clickhouse/concepts/storage).
+     */
+    diskTypeId?: string;
+    /**
+     * The ID of the preset for computational resources available to a ClickHouse host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-clickhouse/concepts).
+     */
+    resourcePresetId?: string;
+}
+
+export interface GetMdbClickhouseClusterShardResourcesArgs {
+    /**
+     * Volume of the storage available to a ClickHouse host, in gigabytes.
+     */
+    diskSize?: pulumi.Input<number>;
+    /**
+     * Type of the storage of ClickHouse hosts. For more information see [the official documentation](https://yandex.cloud/docs/managed-clickhouse/concepts/storage).
+     */
+    diskTypeId?: pulumi.Input<string>;
+    /**
+     * The ID of the preset for computational resources available to a ClickHouse host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-clickhouse/concepts).
+     */
+    resourcePresetId?: pulumi.Input<string>;
+}
+
+export interface GetMdbClickhouseClusterUser {
+    /**
+     * Connection Manager connection configuration. Filled in by the server automatically.
+     */
+    connectionManager?: {[key: string]: string};
+    /**
+     * Generate password using Connection Manager. Allowed values: `true` or `false`. It's used only during user creation and is ignored during updating.
+     *
+     * > **Must specify either password or generate_password**.
+     */
+    generatePassword?: boolean;
+    /**
+     * The name of the user.
+     */
+    name?: string;
+    /**
+     * The password of the user.
+     */
+    password?: string;
+    /**
+     * Set of permissions granted to the user.
+     */
+    permissions?: inputs.GetMdbClickhouseClusterUserPermission[];
+    /**
+     * Set of user quotas.
+     */
+    quotas?: inputs.GetMdbClickhouseClusterUserQuota[];
+    /**
+     * Custom settings for user.
+     */
+    settings?: inputs.GetMdbClickhouseClusterUserSettings;
+}
+
+export interface GetMdbClickhouseClusterUserArgs {
+    /**
+     * Connection Manager connection configuration. Filled in by the server automatically.
+     */
+    connectionManager?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    /**
+     * Generate password using Connection Manager. Allowed values: `true` or `false`. It's used only during user creation and is ignored during updating.
+     *
+     * > **Must specify either password or generate_password**.
+     */
+    generatePassword?: pulumi.Input<boolean>;
+    /**
+     * The name of the user.
+     */
+    name?: pulumi.Input<string>;
+    /**
+     * The password of the user.
+     */
+    password?: pulumi.Input<string>;
+    /**
+     * Set of permissions granted to the user.
+     */
+    permissions?: pulumi.Input<pulumi.Input<inputs.GetMdbClickhouseClusterUserPermissionArgs>[]>;
+    /**
+     * Set of user quotas.
+     */
+    quotas?: pulumi.Input<pulumi.Input<inputs.GetMdbClickhouseClusterUserQuotaArgs>[]>;
+    /**
+     * Custom settings for user.
+     */
+    settings?: pulumi.Input<inputs.GetMdbClickhouseClusterUserSettingsArgs>;
+}
+
+export interface GetMdbClickhouseClusterUserPermission {
+    /**
+     * The name of the database that the permission grants access to.
+     */
+    databaseName?: string;
+}
+
+export interface GetMdbClickhouseClusterUserPermissionArgs {
+    /**
+     * The name of the database that the permission grants access to.
+     */
+    databaseName?: pulumi.Input<string>;
+}
+
+export interface GetMdbClickhouseClusterUserQuota {
+    /**
+     * The number of queries that threw exception.
+     */
+    errors?: number;
+    /**
+     * The total query execution time, in milliseconds (wall time).
+     */
+    executionTime?: number;
+    /**
+     * Duration of interval for quota in milliseconds.
+     */
+    intervalDuration?: number;
+    /**
+     * The total number of queries.
+     */
+    queries?: number;
+    /**
+     * The total number of source rows read from tables for running the query, on all remote servers.
+     */
+    readRows?: number;
+    /**
+     * The total number of rows given as the result.
+     */
+    resultRows?: number;
+}
+
+export interface GetMdbClickhouseClusterUserQuotaArgs {
+    /**
+     * The number of queries that threw exception.
+     */
+    errors?: pulumi.Input<number>;
+    /**
+     * The total query execution time, in milliseconds (wall time).
+     */
+    executionTime?: pulumi.Input<number>;
+    /**
+     * Duration of interval for quota in milliseconds.
+     */
+    intervalDuration?: pulumi.Input<number>;
+    /**
+     * The total number of queries.
+     */
+    queries?: pulumi.Input<number>;
+    /**
+     * The total number of source rows read from tables for running the query, on all remote servers.
+     */
+    readRows?: pulumi.Input<number>;
+    /**
+     * The total number of rows given as the result.
+     */
+    resultRows?: pulumi.Input<number>;
+}
+
+export interface GetMdbClickhouseClusterUserSettings {
+    /**
+     * Include CORS headers in HTTP responses.
+     */
+    addHttpCorsHeader?: boolean;
+    /**
+     * Allows or denies DDL queries.
+     */
+    allowDdl?: boolean;
+    /**
+     * Enables introspections functions for query profiling.
+     */
+    allowIntrospectionFunctions?: boolean;
+    /**
+     * Allows specifying LowCardinality modifier for types of small fixed size (8 or less) in CREATE TABLE statements. Enabling this may increase merge times and memory consumption.
+     */
+    allowSuspiciousLowCardinalityTypes?: boolean;
+    /**
+     * Enables legacy ClickHouse server behavior in ANY INNER|LEFT JOIN operations.
+     */
+    anyJoinDistinctRightTableKeys?: boolean;
+    /**
+     * Enables asynchronous inserts. Disabled by default.
+     */
+    asyncInsert?: boolean;
+    /**
+     * The maximum timeout in milliseconds since the first INSERT query before inserting collected data. If the parameter is set to 0, the timeout is disabled. Default value: 200.
+     */
+    asyncInsertBusyTimeout?: number;
+    /**
+     * The maximum size of the unparsed data in bytes collected per query before being inserted. If the parameter is set to 0, asynchronous insertions are disabled. Default value: 100000.
+     */
+    asyncInsertMaxDataSize?: number;
+    /**
+     * The maximum timeout in milliseconds since the last INSERT query before dumping collected data. If enabled, the settings prolongs the asyncInsertBusyTimeout with every INSERT query as long as asyncInsertMaxDataSize is not exceeded.
+     */
+    asyncInsertStaleTimeout?: number;
+    /**
+     * The maximum number of threads for background data parsing and insertion. If the parameter is set to 0, asynchronous insertions are disabled. Default value: 16.
+     */
+    asyncInsertThreads?: number;
+    /**
+     * Cancels HTTP read-only queries (e.g. SELECT) when a client closes the connection without waiting for the response. Default value: false.
+     */
+    cancelHttpReadonlyQueriesOnClientClose?: boolean;
+    /**
+     * Enable compilation of queries.
+     */
+    compile?: boolean;
+    /**
+     * Turn on expression compilation.
+     */
+    compileExpressions?: boolean;
+    /**
+     * Connect timeout in milliseconds on the socket used for communicating with the client.
+     */
+    connectTimeout?: number;
+    /**
+     * The timeout in milliseconds for connecting to a remote server for a Distributed table engine, if the ‘shard’ and ‘replica’ sections are used in the cluster definition. If unsuccessful, several attempts are made to connect to various replicas. Default value: 50.
+     */
+    connectTimeoutWithFailover?: number;
+    /**
+     * Specifies which of the uniq* functions should be used to perform the COUNT(DISTINCT …) construction.
+     */
+    countDistinctImplementation?: string;
+    /**
+     * Allows choosing a parser of the text representation of date and time, one of: `bestEffort`, `basic`, `bestEffortUs`. Default value: `basic`. Cloud default value: `bestEffort`.
+     */
+    dateTimeInputFormat?: string;
+    /**
+     * Allows choosing different output formats of the text representation of date and time, one of: `simple`, `iso`, `unixTimestamp`. Default value: `simple`.
+     */
+    dateTimeOutputFormat?: string;
+    /**
+     * Enables or disables the deduplication check for materialized views that receive data from `Replicated` tables.
+     */
+    deduplicateBlocksInDependentMaterializedViews?: boolean;
+    /**
+     * Sets behavior on overflow when using DISTINCT. Possible values:
+     * * `throw` - abort query execution, return an error.
+     * * `break` - stop query execution, return partial result.
+     */
+    distinctOverflowMode?: string;
+    /**
+     * Determine the behavior of distributed subqueries.
+     */
+    distributedAggregationMemoryEfficient?: boolean;
+    /**
+     * Timeout for DDL queries, in milliseconds.
+     */
+    distributedDdlTaskTimeout?: number;
+    /**
+     * Changes the behavior of distributed subqueries.
+     */
+    distributedProductMode?: string;
+    /**
+     * Allows to return empty result.
+     */
+    emptyResultForAggregationByEmptySet?: boolean;
+    /**
+     * Enables or disables data compression in the response to an HTTP request.
+     */
+    enableHttpCompression?: boolean;
+    /**
+     * Forces a query to an out-of-date replica if updated data is not available.
+     */
+    fallbackToStaleReplicasForDistributedQueries?: boolean;
+    /**
+     * Sets the data format of a nested columns.
+     */
+    flattenNested?: boolean;
+    /**
+     * Disables query execution if the index can’t be used by date.
+     */
+    forceIndexByDate?: boolean;
+    /**
+     * Disables query execution if indexing by the primary key is not possible.
+     */
+    forcePrimaryKey?: boolean;
+    /**
+     * Regular expression (for Regexp format).
+     */
+    formatRegexp?: string;
+    /**
+     * Skip lines unmatched by regular expression.
+     */
+    formatRegexpSkipUnmatched?: boolean;
+    /**
+     * Sets behavior on overflow while GROUP BY operation. Possible values:
+     * * `throw` - abort query execution, return an error.
+     * * `break` - stop query execution, return partial result.
+     * * `any` - perform approximate GROUP BY operation by continuing aggregation for the keys that got into the set, but don’t add new keys to the set.
+     */
+    groupByOverflowMode?: string;
+    /**
+     * Sets the threshold of the number of keys, after that the two-level aggregation should be used.
+     */
+    groupByTwoLevelThreshold?: number;
+    /**
+     * Sets the threshold of the number of bytes, after that the two-level aggregation should be used.
+     */
+    groupByTwoLevelThresholdBytes?: number;
+    /**
+     * Connection timeout for establishing connection with replica for Hedged requests. Default value: 50 milliseconds.
+     */
+    hedgedConnectionTimeoutMs?: number;
+    /**
+     * Timeout for HTTP connection in milliseconds.
+     */
+    httpConnectionTimeout?: number;
+    /**
+     * Sets minimal interval between notifications about request process in HTTP header X-ClickHouse-Progress.
+     */
+    httpHeadersProgressInterval?: number;
+    /**
+     * Timeout for HTTP connection in milliseconds.
+     */
+    httpReceiveTimeout?: number;
+    /**
+     * Timeout for HTTP connection in milliseconds.
+     */
+    httpSendTimeout?: number;
+    /**
+     * Timeout to close idle TCP connections after specified number of seconds. Default value: 3600 seconds.
+     */
+    idleConnectionTimeout?: number;
+    /**
+     * When performing INSERT queries, replace omitted input column values with default values of the respective columns.
+     */
+    inputFormatDefaultsForOmittedFields?: boolean;
+    /**
+     * Enables or disables the insertion of JSON data with nested objects.
+     */
+    inputFormatImportNestedJson?: boolean;
+    /**
+     * Enables or disables the initialization of NULL fields with default values, if data type of these fields is not nullable.
+     */
+    inputFormatNullAsDefault?: boolean;
+    /**
+     * Enables or disables order-preserving parallel parsing of data formats. Supported only for TSV, TKSV, CSV and JSONEachRow formats.
+     */
+    inputFormatParallelParsing?: boolean;
+    /**
+     * Enables or disables the full SQL parser if the fast stream parser can’t parse the data.
+     */
+    inputFormatValuesInterpretExpressions?: boolean;
+    /**
+     * Enables or disables checking the column order when inserting data.
+     */
+    inputFormatWithNamesUseHeader?: boolean;
+    /**
+     * The setting sets the maximum number of retries for ClickHouse Keeper (or ZooKeeper) requests during insert into replicated MergeTree. Only Keeper requests which failed due to network error, Keeper session timeout, or request timeout are considered for retries.
+     */
+    insertKeeperMaxRetries?: number;
+    /**
+     * Enables the insertion of default values instead of NULL into columns with not nullable data type. Default value: true.
+     */
+    insertNullAsDefault?: boolean;
+    /**
+     * Enables the quorum writes.
+     */
+    insertQuorum?: number;
+    /**
+     * Enables or disables parallelism for quorum INSERT queries.
+     */
+    insertQuorumParallel?: boolean;
+    /**
+     * Write to a quorum timeout in milliseconds.
+     */
+    insertQuorumTimeout?: number;
+    /**
+     * Specifies which JOIN algorithm is used. Possible values:
+     * * `hash` - hash join algorithm is used. The most generic implementation that supports all combinations of kind and strictness and multiple join keys that are combined with OR in the JOIN ON section.
+     * * `parallelHash` - a variation of hash join that splits the data into buckets and builds several hash tables instead of one concurrently to speed up this process.
+     * * `partialMerge` - a variation of the sort-merge algorithm, where only the right table is fully sorted.
+     * * `direct` - this algorithm can be applied when the storage for the right table supports key-value requests.
+     * * `auto` - when set to auto, hash join is tried first, and the algorithm is switched on the fly to another algorithm if the memory limit is violated.
+     * * `fullSortingMerge` - sort-merge algorithm with full sorting joined tables before joining.
+     * * `preferPartialMerge` - clickHouse always tries to use partialMerge join if possible, otherwise, it uses hash. Deprecated, same as partial_merge,hash.
+     */
+    joinAlgorithms?: string[];
+    /**
+     * Sets behavior on overflow in JOIN. Possible values:
+     * * `throw` - abort query execution, return an error.
+     * * `break` - stop query execution, return partial result.
+     */
+    joinOverflowMode?: string;
+    /**
+     * Sets the type of JOIN behavior. When merging tables, empty cells may appear. ClickHouse fills them differently based on this setting.
+     */
+    joinUseNulls?: boolean;
+    /**
+     * Require aliases for subselects and table functions in FROM that more than one table is present.
+     */
+    joinedSubqueryRequiresAlias?: boolean;
+    /**
+     * Specifies the algorithm of replicas selection that is used for distributed query processing, one of: random, nearest_hostname, in_order, first_or_random, round_robin. Default value: random.
+     */
+    loadBalancing?: string;
+    /**
+     * Method of reading data from local filesystem. Possible values:
+     * * `read` - abort query execution, return an error.
+     * * `pread` - abort query execution, return an error.
+     * * `preadThreadpool` - stop query execution, return partial result. If the parameter is set to 0 (default), no hops is allowed.
+     */
+    localFilesystemReadMethod?: string;
+    /**
+     * Setting up query threads logging. Query threads log into the system.query_thread_log table. This setting has effect only when logQueries is true. Queries’ threads run by ClickHouse with this setup are logged according to the rules in the queryThreadLog server configuration parameter. Default value: `true`.
+     */
+    logQueryThreads?: boolean;
+    /**
+     * Allows or restricts using the LowCardinality data type with the Native format.
+     */
+    lowCardinalityAllowInNativeFormat?: boolean;
+    /**
+     * Maximum abstract syntax tree depth.
+     */
+    maxAstDepth?: number;
+    /**
+     * Maximum abstract syntax tree elements.
+     */
+    maxAstElements?: number;
+    /**
+     * A recommendation for what size of the block (in a count of rows) to load from tables.
+     */
+    maxBlockSize?: number;
+    /**
+     * Limit in bytes for using memory for GROUP BY before using swap on disk.
+     */
+    maxBytesBeforeExternalGroupBy?: number;
+    /**
+     * This setting is equivalent of the maxBytesBeforeExternalGroupBy setting, except for it is for sort operation (ORDER BY), not aggregation.
+     */
+    maxBytesBeforeExternalSort?: number;
+    /**
+     * Limits the maximum size of a hash table in bytes (uncompressed data) when using DISTINCT.
+     */
+    maxBytesInDistinct?: number;
+    /**
+     * Limit on maximum size of the hash table for JOIN, in bytes.
+     */
+    maxBytesInJoin?: number;
+    /**
+     * Limit on the number of bytes in the set resulting from the execution of the IN section.
+     */
+    maxBytesInSet?: number;
+    /**
+     * Limits the maximum number of bytes (uncompressed data) that can be read from a table when running a query.
+     */
+    maxBytesToRead?: number;
+    /**
+     * Limits the maximum number of bytes (uncompressed data) that can be read from a table for sorting.
+     */
+    maxBytesToSort?: number;
+    /**
+     * Limits the maximum number of bytes (uncompressed data) that can be passed to a remote server or saved in a temporary table when using GLOBAL IN.
+     */
+    maxBytesToTransfer?: number;
+    /**
+     * Limits the maximum number of columns that can be read from a table in a single query.
+     */
+    maxColumnsToRead?: number;
+    /**
+     * The maximum number of concurrent requests per user. Default value: 0 (no limit).
+     */
+    maxConcurrentQueriesForUser?: number;
+    /**
+     * Limits the maximum query execution time in milliseconds.
+     */
+    maxExecutionTime?: number;
+    /**
+     * Maximum abstract syntax tree depth after after expansion of aliases.
+     */
+    maxExpandedAstElements?: number;
+    /**
+     * Sets the maximum number of parallel threads for the SELECT query data read phase with the FINAL modifier.
+     */
+    maxFinalThreads?: number;
+    /**
+     * Limits the maximum number of HTTP GET redirect hops for URL-engine tables.
+     */
+    maxHttpGetRedirects?: number;
+    /**
+     * The size of blocks (in a count of rows) to form for insertion into a table.
+     */
+    maxInsertBlockSize?: number;
+    /**
+     * The maximum number of threads to execute the INSERT SELECT query. Default value: 0.
+     */
+    maxInsertThreads?: number;
+    /**
+     * Limits the maximum memory usage (in bytes) for processing queries on a single server.
+     */
+    maxMemoryUsage?: number;
+    /**
+     * Limits the maximum memory usage (in bytes) for processing of user's queries on a single server.
+     */
+    maxMemoryUsageForUser?: number;
+    /**
+     * Limits the speed of the data exchange over the network in bytes per second.
+     */
+    maxNetworkBandwidth?: number;
+    /**
+     * Limits the speed of the data exchange over the network in bytes per second.
+     */
+    maxNetworkBandwidthForUser?: number;
+    /**
+     * Limits maximum recursion depth in the recursive descent parser. Allows controlling the stack size. Zero means unlimited.
+     */
+    maxParserDepth?: number;
+    /**
+     * The maximum part of a query that can be taken to RAM for parsing with the SQL parser.
+     */
+    maxQuerySize?: number;
+    /**
+     * The maximum size of the buffer to read from the filesystem.
+     */
+    maxReadBufferSize?: number;
+    /**
+     * Disables lagging replicas for distributed queries.
+     */
+    maxReplicaDelayForDistributedQueries?: number;
+    /**
+     * Limits the number of bytes in the result.
+     */
+    maxResultBytes?: number;
+    /**
+     * Limits the number of rows in the result.
+     */
+    maxResultRows?: number;
+    /**
+     * Limits the maximum number of different rows when using DISTINCT.
+     */
+    maxRowsInDistinct?: number;
+    /**
+     * Limit on maximum size of the hash table for JOIN, in rows.
+     */
+    maxRowsInJoin?: number;
+    /**
+     * Limit on the number of rows in the set resulting from the execution of the IN section.
+     */
+    maxRowsInSet?: number;
+    /**
+     * Limits the maximum number of unique keys received from aggregation function.
+     */
+    maxRowsToGroupBy?: number;
+    /**
+     * Limits the maximum number of rows that can be read from a table when running a query.
+     */
+    maxRowsToRead?: number;
+    /**
+     * Limits the maximum number of rows that can be read from a table for sorting.
+     */
+    maxRowsToSort?: number;
+    /**
+     * Limits the maximum number of rows that can be passed to a remote server or saved in a temporary table when using GLOBAL IN.
+     */
+    maxRowsToTransfer?: number;
+    /**
+     * Limits the maximum number of temporary columns that must be kept in RAM at the same time when running a query, including constant columns.
+     */
+    maxTemporaryColumns?: number;
+    /**
+     * The maximum amount of data consumed by temporary files on disk in bytes for all concurrently running queries. Zero means unlimited.
+     */
+    maxTemporaryDataOnDiskSizeForQuery?: number;
+    /**
+     * The maximum amount of data consumed by temporary files on disk in bytes for all concurrently running user queries. Zero means unlimited.
+     */
+    maxTemporaryDataOnDiskSizeForUser?: number;
+    /**
+     * Limits the maximum number of temporary columns that must be kept in RAM at the same time when running a query, excluding constant columns.
+     */
+    maxTemporaryNonConstColumns?: number;
+    /**
+     * The maximum number of query processing threads, excluding threads for retrieving data from remote servers.
+     */
+    maxThreads?: number;
+    /**
+     * It represents soft memory limit in case when hard limit is reached on user level. This value is used to compute overcommit ratio for the query. Zero means skip the query.
+     */
+    memoryOvercommitRatioDenominator?: number;
+    /**
+     * It represents soft memory limit in case when hard limit is reached on global level. This value is used to compute overcommit ratio for the query. Zero means skip the query.
+     */
+    memoryOvercommitRatioDenominatorForUser?: number;
+    /**
+     * Collect random allocations and deallocations and write them into system.trace_log with 'MemorySample' trace_type. The probability is for every alloc/free regardless to the size of the allocation. Possible values: from 0 to 1. Default: 0.
+     */
+    memoryProfilerSampleProbability?: number;
+    /**
+     * Memory profiler step (in bytes). If the next query step requires more memory than this parameter specifies, the memory profiler collects the allocating stack trace. Values lower than a few megabytes slow down query processing. Default value: 4194304 (4 MB). Zero means disabled memory profiler.
+     */
+    memoryProfilerStep?: number;
+    /**
+     * Maximum time thread will wait for memory to be freed in the case of memory overcommit on a user level. If the timeout is reached and memory is not freed, an exception is thrown.
+     */
+    memoryUsageOvercommitMaxWaitMicroseconds?: number;
+    /**
+     * If ClickHouse should read more than mergeTreeMaxBytesToUseCache bytes in one query, it doesn’t use the cache of uncompressed blocks.
+     */
+    mergeTreeMaxBytesToUseCache?: number;
+    /**
+     * If ClickHouse should read more than mergeTreeMaxRowsToUseCache rows in one query, it doesn’t use the cache of uncompressed blocks.
+     */
+    mergeTreeMaxRowsToUseCache?: number;
+    /**
+     * If the number of bytes to read from one file of a MergeTree-engine table exceeds merge_tree_min_bytes_for_concurrent_read, then ClickHouse tries to concurrently read from this file in several threads.
+     */
+    mergeTreeMinBytesForConcurrentRead?: number;
+    /**
+     * If the number of rows to be read from a file of a MergeTree table exceeds mergeTreeMinRowsForConcurrentRead then ClickHouse tries to perform a concurrent reading from this file on several threads.
+     */
+    mergeTreeMinRowsForConcurrentRead?: number;
+    /**
+     * The minimum data volume required for using direct I/O access to the storage disk.
+     */
+    minBytesToUseDirectIo?: number;
+    /**
+     * How many times to potentially use a compiled chunk of code before running compilation.
+     */
+    minCountToCompile?: number;
+    /**
+     * A query waits for expression compilation process to complete prior to continuing execution.
+     */
+    minCountToCompileExpression?: number;
+    /**
+     * Minimal execution speed in rows per second.
+     */
+    minExecutionSpeed?: number;
+    /**
+     * Minimal execution speed in bytes per second.
+     */
+    minExecutionSpeedBytes?: number;
+    /**
+     * Sets the minimum number of bytes in the block which can be inserted into a table by an INSERT query.
+     */
+    minInsertBlockSizeBytes?: number;
+    /**
+     * Sets the minimum number of rows in the block which can be inserted into a table by an INSERT query.
+     */
+    minInsertBlockSizeRows?: number;
+    /**
+     * If the value is true, integers appear in quotes when using JSON* Int64 and UInt64 formats (for compatibility with most JavaScript implementations); otherwise, integers are output without the quotes.
+     */
+    outputFormatJsonQuote64bitIntegers?: boolean;
+    /**
+     * Enables +nan, -nan, +inf, -inf outputs in JSON output format.
+     */
+    outputFormatJsonQuoteDenormals?: boolean;
+    /**
+     * Enables/disables preferable using the localhost replica when processing distributed queries. Default value: true.
+     */
+    preferLocalhostReplica?: boolean;
+    /**
+     * Query priority.
+     */
+    priority?: number;
+    /**
+     * Quota accounting mode.
+     */
+    quotaMode?: string;
+    /**
+     * Sets behavior on overflow while read. Possible values:
+     * * `throw` - abort query execution, return an error.
+     * * `break` - stop query execution, return partial result.
+     */
+    readOverflowMode?: string;
+    /**
+     * Restricts permissions for reading data, write data and change settings queries.
+     */
+    readonly?: number;
+    /**
+     * Receive timeout in milliseconds on the socket used for communicating with the client.
+     */
+    receiveTimeout?: number;
+    /**
+     * Method of reading data from remote filesystem, one of: `read`, `threadpool`.
+     */
+    remoteFilesystemReadMethod?: string;
+    /**
+     * For ALTER ... ATTACH|DETACH|DROP queries, you can use the replicationAlterPartitionsSync setting to set up waiting.
+     */
+    replicationAlterPartitionsSync?: number;
+    /**
+     * Sets behavior on overflow in result. Possible values:
+     * * `throw` - abort query execution, return an error.
+     * * `break` - stop query execution, return partial result.
+     */
+    resultOverflowMode?: string;
+    /**
+     * Enables or disables sequential consistency for SELECT queries.
+     */
+    selectSequentialConsistency?: boolean;
+    /**
+     * Enables or disables `X-ClickHouse-Progress` HTTP response headers in clickhouse-server responses.
+     */
+    sendProgressInHttpHeaders?: boolean;
+    /**
+     * Send timeout in milliseconds on the socket used for communicating with the client.
+     */
+    sendTimeout?: number;
+    /**
+     * Sets behavior on overflow in the set resulting. Possible values:
+     *   * `throw` - abort query execution, return an error.
+     * * `break` - stop query execution, return partial result.
+     */
+    setOverflowMode?: string;
+    /**
+     * Enables or disables silently skipping of unavailable shards.
+     */
+    skipUnavailableShards?: boolean;
+    /**
+     * Sets behavior on overflow while sort. Possible values:
+     * * `throw` - abort query execution, return an error.
+     * * `break` - stop query execution, return partial result.
+     */
+    sortOverflowMode?: string;
+    /**
+     * Timeout (in seconds) between checks of execution speed. It is checked that execution speed is not less that specified in minExecutionSpeed parameter. Must be at least 1000.
+     */
+    timeoutBeforeCheckingExecutionSpeed?: number;
+    /**
+     * Sets behavior on overflow. Possible values:
+     * * `throw` - abort query execution, return an error.
+     * * `break` - stop query execution, return partial result.
+     */
+    timeoutOverflowMode?: string;
+    /**
+     * Sets behavior on overflow. Possible values:
+     * * `throw` - abort query execution, return an error.
+     * * `break` - stop query execution, return partial result.
+     */
+    transferOverflowMode?: string;
+    /**
+     * Enables equality of NULL values for IN operator.
+     */
+    transformNullIn?: boolean;
+    /**
+     * Enables hedged requests logic for remote queries. It allows to establish many connections with different replicas for query. New connection is enabled in case existent connection(s) with replica(s) were not established within hedgedConnectionTimeout or no data was received within receive_data_timeout. Query uses the first connection which send non empty progress packet (or data packet, if allow_changing_replica_until_first_data_packet); other connections are cancelled. Queries with maxParallelReplicas > 1 are supported. Default value: true.
+     */
+    useHedgedRequests?: boolean;
+    /**
+     * Whether to use a cache of uncompressed blocks.
+     */
+    useUncompressedCache?: boolean;
+    /**
+     * Enables waiting for processing of asynchronous insertion. If enabled, server returns OK only after the data is inserted.
+     */
+    waitForAsyncInsert?: boolean;
+    /**
+     * The timeout (in seconds) for waiting for processing of asynchronous insertion. Value must be at least 1000 (1 second).
+     */
+    waitForAsyncInsertTimeout?: number;
+}
+
+export interface GetMdbClickhouseClusterUserSettingsArgs {
+    /**
+     * Include CORS headers in HTTP responses.
+     */
+    addHttpCorsHeader?: pulumi.Input<boolean>;
+    /**
+     * Allows or denies DDL queries.
+     */
+    allowDdl?: pulumi.Input<boolean>;
+    /**
+     * Enables introspections functions for query profiling.
+     */
+    allowIntrospectionFunctions?: pulumi.Input<boolean>;
+    /**
+     * Allows specifying LowCardinality modifier for types of small fixed size (8 or less) in CREATE TABLE statements. Enabling this may increase merge times and memory consumption.
+     */
+    allowSuspiciousLowCardinalityTypes?: pulumi.Input<boolean>;
+    /**
+     * Enables legacy ClickHouse server behavior in ANY INNER|LEFT JOIN operations.
+     */
+    anyJoinDistinctRightTableKeys?: pulumi.Input<boolean>;
+    /**
+     * Enables asynchronous inserts. Disabled by default.
+     */
+    asyncInsert?: pulumi.Input<boolean>;
+    /**
+     * The maximum timeout in milliseconds since the first INSERT query before inserting collected data. If the parameter is set to 0, the timeout is disabled. Default value: 200.
+     */
+    asyncInsertBusyTimeout?: pulumi.Input<number>;
+    /**
+     * The maximum size of the unparsed data in bytes collected per query before being inserted. If the parameter is set to 0, asynchronous insertions are disabled. Default value: 100000.
+     */
+    asyncInsertMaxDataSize?: pulumi.Input<number>;
+    /**
+     * The maximum timeout in milliseconds since the last INSERT query before dumping collected data. If enabled, the settings prolongs the asyncInsertBusyTimeout with every INSERT query as long as asyncInsertMaxDataSize is not exceeded.
+     */
+    asyncInsertStaleTimeout?: pulumi.Input<number>;
+    /**
+     * The maximum number of threads for background data parsing and insertion. If the parameter is set to 0, asynchronous insertions are disabled. Default value: 16.
+     */
+    asyncInsertThreads?: pulumi.Input<number>;
+    /**
+     * Cancels HTTP read-only queries (e.g. SELECT) when a client closes the connection without waiting for the response. Default value: false.
+     */
+    cancelHttpReadonlyQueriesOnClientClose?: pulumi.Input<boolean>;
+    /**
+     * Enable compilation of queries.
+     */
+    compile?: pulumi.Input<boolean>;
+    /**
+     * Turn on expression compilation.
+     */
+    compileExpressions?: pulumi.Input<boolean>;
+    /**
+     * Connect timeout in milliseconds on the socket used for communicating with the client.
+     */
+    connectTimeout?: pulumi.Input<number>;
+    /**
+     * The timeout in milliseconds for connecting to a remote server for a Distributed table engine, if the ‘shard’ and ‘replica’ sections are used in the cluster definition. If unsuccessful, several attempts are made to connect to various replicas. Default value: 50.
+     */
+    connectTimeoutWithFailover?: pulumi.Input<number>;
+    /**
+     * Specifies which of the uniq* functions should be used to perform the COUNT(DISTINCT …) construction.
+     */
+    countDistinctImplementation?: pulumi.Input<string>;
+    /**
+     * Allows choosing a parser of the text representation of date and time, one of: `bestEffort`, `basic`, `bestEffortUs`. Default value: `basic`. Cloud default value: `bestEffort`.
+     */
+    dateTimeInputFormat?: pulumi.Input<string>;
+    /**
+     * Allows choosing different output formats of the text representation of date and time, one of: `simple`, `iso`, `unixTimestamp`. Default value: `simple`.
+     */
+    dateTimeOutputFormat?: pulumi.Input<string>;
+    /**
+     * Enables or disables the deduplication check for materialized views that receive data from `Replicated` tables.
+     */
+    deduplicateBlocksInDependentMaterializedViews?: pulumi.Input<boolean>;
+    /**
+     * Sets behavior on overflow when using DISTINCT. Possible values:
+     * * `throw` - abort query execution, return an error.
+     * * `break` - stop query execution, return partial result.
+     */
+    distinctOverflowMode?: pulumi.Input<string>;
+    /**
+     * Determine the behavior of distributed subqueries.
+     */
+    distributedAggregationMemoryEfficient?: pulumi.Input<boolean>;
+    /**
+     * Timeout for DDL queries, in milliseconds.
+     */
+    distributedDdlTaskTimeout?: pulumi.Input<number>;
+    /**
+     * Changes the behavior of distributed subqueries.
+     */
+    distributedProductMode?: pulumi.Input<string>;
+    /**
+     * Allows to return empty result.
+     */
+    emptyResultForAggregationByEmptySet?: pulumi.Input<boolean>;
+    /**
+     * Enables or disables data compression in the response to an HTTP request.
+     */
+    enableHttpCompression?: pulumi.Input<boolean>;
+    /**
+     * Forces a query to an out-of-date replica if updated data is not available.
+     */
+    fallbackToStaleReplicasForDistributedQueries?: pulumi.Input<boolean>;
+    /**
+     * Sets the data format of a nested columns.
+     */
+    flattenNested?: pulumi.Input<boolean>;
+    /**
+     * Disables query execution if the index can’t be used by date.
+     */
+    forceIndexByDate?: pulumi.Input<boolean>;
+    /**
+     * Disables query execution if indexing by the primary key is not possible.
+     */
+    forcePrimaryKey?: pulumi.Input<boolean>;
+    /**
+     * Regular expression (for Regexp format).
+     */
+    formatRegexp?: pulumi.Input<string>;
+    /**
+     * Skip lines unmatched by regular expression.
+     */
+    formatRegexpSkipUnmatched?: pulumi.Input<boolean>;
+    /**
+     * Sets behavior on overflow while GROUP BY operation. Possible values:
+     * * `throw` - abort query execution, return an error.
+     * * `break` - stop query execution, return partial result.
+     * * `any` - perform approximate GROUP BY operation by continuing aggregation for the keys that got into the set, but don’t add new keys to the set.
+     */
+    groupByOverflowMode?: pulumi.Input<string>;
+    /**
+     * Sets the threshold of the number of keys, after that the two-level aggregation should be used.
+     */
+    groupByTwoLevelThreshold?: pulumi.Input<number>;
+    /**
+     * Sets the threshold of the number of bytes, after that the two-level aggregation should be used.
+     */
+    groupByTwoLevelThresholdBytes?: pulumi.Input<number>;
+    /**
+     * Connection timeout for establishing connection with replica for Hedged requests. Default value: 50 milliseconds.
+     */
+    hedgedConnectionTimeoutMs?: pulumi.Input<number>;
+    /**
+     * Timeout for HTTP connection in milliseconds.
+     */
+    httpConnectionTimeout?: pulumi.Input<number>;
+    /**
+     * Sets minimal interval between notifications about request process in HTTP header X-ClickHouse-Progress.
+     */
+    httpHeadersProgressInterval?: pulumi.Input<number>;
+    /**
+     * Timeout for HTTP connection in milliseconds.
+     */
+    httpReceiveTimeout?: pulumi.Input<number>;
+    /**
+     * Timeout for HTTP connection in milliseconds.
+     */
+    httpSendTimeout?: pulumi.Input<number>;
+    /**
+     * Timeout to close idle TCP connections after specified number of seconds. Default value: 3600 seconds.
+     */
+    idleConnectionTimeout?: pulumi.Input<number>;
+    /**
+     * When performing INSERT queries, replace omitted input column values with default values of the respective columns.
+     */
+    inputFormatDefaultsForOmittedFields?: pulumi.Input<boolean>;
+    /**
+     * Enables or disables the insertion of JSON data with nested objects.
+     */
+    inputFormatImportNestedJson?: pulumi.Input<boolean>;
+    /**
+     * Enables or disables the initialization of NULL fields with default values, if data type of these fields is not nullable.
+     */
+    inputFormatNullAsDefault?: pulumi.Input<boolean>;
+    /**
+     * Enables or disables order-preserving parallel parsing of data formats. Supported only for TSV, TKSV, CSV and JSONEachRow formats.
+     */
+    inputFormatParallelParsing?: pulumi.Input<boolean>;
+    /**
+     * Enables or disables the full SQL parser if the fast stream parser can’t parse the data.
+     */
+    inputFormatValuesInterpretExpressions?: pulumi.Input<boolean>;
+    /**
+     * Enables or disables checking the column order when inserting data.
+     */
+    inputFormatWithNamesUseHeader?: pulumi.Input<boolean>;
+    /**
+     * The setting sets the maximum number of retries for ClickHouse Keeper (or ZooKeeper) requests during insert into replicated MergeTree. Only Keeper requests which failed due to network error, Keeper session timeout, or request timeout are considered for retries.
+     */
+    insertKeeperMaxRetries?: pulumi.Input<number>;
+    /**
+     * Enables the insertion of default values instead of NULL into columns with not nullable data type. Default value: true.
+     */
+    insertNullAsDefault?: pulumi.Input<boolean>;
+    /**
+     * Enables the quorum writes.
+     */
+    insertQuorum?: pulumi.Input<number>;
+    /**
+     * Enables or disables parallelism for quorum INSERT queries.
+     */
+    insertQuorumParallel?: pulumi.Input<boolean>;
+    /**
+     * Write to a quorum timeout in milliseconds.
+     */
+    insertQuorumTimeout?: pulumi.Input<number>;
+    /**
+     * Specifies which JOIN algorithm is used. Possible values:
+     * * `hash` - hash join algorithm is used. The most generic implementation that supports all combinations of kind and strictness and multiple join keys that are combined with OR in the JOIN ON section.
+     * * `parallelHash` - a variation of hash join that splits the data into buckets and builds several hash tables instead of one concurrently to speed up this process.
+     * * `partialMerge` - a variation of the sort-merge algorithm, where only the right table is fully sorted.
+     * * `direct` - this algorithm can be applied when the storage for the right table supports key-value requests.
+     * * `auto` - when set to auto, hash join is tried first, and the algorithm is switched on the fly to another algorithm if the memory limit is violated.
+     * * `fullSortingMerge` - sort-merge algorithm with full sorting joined tables before joining.
+     * * `preferPartialMerge` - clickHouse always tries to use partialMerge join if possible, otherwise, it uses hash. Deprecated, same as partial_merge,hash.
+     */
+    joinAlgorithms?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Sets behavior on overflow in JOIN. Possible values:
+     * * `throw` - abort query execution, return an error.
+     * * `break` - stop query execution, return partial result.
+     */
+    joinOverflowMode?: pulumi.Input<string>;
+    /**
+     * Sets the type of JOIN behavior. When merging tables, empty cells may appear. ClickHouse fills them differently based on this setting.
+     */
+    joinUseNulls?: pulumi.Input<boolean>;
+    /**
+     * Require aliases for subselects and table functions in FROM that more than one table is present.
+     */
+    joinedSubqueryRequiresAlias?: pulumi.Input<boolean>;
+    /**
+     * Specifies the algorithm of replicas selection that is used for distributed query processing, one of: random, nearest_hostname, in_order, first_or_random, round_robin. Default value: random.
+     */
+    loadBalancing?: pulumi.Input<string>;
+    /**
+     * Method of reading data from local filesystem. Possible values:
+     * * `read` - abort query execution, return an error.
+     * * `pread` - abort query execution, return an error.
+     * * `preadThreadpool` - stop query execution, return partial result. If the parameter is set to 0 (default), no hops is allowed.
+     */
+    localFilesystemReadMethod?: pulumi.Input<string>;
+    /**
+     * Setting up query threads logging. Query threads log into the system.query_thread_log table. This setting has effect only when logQueries is true. Queries’ threads run by ClickHouse with this setup are logged according to the rules in the queryThreadLog server configuration parameter. Default value: `true`.
+     */
+    logQueryThreads?: pulumi.Input<boolean>;
+    /**
+     * Allows or restricts using the LowCardinality data type with the Native format.
+     */
+    lowCardinalityAllowInNativeFormat?: pulumi.Input<boolean>;
+    /**
+     * Maximum abstract syntax tree depth.
+     */
+    maxAstDepth?: pulumi.Input<number>;
+    /**
+     * Maximum abstract syntax tree elements.
+     */
+    maxAstElements?: pulumi.Input<number>;
+    /**
+     * A recommendation for what size of the block (in a count of rows) to load from tables.
+     */
+    maxBlockSize?: pulumi.Input<number>;
+    /**
+     * Limit in bytes for using memory for GROUP BY before using swap on disk.
+     */
+    maxBytesBeforeExternalGroupBy?: pulumi.Input<number>;
+    /**
+     * This setting is equivalent of the maxBytesBeforeExternalGroupBy setting, except for it is for sort operation (ORDER BY), not aggregation.
+     */
+    maxBytesBeforeExternalSort?: pulumi.Input<number>;
+    /**
+     * Limits the maximum size of a hash table in bytes (uncompressed data) when using DISTINCT.
+     */
+    maxBytesInDistinct?: pulumi.Input<number>;
+    /**
+     * Limit on maximum size of the hash table for JOIN, in bytes.
+     */
+    maxBytesInJoin?: pulumi.Input<number>;
+    /**
+     * Limit on the number of bytes in the set resulting from the execution of the IN section.
+     */
+    maxBytesInSet?: pulumi.Input<number>;
+    /**
+     * Limits the maximum number of bytes (uncompressed data) that can be read from a table when running a query.
+     */
+    maxBytesToRead?: pulumi.Input<number>;
+    /**
+     * Limits the maximum number of bytes (uncompressed data) that can be read from a table for sorting.
+     */
+    maxBytesToSort?: pulumi.Input<number>;
+    /**
+     * Limits the maximum number of bytes (uncompressed data) that can be passed to a remote server or saved in a temporary table when using GLOBAL IN.
+     */
+    maxBytesToTransfer?: pulumi.Input<number>;
+    /**
+     * Limits the maximum number of columns that can be read from a table in a single query.
+     */
+    maxColumnsToRead?: pulumi.Input<number>;
+    /**
+     * The maximum number of concurrent requests per user. Default value: 0 (no limit).
+     */
+    maxConcurrentQueriesForUser?: pulumi.Input<number>;
+    /**
+     * Limits the maximum query execution time in milliseconds.
+     */
+    maxExecutionTime?: pulumi.Input<number>;
+    /**
+     * Maximum abstract syntax tree depth after after expansion of aliases.
+     */
+    maxExpandedAstElements?: pulumi.Input<number>;
+    /**
+     * Sets the maximum number of parallel threads for the SELECT query data read phase with the FINAL modifier.
+     */
+    maxFinalThreads?: pulumi.Input<number>;
+    /**
+     * Limits the maximum number of HTTP GET redirect hops for URL-engine tables.
+     */
+    maxHttpGetRedirects?: pulumi.Input<number>;
+    /**
+     * The size of blocks (in a count of rows) to form for insertion into a table.
+     */
+    maxInsertBlockSize?: pulumi.Input<number>;
+    /**
+     * The maximum number of threads to execute the INSERT SELECT query. Default value: 0.
+     */
+    maxInsertThreads?: pulumi.Input<number>;
+    /**
+     * Limits the maximum memory usage (in bytes) for processing queries on a single server.
+     */
+    maxMemoryUsage?: pulumi.Input<number>;
+    /**
+     * Limits the maximum memory usage (in bytes) for processing of user's queries on a single server.
+     */
+    maxMemoryUsageForUser?: pulumi.Input<number>;
+    /**
+     * Limits the speed of the data exchange over the network in bytes per second.
+     */
+    maxNetworkBandwidth?: pulumi.Input<number>;
+    /**
+     * Limits the speed of the data exchange over the network in bytes per second.
+     */
+    maxNetworkBandwidthForUser?: pulumi.Input<number>;
+    /**
+     * Limits maximum recursion depth in the recursive descent parser. Allows controlling the stack size. Zero means unlimited.
+     */
+    maxParserDepth?: pulumi.Input<number>;
+    /**
+     * The maximum part of a query that can be taken to RAM for parsing with the SQL parser.
+     */
+    maxQuerySize?: pulumi.Input<number>;
+    /**
+     * The maximum size of the buffer to read from the filesystem.
+     */
+    maxReadBufferSize?: pulumi.Input<number>;
+    /**
+     * Disables lagging replicas for distributed queries.
+     */
+    maxReplicaDelayForDistributedQueries?: pulumi.Input<number>;
+    /**
+     * Limits the number of bytes in the result.
+     */
+    maxResultBytes?: pulumi.Input<number>;
+    /**
+     * Limits the number of rows in the result.
+     */
+    maxResultRows?: pulumi.Input<number>;
+    /**
+     * Limits the maximum number of different rows when using DISTINCT.
+     */
+    maxRowsInDistinct?: pulumi.Input<number>;
+    /**
+     * Limit on maximum size of the hash table for JOIN, in rows.
+     */
+    maxRowsInJoin?: pulumi.Input<number>;
+    /**
+     * Limit on the number of rows in the set resulting from the execution of the IN section.
+     */
+    maxRowsInSet?: pulumi.Input<number>;
+    /**
+     * Limits the maximum number of unique keys received from aggregation function.
+     */
+    maxRowsToGroupBy?: pulumi.Input<number>;
+    /**
+     * Limits the maximum number of rows that can be read from a table when running a query.
+     */
+    maxRowsToRead?: pulumi.Input<number>;
+    /**
+     * Limits the maximum number of rows that can be read from a table for sorting.
+     */
+    maxRowsToSort?: pulumi.Input<number>;
+    /**
+     * Limits the maximum number of rows that can be passed to a remote server or saved in a temporary table when using GLOBAL IN.
+     */
+    maxRowsToTransfer?: pulumi.Input<number>;
+    /**
+     * Limits the maximum number of temporary columns that must be kept in RAM at the same time when running a query, including constant columns.
+     */
+    maxTemporaryColumns?: pulumi.Input<number>;
+    /**
+     * The maximum amount of data consumed by temporary files on disk in bytes for all concurrently running queries. Zero means unlimited.
+     */
+    maxTemporaryDataOnDiskSizeForQuery?: pulumi.Input<number>;
+    /**
+     * The maximum amount of data consumed by temporary files on disk in bytes for all concurrently running user queries. Zero means unlimited.
+     */
+    maxTemporaryDataOnDiskSizeForUser?: pulumi.Input<number>;
+    /**
+     * Limits the maximum number of temporary columns that must be kept in RAM at the same time when running a query, excluding constant columns.
+     */
+    maxTemporaryNonConstColumns?: pulumi.Input<number>;
+    /**
+     * The maximum number of query processing threads, excluding threads for retrieving data from remote servers.
+     */
+    maxThreads?: pulumi.Input<number>;
+    /**
+     * It represents soft memory limit in case when hard limit is reached on user level. This value is used to compute overcommit ratio for the query. Zero means skip the query.
+     */
+    memoryOvercommitRatioDenominator?: pulumi.Input<number>;
+    /**
+     * It represents soft memory limit in case when hard limit is reached on global level. This value is used to compute overcommit ratio for the query. Zero means skip the query.
+     */
+    memoryOvercommitRatioDenominatorForUser?: pulumi.Input<number>;
+    /**
+     * Collect random allocations and deallocations and write them into system.trace_log with 'MemorySample' trace_type. The probability is for every alloc/free regardless to the size of the allocation. Possible values: from 0 to 1. Default: 0.
+     */
+    memoryProfilerSampleProbability?: pulumi.Input<number>;
+    /**
+     * Memory profiler step (in bytes). If the next query step requires more memory than this parameter specifies, the memory profiler collects the allocating stack trace. Values lower than a few megabytes slow down query processing. Default value: 4194304 (4 MB). Zero means disabled memory profiler.
+     */
+    memoryProfilerStep?: pulumi.Input<number>;
+    /**
+     * Maximum time thread will wait for memory to be freed in the case of memory overcommit on a user level. If the timeout is reached and memory is not freed, an exception is thrown.
+     */
+    memoryUsageOvercommitMaxWaitMicroseconds?: pulumi.Input<number>;
+    /**
+     * If ClickHouse should read more than mergeTreeMaxBytesToUseCache bytes in one query, it doesn’t use the cache of uncompressed blocks.
+     */
+    mergeTreeMaxBytesToUseCache?: pulumi.Input<number>;
+    /**
+     * If ClickHouse should read more than mergeTreeMaxRowsToUseCache rows in one query, it doesn’t use the cache of uncompressed blocks.
+     */
+    mergeTreeMaxRowsToUseCache?: pulumi.Input<number>;
+    /**
+     * If the number of bytes to read from one file of a MergeTree-engine table exceeds merge_tree_min_bytes_for_concurrent_read, then ClickHouse tries to concurrently read from this file in several threads.
+     */
+    mergeTreeMinBytesForConcurrentRead?: pulumi.Input<number>;
+    /**
+     * If the number of rows to be read from a file of a MergeTree table exceeds mergeTreeMinRowsForConcurrentRead then ClickHouse tries to perform a concurrent reading from this file on several threads.
+     */
+    mergeTreeMinRowsForConcurrentRead?: pulumi.Input<number>;
+    /**
+     * The minimum data volume required for using direct I/O access to the storage disk.
+     */
+    minBytesToUseDirectIo?: pulumi.Input<number>;
+    /**
+     * How many times to potentially use a compiled chunk of code before running compilation.
+     */
+    minCountToCompile?: pulumi.Input<number>;
+    /**
+     * A query waits for expression compilation process to complete prior to continuing execution.
+     */
+    minCountToCompileExpression?: pulumi.Input<number>;
+    /**
+     * Minimal execution speed in rows per second.
+     */
+    minExecutionSpeed?: pulumi.Input<number>;
+    /**
+     * Minimal execution speed in bytes per second.
+     */
+    minExecutionSpeedBytes?: pulumi.Input<number>;
+    /**
+     * Sets the minimum number of bytes in the block which can be inserted into a table by an INSERT query.
+     */
+    minInsertBlockSizeBytes?: pulumi.Input<number>;
+    /**
+     * Sets the minimum number of rows in the block which can be inserted into a table by an INSERT query.
+     */
+    minInsertBlockSizeRows?: pulumi.Input<number>;
+    /**
+     * If the value is true, integers appear in quotes when using JSON* Int64 and UInt64 formats (for compatibility with most JavaScript implementations); otherwise, integers are output without the quotes.
+     */
+    outputFormatJsonQuote64bitIntegers?: pulumi.Input<boolean>;
+    /**
+     * Enables +nan, -nan, +inf, -inf outputs in JSON output format.
+     */
+    outputFormatJsonQuoteDenormals?: pulumi.Input<boolean>;
+    /**
+     * Enables/disables preferable using the localhost replica when processing distributed queries. Default value: true.
+     */
+    preferLocalhostReplica?: pulumi.Input<boolean>;
+    /**
+     * Query priority.
+     */
+    priority?: pulumi.Input<number>;
+    /**
+     * Quota accounting mode.
+     */
+    quotaMode?: pulumi.Input<string>;
+    /**
+     * Sets behavior on overflow while read. Possible values:
+     * * `throw` - abort query execution, return an error.
+     * * `break` - stop query execution, return partial result.
+     */
+    readOverflowMode?: pulumi.Input<string>;
+    /**
+     * Restricts permissions for reading data, write data and change settings queries.
+     */
+    readonly?: pulumi.Input<number>;
+    /**
+     * Receive timeout in milliseconds on the socket used for communicating with the client.
+     */
+    receiveTimeout?: pulumi.Input<number>;
+    /**
+     * Method of reading data from remote filesystem, one of: `read`, `threadpool`.
+     */
+    remoteFilesystemReadMethod?: pulumi.Input<string>;
+    /**
+     * For ALTER ... ATTACH|DETACH|DROP queries, you can use the replicationAlterPartitionsSync setting to set up waiting.
+     */
+    replicationAlterPartitionsSync?: pulumi.Input<number>;
+    /**
+     * Sets behavior on overflow in result. Possible values:
+     * * `throw` - abort query execution, return an error.
+     * * `break` - stop query execution, return partial result.
+     */
+    resultOverflowMode?: pulumi.Input<string>;
+    /**
+     * Enables or disables sequential consistency for SELECT queries.
+     */
+    selectSequentialConsistency?: pulumi.Input<boolean>;
+    /**
+     * Enables or disables `X-ClickHouse-Progress` HTTP response headers in clickhouse-server responses.
+     */
+    sendProgressInHttpHeaders?: pulumi.Input<boolean>;
+    /**
+     * Send timeout in milliseconds on the socket used for communicating with the client.
+     */
+    sendTimeout?: pulumi.Input<number>;
+    /**
+     * Sets behavior on overflow in the set resulting. Possible values:
+     *   * `throw` - abort query execution, return an error.
+     * * `break` - stop query execution, return partial result.
+     */
+    setOverflowMode?: pulumi.Input<string>;
+    /**
+     * Enables or disables silently skipping of unavailable shards.
+     */
+    skipUnavailableShards?: pulumi.Input<boolean>;
+    /**
+     * Sets behavior on overflow while sort. Possible values:
+     * * `throw` - abort query execution, return an error.
+     * * `break` - stop query execution, return partial result.
+     */
+    sortOverflowMode?: pulumi.Input<string>;
+    /**
+     * Timeout (in seconds) between checks of execution speed. It is checked that execution speed is not less that specified in minExecutionSpeed parameter. Must be at least 1000.
+     */
+    timeoutBeforeCheckingExecutionSpeed?: pulumi.Input<number>;
+    /**
+     * Sets behavior on overflow. Possible values:
+     * * `throw` - abort query execution, return an error.
+     * * `break` - stop query execution, return partial result.
+     */
+    timeoutOverflowMode?: pulumi.Input<string>;
+    /**
+     * Sets behavior on overflow. Possible values:
+     * * `throw` - abort query execution, return an error.
+     * * `break` - stop query execution, return partial result.
+     */
+    transferOverflowMode?: pulumi.Input<string>;
+    /**
+     * Enables equality of NULL values for IN operator.
+     */
+    transformNullIn?: pulumi.Input<boolean>;
+    /**
+     * Enables hedged requests logic for remote queries. It allows to establish many connections with different replicas for query. New connection is enabled in case existent connection(s) with replica(s) were not established within hedgedConnectionTimeout or no data was received within receive_data_timeout. Query uses the first connection which send non empty progress packet (or data packet, if allow_changing_replica_until_first_data_packet); other connections are cancelled. Queries with maxParallelReplicas > 1 are supported. Default value: true.
+     */
+    useHedgedRequests?: pulumi.Input<boolean>;
+    /**
+     * Whether to use a cache of uncompressed blocks.
+     */
+    useUncompressedCache?: pulumi.Input<boolean>;
+    /**
+     * Enables waiting for processing of asynchronous insertion. If enabled, server returns OK only after the data is inserted.
+     */
+    waitForAsyncInsert?: pulumi.Input<boolean>;
+    /**
+     * The timeout (in seconds) for waiting for processing of asynchronous insertion. Value must be at least 1000 (1 second).
+     */
+    waitForAsyncInsertTimeout?: pulumi.Input<number>;
+}
+
+export interface GetMdbClickhouseClusterZookeeper {
+    /**
+     * Resources allocated to hosts of the ZooKeeper subcluster.
+     */
+    resources?: inputs.GetMdbClickhouseClusterZookeeperResources;
+}
+
+export interface GetMdbClickhouseClusterZookeeperArgs {
+    /**
+     * Resources allocated to hosts of the ZooKeeper subcluster.
+     */
+    resources?: pulumi.Input<inputs.GetMdbClickhouseClusterZookeeperResourcesArgs>;
+}
+
+export interface GetMdbClickhouseClusterZookeeperResources {
+    /**
+     * Volume of the storage available to a ZooKeeper host, in gigabytes.
+     */
+    diskSize?: number;
+    /**
+     * Type of the storage of ZooKeeper hosts. For more information see [the official documentation](https://yandex.cloud/docs/managed-clickhouse/concepts/storage).
+     */
+    diskTypeId?: string;
+    /**
+     * The ID of the preset for computational resources available to a ZooKeeper host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-clickhouse/concepts).
+     */
+    resourcePresetId?: string;
+}
+
+export interface GetMdbClickhouseClusterZookeeperResourcesArgs {
+    /**
+     * Volume of the storage available to a ZooKeeper host, in gigabytes.
+     */
+    diskSize?: pulumi.Input<number>;
+    /**
+     * Type of the storage of ZooKeeper hosts. For more information see [the official documentation](https://yandex.cloud/docs/managed-clickhouse/concepts/storage).
+     */
+    diskTypeId?: pulumi.Input<string>;
+    /**
+     * The ID of the preset for computational resources available to a ZooKeeper host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-clickhouse/concepts).
+     */
+    resourcePresetId?: pulumi.Input<string>;
+}
+
+export interface GetMdbGreenplumClusterBackgroundActivity {
+    analyzeAndVacuums?: inputs.GetMdbGreenplumClusterBackgroundActivityAnalyzeAndVacuum[];
+    queryKillerIdleInTransactions?: inputs.GetMdbGreenplumClusterBackgroundActivityQueryKillerIdleInTransaction[];
+    queryKillerIdles?: inputs.GetMdbGreenplumClusterBackgroundActivityQueryKillerIdle[];
+    queryKillerLongRunnings?: inputs.GetMdbGreenplumClusterBackgroundActivityQueryKillerLongRunning[];
+}
+
+export interface GetMdbGreenplumClusterBackgroundActivityArgs {
+    analyzeAndVacuums?: pulumi.Input<pulumi.Input<inputs.GetMdbGreenplumClusterBackgroundActivityAnalyzeAndVacuumArgs>[]>;
+    queryKillerIdleInTransactions?: pulumi.Input<pulumi.Input<inputs.GetMdbGreenplumClusterBackgroundActivityQueryKillerIdleInTransactionArgs>[]>;
+    queryKillerIdles?: pulumi.Input<pulumi.Input<inputs.GetMdbGreenplumClusterBackgroundActivityQueryKillerIdleArgs>[]>;
+    queryKillerLongRunnings?: pulumi.Input<pulumi.Input<inputs.GetMdbGreenplumClusterBackgroundActivityQueryKillerLongRunningArgs>[]>;
+}
+
+export interface GetMdbGreenplumClusterBackgroundActivityAnalyzeAndVacuum {
+    analyzeTimeout?: number;
+    startTime?: string;
+    vacuumTimeout?: number;
+}
+
+export interface GetMdbGreenplumClusterBackgroundActivityAnalyzeAndVacuumArgs {
+    analyzeTimeout?: pulumi.Input<number>;
+    startTime?: pulumi.Input<string>;
+    vacuumTimeout?: pulumi.Input<number>;
+}
+
+export interface GetMdbGreenplumClusterBackgroundActivityQueryKillerIdle {
+    enable?: boolean;
+    ignoreUsers?: string[];
+    maxAge?: number;
+}
+
+export interface GetMdbGreenplumClusterBackgroundActivityQueryKillerIdleArgs {
+    enable?: pulumi.Input<boolean>;
+    ignoreUsers?: pulumi.Input<pulumi.Input<string>[]>;
+    maxAge?: pulumi.Input<number>;
+}
+
+export interface GetMdbGreenplumClusterBackgroundActivityQueryKillerIdleInTransaction {
+    enable?: boolean;
+    ignoreUsers?: string[];
+    maxAge?: number;
+}
+
+export interface GetMdbGreenplumClusterBackgroundActivityQueryKillerIdleInTransactionArgs {
+    enable?: pulumi.Input<boolean>;
+    ignoreUsers?: pulumi.Input<pulumi.Input<string>[]>;
+    maxAge?: pulumi.Input<number>;
+}
+
+export interface GetMdbGreenplumClusterBackgroundActivityQueryKillerLongRunning {
+    enable?: boolean;
+    ignoreUsers?: string[];
+    maxAge?: number;
+}
+
+export interface GetMdbGreenplumClusterBackgroundActivityQueryKillerLongRunningArgs {
+    enable?: pulumi.Input<boolean>;
+    ignoreUsers?: pulumi.Input<pulumi.Input<string>[]>;
+    maxAge?: pulumi.Input<number>;
+}
+
+export interface GetMdbGreenplumClusterPoolerConfig {
+    poolClientIdleTimeout?: number;
+    poolSize?: number;
+    poolingMode?: string;
+}
+
+export interface GetMdbGreenplumClusterPoolerConfigArgs {
+    poolClientIdleTimeout?: pulumi.Input<number>;
+    poolSize?: pulumi.Input<number>;
+    poolingMode?: pulumi.Input<string>;
+}
+
+export interface GetMdbGreenplumClusterPxfConfig {
+    connectionTimeout?: number;
+    maxThreads?: number;
+    poolAllowCoreThreadTimeout?: boolean;
+    poolCoreSize?: number;
+    poolMaxSize?: number;
+    poolQueueCapacity?: number;
+    uploadTimeout?: number;
+    xms?: number;
+    xmx?: number;
+}
+
+export interface GetMdbGreenplumClusterPxfConfigArgs {
+    connectionTimeout?: pulumi.Input<number>;
+    maxThreads?: pulumi.Input<number>;
+    poolAllowCoreThreadTimeout?: pulumi.Input<boolean>;
+    poolCoreSize?: pulumi.Input<number>;
+    poolMaxSize?: pulumi.Input<number>;
+    poolQueueCapacity?: pulumi.Input<number>;
+    uploadTimeout?: pulumi.Input<number>;
+    xms?: pulumi.Input<number>;
+    xmx?: pulumi.Input<number>;
+}
+
+export interface GetMdbKafkaClusterConfig {
+    /**
+     * Access policy to the Kafka cluster.
+     */
+    access?: inputs.GetMdbKafkaClusterConfigAccess;
+    /**
+     * Determines whether each broker will be assigned a public IP address. The default is `false`.
+     */
+    assignPublicIp?: boolean;
+    /**
+     * Count of brokers per availability zone. The default is `1`.
+     */
+    brokersCount?: number;
+    /**
+     * Disk autoscaling settings of the Kafka cluster.
+     */
+    diskSizeAutoscaling?: inputs.GetMdbKafkaClusterConfigDiskSizeAutoscaling;
+    /**
+     * Configuration of the Kafka subcluster.
+     */
+    kafka: inputs.GetMdbKafkaClusterConfigKafka;
+    /**
+     * Configuration of the KRaft-controller subcluster.
+     */
+    kraft?: inputs.GetMdbKafkaClusterConfigKraft;
+    /**
+     * REST API settings of the Kafka cluster.
+     */
+    restApi?: inputs.GetMdbKafkaClusterConfigRestApi;
+    /**
+     * Enables managed schema registry on cluster. The default is `false`.
+     */
+    schemaRegistry?: boolean;
+    /**
+     * @deprecated The 'unmanaged_topics' field has been deprecated, because feature enabled permanently and can't be disabled.
+     */
+    unmanagedTopics?: boolean;
+    /**
+     * Version of the Kafka server software.
+     */
+    version: string;
+    /**
+     * List of availability zones.
+     */
+    zones: string[];
+    /**
+     * Configuration of the ZooKeeper subcluster.
+     */
+    zookeeper?: inputs.GetMdbKafkaClusterConfigZookeeper;
+}
+
+export interface GetMdbKafkaClusterConfigArgs {
+    /**
+     * Access policy to the Kafka cluster.
+     */
+    access?: pulumi.Input<inputs.GetMdbKafkaClusterConfigAccessArgs>;
+    /**
+     * Determines whether each broker will be assigned a public IP address. The default is `false`.
+     */
+    assignPublicIp?: pulumi.Input<boolean>;
+    /**
+     * Count of brokers per availability zone. The default is `1`.
+     */
+    brokersCount?: pulumi.Input<number>;
+    /**
+     * Disk autoscaling settings of the Kafka cluster.
+     */
+    diskSizeAutoscaling?: pulumi.Input<inputs.GetMdbKafkaClusterConfigDiskSizeAutoscalingArgs>;
+    /**
+     * Configuration of the Kafka subcluster.
+     */
+    kafka: pulumi.Input<inputs.GetMdbKafkaClusterConfigKafkaArgs>;
+    /**
+     * Configuration of the KRaft-controller subcluster.
+     */
+    kraft?: pulumi.Input<inputs.GetMdbKafkaClusterConfigKraftArgs>;
+    /**
+     * REST API settings of the Kafka cluster.
+     */
+    restApi?: pulumi.Input<inputs.GetMdbKafkaClusterConfigRestApiArgs>;
+    /**
+     * Enables managed schema registry on cluster. The default is `false`.
+     */
+    schemaRegistry?: pulumi.Input<boolean>;
+    /**
+     * @deprecated The 'unmanaged_topics' field has been deprecated, because feature enabled permanently and can't be disabled.
+     */
+    unmanagedTopics?: pulumi.Input<boolean>;
+    /**
+     * Version of the Kafka server software.
+     */
+    version: pulumi.Input<string>;
+    /**
+     * List of availability zones.
+     */
+    zones: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Configuration of the ZooKeeper subcluster.
+     */
+    zookeeper?: pulumi.Input<inputs.GetMdbKafkaClusterConfigZookeeperArgs>;
+}
+
+export interface GetMdbKafkaClusterConfigAccess {
+    /**
+     * Allow access for [DataTransfer](https://yandex.cloud/services/data-transfer).
+     */
+    dataTransfer?: boolean;
+}
+
+export interface GetMdbKafkaClusterConfigAccessArgs {
+    /**
+     * Allow access for [DataTransfer](https://yandex.cloud/services/data-transfer).
+     */
+    dataTransfer?: pulumi.Input<boolean>;
+}
+
+export interface GetMdbKafkaClusterConfigDiskSizeAutoscaling {
+    /**
+     * Maximum possible size of disk in bytes.
+     */
+    diskSizeLimit: number;
+    /**
+     * Percent of disk utilization. Disk will autoscale immediately, if this threshold reached. Value is between 0 and 100. Default value is 0 (autoscaling disabled). Must be not less then 'planned_usage_threshold' value.
+     */
+    emergencyUsageThreshold?: number;
+    /**
+     * Percent of disk utilization. During maintenance disk will autoscale, if this threshold reached. Value is between 0 and 100. Default value is 0 (autoscaling disabled).
+     */
+    plannedUsageThreshold?: number;
+}
+
+export interface GetMdbKafkaClusterConfigDiskSizeAutoscalingArgs {
+    /**
+     * Maximum possible size of disk in bytes.
+     */
+    diskSizeLimit: pulumi.Input<number>;
+    /**
+     * Percent of disk utilization. Disk will autoscale immediately, if this threshold reached. Value is between 0 and 100. Default value is 0 (autoscaling disabled). Must be not less then 'planned_usage_threshold' value.
+     */
+    emergencyUsageThreshold?: pulumi.Input<number>;
+    /**
+     * Percent of disk utilization. During maintenance disk will autoscale, if this threshold reached. Value is between 0 and 100. Default value is 0 (autoscaling disabled).
+     */
+    plannedUsageThreshold?: pulumi.Input<number>;
+}
+
+export interface GetMdbKafkaClusterConfigKafka {
+    /**
+     * User-defined settings for the Kafka cluster. For more information, see [the official documentation](https://yandex.cloud/docs/managed-kafka/operations/cluster-update) and [the Kafka documentation](https://kafka.apache.org/documentation/#configuration).
+     */
+    kafkaConfig?: inputs.GetMdbKafkaClusterConfigKafkaKafkaConfig;
+    /**
+     * Resources allocated to hosts of the Kafka subcluster.
+     */
+    resources: inputs.GetMdbKafkaClusterConfigKafkaResources;
+}
+
+export interface GetMdbKafkaClusterConfigKafkaArgs {
+    /**
+     * User-defined settings for the Kafka cluster. For more information, see [the official documentation](https://yandex.cloud/docs/managed-kafka/operations/cluster-update) and [the Kafka documentation](https://kafka.apache.org/documentation/#configuration).
+     */
+    kafkaConfig?: pulumi.Input<inputs.GetMdbKafkaClusterConfigKafkaKafkaConfigArgs>;
+    /**
+     * Resources allocated to hosts of the Kafka subcluster.
+     */
+    resources: pulumi.Input<inputs.GetMdbKafkaClusterConfigKafkaResourcesArgs>;
+}
+
+export interface GetMdbKafkaClusterConfigKafkaKafkaConfig {
+    /**
+     * Enable auto creation of topic on the server.
+     */
+    autoCreateTopicsEnable?: boolean;
+    /**
+     * Compression type of kafka topics.
+     */
+    compressionType?: string;
+    /**
+     * The replication factor for automatically created topics, and for topics created with -1 as the replication factor.
+     */
+    defaultReplicationFactor?: string;
+    /**
+     * The number of messages accumulated on a log partition before messages are flushed to disk.
+     */
+    logFlushIntervalMessages?: string;
+    /**
+     * The maximum time in ms that a message in any topic is kept in memory before flushed to disk. If not set, the value in log.flush.scheduler.interval.ms is used.
+     */
+    logFlushIntervalMs?: string;
+    /**
+     * The frequency in ms that the log flusher checks whether any log needs to be flushed to disk.
+     */
+    logFlushSchedulerIntervalMs?: string;
+    /**
+     * Should pre allocate file when create new segment?
+     */
+    logPreallocate?: boolean;
+    /**
+     * The maximum size of the log before deleting it.
+     */
+    logRetentionBytes?: string;
+    /**
+     * The number of hours to keep a log file before deleting it (in hours), tertiary to log.retention.ms property.
+     */
+    logRetentionHours?: string;
+    /**
+     * The number of minutes to keep a log file before deleting it (in minutes), secondary to log.retention.ms property. If not set, the value in log.retention.hours is used.
+     */
+    logRetentionMinutes?: string;
+    /**
+     * The number of milliseconds to keep a log file before deleting it (in milliseconds), If not set, the value in log.retention.minutes is used. If set to -1, no time limit is applied.
+     */
+    logRetentionMs?: string;
+    /**
+     * The maximum size of a single log file.
+     */
+    logSegmentBytes?: string;
+    /**
+     * The largest record batch size allowed by Kafka (after compression if compression is enabled).
+     */
+    messageMaxBytes?: string;
+    /**
+     * The default number of log partitions per topic.
+     */
+    numPartitions?: string;
+    /**
+     * For subscribed consumers, committed offset of a specific partition will be expired and discarded after this period of time.
+     */
+    offsetsRetentionMinutes?: string;
+    /**
+     * The number of bytes of messages to attempt to fetch for each partition.
+     */
+    replicaFetchMaxBytes?: string;
+    /**
+     * The list of SASL mechanisms enabled in the Kafka server.
+     */
+    saslEnabledMechanisms?: string[];
+    /**
+     * The SO_RCVBUF buffer of the socket server sockets. If the value is -1, the OS default will be used.
+     */
+    socketReceiveBufferBytes?: string;
+    /**
+     * The SO_SNDBUF buffer of the socket server sockets. If the value is -1, the OS default will be used.
+     */
+    socketSendBufferBytes?: string;
+    /**
+     * A list of cipher suites.
+     */
+    sslCipherSuites?: string[];
+}
+
+export interface GetMdbKafkaClusterConfigKafkaKafkaConfigArgs {
+    /**
+     * Enable auto creation of topic on the server.
+     */
+    autoCreateTopicsEnable?: pulumi.Input<boolean>;
+    /**
+     * Compression type of kafka topics.
+     */
+    compressionType?: pulumi.Input<string>;
+    /**
+     * The replication factor for automatically created topics, and for topics created with -1 as the replication factor.
+     */
+    defaultReplicationFactor?: pulumi.Input<string>;
+    /**
+     * The number of messages accumulated on a log partition before messages are flushed to disk.
+     */
+    logFlushIntervalMessages?: pulumi.Input<string>;
+    /**
+     * The maximum time in ms that a message in any topic is kept in memory before flushed to disk. If not set, the value in log.flush.scheduler.interval.ms is used.
+     */
+    logFlushIntervalMs?: pulumi.Input<string>;
+    /**
+     * The frequency in ms that the log flusher checks whether any log needs to be flushed to disk.
+     */
+    logFlushSchedulerIntervalMs?: pulumi.Input<string>;
+    /**
+     * Should pre allocate file when create new segment?
+     */
+    logPreallocate?: pulumi.Input<boolean>;
+    /**
+     * The maximum size of the log before deleting it.
+     */
+    logRetentionBytes?: pulumi.Input<string>;
+    /**
+     * The number of hours to keep a log file before deleting it (in hours), tertiary to log.retention.ms property.
+     */
+    logRetentionHours?: pulumi.Input<string>;
+    /**
+     * The number of minutes to keep a log file before deleting it (in minutes), secondary to log.retention.ms property. If not set, the value in log.retention.hours is used.
+     */
+    logRetentionMinutes?: pulumi.Input<string>;
+    /**
+     * The number of milliseconds to keep a log file before deleting it (in milliseconds), If not set, the value in log.retention.minutes is used. If set to -1, no time limit is applied.
+     */
+    logRetentionMs?: pulumi.Input<string>;
+    /**
+     * The maximum size of a single log file.
+     */
+    logSegmentBytes?: pulumi.Input<string>;
+    /**
+     * The largest record batch size allowed by Kafka (after compression if compression is enabled).
+     */
+    messageMaxBytes?: pulumi.Input<string>;
+    /**
+     * The default number of log partitions per topic.
+     */
+    numPartitions?: pulumi.Input<string>;
+    /**
+     * For subscribed consumers, committed offset of a specific partition will be expired and discarded after this period of time.
+     */
+    offsetsRetentionMinutes?: pulumi.Input<string>;
+    /**
+     * The number of bytes of messages to attempt to fetch for each partition.
+     */
+    replicaFetchMaxBytes?: pulumi.Input<string>;
+    /**
+     * The list of SASL mechanisms enabled in the Kafka server.
+     */
+    saslEnabledMechanisms?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The SO_RCVBUF buffer of the socket server sockets. If the value is -1, the OS default will be used.
+     */
+    socketReceiveBufferBytes?: pulumi.Input<string>;
+    /**
+     * The SO_SNDBUF buffer of the socket server sockets. If the value is -1, the OS default will be used.
+     */
+    socketSendBufferBytes?: pulumi.Input<string>;
+    /**
+     * A list of cipher suites.
+     */
+    sslCipherSuites?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface GetMdbKafkaClusterConfigKafkaResources {
+    /**
+     * Volume of the storage available to a Kafka host, in gigabytes.
+     */
+    diskSize: number;
+    /**
+     * Type of the storage of Kafka hosts. For more information see [the official documentation](https://yandex.cloud/docs/managed-kafka/concepts/storage).
+     */
+    diskTypeId: string;
+    /**
+     * The ID of the preset for computational resources available to a Kafka host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-kafka/concepts).
+     */
+    resourcePresetId: string;
+}
+
+export interface GetMdbKafkaClusterConfigKafkaResourcesArgs {
+    /**
+     * Volume of the storage available to a Kafka host, in gigabytes.
+     */
+    diskSize: pulumi.Input<number>;
+    /**
+     * Type of the storage of Kafka hosts. For more information see [the official documentation](https://yandex.cloud/docs/managed-kafka/concepts/storage).
+     */
+    diskTypeId: pulumi.Input<string>;
+    /**
+     * The ID of the preset for computational resources available to a Kafka host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-kafka/concepts).
+     */
+    resourcePresetId: pulumi.Input<string>;
+}
+
+export interface GetMdbKafkaClusterConfigKraft {
+    /**
+     * Resources allocated to hosts of the KRaft-controller subcluster.
+     */
+    resources?: inputs.GetMdbKafkaClusterConfigKraftResources;
+}
+
+export interface GetMdbKafkaClusterConfigKraftArgs {
+    /**
+     * Resources allocated to hosts of the KRaft-controller subcluster.
+     */
+    resources?: pulumi.Input<inputs.GetMdbKafkaClusterConfigKraftResourcesArgs>;
+}
+
+export interface GetMdbKafkaClusterConfigKraftResources {
+    /**
+     * Volume of the storage available to a KRaft-controller host, in gigabytes.
+     */
+    diskSize?: number;
+    /**
+     * Type of the storage of KRaft-controller hosts. For more information see [the official documentation](https://yandex.cloud/docs/managed-kafka/concepts/storage).
+     */
+    diskTypeId?: string;
+    /**
+     * The ID of the preset for computational resources available to a KRaft-controller host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-kafka/concepts).
+     */
+    resourcePresetId?: string;
+}
+
+export interface GetMdbKafkaClusterConfigKraftResourcesArgs {
+    /**
+     * Volume of the storage available to a KRaft-controller host, in gigabytes.
+     */
+    diskSize?: pulumi.Input<number>;
+    /**
+     * Type of the storage of KRaft-controller hosts. For more information see [the official documentation](https://yandex.cloud/docs/managed-kafka/concepts/storage).
+     */
+    diskTypeId?: pulumi.Input<string>;
+    /**
+     * The ID of the preset for computational resources available to a KRaft-controller host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-kafka/concepts).
+     */
+    resourcePresetId?: pulumi.Input<string>;
+}
+
+export interface GetMdbKafkaClusterConfigRestApi {
+    /**
+     * Enables REST API on cluster. The default is `false`.
+     */
+    enabled?: boolean;
+}
+
+export interface GetMdbKafkaClusterConfigRestApiArgs {
+    /**
+     * Enables REST API on cluster. The default is `false`.
+     */
+    enabled?: pulumi.Input<boolean>;
+}
+
+export interface GetMdbKafkaClusterConfigZookeeper {
+    /**
+     * Resources allocated to hosts of the ZooKeeper subcluster.
+     */
+    resources?: inputs.GetMdbKafkaClusterConfigZookeeperResources;
+}
+
+export interface GetMdbKafkaClusterConfigZookeeperArgs {
+    /**
+     * Resources allocated to hosts of the ZooKeeper subcluster.
+     */
+    resources?: pulumi.Input<inputs.GetMdbKafkaClusterConfigZookeeperResourcesArgs>;
+}
+
+export interface GetMdbKafkaClusterConfigZookeeperResources {
+    /**
+     * Volume of the storage available to a ZooKeeper host, in gigabytes.
+     */
+    diskSize?: number;
+    /**
+     * Type of the storage of ZooKeeper hosts. For more information see [the official documentation](https://yandex.cloud/docs/managed-kafka/concepts/storage).
+     */
+    diskTypeId?: string;
+    /**
+     * The ID of the preset for computational resources available to a ZooKeeper host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-kafka/concepts).
+     */
+    resourcePresetId?: string;
+}
+
+export interface GetMdbKafkaClusterConfigZookeeperResourcesArgs {
+    /**
+     * Volume of the storage available to a ZooKeeper host, in gigabytes.
+     */
+    diskSize?: pulumi.Input<number>;
+    /**
+     * Type of the storage of ZooKeeper hosts. For more information see [the official documentation](https://yandex.cloud/docs/managed-kafka/concepts/storage).
+     */
+    diskTypeId?: pulumi.Input<string>;
+    /**
+     * The ID of the preset for computational resources available to a ZooKeeper host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-kafka/concepts).
+     */
+    resourcePresetId?: pulumi.Input<string>;
+}
+
+export interface GetMdbKafkaClusterTopic {
+    /**
+     * The name of the topic.
+     */
+    name: string;
+    /**
+     * The number of the topic's partitions.
+     */
+    partitions: number;
+    /**
+     * Amount of data copies (replicas) for the topic in the cluster.
+     */
+    replicationFactor: number;
+    /**
+     * User-defined settings for the topic. For more information, see [the official documentation](https://yandex.cloud/docs/managed-kafka/operations/cluster-topics#update-topic) and [the Kafka documentation](https://kafka.apache.org/documentation/#configuration).
+     */
+    topicConfig?: inputs.GetMdbKafkaClusterTopicTopicConfig;
+}
+
+export interface GetMdbKafkaClusterTopicArgs {
+    /**
+     * The name of the topic.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * The number of the topic's partitions.
+     */
+    partitions: pulumi.Input<number>;
+    /**
+     * Amount of data copies (replicas) for the topic in the cluster.
+     */
+    replicationFactor: pulumi.Input<number>;
+    /**
+     * User-defined settings for the topic. For more information, see [the official documentation](https://yandex.cloud/docs/managed-kafka/operations/cluster-topics#update-topic) and [the Kafka documentation](https://kafka.apache.org/documentation/#configuration).
+     */
+    topicConfig?: pulumi.Input<inputs.GetMdbKafkaClusterTopicTopicConfigArgs>;
+}
+
+export interface GetMdbKafkaClusterTopicTopicConfig {
+    /**
+     * Retention policy to use on log segments.
+     */
+    cleanupPolicy?: string;
+    /**
+     * Compression type of kafka topic.
+     */
+    compressionType?: string;
+    /**
+     * The amount of time to retain delete tombstone markers for log compacted topics.
+     */
+    deleteRetentionMs?: string;
+    /**
+     * The time to wait before deleting a file from the filesystem.
+     */
+    fileDeleteDelayMs?: string;
+    /**
+     * This setting allows specifying an interval at which we will force an fsync of data written to the log.
+     */
+    flushMessages?: string;
+    /**
+     * This setting allows specifying a time interval at which we will force an fsync of data written to the log.
+     */
+    flushMs?: string;
+    /**
+     * The largest record batch size allowed by Kafka (after compression if compression is enabled).
+     */
+    maxMessageBytes?: string;
+    /**
+     * The minimum time a message will remain uncompacted in the log. Only applicable for logs that are being compacted.
+     */
+    minCompactionLagMs?: string;
+    /**
+     * When a producer sets acks to "all" (or "-1"), this configuration specifies the minimum number of replicas that must acknowledge a write for the write to be considered successful.
+     */
+    minInsyncReplicas?: string;
+    /**
+     * True if we should preallocate the file on disk when creating a new log segment.
+     */
+    preallocate?: boolean;
+    /**
+     * This configuration controls the maximum size a partition (which consists of log segments) can grow to before we will discard old log segments to free up space if we are using the "delete" retention policy.
+     */
+    retentionBytes?: string;
+    /**
+     * This configuration controls the maximum time we will retain a log before we will discard old log segments to free up space if we are using the "delete" retention policy.
+     */
+    retentionMs?: string;
+    /**
+     * This configuration controls the segment file size for the log.
+     */
+    segmentBytes?: string;
+}
+
+export interface GetMdbKafkaClusterTopicTopicConfigArgs {
+    /**
+     * Retention policy to use on log segments.
+     */
+    cleanupPolicy?: pulumi.Input<string>;
+    /**
+     * Compression type of kafka topic.
+     */
+    compressionType?: pulumi.Input<string>;
+    /**
+     * The amount of time to retain delete tombstone markers for log compacted topics.
+     */
+    deleteRetentionMs?: pulumi.Input<string>;
+    /**
+     * The time to wait before deleting a file from the filesystem.
+     */
+    fileDeleteDelayMs?: pulumi.Input<string>;
+    /**
+     * This setting allows specifying an interval at which we will force an fsync of data written to the log.
+     */
+    flushMessages?: pulumi.Input<string>;
+    /**
+     * This setting allows specifying a time interval at which we will force an fsync of data written to the log.
+     */
+    flushMs?: pulumi.Input<string>;
+    /**
+     * The largest record batch size allowed by Kafka (after compression if compression is enabled).
+     */
+    maxMessageBytes?: pulumi.Input<string>;
+    /**
+     * The minimum time a message will remain uncompacted in the log. Only applicable for logs that are being compacted.
+     */
+    minCompactionLagMs?: pulumi.Input<string>;
+    /**
+     * When a producer sets acks to "all" (or "-1"), this configuration specifies the minimum number of replicas that must acknowledge a write for the write to be considered successful.
+     */
+    minInsyncReplicas?: pulumi.Input<string>;
+    /**
+     * True if we should preallocate the file on disk when creating a new log segment.
+     */
+    preallocate?: pulumi.Input<boolean>;
+    /**
+     * This configuration controls the maximum size a partition (which consists of log segments) can grow to before we will discard old log segments to free up space if we are using the "delete" retention policy.
+     */
+    retentionBytes?: pulumi.Input<string>;
+    /**
+     * This configuration controls the maximum time we will retain a log before we will discard old log segments to free up space if we are using the "delete" retention policy.
+     */
+    retentionMs?: pulumi.Input<string>;
+    /**
+     * This configuration controls the segment file size for the log.
+     */
+    segmentBytes?: pulumi.Input<string>;
+}
+
+export interface GetMdbKafkaClusterUser {
+    /**
+     * The name of the user.
+     */
+    name: string;
+    /**
+     * The password of the user.
+     */
+    password: string;
+    /**
+     * Set of permissions granted to the user.
+     */
+    permissions?: inputs.GetMdbKafkaClusterUserPermission[];
+}
+
+export interface GetMdbKafkaClusterUserArgs {
+    /**
+     * The name of the user.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * The password of the user.
+     */
+    password: pulumi.Input<string>;
+    /**
+     * Set of permissions granted to the user.
+     */
+    permissions?: pulumi.Input<pulumi.Input<inputs.GetMdbKafkaClusterUserPermissionArgs>[]>;
+}
+
+export interface GetMdbKafkaClusterUserPermission {
+    /**
+     * Set of hosts, to which this permission grants access to. Only ip-addresses allowed as value of single host.
+     */
+    allowHosts?: string[];
+    /**
+     * The role type to grant to the topic.
+     */
+    role: string;
+    /**
+     * The name of the topic that the permission grants access to.
+     */
+    topicName: string;
+}
+
+export interface GetMdbKafkaClusterUserPermissionArgs {
+    /**
+     * Set of hosts, to which this permission grants access to. Only ip-addresses allowed as value of single host.
+     */
+    allowHosts?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The role type to grant to the topic.
+     */
+    role: pulumi.Input<string>;
+    /**
+     * The name of the topic that the permission grants access to.
+     */
+    topicName: pulumi.Input<string>;
+}
+
+export interface GetMdbMongodbClusterClusterConfig {
+    /**
+     * Access policy to the MongoDB cluster.
+     */
+    access?: inputs.GetMdbMongodbClusterClusterConfigAccess;
+    /**
+     * Retain period of automatically created backup in days.
+     */
+    backupRetainPeriodDays?: number;
+    /**
+     * Time to start the daily backup, in the UTC timezone.
+     */
+    backupWindowStart?: inputs.GetMdbMongodbClusterClusterConfigBackupWindowStart;
+    /**
+     * Feature compatibility version of MongoDB. If not provided version is taken. Can be either `6.0`, `5.0`, `4.4` and `4.2`.
+     */
+    featureCompatibilityVersion?: string;
+    /**
+     * Configuration of the mongocfg service.
+     */
+    mongocfg?: inputs.GetMdbMongodbClusterClusterConfigMongocfg;
+    /**
+     * Configuration of the mongod service.
+     */
+    mongod?: inputs.GetMdbMongodbClusterClusterConfigMongod;
+    /**
+     * Configuration of the mongos service.
+     */
+    mongos?: inputs.GetMdbMongodbClusterClusterConfigMongos;
+    /**
+     * Performance diagnostics to the MongoDB cluster.
+     */
+    performanceDiagnostics?: inputs.GetMdbMongodbClusterClusterConfigPerformanceDiagnostics;
+    /**
+     * Version of the MongoDB server software. Can be either `4.2`, `4.4`, `4.4-enterprise`, `5.0`, `5.0-enterprise`, `6.0` and `6.0-enterprise`.
+     */
+    version?: string;
+}
+
+export interface GetMdbMongodbClusterClusterConfigArgs {
+    /**
+     * Access policy to the MongoDB cluster.
+     */
+    access?: pulumi.Input<inputs.GetMdbMongodbClusterClusterConfigAccessArgs>;
+    /**
+     * Retain period of automatically created backup in days.
+     */
+    backupRetainPeriodDays?: pulumi.Input<number>;
+    /**
+     * Time to start the daily backup, in the UTC timezone.
+     */
+    backupWindowStart?: pulumi.Input<inputs.GetMdbMongodbClusterClusterConfigBackupWindowStartArgs>;
+    /**
+     * Feature compatibility version of MongoDB. If not provided version is taken. Can be either `6.0`, `5.0`, `4.4` and `4.2`.
+     */
+    featureCompatibilityVersion?: pulumi.Input<string>;
+    /**
+     * Configuration of the mongocfg service.
+     */
+    mongocfg?: pulumi.Input<inputs.GetMdbMongodbClusterClusterConfigMongocfgArgs>;
+    /**
+     * Configuration of the mongod service.
+     */
+    mongod?: pulumi.Input<inputs.GetMdbMongodbClusterClusterConfigMongodArgs>;
+    /**
+     * Configuration of the mongos service.
+     */
+    mongos?: pulumi.Input<inputs.GetMdbMongodbClusterClusterConfigMongosArgs>;
+    /**
+     * Performance diagnostics to the MongoDB cluster.
+     */
+    performanceDiagnostics?: pulumi.Input<inputs.GetMdbMongodbClusterClusterConfigPerformanceDiagnosticsArgs>;
+    /**
+     * Version of the MongoDB server software. Can be either `4.2`, `4.4`, `4.4-enterprise`, `5.0`, `5.0-enterprise`, `6.0` and `6.0-enterprise`.
+     */
+    version?: pulumi.Input<string>;
+}
+
+export interface GetMdbMongodbClusterClusterConfigAccess {
+    /**
+     * Allow access for [Yandex DataLens](https://yandex.cloud/services/datalens).
+     */
+    dataLens?: boolean;
+    /**
+     * Allow access for [DataTransfer](https://yandex.cloud/services/data-transfer).
+     */
+    dataTransfer?: boolean;
+    /**
+     * Allow access for [WebSQL](https://yandex.cloud/ru/docs/websql/).
+     */
+    webSql?: boolean;
+}
+
+export interface GetMdbMongodbClusterClusterConfigAccessArgs {
+    /**
+     * Allow access for [Yandex DataLens](https://yandex.cloud/services/datalens).
+     */
+    dataLens?: pulumi.Input<boolean>;
+    /**
+     * Allow access for [DataTransfer](https://yandex.cloud/services/data-transfer).
+     */
+    dataTransfer?: pulumi.Input<boolean>;
+    /**
+     * Allow access for [WebSQL](https://yandex.cloud/ru/docs/websql/).
+     */
+    webSql?: pulumi.Input<boolean>;
+}
+
+export interface GetMdbMongodbClusterClusterConfigBackupWindowStart {
+    /**
+     * The hour at which backup will be started.
+     */
+    hours?: number;
+    /**
+     * The minute at which backup will be started.
+     */
+    minutes?: number;
+}
+
+export interface GetMdbMongodbClusterClusterConfigBackupWindowStartArgs {
+    /**
+     * The hour at which backup will be started.
+     */
+    hours?: pulumi.Input<number>;
+    /**
+     * The minute at which backup will be started.
+     */
+    minutes?: pulumi.Input<number>;
+}
+
+export interface GetMdbMongodbClusterClusterConfigMongocfg {
+    /**
+     * A set of network settings (see the [net](https://www.mongodb.com/docs/manual/reference/configuration-options/#net-options) option).
+     */
+    net?: inputs.GetMdbMongodbClusterClusterConfigMongocfgNet;
+    /**
+     * A set of profiling settings (see the [operationProfiling](https://www.mongodb.com/docs/manual/reference/configuration-options/#operationprofiling-options) option).
+     */
+    operationProfiling?: inputs.GetMdbMongodbClusterClusterConfigMongocfgOperationProfiling;
+    /**
+     * A set of storage settings (see the [storage](https://www.mongodb.com/docs/manual/reference/configuration-options/#storage-options) option).
+     */
+    storage?: inputs.GetMdbMongodbClusterClusterConfigMongocfgStorage;
+}
+
+export interface GetMdbMongodbClusterClusterConfigMongocfgArgs {
+    /**
+     * A set of network settings (see the [net](https://www.mongodb.com/docs/manual/reference/configuration-options/#net-options) option).
+     */
+    net?: pulumi.Input<inputs.GetMdbMongodbClusterClusterConfigMongocfgNetArgs>;
+    /**
+     * A set of profiling settings (see the [operationProfiling](https://www.mongodb.com/docs/manual/reference/configuration-options/#operationprofiling-options) option).
+     */
+    operationProfiling?: pulumi.Input<inputs.GetMdbMongodbClusterClusterConfigMongocfgOperationProfilingArgs>;
+    /**
+     * A set of storage settings (see the [storage](https://www.mongodb.com/docs/manual/reference/configuration-options/#storage-options) option).
+     */
+    storage?: pulumi.Input<inputs.GetMdbMongodbClusterClusterConfigMongocfgStorageArgs>;
+}
+
+export interface GetMdbMongodbClusterClusterConfigMongocfgNet {
+    maxIncomingConnections?: number;
+}
+
+export interface GetMdbMongodbClusterClusterConfigMongocfgNetArgs {
+    maxIncomingConnections?: pulumi.Input<number>;
+}
+
+export interface GetMdbMongodbClusterClusterConfigMongocfgOperationProfiling {
+    mode?: string;
+    slowOpThreshold?: number;
+}
+
+export interface GetMdbMongodbClusterClusterConfigMongocfgOperationProfilingArgs {
+    mode?: pulumi.Input<string>;
+    slowOpThreshold?: pulumi.Input<number>;
+}
+
+export interface GetMdbMongodbClusterClusterConfigMongocfgStorage {
+    wiredTiger?: inputs.GetMdbMongodbClusterClusterConfigMongocfgStorageWiredTiger;
+}
+
+export interface GetMdbMongodbClusterClusterConfigMongocfgStorageArgs {
+    wiredTiger?: pulumi.Input<inputs.GetMdbMongodbClusterClusterConfigMongocfgStorageWiredTigerArgs>;
+}
+
+export interface GetMdbMongodbClusterClusterConfigMongocfgStorageWiredTiger {
+    cacheSizeGb?: number;
+}
+
+export interface GetMdbMongodbClusterClusterConfigMongocfgStorageWiredTigerArgs {
+    cacheSizeGb?: pulumi.Input<number>;
+}
+
+export interface GetMdbMongodbClusterClusterConfigMongod {
+    /**
+     * A set of audit log settings (see the [auditLog](https://www.mongodb.com/docs/manual/reference/configuration-options/#auditlog-options) option). Available only in enterprise edition.
+     */
+    auditLog?: inputs.GetMdbMongodbClusterClusterConfigMongodAuditLog;
+    /**
+     * A set of network settings (see the [net](https://www.mongodb.com/docs/manual/reference/configuration-options/#net-options) option).
+     */
+    net?: inputs.GetMdbMongodbClusterClusterConfigMongodNet;
+    /**
+     * A set of profiling settings (see the [operationProfiling](https://www.mongodb.com/docs/manual/reference/configuration-options/#operationprofiling-options) option).
+     */
+    operationProfiling?: inputs.GetMdbMongodbClusterClusterConfigMongodOperationProfiling;
+    /**
+     * A set of MongoDB Security settings (see the [security](https://www.mongodb.com/docs/manual/reference/configuration-options/#security-options) option). Available only in enterprise edition.
+     */
+    security?: inputs.GetMdbMongodbClusterClusterConfigMongodSecurity;
+    /**
+     * A set of MongoDB Server Parameters (see the [setParameter](https://www.mongodb.com/docs/manual/reference/configuration-options/#setparameter-option) option).
+     */
+    setParameter?: inputs.GetMdbMongodbClusterClusterConfigMongodSetParameter;
+    /**
+     * A set of storage settings (see the [storage](https://www.mongodb.com/docs/manual/reference/configuration-options/#storage-options) option).
+     */
+    storage?: inputs.GetMdbMongodbClusterClusterConfigMongodStorage;
+}
+
+export interface GetMdbMongodbClusterClusterConfigMongodArgs {
+    /**
+     * A set of audit log settings (see the [auditLog](https://www.mongodb.com/docs/manual/reference/configuration-options/#auditlog-options) option). Available only in enterprise edition.
+     */
+    auditLog?: pulumi.Input<inputs.GetMdbMongodbClusterClusterConfigMongodAuditLogArgs>;
+    /**
+     * A set of network settings (see the [net](https://www.mongodb.com/docs/manual/reference/configuration-options/#net-options) option).
+     */
+    net?: pulumi.Input<inputs.GetMdbMongodbClusterClusterConfigMongodNetArgs>;
+    /**
+     * A set of profiling settings (see the [operationProfiling](https://www.mongodb.com/docs/manual/reference/configuration-options/#operationprofiling-options) option).
+     */
+    operationProfiling?: pulumi.Input<inputs.GetMdbMongodbClusterClusterConfigMongodOperationProfilingArgs>;
+    /**
+     * A set of MongoDB Security settings (see the [security](https://www.mongodb.com/docs/manual/reference/configuration-options/#security-options) option). Available only in enterprise edition.
+     */
+    security?: pulumi.Input<inputs.GetMdbMongodbClusterClusterConfigMongodSecurityArgs>;
+    /**
+     * A set of MongoDB Server Parameters (see the [setParameter](https://www.mongodb.com/docs/manual/reference/configuration-options/#setparameter-option) option).
+     */
+    setParameter?: pulumi.Input<inputs.GetMdbMongodbClusterClusterConfigMongodSetParameterArgs>;
+    /**
+     * A set of storage settings (see the [storage](https://www.mongodb.com/docs/manual/reference/configuration-options/#storage-options) option).
+     */
+    storage?: pulumi.Input<inputs.GetMdbMongodbClusterClusterConfigMongodStorageArgs>;
+}
+
+export interface GetMdbMongodbClusterClusterConfigMongodAuditLog {
+    /**
+     * Configuration of the audit log filter in JSON format. For more information see [auditLog.filter](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-auditLog.filter) description in the official documentation. Available only in enterprise edition.
+     */
+    filter?: string;
+    /**
+     * Specifies if a node allows runtime configuration of audit filters and the auditAuthorizationSuccess variable. For more information see [auditLog.runtimeConfiguration](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-auditLog.runtimeConfiguration) description in the official documentation. Available only in enterprise edition.
+     */
+    runtimeConfiguration?: boolean;
+}
+
+export interface GetMdbMongodbClusterClusterConfigMongodAuditLogArgs {
+    /**
+     * Configuration of the audit log filter in JSON format. For more information see [auditLog.filter](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-auditLog.filter) description in the official documentation. Available only in enterprise edition.
+     */
+    filter?: pulumi.Input<string>;
+    /**
+     * Specifies if a node allows runtime configuration of audit filters and the auditAuthorizationSuccess variable. For more information see [auditLog.runtimeConfiguration](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-auditLog.runtimeConfiguration) description in the official documentation. Available only in enterprise edition.
+     */
+    runtimeConfiguration?: pulumi.Input<boolean>;
+}
+
+export interface GetMdbMongodbClusterClusterConfigMongodNet {
+    /**
+     * Specifies the default compressor(s) to use for communication between this mongod or mongos. Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd, disabled. To disable network compression, make `disabled` the only value. For more information, see the [net.Compression.Compressors](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-net.compression.compressors) description in the official documentation.
+     */
+    compressors?: string[];
+    /**
+     * The maximum number of simultaneous connections that host will accept. For more information, see the [net.maxIncomingConnections](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-net.maxIncomingConnections) description in the official documentation.
+     */
+    maxIncomingConnections?: number;
+}
+
+export interface GetMdbMongodbClusterClusterConfigMongodNetArgs {
+    /**
+     * Specifies the default compressor(s) to use for communication between this mongod or mongos. Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd, disabled. To disable network compression, make `disabled` the only value. For more information, see the [net.Compression.Compressors](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-net.compression.compressors) description in the official documentation.
+     */
+    compressors?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The maximum number of simultaneous connections that host will accept. For more information, see the [net.maxIncomingConnections](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-net.maxIncomingConnections) description in the official documentation.
+     */
+    maxIncomingConnections?: pulumi.Input<number>;
+}
+
+export interface GetMdbMongodbClusterClusterConfigMongodOperationProfiling {
+    /**
+     * Specifies which operations should be profiled. The following profiler levels are available: off, slow_op, all. For more information, see the [operationProfiling.mode](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-operationProfiling.mode) description in the official documentation.
+     */
+    mode?: string;
+    /**
+     * The fraction of slow operations that should be profiled or logged. Accepts values between 0 and 1, inclusive. For more information, see the [operationProfiling.slowOpSampleRate](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-operationProfiling.slowOpSampleRate) description in the official documentation.
+     */
+    slowOpSampleRate?: number;
+    /**
+     * The slow operation time threshold, in milliseconds. Operations that run for longer than this threshold are considered slow. For more information, see the [operationProfiling.slowOpThresholdMs](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-operationProfiling.slowOpThresholdMs) description in the official documentation.
+     */
+    slowOpThreshold?: number;
+}
+
+export interface GetMdbMongodbClusterClusterConfigMongodOperationProfilingArgs {
+    /**
+     * Specifies which operations should be profiled. The following profiler levels are available: off, slow_op, all. For more information, see the [operationProfiling.mode](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-operationProfiling.mode) description in the official documentation.
+     */
+    mode?: pulumi.Input<string>;
+    /**
+     * The fraction of slow operations that should be profiled or logged. Accepts values between 0 and 1, inclusive. For more information, see the [operationProfiling.slowOpSampleRate](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-operationProfiling.slowOpSampleRate) description in the official documentation.
+     */
+    slowOpSampleRate?: pulumi.Input<number>;
+    /**
+     * The slow operation time threshold, in milliseconds. Operations that run for longer than this threshold are considered slow. For more information, see the [operationProfiling.slowOpThresholdMs](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-operationProfiling.slowOpThresholdMs) description in the official documentation.
+     */
+    slowOpThreshold?: pulumi.Input<number>;
+}
+
+export interface GetMdbMongodbClusterClusterConfigMongodSecurity {
+    /**
+     * Enables the encryption for the WiredTiger storage engine. Can be either true or false. For more information see [security.enableEncryption](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-security.enableEncryption) description in the official documentation. Available only in enterprise edition.
+     */
+    enableEncryption?: boolean;
+    /**
+     * Configuration of the third party key management appliance via the Key Management Interoperability Protocol (KMIP) (see [Encryption tutorial](https://www.mongodb.com/docs/rapid/tutorial/configure-encryption) ). Requires `enableEncryption` to be true. The structure is documented below. Available only in enterprise edition.
+     */
+    kmip?: inputs.GetMdbMongodbClusterClusterConfigMongodSecurityKmip;
+}
+
+export interface GetMdbMongodbClusterClusterConfigMongodSecurityArgs {
+    /**
+     * Enables the encryption for the WiredTiger storage engine. Can be either true or false. For more information see [security.enableEncryption](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-security.enableEncryption) description in the official documentation. Available only in enterprise edition.
+     */
+    enableEncryption?: pulumi.Input<boolean>;
+    /**
+     * Configuration of the third party key management appliance via the Key Management Interoperability Protocol (KMIP) (see [Encryption tutorial](https://www.mongodb.com/docs/rapid/tutorial/configure-encryption) ). Requires `enableEncryption` to be true. The structure is documented below. Available only in enterprise edition.
+     */
+    kmip?: pulumi.Input<inputs.GetMdbMongodbClusterClusterConfigMongodSecurityKmipArgs>;
+}
+
+export interface GetMdbMongodbClusterClusterConfigMongodSecurityKmip {
+    /**
+     * String containing the client certificate used for authenticating MongoDB to the KMIP server. For more information see [security.kmip.clientCertificateFile](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-security.kmip.clientCertificateFile) description in the official documentation.
+     */
+    clientCertificate?: string;
+    /**
+     * Unique KMIP identifier for an existing key within the KMIP server. For more information see [security.kmip.keyIdentifier](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-security.kmip.keyIdentifier) description in the official documentation.
+     */
+    keyIdentifier?: string;
+    /**
+     * Port number to use to communicate with the KMIP server. Default: 5696 For more information see [security.kmip.port](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-security.kmip.port) description in the official documentation.
+     */
+    port?: number;
+    /**
+     * Path to CA File. Used for validating secure client connection to KMIP server. For more information see [security.kmip.serverCAFile](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-security.kmip.serverCAFile) description in the official documentation.
+     */
+    serverCa?: string;
+    /**
+     * Hostname or IP address of the KMIP server to connect to. For more information see [security.kmip.serverName](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-security.kmip.serverName) description in the official documentation.
+     */
+    serverName?: string;
+}
+
+export interface GetMdbMongodbClusterClusterConfigMongodSecurityKmipArgs {
+    /**
+     * String containing the client certificate used for authenticating MongoDB to the KMIP server. For more information see [security.kmip.clientCertificateFile](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-security.kmip.clientCertificateFile) description in the official documentation.
+     */
+    clientCertificate?: pulumi.Input<string>;
+    /**
+     * Unique KMIP identifier for an existing key within the KMIP server. For more information see [security.kmip.keyIdentifier](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-security.kmip.keyIdentifier) description in the official documentation.
+     */
+    keyIdentifier?: pulumi.Input<string>;
+    /**
+     * Port number to use to communicate with the KMIP server. Default: 5696 For more information see [security.kmip.port](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-security.kmip.port) description in the official documentation.
+     */
+    port?: pulumi.Input<number>;
+    /**
+     * Path to CA File. Used for validating secure client connection to KMIP server. For more information see [security.kmip.serverCAFile](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-security.kmip.serverCAFile) description in the official documentation.
+     */
+    serverCa?: pulumi.Input<string>;
+    /**
+     * Hostname or IP address of the KMIP server to connect to. For more information see [security.kmip.serverName](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-security.kmip.serverName) description in the official documentation.
+     */
+    serverName?: pulumi.Input<string>;
+}
+
+export interface GetMdbMongodbClusterClusterConfigMongodSetParameter {
+    /**
+     * Enables the auditing of authorization successes. Can be either true or false. For more information, see the [auditAuthorizationSuccess](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.auditAuthorizationSuccess) description in the official documentation. Available only in enterprise edition.
+     */
+    auditAuthorizationSuccess?: boolean;
+    /**
+     * Enables the flow control. Can be either true or false. For more information, see the [enableFlowControl](https://www.mongodb.com/docs/rapid/reference/parameters/#mongodb-parameter-param.enableFlowControl) description in the official documentation.
+     */
+    enableFlowControl?: boolean;
+    /**
+     * The minimum time window in seconds for which the storage engine keeps the snapshot history. For more information, see the [minSnapshotHistoryWindowInSeconds](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.minSnapshotHistoryWindowInSeconds) description in the official documentation.
+     */
+    minSnapshotHistoryWindowInSeconds?: number;
+}
+
+export interface GetMdbMongodbClusterClusterConfigMongodSetParameterArgs {
+    /**
+     * Enables the auditing of authorization successes. Can be either true or false. For more information, see the [auditAuthorizationSuccess](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.auditAuthorizationSuccess) description in the official documentation. Available only in enterprise edition.
+     */
+    auditAuthorizationSuccess?: pulumi.Input<boolean>;
+    /**
+     * Enables the flow control. Can be either true or false. For more information, see the [enableFlowControl](https://www.mongodb.com/docs/rapid/reference/parameters/#mongodb-parameter-param.enableFlowControl) description in the official documentation.
+     */
+    enableFlowControl?: pulumi.Input<boolean>;
+    /**
+     * The minimum time window in seconds for which the storage engine keeps the snapshot history. For more information, see the [minSnapshotHistoryWindowInSeconds](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.minSnapshotHistoryWindowInSeconds) description in the official documentation.
+     */
+    minSnapshotHistoryWindowInSeconds?: pulumi.Input<number>;
+}
+
+export interface GetMdbMongodbClusterClusterConfigMongodStorage {
+    /**
+     * The durability journal to ensure data files remain valid and recoverable.
+     */
+    journal?: inputs.GetMdbMongodbClusterClusterConfigMongodStorageJournal;
+    /**
+     * The WiredTiger engine settings. (see the [storage.wiredTiger](https://www.mongodb.com/docs/manual/reference/configuration-options/#storage.wiredtiger-options) option). These settings available only on `mongod` hosts.
+     */
+    wiredTiger?: inputs.GetMdbMongodbClusterClusterConfigMongodStorageWiredTiger;
+}
+
+export interface GetMdbMongodbClusterClusterConfigMongodStorageArgs {
+    /**
+     * The durability journal to ensure data files remain valid and recoverable.
+     */
+    journal?: pulumi.Input<inputs.GetMdbMongodbClusterClusterConfigMongodStorageJournalArgs>;
+    /**
+     * The WiredTiger engine settings. (see the [storage.wiredTiger](https://www.mongodb.com/docs/manual/reference/configuration-options/#storage.wiredtiger-options) option). These settings available only on `mongod` hosts.
+     */
+    wiredTiger?: pulumi.Input<inputs.GetMdbMongodbClusterClusterConfigMongodStorageWiredTigerArgs>;
+}
+
+export interface GetMdbMongodbClusterClusterConfigMongodStorageJournal {
+    /**
+     * The maximum amount of time in milliseconds that the mongod process allows between journal operations. For more information, see the [storage.journal.commitIntervalMs](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-storage.journal.commitIntervalMs) description in the official documentation.
+     */
+    commitInterval?: number;
+}
+
+export interface GetMdbMongodbClusterClusterConfigMongodStorageJournalArgs {
+    /**
+     * The maximum amount of time in milliseconds that the mongod process allows between journal operations. For more information, see the [storage.journal.commitIntervalMs](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-storage.journal.commitIntervalMs) description in the official documentation.
+     */
+    commitInterval?: pulumi.Input<number>;
+}
+
+export interface GetMdbMongodbClusterClusterConfigMongodStorageWiredTiger {
+    /**
+     * Specifies the default compression for collection data. You can override this on a per-collection basis when creating collections. Available compressors are: none, snappy, zlib, zstd. This setting available only on `mongod` hosts. For more information, see the [storage.wiredTiger.collectionConfig.blockCompressor](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-storage.wiredTiger.collectionConfig.blockCompressor) description in the official documentation.
+     */
+    blockCompressor?: string;
+    /**
+     * Defines the maximum size of the internal cache that WiredTiger will use for all data. For more information, see the [storage.wiredTiger.engineConfig.cacheSizeGB](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-storage.wiredTiger.engineConfig.cacheSizeGB) description in the official documentation.
+     */
+    cacheSizeGb?: number;
+    /**
+     * Enables or disables prefix compression for index data. Сan be either true or false. For more information, see the [storage.wiredTiger.indexConfig.prefixCompression](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-storage.wiredTiger.indexConfig.prefixCompression) description in the official documentation.
+     */
+    prefixCompression?: boolean;
+}
+
+export interface GetMdbMongodbClusterClusterConfigMongodStorageWiredTigerArgs {
+    /**
+     * Specifies the default compression for collection data. You can override this on a per-collection basis when creating collections. Available compressors are: none, snappy, zlib, zstd. This setting available only on `mongod` hosts. For more information, see the [storage.wiredTiger.collectionConfig.blockCompressor](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-storage.wiredTiger.collectionConfig.blockCompressor) description in the official documentation.
+     */
+    blockCompressor?: pulumi.Input<string>;
+    /**
+     * Defines the maximum size of the internal cache that WiredTiger will use for all data. For more information, see the [storage.wiredTiger.engineConfig.cacheSizeGB](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-storage.wiredTiger.engineConfig.cacheSizeGB) description in the official documentation.
+     */
+    cacheSizeGb?: pulumi.Input<number>;
+    /**
+     * Enables or disables prefix compression for index data. Сan be either true or false. For more information, see the [storage.wiredTiger.indexConfig.prefixCompression](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-storage.wiredTiger.indexConfig.prefixCompression) description in the official documentation.
+     */
+    prefixCompression?: pulumi.Input<boolean>;
+}
+
+export interface GetMdbMongodbClusterClusterConfigMongos {
+    /**
+     * A set of network settings (see the [net](https://www.mongodb.com/docs/manual/reference/configuration-options/#net-options) option).
+     */
+    net?: inputs.GetMdbMongodbClusterClusterConfigMongosNet;
+}
+
+export interface GetMdbMongodbClusterClusterConfigMongosArgs {
+    /**
+     * A set of network settings (see the [net](https://www.mongodb.com/docs/manual/reference/configuration-options/#net-options) option).
+     */
+    net?: pulumi.Input<inputs.GetMdbMongodbClusterClusterConfigMongosNetArgs>;
+}
+
+export interface GetMdbMongodbClusterClusterConfigMongosNet {
+    compressors?: string[];
+    maxIncomingConnections?: number;
+}
+
+export interface GetMdbMongodbClusterClusterConfigMongosNetArgs {
+    compressors?: pulumi.Input<pulumi.Input<string>[]>;
+    maxIncomingConnections?: pulumi.Input<number>;
+}
+
+export interface GetMdbMongodbClusterClusterConfigPerformanceDiagnostics {
+    /**
+     * Enable or disable performance diagnostics.
+     */
+    enabled?: boolean;
+}
+
+export interface GetMdbMongodbClusterClusterConfigPerformanceDiagnosticsArgs {
+    /**
+     * Enable or disable performance diagnostics.
+     */
+    enabled?: pulumi.Input<boolean>;
+}
+
+export interface GetMdbMongodbClusterDatabase {
+    /**
+     * The name of the database.
+     */
+    name?: string;
+}
+
+export interface GetMdbMongodbClusterDatabaseArgs {
+    /**
+     * The name of the database.
+     */
+    name?: pulumi.Input<string>;
+}
+
+export interface GetMdbMongodbClusterDiskSizeAutoscalingMongocfg {
+    /**
+     * Limit of disk size after autoscaling (GiB).
+     */
+    diskSizeLimit?: number;
+    /**
+     * Immediate autoscaling disk usage (percent).
+     */
+    emergencyUsageThreshold?: number;
+    /**
+     * Maintenance window autoscaling disk usage (percent).
+     */
+    plannedUsageThreshold?: number;
+}
+
+export interface GetMdbMongodbClusterDiskSizeAutoscalingMongocfgArgs {
+    /**
+     * Limit of disk size after autoscaling (GiB).
+     */
+    diskSizeLimit?: pulumi.Input<number>;
+    /**
+     * Immediate autoscaling disk usage (percent).
+     */
+    emergencyUsageThreshold?: pulumi.Input<number>;
+    /**
+     * Maintenance window autoscaling disk usage (percent).
+     */
+    plannedUsageThreshold?: pulumi.Input<number>;
+}
+
+export interface GetMdbMongodbClusterDiskSizeAutoscalingMongod {
+    /**
+     * Limit of disk size after autoscaling (GiB).
+     */
+    diskSizeLimit?: number;
+    /**
+     * Immediate autoscaling disk usage (percent).
+     */
+    emergencyUsageThreshold?: number;
+    /**
+     * Maintenance window autoscaling disk usage (percent).
+     */
+    plannedUsageThreshold?: number;
+}
+
+export interface GetMdbMongodbClusterDiskSizeAutoscalingMongodArgs {
+    /**
+     * Limit of disk size after autoscaling (GiB).
+     */
+    diskSizeLimit?: pulumi.Input<number>;
+    /**
+     * Immediate autoscaling disk usage (percent).
+     */
+    emergencyUsageThreshold?: pulumi.Input<number>;
+    /**
+     * Maintenance window autoscaling disk usage (percent).
+     */
+    plannedUsageThreshold?: pulumi.Input<number>;
+}
+
+export interface GetMdbMongodbClusterDiskSizeAutoscalingMongoinfra {
+    /**
+     * Limit of disk size after autoscaling (GiB).
+     */
+    diskSizeLimit?: number;
+    /**
+     * Immediate autoscaling disk usage (percent).
+     */
+    emergencyUsageThreshold?: number;
+    /**
+     * Maintenance window autoscaling disk usage (percent).
+     */
+    plannedUsageThreshold?: number;
+}
+
+export interface GetMdbMongodbClusterDiskSizeAutoscalingMongoinfraArgs {
+    /**
+     * Limit of disk size after autoscaling (GiB).
+     */
+    diskSizeLimit?: pulumi.Input<number>;
+    /**
+     * Immediate autoscaling disk usage (percent).
+     */
+    emergencyUsageThreshold?: pulumi.Input<number>;
+    /**
+     * Maintenance window autoscaling disk usage (percent).
+     */
+    plannedUsageThreshold?: pulumi.Input<number>;
+}
+
+export interface GetMdbMongodbClusterDiskSizeAutoscalingMongos {
+    /**
+     * Limit of disk size after autoscaling (GiB).
+     */
+    diskSizeLimit?: number;
+    /**
+     * Immediate autoscaling disk usage (percent).
+     */
+    emergencyUsageThreshold?: number;
+    /**
+     * Maintenance window autoscaling disk usage (percent).
+     */
+    plannedUsageThreshold?: number;
+}
+
+export interface GetMdbMongodbClusterDiskSizeAutoscalingMongosArgs {
+    /**
+     * Limit of disk size after autoscaling (GiB).
+     */
+    diskSizeLimit?: pulumi.Input<number>;
+    /**
+     * Immediate autoscaling disk usage (percent).
+     */
+    emergencyUsageThreshold?: pulumi.Input<number>;
+    /**
+     * Maintenance window autoscaling disk usage (percent).
+     */
+    plannedUsageThreshold?: pulumi.Input<number>;
+}
+
+export interface GetMdbMongodbClusterHost {
+    /**
+     * Should this host have assigned public IP assigned. Can be either `true` or `false`.
+     */
+    assignPublicIp?: boolean;
+    /**
+     * The health of the host.
+     */
+    health?: string;
+    /**
+     * The parameters of mongod host in replicaset.
+     */
+    hostParameters?: inputs.GetMdbMongodbClusterHostHostParameters;
+    /**
+     * The fully qualified domain name of the host. Computed on server side.
+     */
+    name?: string;
+    /**
+     * The role of the cluster (either PRIMARY or SECONDARY).
+     */
+    role?: string;
+    /**
+     * The name of the shard to which the host belongs. Only for sharded cluster.
+     */
+    shardName?: string;
+    /**
+     * The ID of the subnet, to which the host belongs. The subnet must be a part of the network to which the cluster belongs.
+     */
+    subnetId?: string;
+    /**
+     * Type of Mongo daemon which runs on this host (mongod, mongos, mongocfg, mongoinfra). Defaults to `mongod`.
+     */
+    type?: string;
+    /**
+     * The [availability zone](https://yandex.cloud/docs/overview/concepts/geo-scope) where resource is located. If it is not provided, the default provider zone will be used.
+     */
+    zoneId?: string;
+}
+
+export interface GetMdbMongodbClusterHostArgs {
+    /**
+     * Should this host have assigned public IP assigned. Can be either `true` or `false`.
+     */
+    assignPublicIp?: pulumi.Input<boolean>;
+    /**
+     * The health of the host.
+     */
+    health?: pulumi.Input<string>;
+    /**
+     * The parameters of mongod host in replicaset.
+     */
+    hostParameters?: pulumi.Input<inputs.GetMdbMongodbClusterHostHostParametersArgs>;
+    /**
+     * The fully qualified domain name of the host. Computed on server side.
+     */
+    name?: pulumi.Input<string>;
+    /**
+     * The role of the cluster (either PRIMARY or SECONDARY).
+     */
+    role?: pulumi.Input<string>;
+    /**
+     * The name of the shard to which the host belongs. Only for sharded cluster.
+     */
+    shardName?: pulumi.Input<string>;
+    /**
+     * The ID of the subnet, to which the host belongs. The subnet must be a part of the network to which the cluster belongs.
+     */
+    subnetId?: pulumi.Input<string>;
+    /**
+     * Type of Mongo daemon which runs on this host (mongod, mongos, mongocfg, mongoinfra). Defaults to `mongod`.
+     */
+    type?: pulumi.Input<string>;
+    /**
+     * The [availability zone](https://yandex.cloud/docs/overview/concepts/geo-scope) where resource is located. If it is not provided, the default provider zone will be used.
+     */
+    zoneId?: pulumi.Input<string>;
+}
+
+export interface GetMdbMongodbClusterHostHostParameters {
+    /**
+     * Should this host be hidden in replicaset. Can be either `true` of `false`. For more information see [the official documentation](https://www.mongodb.com/docs/current/reference/replica-configuration/#mongodb-rsconf-rsconf.members-n-.hidden).
+     */
+    hidden?: boolean;
+    /**
+     * A floating point number that indicates the relative likelihood of a replica set member to become the primary. For more information see [the official documentation](https://www.mongodb.com/docs/current/reference/replica-configuration/#mongodb-rsconf-rsconf.members-n-.priority).
+     */
+    priority?: number;
+    /**
+     * The number of seconds `behind` the primary that this replica set member should `lag`. For more information see [the official documentation](https://www.mongodb.com/docs/current/reference/replica-configuration/#mongodb-rsconf-rsconf.members-n-.secondaryDelaySecs).
+     */
+    secondaryDelaySecs?: number;
+    /**
+     * A set of key/value pairs to assign for the replica set member. For more information see [the official documentation](https://www.mongodb.com/docs/current/reference/replica-configuration/#mongodb-rsconf-rsconf.members-n-.tags).
+     */
+    tags?: {[key: string]: string};
+}
+
+export interface GetMdbMongodbClusterHostHostParametersArgs {
+    /**
+     * Should this host be hidden in replicaset. Can be either `true` of `false`. For more information see [the official documentation](https://www.mongodb.com/docs/current/reference/replica-configuration/#mongodb-rsconf-rsconf.members-n-.hidden).
+     */
+    hidden?: pulumi.Input<boolean>;
+    /**
+     * A floating point number that indicates the relative likelihood of a replica set member to become the primary. For more information see [the official documentation](https://www.mongodb.com/docs/current/reference/replica-configuration/#mongodb-rsconf-rsconf.members-n-.priority).
+     */
+    priority?: pulumi.Input<number>;
+    /**
+     * The number of seconds `behind` the primary that this replica set member should `lag`. For more information see [the official documentation](https://www.mongodb.com/docs/current/reference/replica-configuration/#mongodb-rsconf-rsconf.members-n-.secondaryDelaySecs).
+     */
+    secondaryDelaySecs?: pulumi.Input<number>;
+    /**
+     * A set of key/value pairs to assign for the replica set member. For more information see [the official documentation](https://www.mongodb.com/docs/current/reference/replica-configuration/#mongodb-rsconf-rsconf.members-n-.tags).
+     */
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+}
+
+export interface GetMdbMongodbClusterMaintenanceWindow {
+    /**
+     * Day of week for maintenance window if window type is weekly. Possible values: `MON`, `TUE`, `WED`, `THU`, `FRI`, `SAT`, `SUN`.
+     */
+    day?: string;
+    /**
+     * Hour of day in UTC time zone (1-24) for maintenance window if window type is weekly.
+     */
+    hour?: number;
+    /**
+     * Type of maintenance window. Can be either `ANYTIME` or `WEEKLY`. A day and hour of window need to be specified with weekly window.
+     */
+    type?: string;
+}
+
+export interface GetMdbMongodbClusterMaintenanceWindowArgs {
+    /**
+     * Day of week for maintenance window if window type is weekly. Possible values: `MON`, `TUE`, `WED`, `THU`, `FRI`, `SAT`, `SUN`.
+     */
+    day?: pulumi.Input<string>;
+    /**
+     * Hour of day in UTC time zone (1-24) for maintenance window if window type is weekly.
+     */
+    hour?: pulumi.Input<number>;
+    /**
+     * Type of maintenance window. Can be either `ANYTIME` or `WEEKLY`. A day and hour of window need to be specified with weekly window.
+     */
+    type?: pulumi.Input<string>;
+}
+
+export interface GetMdbMongodbClusterResources {
+    /**
+     * Volume of the storage available to a MongoDB host, in gigabytes.
+     */
+    diskSize?: number;
+    /**
+     * Type of the storage of MongoDB hosts. For more information see [the official documentation](https://yandex.cloud/docs/managed-clickhouse/concepts/storage).
+     */
+    diskTypeId?: string;
+    /**
+     * The ID of the preset for computational resources available to a MongoDB host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-mongodb/concepts).
+     */
+    resourcePresetId?: string;
+}
+
+export interface GetMdbMongodbClusterResourcesArgs {
+    /**
+     * Volume of the storage available to a MongoDB host, in gigabytes.
+     */
+    diskSize?: pulumi.Input<number>;
+    /**
+     * Type of the storage of MongoDB hosts. For more information see [the official documentation](https://yandex.cloud/docs/managed-clickhouse/concepts/storage).
+     */
+    diskTypeId?: pulumi.Input<string>;
+    /**
+     * The ID of the preset for computational resources available to a MongoDB host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-mongodb/concepts).
+     */
+    resourcePresetId?: pulumi.Input<string>;
+}
+
+export interface GetMdbMongodbClusterResourcesMongocfg {
+    /**
+     * Volume of the storage available to a MongoDB host, in gigabytes.
+     */
+    diskSize?: number;
+    /**
+     * Type of the storage of MongoDB hosts. For more information see [the official documentation](https://yandex.cloud/docs/managed-clickhouse/concepts/storage).
+     */
+    diskTypeId?: string;
+    /**
+     * The ID of the preset for computational resources available to a MongoDB host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-mongodb/concepts).
+     */
+    resourcePresetId?: string;
+}
+
+export interface GetMdbMongodbClusterResourcesMongocfgArgs {
+    /**
+     * Volume of the storage available to a MongoDB host, in gigabytes.
+     */
+    diskSize?: pulumi.Input<number>;
+    /**
+     * Type of the storage of MongoDB hosts. For more information see [the official documentation](https://yandex.cloud/docs/managed-clickhouse/concepts/storage).
+     */
+    diskTypeId?: pulumi.Input<string>;
+    /**
+     * The ID of the preset for computational resources available to a MongoDB host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-mongodb/concepts).
+     */
+    resourcePresetId?: pulumi.Input<string>;
+}
+
+export interface GetMdbMongodbClusterResourcesMongod {
+    /**
+     * Volume of the storage available to a MongoDB host, in gigabytes.
+     */
+    diskSize?: number;
+    /**
+     * Type of the storage of MongoDB hosts. For more information see [the official documentation](https://yandex.cloud/docs/managed-clickhouse/concepts/storage).
+     */
+    diskTypeId?: string;
+    /**
+     * The ID of the preset for computational resources available to a MongoDB host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-mongodb/concepts).
+     */
+    resourcePresetId?: string;
+}
+
+export interface GetMdbMongodbClusterResourcesMongodArgs {
+    /**
+     * Volume of the storage available to a MongoDB host, in gigabytes.
+     */
+    diskSize?: pulumi.Input<number>;
+    /**
+     * Type of the storage of MongoDB hosts. For more information see [the official documentation](https://yandex.cloud/docs/managed-clickhouse/concepts/storage).
+     */
+    diskTypeId?: pulumi.Input<string>;
+    /**
+     * The ID of the preset for computational resources available to a MongoDB host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-mongodb/concepts).
+     */
+    resourcePresetId?: pulumi.Input<string>;
+}
+
+export interface GetMdbMongodbClusterResourcesMongoinfra {
+    /**
+     * Volume of the storage available to a MongoDB host, in gigabytes.
+     */
+    diskSize?: number;
+    /**
+     * Type of the storage of MongoDB hosts. For more information see [the official documentation](https://yandex.cloud/docs/managed-clickhouse/concepts/storage).
+     */
+    diskTypeId?: string;
+    /**
+     * The ID of the preset for computational resources available to a MongoDB host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-mongodb/concepts).
+     */
+    resourcePresetId?: string;
+}
+
+export interface GetMdbMongodbClusterResourcesMongoinfraArgs {
+    /**
+     * Volume of the storage available to a MongoDB host, in gigabytes.
+     */
+    diskSize?: pulumi.Input<number>;
+    /**
+     * Type of the storage of MongoDB hosts. For more information see [the official documentation](https://yandex.cloud/docs/managed-clickhouse/concepts/storage).
+     */
+    diskTypeId?: pulumi.Input<string>;
+    /**
+     * The ID of the preset for computational resources available to a MongoDB host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-mongodb/concepts).
+     */
+    resourcePresetId?: pulumi.Input<string>;
+}
+
+export interface GetMdbMongodbClusterResourcesMongos {
+    /**
+     * Volume of the storage available to a MongoDB host, in gigabytes.
+     */
+    diskSize?: number;
+    /**
+     * Type of the storage of MongoDB hosts. For more information see [the official documentation](https://yandex.cloud/docs/managed-clickhouse/concepts/storage).
+     */
+    diskTypeId?: string;
+    /**
+     * The ID of the preset for computational resources available to a MongoDB host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-mongodb/concepts).
+     */
+    resourcePresetId?: string;
+}
+
+export interface GetMdbMongodbClusterResourcesMongosArgs {
+    /**
+     * Volume of the storage available to a MongoDB host, in gigabytes.
+     */
+    diskSize?: pulumi.Input<number>;
+    /**
+     * Type of the storage of MongoDB hosts. For more information see [the official documentation](https://yandex.cloud/docs/managed-clickhouse/concepts/storage).
+     */
+    diskTypeId?: pulumi.Input<string>;
+    /**
+     * The ID of the preset for computational resources available to a MongoDB host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-mongodb/concepts).
+     */
+    resourcePresetId?: pulumi.Input<string>;
+}
+
+export interface GetMdbMongodbClusterRestore {
+    /**
+     * Backup ID. The cluster will be created from the specified backup. [How to get a list of PostgreSQL backups](https://yandex.cloud/docs/managed-mongodb/operations/cluster-backups).
+     */
+    backupId?: string;
+    /**
+     * Timestamp of the moment to which the MongoDB cluster should be restored. (Format: `2006-01-02T15:04:05` - UTC). When not set, current time is used.
+     */
+    time?: string;
+}
+
+export interface GetMdbMongodbClusterRestoreArgs {
+    /**
+     * Backup ID. The cluster will be created from the specified backup. [How to get a list of PostgreSQL backups](https://yandex.cloud/docs/managed-mongodb/operations/cluster-backups).
+     */
+    backupId?: pulumi.Input<string>;
+    /**
+     * Timestamp of the moment to which the MongoDB cluster should be restored. (Format: `2006-01-02T15:04:05` - UTC). When not set, current time is used.
+     */
+    time?: pulumi.Input<string>;
+}
+
+export interface GetMdbMongodbClusterUser {
+    /**
+     * The name of the user.
+     */
+    name?: string;
+    /**
+     * The password of the user.
+     */
+    password?: string;
+    /**
+     * Set of permissions granted to the user.
+     */
+    permissions?: inputs.GetMdbMongodbClusterUserPermission[];
+}
+
+export interface GetMdbMongodbClusterUserArgs {
+    /**
+     * The name of the user.
+     */
+    name?: pulumi.Input<string>;
+    /**
+     * The password of the user.
+     */
+    password?: pulumi.Input<string>;
+    /**
+     * Set of permissions granted to the user.
+     */
+    permissions?: pulumi.Input<pulumi.Input<inputs.GetMdbMongodbClusterUserPermissionArgs>[]>;
+}
+
+export interface GetMdbMongodbClusterUserPermission {
+    /**
+     * The name of the database that the permission grants access to.
+     */
+    databaseName?: string;
+    /**
+     * The roles of the user in this database. For more information see [the official documentation](https://yandex.cloud/docs/managed-mongodb/concepts/users-and-roles).
+     */
+    roles?: string[];
+}
+
+export interface GetMdbMongodbClusterUserPermissionArgs {
+    /**
+     * The name of the database that the permission grants access to.
+     */
+    databaseName?: pulumi.Input<string>;
+    /**
+     * The roles of the user in this database. For more information see [the official documentation](https://yandex.cloud/docs/managed-mongodb/concepts/users-and-roles).
+     */
+    roles?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface GetMdbMysqlClusterAccess {
+    dataLens?: boolean;
+    dataTransfer?: boolean;
+    webSql?: boolean;
+}
+
+export interface GetMdbMysqlClusterAccessArgs {
+    dataLens?: pulumi.Input<boolean>;
+    dataTransfer?: pulumi.Input<boolean>;
+    webSql?: pulumi.Input<boolean>;
+}
+
+export interface GetMdbMysqlUserPermission {
+    databaseName?: string;
+    roles?: string[];
+}
+
+export interface GetMdbMysqlUserPermissionArgs {
+    databaseName?: pulumi.Input<string>;
+    roles?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface GetMdbPostgresqlDatabaseExtension {
+    name: string;
+    version?: string;
+}
+
+export interface GetMdbPostgresqlDatabaseExtensionArgs {
+    name: pulumi.Input<string>;
+    version?: pulumi.Input<string>;
+}
+
+export interface GetOrganizationmanagerOsLoginSettingsSshCertificateSettings {
+    enabled?: boolean;
+}
+
+export interface GetOrganizationmanagerOsLoginSettingsSshCertificateSettingsArgs {
+    enabled?: pulumi.Input<boolean>;
+}
+
+export interface GetOrganizationmanagerOsLoginSettingsUserSshKeySettings {
+    allowManageOwnKeys?: boolean;
+    enabled?: boolean;
+}
+
+export interface GetOrganizationmanagerOsLoginSettingsUserSshKeySettingsArgs {
+    allowManageOwnKeys?: pulumi.Input<boolean>;
+    enabled?: pulumi.Input<boolean>;
+}
+
+export interface GetServerlessContainerConnectivity {
+    networkId: string;
+}
+
+export interface GetServerlessContainerConnectivityArgs {
+    networkId: pulumi.Input<string>;
+}
+
+export interface GetServerlessContainerMetadataOptions {
+    awsV1HttpEndpoint?: number;
+    gceHttpEndpoint?: number;
+}
+
+export interface GetServerlessContainerMetadataOptionsArgs {
+    awsV1HttpEndpoint?: pulumi.Input<number>;
+    gceHttpEndpoint?: pulumi.Input<number>;
+}
+
+export interface GetServerlessContainerMount {
+    ephemeralDisk?: inputs.GetServerlessContainerMountEphemeralDisk;
+    mode?: string;
+    mountPointPath: string;
+    objectStorage?: inputs.GetServerlessContainerMountObjectStorage;
+}
+
+export interface GetServerlessContainerMountArgs {
+    ephemeralDisk?: pulumi.Input<inputs.GetServerlessContainerMountEphemeralDiskArgs>;
+    mode?: pulumi.Input<string>;
+    mountPointPath: pulumi.Input<string>;
+    objectStorage?: pulumi.Input<inputs.GetServerlessContainerMountObjectStorageArgs>;
+}
+
+export interface GetServerlessContainerMountEphemeralDisk {
+    blockSizeKb?: number;
+    sizeGb: number;
+}
+
+export interface GetServerlessContainerMountEphemeralDiskArgs {
+    blockSizeKb?: pulumi.Input<number>;
+    sizeGb: pulumi.Input<number>;
+}
+
+export interface GetServerlessContainerMountObjectStorage {
+    bucket: string;
+    prefix?: string;
+}
+
+export interface GetServerlessContainerMountObjectStorageArgs {
+    bucket: pulumi.Input<string>;
+    prefix?: pulumi.Input<string>;
+}
+
+export interface GetServerlessContainerRuntime {
+    type: string;
+}
+
+export interface GetServerlessContainerRuntimeArgs {
+    type: pulumi.Input<string>;
+}
+
+export interface GetServerlessContainerSecret {
+    environmentVariable: string;
+    id: string;
+    key: string;
+    versionId: string;
+}
+
+export interface GetServerlessContainerSecretArgs {
+    environmentVariable: pulumi.Input<string>;
+    id: pulumi.Input<string>;
+    key: pulumi.Input<string>;
+    versionId: pulumi.Input<string>;
+}
+
+export interface GetServerlessContainerStorageMount {
+    bucket: string;
+    mountPointPath: string;
+    prefix?: string;
+    readOnly?: boolean;
+}
+
+export interface GetServerlessContainerStorageMountArgs {
+    bucket: pulumi.Input<string>;
+    mountPointPath: pulumi.Input<string>;
+    prefix?: pulumi.Input<string>;
+    readOnly?: pulumi.Input<boolean>;
+}
+
+export interface GetVpcGatewaySharedEgressGateway {
+}
+
+export interface GetVpcGatewaySharedEgressGatewayArgs {
+}
+
+export interface GetVpcPrivateEndpointObjectStorage {
+}
+
+export interface GetVpcPrivateEndpointObjectStorageArgs {
+}
+
+export interface GetYdbDatabaseServerlessServerlessDatabase {
+    enableThrottlingRcuLimit?: boolean;
+    provisionedRcuLimit?: number;
+    storageSizeLimit?: number;
+    throttlingRcuLimit?: number;
+}
+
+export interface GetYdbDatabaseServerlessServerlessDatabaseArgs {
+    enableThrottlingRcuLimit?: pulumi.Input<boolean>;
+    provisionedRcuLimit?: pulumi.Input<number>;
+    storageSizeLimit?: pulumi.Input<number>;
+    throttlingRcuLimit?: pulumi.Input<number>;
+}
+
+export interface IamServiceAccountApiKeyOutputToLockbox {
+    /**
+     * entry that will store the value of secret_key
+     */
+    entryForSecretKey: pulumi.Input<string>;
+    /**
+     * ID of the Lockbox secret where to store the sensible values.
+     */
+    secretId: pulumi.Input<string>;
+}
+
+export interface IamServiceAccountKeyOutputToLockbox {
+    /**
+     * entry that will store the value of private_key
+     */
+    entryForPrivateKey: pulumi.Input<string>;
+    /**
+     * ID of the Lockbox secret where to store the sensible values.
+     */
+    secretId: pulumi.Input<string>;
+}
+
+export interface IamServiceAccountStaticAccessKeyOutputToLockbox {
+    /**
+     * entry that will store the value of access_key
+     */
+    entryForAccessKey: pulumi.Input<string>;
+    /**
+     * entry that will store the value of secret_key
+     */
+    entryForSecretKey: pulumi.Input<string>;
+    /**
+     * ID of the Lockbox secret where to store the sensible values.
+     */
+    secretId: pulumi.Input<string>;
+}
+
+export interface IotCoreBrokerLogOptions {
+    /**
+     * Is logging for broker disabled.
+     */
+    disabled?: pulumi.Input<boolean>;
+    /**
+     * Log entries are written to default log group for specified folder.
+     */
+    folderId?: pulumi.Input<string>;
+    /**
+     * Log entries are written to specified log group.
+     */
+    logGroupId?: pulumi.Input<string>;
+    /**
+     * Minimum log entry level.
+     */
+    minLevel?: pulumi.Input<string>;
+}
+
+export interface IotCoreRegistryLogOptions {
+    /**
+     * Is logging for registry disabled.
+     */
+    disabled?: pulumi.Input<boolean>;
+    /**
+     * Log entries are written to default log group for specified folder.
+     */
+    folderId?: pulumi.Input<string>;
+    /**
+     * Log entries are written to specified log group.
+     */
+    logGroupId?: pulumi.Input<string>;
+    /**
+     * Minimum log entry level.
+     */
+    minLevel?: pulumi.Input<string>;
+}
+
+export interface KubernetesClusterKmsProvider {
+    /**
+     * KMS key ID.
+     */
+    keyId?: pulumi.Input<string>;
+}
+
+export interface KubernetesClusterMaster {
+    /**
+     * PEM-encoded public certificate that is the root of trust for the Kubernetes cluster.
+     */
+    clusterCaCertificate?: pulumi.Input<string>;
+    etcdClusterSize?: pulumi.Input<number>;
+    /**
+     * An IPv4 external network address that is assigned to the master.
+     */
+    externalV4Address?: pulumi.Input<string>;
+    /**
+     * External endpoint that can be used to access Kubernetes cluster API from the internet (outside of the cloud).
+     */
+    externalV4Endpoint?: pulumi.Input<string>;
+    externalV6Address?: pulumi.Input<string>;
+    externalV6Endpoint?: pulumi.Input<string>;
+    /**
+     * An IPv4 internal network address that is assigned to the master.
+     */
+    internalV4Address?: pulumi.Input<string>;
+    /**
+     * Internal endpoint that can be used to connect to the master from cloud networks.
+     */
+    internalV4Endpoint?: pulumi.Input<string>;
+    /**
+     * Maintenance policy for Kubernetes master. If policy is omitted, automatic revision upgrades of the kubernetes master are enabled and could happen at any time. Revision upgrades are performed only within the same minor version, e.g. 1.29. Minor version upgrades (e.g. 1.29->1.30) should be performed manually.
+     */
+    maintenancePolicy?: pulumi.Input<inputs.KubernetesClusterMasterMaintenancePolicy>;
+    /**
+     * Cluster master's instances locations array (zone and subnet). Cannot be used together with `zonal` or `regional`. Currently, supports either one, for zonal master, or three instances of `masterLocation`. Can be updated in place. When creating regional cluster (three master instances), its `region` will be evaluated automatically by backend.
+     */
+    masterLocations?: pulumi.Input<pulumi.Input<inputs.KubernetesClusterMasterMasterLocation>[]>;
+    /**
+     * Master Logging options.
+     */
+    masterLogging?: pulumi.Input<inputs.KubernetesClusterMasterMasterLogging>;
+    /**
+     * When `true`, Kubernetes master will have visible ipv4 address.
+     */
+    publicIp?: pulumi.Input<boolean>;
+    /**
+     * Initialize parameters for Regional Master (highly available master).
+     */
+    regional?: pulumi.Input<inputs.KubernetesClusterMasterRegional>;
+    /**
+     * The list of security groups applied to resource or their components.
+     */
+    securityGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Version of Kubernetes that will be used for master.
+     */
+    version?: pulumi.Input<string>;
+    /**
+     * Information about cluster version.
+     */
+    versionInfos?: pulumi.Input<pulumi.Input<inputs.KubernetesClusterMasterVersionInfo>[]>;
+    /**
+     * Initialize parameters for Zonal Master (single node master).
+     */
+    zonal?: pulumi.Input<inputs.KubernetesClusterMasterZonal>;
+}
+
+export interface KubernetesClusterMasterMaintenancePolicy {
+    /**
+     * Boolean flag that specifies if master can be upgraded automatically. When omitted, default value is TRUE.
+     */
+    autoUpgrade: pulumi.Input<boolean>;
+    /**
+     * This structure specifies maintenance window, when update for master is allowed. When omitted, it defaults to any time. To specify time of day interval, for all days, one element should be provided, with two fields set, `startTime` and `duration`. Please see `zonalClusterResourceName` config example.
+     *
+     * To allow maintenance only on specific days of week, please provide list of elements, with all fields set. Only one time interval (`duration`) is allowed for each day of week. Please see `regionalClusterResourceName` config example
+     */
+    maintenanceWindows?: pulumi.Input<pulumi.Input<inputs.KubernetesClusterMasterMaintenancePolicyMaintenanceWindow>[]>;
+}
+
+export interface KubernetesClusterMasterMaintenancePolicyMaintenanceWindow {
+    day?: pulumi.Input<string>;
+    duration: pulumi.Input<string>;
+    startTime: pulumi.Input<string>;
+}
+
+export interface KubernetesClusterMasterMasterLocation {
+    /**
+     * ID of the subnet.
+     */
+    subnetId?: pulumi.Input<string>;
+    /**
+     * ID of the availability zone.
+     */
+    zone?: pulumi.Input<string>;
+}
+
+export interface KubernetesClusterMasterMasterLogging {
+    /**
+     * Boolean flag that specifies if kube-apiserver audit logs should be sent to Yandex Cloud Logging.
+     */
+    auditEnabled?: pulumi.Input<boolean>;
+    /**
+     * Boolean flag that specifies if cluster-autoscaler logs should be sent to Yandex Cloud Logging.
+     */
+    clusterAutoscalerEnabled?: pulumi.Input<boolean>;
+    /**
+     * Boolean flag that specifies if master components logs should be sent to [Yandex Cloud Logging](https://yandex.cloud/docs/logging/). The exact components that will send their logs must be configured via the options described below.
+     *
+     * > Only one of `logGroupId` or `folderId` (or none) may be specified. If `logGroupId` is specified, logs will be sent to this specific Log group. If `folderId` is specified, logs will be sent to **default** Log group of this folder. If none of two is specified, logs will be sent to **default** Log group of the **same** folder as Kubernetes cluster.
+     */
+    enabled?: pulumi.Input<boolean>;
+    /**
+     * Boolean flag that specifies if kubernetes cluster events should be sent to Yandex Cloud Logging.
+     */
+    eventsEnabled?: pulumi.Input<boolean>;
+    /**
+     * ID of the folder default Log group of which should be used to collect logs.
+     */
+    folderId?: pulumi.Input<string>;
+    /**
+     * Boolean flag that specifies if kube-apiserver logs should be sent to Yandex Cloud Logging.
+     */
+    kubeApiserverEnabled?: pulumi.Input<boolean>;
+    /**
+     * ID of the Yandex Cloud Logging [Log group](https://yandex.cloud/docs/logging/concepts/log-group).
+     */
+    logGroupId?: pulumi.Input<string>;
+}
+
+export interface KubernetesClusterMasterRegional {
+    /**
+     * Array of locations, where master instances will be allocated.
+     */
+    locations?: pulumi.Input<pulumi.Input<inputs.KubernetesClusterMasterRegionalLocation>[]>;
+    /**
+     * Name of availability region (e.g. `ru-central1`), where master instances will be allocated.
+     */
+    region: pulumi.Input<string>;
+}
+
+export interface KubernetesClusterMasterRegionalLocation {
+    /**
+     * ID of the subnet.
+     */
+    subnetId?: pulumi.Input<string>;
+    /**
+     * ID of the availability zone.
+     */
+    zone?: pulumi.Input<string>;
+}
+
+export interface KubernetesClusterMasterVersionInfo {
+    /**
+     * Current Kubernetes version, major.minor (e.g. 1.30).
+     */
+    currentVersion?: pulumi.Input<string>;
+    /**
+     * Boolean flag. Newer revisions may include Kubernetes patches (e.g `1.30.1` > `1.30.2`) as well as some internal component updates - new features or bug fixes in yandex-specific components either on the master or node
+     */
+    newRevisionAvailable?: pulumi.Input<boolean>;
+    /**
+     * Human readable description of the changes to be applied when updating to the latest revision. Empty if newRevisionAvailable is false.
+     */
+    newRevisionSummary?: pulumi.Input<string>;
+    /**
+     * Boolean flag. The current version is on the deprecation schedule, component (master or node group) should be upgraded.
+     */
+    versionDeprecated?: pulumi.Input<boolean>;
+}
+
+export interface KubernetesClusterMasterZonal {
+    /**
+     * ID of the subnet. If no ID is specified, and there only one subnet in specified zone, an address in this subnet will be allocated.
+     */
+    subnetId?: pulumi.Input<string>;
+    /**
+     * ID of the availability zone.
+     */
+    zone?: pulumi.Input<string>;
+}
+
+export interface KubernetesClusterNetworkImplementation {
+    /**
+     * Cilium network implementation configuration. No options exist.
+     */
+    cilium?: pulumi.Input<inputs.KubernetesClusterNetworkImplementationCilium>;
+}
+
+export interface KubernetesClusterNetworkImplementationCilium {
+}
+
+export interface KubernetesNodeGroupAllocationPolicy {
+    /**
+     * Repeated field, that specify subnets (zones), that will be used by node group compute instances. Subnet specified by `subnetId` should be allocated in zone specified by 'zone' argument.
+     */
+    locations?: pulumi.Input<pulumi.Input<inputs.KubernetesNodeGroupAllocationPolicyLocation>[]>;
+}
+
+export interface KubernetesNodeGroupAllocationPolicyLocation {
+    /**
+     * ID of the subnet, that will be used by one compute instance in node group.
+     *
+     * @deprecated The 'subnet_id' field has been deprecated. Please use 'subnet_ids under network_interface' instead.
+     */
+    subnetId?: pulumi.Input<string>;
+    /**
+     * ID of the availability zone where for one compute instance in node group.
+     */
+    zone?: pulumi.Input<string>;
+}
+
+export interface KubernetesNodeGroupDeployPolicy {
+    /**
+     * The maximum number of instances that can be temporarily allocated above the group's target size during the update.
+     */
+    maxExpansion: pulumi.Input<number>;
+    /**
+     * The maximum number of running instances that can be taken offline during update.
+     */
+    maxUnavailable: pulumi.Input<number>;
+}
+
+export interface KubernetesNodeGroupInstanceTemplate {
+    /**
+     * The specifications for boot disks that will be attached to the instance.
+     */
+    bootDisk?: pulumi.Input<inputs.KubernetesNodeGroupInstanceTemplateBootDisk>;
+    /**
+     * Container network configuration.
+     */
+    containerNetwork?: pulumi.Input<inputs.KubernetesNodeGroupInstanceTemplateContainerNetwork>;
+    /**
+     * Container runtime configuration.
+     */
+    containerRuntime?: pulumi.Input<inputs.KubernetesNodeGroupInstanceTemplateContainerRuntime>;
+    /**
+     * GPU settings.
+     */
+    gpuSettings?: pulumi.Input<inputs.KubernetesNodeGroupInstanceTemplateGpuSettings>;
+    /**
+     * Labels that will be assigned to compute nodes (instances), created by the Node Group.
+     */
+    labels?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    /**
+     * The set of metadata `key:value` pairs assigned to this instance template. This includes custom metadata and predefined keys. **Note**: key `user-data` won't be provided into instances. It reserved for internal activity in `kubernetesNodeGroup` resource.
+     */
+    metadata?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    /**
+     * Name template of the instance. In order to be unique it must contain at least one of instance unique placeholders:
+     * * `{instance.short_id}
+     * * `{instance.index}`
+     * * combination of `{instance.zone_id}` and `{instance.index_in_zone}`
+     *
+     * Example: `my-instance-{instance.index}`.
+     * If not set, default is used: `{instance_group.id}-{instance.short_id}`. It may also contain another placeholders, see [Compute Instance group metadata doc](https://yandex.cloud/docs/compute/instancegroup/api-ref/grpc/InstanceGroup) for full list.
+     */
+    name?: pulumi.Input<string>;
+    /**
+     * Enables NAT for node group compute instances.
+     *
+     * @deprecated The 'nat' field has been deprecated. Please use 'nat under network_interface' instead.
+     */
+    nat?: pulumi.Input<boolean>;
+    /**
+     * Type of network acceleration. Values: `standard`, `softwareAccelerated`.
+     */
+    networkAccelerationType?: pulumi.Input<string>;
+    /**
+     * An array with the network interfaces that will be attached to the instance.
+     */
+    networkInterfaces?: pulumi.Input<pulumi.Input<inputs.KubernetesNodeGroupInstanceTemplateNetworkInterface>[]>;
+    /**
+     * The placement policy configuration.
+     */
+    placementPolicy?: pulumi.Input<inputs.KubernetesNodeGroupInstanceTemplatePlacementPolicy>;
+    /**
+     * The ID of the hardware platform configuration for the node group compute instances.
+     */
+    platformId?: pulumi.Input<string>;
+    resources?: pulumi.Input<inputs.KubernetesNodeGroupInstanceTemplateResources>;
+    /**
+     * The scheduling policy for the instances in node group.
+     */
+    schedulingPolicy?: pulumi.Input<inputs.KubernetesNodeGroupInstanceTemplateSchedulingPolicy>;
+}
+
+export interface KubernetesNodeGroupInstanceTemplateBootDisk {
+    /**
+     * The size of the disk in GB. Allowed minimal size: 64 GB.
+     */
+    size?: pulumi.Input<number>;
+    /**
+     * The disk type.
+     */
+    type?: pulumi.Input<string>;
+}
+
+export interface KubernetesNodeGroupInstanceTemplateContainerNetwork {
+    /**
+     * MTU for pods.
+     */
+    podMtu?: pulumi.Input<number>;
+}
+
+export interface KubernetesNodeGroupInstanceTemplateContainerRuntime {
+    /**
+     * Type of container runtime. Values: `docker`, `containerd`.
+     */
+    type: pulumi.Input<string>;
+}
+
+export interface KubernetesNodeGroupInstanceTemplateGpuSettings {
+    /**
+     * GPU cluster id.
+     */
+    gpuClusterId?: pulumi.Input<string>;
+    /**
+     * GPU environment. Values: `runc`, `runcDriversCuda`.
+     */
+    gpuEnvironment?: pulumi.Input<string>;
+}
+
+export interface KubernetesNodeGroupInstanceTemplateNetworkInterface {
+    /**
+     * Allocate an IPv4 address for the interface. The default value is `true`.
+     */
+    ipv4?: pulumi.Input<boolean>;
+    /**
+     * List of configurations for creating ipv4 DNS records.
+     */
+    ipv4DnsRecords?: pulumi.Input<pulumi.Input<inputs.KubernetesNodeGroupInstanceTemplateNetworkInterfaceIpv4DnsRecord>[]>;
+    /**
+     * If true, allocate an IPv6 address for the interface. The address will be automatically assigned from the specified subnet.
+     */
+    ipv6?: pulumi.Input<boolean>;
+    /**
+     * List of configurations for creating ipv6 DNS records.
+     */
+    ipv6DnsRecords?: pulumi.Input<pulumi.Input<inputs.KubernetesNodeGroupInstanceTemplateNetworkInterfaceIpv6DnsRecord>[]>;
+    /**
+     * A public address that can be used to access the internet over NAT.
+     */
+    nat?: pulumi.Input<boolean>;
+    /**
+     * Security group IDs for network interface.
+     */
+    securityGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The IDs of the subnets.
+     */
+    subnetIds: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface KubernetesNodeGroupInstanceTemplateNetworkInterfaceIpv4DnsRecord {
+    /**
+     * DNS zone ID (if not set, private zone is used).
+     */
+    dnsZoneId?: pulumi.Input<string>;
+    /**
+     * DNS record FQDN.
+     */
+    fqdn: pulumi.Input<string>;
+    /**
+     * When set to `true`, also create a PTR DNS record.
+     */
+    ptr?: pulumi.Input<boolean>;
+    /**
+     * DNS record TTL (in seconds).
+     */
+    ttl?: pulumi.Input<number>;
+}
+
+export interface KubernetesNodeGroupInstanceTemplateNetworkInterfaceIpv6DnsRecord {
+    /**
+     * DNS zone ID (if not set, private zone is used).
+     */
+    dnsZoneId?: pulumi.Input<string>;
+    /**
+     * DNS record FQDN.
+     */
+    fqdn: pulumi.Input<string>;
+    /**
+     * When set to `true`, also create a PTR DNS record.
+     */
+    ptr?: pulumi.Input<boolean>;
+    /**
+     * DNS record TTL (in seconds).
+     */
+    ttl?: pulumi.Input<number>;
+}
+
+export interface KubernetesNodeGroupInstanceTemplatePlacementPolicy {
+    /**
+     * Specifies the id of the Placement Group to assign to the instances.
+     */
+    placementGroupId: pulumi.Input<string>;
+}
+
+export interface KubernetesNodeGroupInstanceTemplateResources {
+    /**
+     * Baseline core performance as a percent.
+     */
+    coreFraction?: pulumi.Input<number>;
+    /**
+     * Number of CPU cores allocated to the instance.
+     */
+    cores?: pulumi.Input<number>;
+    /**
+     * Number of GPU cores allocated to the instance.
+     */
+    gpus?: pulumi.Input<number>;
+    /**
+     * The memory size allocated to the instance.
+     */
+    memory?: pulumi.Input<number>;
+}
+
+export interface KubernetesNodeGroupInstanceTemplateSchedulingPolicy {
+    /**
+     * Specifies if the instance is preemptible. Defaults to `false`.
+     */
+    preemptible?: pulumi.Input<boolean>;
+}
+
+export interface KubernetesNodeGroupMaintenancePolicy {
+    /**
+     * Flag that specifies if node group can be repaired automatically. When omitted, default value is `true`.
+     */
+    autoRepair: pulumi.Input<boolean>;
+    /**
+     * Flag specifies if node group can be upgraded automatically. When omitted, default value is `true`.
+     */
+    autoUpgrade: pulumi.Input<boolean>;
+    /**
+     * Set of day intervals, when maintenance is allowed for this node group. When omitted, it defaults to any time.
+     *
+     * To specify time of day interval, for all days, one element should be provided, with two fields set, `startTime` and `duration`.
+     *
+     * To allow maintenance only on specific days of week, please provide list of elements, with all fields set. Only one time interval is allowed for each day of week. Please see `myNodeGroup` config example.
+     */
+    maintenanceWindows?: pulumi.Input<pulumi.Input<inputs.KubernetesNodeGroupMaintenancePolicyMaintenanceWindow>[]>;
+}
+
+export interface KubernetesNodeGroupMaintenancePolicyMaintenanceWindow {
+    day?: pulumi.Input<string>;
+    duration: pulumi.Input<string>;
+    startTime: pulumi.Input<string>;
+}
+
+export interface KubernetesNodeGroupScalePolicy {
+    /**
+     * Scale policy for an autoscaled node group.
+     */
+    autoScale?: pulumi.Input<inputs.KubernetesNodeGroupScalePolicyAutoScale>;
+    /**
+     * Scale policy for a fixed scale node group.
+     */
+    fixedScale?: pulumi.Input<inputs.KubernetesNodeGroupScalePolicyFixedScale>;
+}
+
+export interface KubernetesNodeGroupScalePolicyAutoScale {
+    /**
+     * Initial number of instances in the node group.
+     */
+    initial: pulumi.Input<number>;
+    /**
+     * Maximum number of instances in the node group.
+     */
+    max: pulumi.Input<number>;
+    /**
+     * Minimum number of instances in the node group.
+     */
+    min: pulumi.Input<number>;
+}
+
+export interface KubernetesNodeGroupScalePolicyFixedScale {
+    /**
+     * The number of instances in the node group.
+     */
+    size?: pulumi.Input<number>;
+}
+
+export interface KubernetesNodeGroupVersionInfo {
+    /**
+     * Current Kubernetes version, major.minor (e.g. `1.30`).
+     */
+    currentVersion?: pulumi.Input<string>;
+    /**
+     * True/false flag. Newer revisions may include Kubernetes patches (e.g `1.30.1` > `1.30.2`) as well as some internal component updates - new features or bug fixes in yandex-specific components either on the master or nodes.
+     */
+    newRevisionAvailable?: pulumi.Input<boolean>;
+    /**
+     * Human readable description of the changes to be applied when updating to the latest revision. Empty if newRevisionAvailable is false.
+     */
+    newRevisionSummary?: pulumi.Input<string>;
+    /**
+     * True/false flag. The current version is on the deprecation schedule, component (master or node group) should be upgraded.
+     */
+    versionDeprecated?: pulumi.Input<boolean>;
+}
+
+export interface LbNetworkLoadBalancerAttachedTargetGroup {
+    /**
+     * A HealthCheck resource.
+     *
+     * > One of `httpOptions` or `tcpOptions` should be specified.
+     */
+    healthchecks: pulumi.Input<pulumi.Input<inputs.LbNetworkLoadBalancerAttachedTargetGroupHealthcheck>[]>;
+    /**
+     * ID of the target group.
+     */
+    targetGroupId: pulumi.Input<string>;
+}
+
+export interface LbNetworkLoadBalancerAttachedTargetGroupHealthcheck {
+    /**
+     * Number of successful health checks required in order to set the `HEALTHY` status for the target.
+     */
+    healthyThreshold?: pulumi.Input<number>;
+    /**
+     * Options for HTTP health check.
+     */
+    httpOptions?: pulumi.Input<inputs.LbNetworkLoadBalancerAttachedTargetGroupHealthcheckHttpOptions>;
+    /**
+     * The interval between health checks. The default is 2 seconds.
+     */
+    interval?: pulumi.Input<number>;
+    /**
+     * Name of the health check. The name must be unique for each target group that attached to a single load balancer.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * Options for TCP health check.
+     */
+    tcpOptions?: pulumi.Input<inputs.LbNetworkLoadBalancerAttachedTargetGroupHealthcheckTcpOptions>;
+    /**
+     * Timeout for a target to return a response for the health check. The default is 1 second.
+     */
+    timeout?: pulumi.Input<number>;
+    /**
+     * Number of failed health checks before changing the status to `UNHEALTHY`. The default is 2.
+     */
+    unhealthyThreshold?: pulumi.Input<number>;
+}
+
+export interface LbNetworkLoadBalancerAttachedTargetGroupHealthcheckHttpOptions {
+    /**
+     * URL path to set for health checking requests for every target in the target group. For example `/ping`. The default path is `/`.
+     */
+    path?: pulumi.Input<string>;
+    /**
+     * Port to use for HTTP health checks.
+     */
+    port: pulumi.Input<number>;
+}
+
+export interface LbNetworkLoadBalancerAttachedTargetGroupHealthcheckTcpOptions {
+    /**
+     * Port to use for TCP health checks.
+     */
+    port: pulumi.Input<number>;
+}
+
+export interface LbNetworkLoadBalancerListener {
+    /**
+     * External IP address specification.
+     */
+    externalAddressSpec?: pulumi.Input<inputs.LbNetworkLoadBalancerListenerExternalAddressSpec>;
+    /**
+     * Internal IP address specification.
+     */
+    internalAddressSpec?: pulumi.Input<inputs.LbNetworkLoadBalancerListenerInternalAddressSpec>;
+    /**
+     * Name of the listener. The name must be unique for each listener on a single load balancer.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * Port for incoming traffic.
+     */
+    port: pulumi.Input<number>;
+    /**
+     * Protocol for incoming traffic. TCP or UDP and the default is TCP.
+     */
+    protocol?: pulumi.Input<string>;
+    /**
+     * Port of a target. The default is the same as listener's port.
+     */
+    targetPort?: pulumi.Input<number>;
+}
+
+export interface LbNetworkLoadBalancerListenerExternalAddressSpec {
+    /**
+     * External IP address for a listener. IP address will be allocated if it wasn't been set.
+     */
+    address?: pulumi.Input<string>;
+    /**
+     * IP version of the external addresses that the load balancer works with. Must be one of `ipv4` or `ipv6`. The default is `ipv4`.
+     */
+    ipVersion?: pulumi.Input<string>;
+}
+
+export interface LbNetworkLoadBalancerListenerInternalAddressSpec {
+    /**
+     * Internal IP address for a listener. Must belong to the subnet that is referenced in subnet_id. IP address will be allocated if it wasn't been set.
+     */
+    address?: pulumi.Input<string>;
+    /**
+     * IP version of the external addresses that the load balancer works with. Must be one of `ipv4` or `ipv6`. The default is `ipv4`.
+     */
+    ipVersion?: pulumi.Input<string>;
+    /**
+     * ID of the subnet to which the internal IP address belongs.
+     */
+    subnetId: pulumi.Input<string>;
+}
+
+export interface LbTargetGroupTarget {
+    /**
+     * IP address of the target.
+     */
+    address: pulumi.Input<string>;
+    /**
+     * ID of the subnet that targets are connected to. All targets in the target group must be connected to the same subnet within a single availability zone.
+     */
+    subnetId: pulumi.Input<string>;
+}
+
+export interface LoadtestingAgentComputeInstance {
+    /**
+     * Boot disk specifications for the instance.
+     */
+    bootDisk: pulumi.Input<inputs.LoadtestingAgentComputeInstanceBootDisk>;
+    /**
+     * The set of labels `key:value` pairs assigned to this instance. This includes user custom `labels` and predefined items created by Yandex Cloud Load Testing.
+     */
+    computedLabels?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    /**
+     * The set of metadata `key:value` pairs assigned to this instance. This includes user custom `metadata`, and predefined items created by Yandex Cloud Load Testing.
+     */
+    computedMetadata?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    /**
+     * A set of key/value label pairs to assign to the instance.
+     */
+    labels?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    /**
+     * A set of metadata key/value pairs to make available from within the instance.
+     */
+    metadata?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    /**
+     * Network specifications for the instance. This can be used multiple times for adding multiple interfaces.
+     */
+    networkInterfaces: pulumi.Input<pulumi.Input<inputs.LoadtestingAgentComputeInstanceNetworkInterface>[]>;
+    /**
+     * The Compute platform for virtual machine.
+     */
+    platformId?: pulumi.Input<string>;
+    /**
+     * Compute resource specifications for the instance.
+     */
+    resources: pulumi.Input<inputs.LoadtestingAgentComputeInstanceResources>;
+    /**
+     * The ID of the service account authorized for this load testing agent. Service account should have `loadtesting.generatorClient` or `loadtesting.externalAgent` role in the folder.
+     */
+    serviceAccountId: pulumi.Input<string>;
+    /**
+     * The [availability zone](https://yandex.cloud/docs/overview/concepts/geo-scope) where resource is located. If it is not provided, the default provider zone will be used.
+     */
+    zoneId?: pulumi.Input<string>;
+}
+
+export interface LoadtestingAgentComputeInstanceBootDisk {
+    /**
+     * Whether the disk is auto-deleted when the instance is deleted. The default value is true.
+     */
+    autoDelete?: pulumi.Input<boolean>;
+    /**
+     * This value can be used to reference the device under `/dev/disk/by-id/`.
+     */
+    deviceName?: pulumi.Input<string>;
+    /**
+     * The ID of created disk.
+     */
+    diskId?: pulumi.Input<string>;
+    /**
+     * Parameters for creating a disk alongside the instance.
+     */
+    initializeParams: pulumi.Input<inputs.LoadtestingAgentComputeInstanceBootDiskInitializeParams>;
+}
+
+export interface LoadtestingAgentComputeInstanceBootDiskInitializeParams {
+    /**
+     * Block size of the disk, specified in bytes.
+     */
+    blockSize?: pulumi.Input<number>;
+    /**
+     * A description of the boot disk.
+     */
+    description?: pulumi.Input<string>;
+    /**
+     * A name of the boot disk.
+     */
+    name?: pulumi.Input<string>;
+    /**
+     * The size of the disk in GB. Defaults to 15 GB.
+     */
+    size?: pulumi.Input<number>;
+    /**
+     * The disk type.
+     */
+    type?: pulumi.Input<string>;
+}
+
+export interface LoadtestingAgentComputeInstanceNetworkInterface {
+    index?: pulumi.Input<number>;
+    /**
+     * Manual set static IP address.
+     */
+    ipAddress?: pulumi.Input<string>;
+    /**
+     * Flag for allocating IPv4 address for the network interface.
+     */
+    ipv4?: pulumi.Input<boolean>;
+    /**
+     * Flag for allocating IPv6 address for the network interface.
+     */
+    ipv6?: pulumi.Input<boolean>;
+    /**
+     * Manual set static IPv6 address.
+     */
+    ipv6Address?: pulumi.Input<string>;
+    macAddress?: pulumi.Input<string>;
+    /**
+     * Flag for using NAT.
+     */
+    nat?: pulumi.Input<boolean>;
+    /**
+     * A public address that can be used to access the internet over NAT.
+     */
+    natIpAddress?: pulumi.Input<string>;
+    natIpVersion?: pulumi.Input<string>;
+    /**
+     * Security group ids for network interface.
+     */
+    securityGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The ID of the subnet to attach this interface to. The subnet must reside in the same zone where this instance was created.
+     */
+    subnetId: pulumi.Input<string>;
+}
+
+export interface LoadtestingAgentComputeInstanceResources {
+    /**
+     * If provided, specifies baseline core performance as a percent.
+     */
+    coreFraction?: pulumi.Input<number>;
+    /**
+     * The number of CPU cores for the instance. Defaults to 2 cores.
+     */
+    cores?: pulumi.Input<number>;
+    /**
+     * The memory size in GB. Defaults to 2 GB.
+     */
+    memory?: pulumi.Input<number>;
+}
+
+export interface LoadtestingAgentLogSettings {
+    /**
+     * The ID of cloud logging group to which the load testing agent sends logs.
+     */
+    logGroupId?: pulumi.Input<string>;
+}
+
+export interface LockboxSecretPasswordPayloadSpecification {
+    /**
+     * String of punctuation characters to exclude from the default. Requires `includePunctuation = true`. Default is empty.
+     */
+    excludedPunctuation?: pulumi.Input<string>;
+    /**
+     * Use digits in the generated password. Default is true.
+     */
+    includeDigits?: pulumi.Input<boolean>;
+    /**
+     * Use lowercase letters in the generated password. Default is true.
+     */
+    includeLowercase?: pulumi.Input<boolean>;
+    /**
+     * Use punctuations (`!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~`) in the generated password. Default is true.
+     */
+    includePunctuation?: pulumi.Input<boolean>;
+    /**
+     * Use capital letters in the generated password. Default is true.
+     */
+    includeUppercase?: pulumi.Input<boolean>;
+    /**
+     * String of specific punctuation characters to use. Requires `includePunctuation = true`. Default is empty.
+     */
+    includedPunctuation?: pulumi.Input<string>;
+    /**
+     * Length of generated password. Default is `36`.
+     */
+    length?: pulumi.Input<number>;
+    /**
+     * The key with which the generated password will be placed in the secret version.
+     */
+    passwordKey: pulumi.Input<string>;
+}
+
+export interface LockboxSecretVersionEntry {
+    /**
+     * The command that generates the text value of the entry.
+     */
+    command?: pulumi.Input<inputs.LockboxSecretVersionEntryCommand>;
+    /**
+     * The key of the entry.
+     */
+    key: pulumi.Input<string>;
+    /**
+     * The text value of the entry.
+     */
+    textValue?: pulumi.Input<string>;
+}
+
+export interface LockboxSecretVersionEntryCommand {
+    /**
+     * List of arguments to be passed to the script/command.
+     */
+    args?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Map of environment variables to set before calling the script/command.
+     */
+    env?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    /**
+     * The path to the script or command to execute.
+     */
+    path: pulumi.Input<string>;
+}
+
+export interface MdbClickhouseClusterAccess {
+    /**
+     * Allow access for DataLens.
+     */
+    dataLens?: pulumi.Input<boolean>;
+    /**
+     * Allow access for DataTransfer.
+     */
+    dataTransfer?: pulumi.Input<boolean>;
+    /**
+     * Allow access for Yandex.Metrika.
+     */
+    metrika?: pulumi.Input<boolean>;
+    /**
+     * Allow access for Serverless.
+     */
+    serverless?: pulumi.Input<boolean>;
+    /**
+     * Allow access for Web SQL.
+     */
+    webSql?: pulumi.Input<boolean>;
+    /**
+     * Allow access for YandexQuery.
+     */
+    yandexQuery?: pulumi.Input<boolean>;
+}
+
+export interface MdbClickhouseClusterBackupWindowStart {
+    /**
+     * The hour at which backup will be started.
+     */
+    hours?: pulumi.Input<number>;
+    /**
+     * The minute at which backup will be started.
+     */
+    minutes?: pulumi.Input<number>;
+}
+
+export interface MdbClickhouseClusterClickhouse {
+    /**
+     * ClickHouse server parameters. For more information, see [the official documentation](https://yandex.cloud/docs/managed-clickhouse/concepts/settings-list).
+     */
+    config?: pulumi.Input<inputs.MdbClickhouseClusterClickhouseConfig>;
+    /**
+     * Resources allocated to hosts of the ClickHouse subcluster.
+     */
+    resources?: pulumi.Input<inputs.MdbClickhouseClusterClickhouseResources>;
+}
+
+export interface MdbClickhouseClusterClickhouseConfig {
+    /**
+     * Enable or disable asynchronousInsertLog system table.
+     */
+    asynchronousInsertLogEnabled?: pulumi.Input<boolean>;
+    /**
+     * The maximum size that asynchronousInsertLog can grow to before old data will be removed.
+     */
+    asynchronousInsertLogRetentionSize?: pulumi.Input<number>;
+    /**
+     * The maximum time that asynchronousInsertLog records will be retained before removal.
+     */
+    asynchronousInsertLogRetentionTime?: pulumi.Input<number>;
+    /**
+     * Enable or disable asynchronousMetricLog system table.
+     */
+    asynchronousMetricLogEnabled?: pulumi.Input<boolean>;
+    /**
+     * The maximum size that asynchronousMetricLog can grow to before old data will be removed.
+     */
+    asynchronousMetricLogRetentionSize?: pulumi.Input<number>;
+    /**
+     * The maximum time that asynchronousMetricLog records will be retained before removal.
+     */
+    asynchronousMetricLogRetentionTime?: pulumi.Input<number>;
+    /**
+     * The maximum number of threads that will be used for performing flush operations for Buffer-engine tables in the background.
+     */
+    backgroundBufferFlushSchedulePoolSize?: pulumi.Input<number>;
+    /**
+     * The maximum number of threads that will be used for performing a variety of operations (mostly garbage collection) for MergeTree-engine tables in a background.
+     */
+    backgroundCommonPoolSize?: pulumi.Input<number>;
+    /**
+     * The maximum number of threads that will be used for executing distributed sends.
+     */
+    backgroundDistributedSchedulePoolSize?: pulumi.Input<number>;
+    /**
+     * The maximum number of threads that will be used for fetching data parts from another replica for MergeTree-engine tables in a background.
+     */
+    backgroundFetchesPoolSize?: pulumi.Input<number>;
+    /**
+     * Sets a ratio between the number of threads and the number of background merges and mutations that can be executed concurrently.
+     */
+    backgroundMergesMutationsConcurrencyRatio?: pulumi.Input<number>;
+    /**
+     * The maximum number of threads that will be used for executing background operations for message streaming.
+     */
+    backgroundMessageBrokerSchedulePoolSize?: pulumi.Input<number>;
+    /**
+     * The maximum number of threads that will be used for moving data parts to another disk or volume for MergeTree-engine tables in a background.
+     */
+    backgroundMovePoolSize?: pulumi.Input<number>;
+    /**
+     * Sets the number of threads performing background merges and mutations for MergeTree-engine tables.
+     */
+    backgroundPoolSize?: pulumi.Input<number>;
+    /**
+     * The maximum number of threads that will be used for constantly executing some lightweight periodic operations for replicated tables, Kafka streaming, and DNS cache updates.
+     */
+    backgroundSchedulePoolSize?: pulumi.Input<number>;
+    /**
+     * Data compression configuration.
+     */
+    compressions?: pulumi.Input<pulumi.Input<inputs.MdbClickhouseClusterClickhouseConfigCompression>[]>;
+    /**
+     * Default database name.
+     */
+    defaultDatabase?: pulumi.Input<string>;
+    /**
+     * Lazy loading of dictionaries. If true, then each dictionary is loaded on the first use.
+     */
+    dictionariesLazyLoad?: pulumi.Input<boolean>;
+    /**
+     * Enable or disable geobase.
+     */
+    geobaseEnabled?: pulumi.Input<boolean>;
+    /**
+     * Address of the archive with the user geobase in Object Storage.
+     */
+    geobaseUri?: pulumi.Input<string>;
+    /**
+     * Graphite rollup configuration.
+     */
+    graphiteRollups?: pulumi.Input<pulumi.Input<inputs.MdbClickhouseClusterClickhouseConfigGraphiteRollup>[]>;
+    /**
+     * JDBC bridge configuration.
+     */
+    jdbcBridge?: pulumi.Input<inputs.MdbClickhouseClusterClickhouseConfigJdbcBridge>;
+    /**
+     * Kafka connection configuration.
+     */
+    kafka?: pulumi.Input<inputs.MdbClickhouseClusterClickhouseConfigKafka>;
+    /**
+     * Kafka topic connection configuration.
+     */
+    kafkaTopics?: pulumi.Input<pulumi.Input<inputs.MdbClickhouseClusterClickhouseConfigKafkaTopic>[]>;
+    /**
+     * The number of seconds that ClickHouse waits for incoming requests for HTTP protocol before closing the connection.
+     */
+    keepAliveTimeout?: pulumi.Input<number>;
+    /**
+     * Logging level.
+     */
+    logLevel?: pulumi.Input<string>;
+    /**
+     * Maximum size of cache for marks
+     */
+    markCacheSize?: pulumi.Input<number>;
+    /**
+     * Limit on total number of concurrently executed queries.
+     */
+    maxConcurrentQueries?: pulumi.Input<number>;
+    /**
+     * Max server connections.
+     */
+    maxConnections?: pulumi.Input<number>;
+    /**
+     * Restriction on dropping partitions.
+     */
+    maxPartitionSizeToDrop?: pulumi.Input<number>;
+    /**
+     * Restriction on deleting tables.
+     */
+    maxTableSizeToDrop?: pulumi.Input<number>;
+    /**
+     * MergeTree engine configuration.
+     */
+    mergeTree?: pulumi.Input<inputs.MdbClickhouseClusterClickhouseConfigMergeTree>;
+    /**
+     * Enable or disable metricLog system table.
+     */
+    metricLogEnabled?: pulumi.Input<boolean>;
+    /**
+     * The maximum size that metricLog can grow to before old data will be removed.
+     */
+    metricLogRetentionSize?: pulumi.Input<number>;
+    /**
+     * The maximum time that metricLog records will be retained before removal.
+     */
+    metricLogRetentionTime?: pulumi.Input<number>;
+    /**
+     * Enable or disable opentelemetrySpanLog system table.
+     */
+    opentelemetrySpanLogEnabled?: pulumi.Input<boolean>;
+    /**
+     * The maximum size that opentelemetrySpanLog can grow to before old data will be removed.
+     */
+    opentelemetrySpanLogRetentionSize?: pulumi.Input<number>;
+    /**
+     * The maximum time that opentelemetrySpanLog records will be retained before removal.
+     */
+    opentelemetrySpanLogRetentionTime?: pulumi.Input<number>;
+    /**
+     * The maximum size that partLog can grow to before old data will be removed.
+     */
+    partLogRetentionSize?: pulumi.Input<number>;
+    /**
+     * The maximum time that partLog records will be retained before removal.
+     */
+    partLogRetentionTime?: pulumi.Input<number>;
+    /**
+     * Query cache configuration.
+     */
+    queryCache?: pulumi.Input<inputs.MdbClickhouseClusterClickhouseConfigQueryCache>;
+    /**
+     * The maximum size that queryLog can grow to before old data will be removed.
+     */
+    queryLogRetentionSize?: pulumi.Input<number>;
+    /**
+     * The maximum time that queryLog records will be retained before removal.
+     */
+    queryLogRetentionTime?: pulumi.Input<number>;
+    /**
+     * Query masking rules configuration.
+     */
+    queryMaskingRules?: pulumi.Input<pulumi.Input<inputs.MdbClickhouseClusterClickhouseConfigQueryMaskingRule>[]>;
+    /**
+     * Enable or disable queryThreadLog system table.
+     */
+    queryThreadLogEnabled?: pulumi.Input<boolean>;
+    /**
+     * The maximum size that queryThreadLog can grow to before old data will be removed.
+     */
+    queryThreadLogRetentionSize?: pulumi.Input<number>;
+    /**
+     * The maximum time that queryThreadLog records will be retained before removal.
+     */
+    queryThreadLogRetentionTime?: pulumi.Input<number>;
+    /**
+     * Enable or disable queryViewsLog system table.
+     */
+    queryViewsLogEnabled?: pulumi.Input<boolean>;
+    /**
+     * The maximum size that queryViewsLog can grow to before old data will be removed.
+     */
+    queryViewsLogRetentionSize?: pulumi.Input<number>;
+    /**
+     * The maximum time that queryViewsLog records will be retained before removal.
+     */
+    queryViewsLogRetentionTime?: pulumi.Input<number>;
+    /**
+     * RabbitMQ connection configuration.
+     */
+    rabbitmq?: pulumi.Input<inputs.MdbClickhouseClusterClickhouseConfigRabbitmq>;
+    /**
+     * Enable or disable sessionLog system table.
+     */
+    sessionLogEnabled?: pulumi.Input<boolean>;
+    /**
+     * The maximum size that sessionLog can grow to before old data will be removed.
+     */
+    sessionLogRetentionSize?: pulumi.Input<number>;
+    /**
+     * The maximum time that sessionLog records will be retained before removal.
+     */
+    sessionLogRetentionTime?: pulumi.Input<number>;
+    /**
+     * Enable or disable textLog system table.
+     */
+    textLogEnabled?: pulumi.Input<boolean>;
+    /**
+     * Logging level for textLog system table.
+     */
+    textLogLevel?: pulumi.Input<string>;
+    /**
+     * The maximum size that textLog can grow to before old data will be removed.
+     */
+    textLogRetentionSize?: pulumi.Input<number>;
+    /**
+     * The maximum time that textLog records will be retained before removal.
+     */
+    textLogRetentionTime?: pulumi.Input<number>;
+    /**
+     * The server's time zone.
+     */
+    timezone?: pulumi.Input<string>;
+    /**
+     * Whenever server memory usage becomes larger than every next step in number of bytes the memory profiler will collect the allocating stack trace.
+     */
+    totalMemoryProfilerStep?: pulumi.Input<number>;
+    /**
+     * Enable or disable traceLog system table.
+     */
+    traceLogEnabled?: pulumi.Input<boolean>;
+    /**
+     * The maximum size that traceLog can grow to before old data will be removed.
+     */
+    traceLogRetentionSize?: pulumi.Input<number>;
+    /**
+     * The maximum time that traceLog records will be retained before removal.
+     */
+    traceLogRetentionTime?: pulumi.Input<number>;
+    /**
+     * Cache size (in bytes) for uncompressed data used by table engines from the MergeTree family. Zero means disabled.
+     */
+    uncompressedCacheSize?: pulumi.Input<number>;
+    /**
+     * Enable or disable zookeeperLog system table.
+     */
+    zookeeperLogEnabled?: pulumi.Input<boolean>;
+    /**
+     * The maximum size that zookeeperLog can grow to before old data will be removed.
+     */
+    zookeeperLogRetentionSize?: pulumi.Input<number>;
+    /**
+     * The maximum time that zookeeperLog records will be retained before removal.
+     */
+    zookeeperLogRetentionTime?: pulumi.Input<number>;
+}
+
+export interface MdbClickhouseClusterClickhouseConfigCompression {
+    /**
+     * Compression level for `ZSTD` method.
+     */
+    level?: pulumi.Input<number>;
+    /**
+     * Compression method. Two methods are available: `LZ4` and `zstd`.
+     */
+    method: pulumi.Input<string>;
+    /**
+     * Min part size: Minimum size (in bytes) of a data part in a table. ClickHouse only applies the rule to tables with data parts greater than or equal to the Min part size value.
+     */
+    minPartSize: pulumi.Input<number>;
+    /**
+     * Min part size ratio: Minimum table part size to total table size ratio. ClickHouse only applies the rule to tables in which this ratio is greater than or equal to the Min part size ratio value.
+     */
+    minPartSizeRatio: pulumi.Input<number>;
+}
+
+export interface MdbClickhouseClusterClickhouseConfigGraphiteRollup {
+    /**
+     * Graphite rollup configuration name.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * The name of the column storing the metric name (Graphite sensor). Default value: Path.
+     */
+    pathColumnName?: pulumi.Input<string>;
+    /**
+     * Set of thinning rules.
+     */
+    patterns?: pulumi.Input<pulumi.Input<inputs.MdbClickhouseClusterClickhouseConfigGraphiteRollupPattern>[]>;
+    /**
+     * The name of the column storing the time of measuring the metric. Default value: Time.
+     */
+    timeColumnName?: pulumi.Input<string>;
+    /**
+     * The name of the column storing the value of the metric at the time set in `timeColumnName`. Default value: Value.
+     */
+    valueColumnName?: pulumi.Input<string>;
+    /**
+     * The name of the column storing the version of the metric. Default value: Timestamp.
+     */
+    versionColumnName?: pulumi.Input<string>;
+}
+
+export interface MdbClickhouseClusterClickhouseConfigGraphiteRollupPattern {
+    /**
+     * Aggregation function name.
+     */
+    function: pulumi.Input<string>;
+    /**
+     * Regular expression that the metric name must match.
+     */
+    regexp?: pulumi.Input<string>;
+    /**
+     * Retain parameters.
+     */
+    retentions?: pulumi.Input<pulumi.Input<inputs.MdbClickhouseClusterClickhouseConfigGraphiteRollupPatternRetention>[]>;
+}
+
+export interface MdbClickhouseClusterClickhouseConfigGraphiteRollupPatternRetention {
+    /**
+     * Minimum data age in seconds.
+     */
+    age: pulumi.Input<number>;
+    /**
+     * Accuracy of determining the age of the data in seconds.
+     */
+    precision: pulumi.Input<number>;
+}
+
+export interface MdbClickhouseClusterClickhouseConfigJdbcBridge {
+    /**
+     * Host of jdbc bridge.
+     */
+    host: pulumi.Input<string>;
+    /**
+     * Port of jdbc bridge. Default value: 9019.
+     */
+    port?: pulumi.Input<number>;
+}
+
+export interface MdbClickhouseClusterClickhouseConfigKafka {
+    /**
+     * Action to take when there is no initial offset in offset store or the desired offset is out of range: 'smallest','earliest' - automatically reset the offset to the smallest offset, 'largest','latest' - automatically reset the offset to the largest offset, 'error' - trigger an error (ERR__AUTO_OFFSET_RESET) which is retrieved by consuming messages and checking 'message->err'.
+     */
+    autoOffsetReset?: pulumi.Input<string>;
+    /**
+     * A comma-separated list of debug contexts to enable.
+     */
+    debug?: pulumi.Input<string>;
+    /**
+     * Enable verification of SSL certificates.
+     */
+    enableSslCertificateVerification?: pulumi.Input<boolean>;
+    /**
+     * Maximum allowed time between calls to consume messages (e.g., `rd_kafka_consumer_poll()` for high-level consumers. If this interval is exceeded the consumer is considered failed and the group will rebalance in order to reassign the partitions to another consumer group member.
+     */
+    maxPollIntervalMs?: pulumi.Input<number>;
+    /**
+     * SASL mechanism used in kafka authentication.
+     */
+    saslMechanism?: pulumi.Input<string>;
+    /**
+     * User password on kafka server.
+     */
+    saslPassword?: pulumi.Input<string>;
+    /**
+     * Username on kafka server.
+     */
+    saslUsername?: pulumi.Input<string>;
+    /**
+     * Security protocol used to connect to kafka server.
+     */
+    securityProtocol?: pulumi.Input<string>;
+    /**
+     * Client group session and failure detection timeout. The consumer sends periodic heartbeats (heartbeat.interval.ms) to indicate its liveness to the broker. If no hearts are received by the broker for a group member within the session timeout, the broker will remove the consumer from the group and trigger a rebalance.
+     */
+    sessionTimeoutMs?: pulumi.Input<number>;
+}
+
+export interface MdbClickhouseClusterClickhouseConfigKafkaTopic {
+    /**
+     * Kafka topic name.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * Kafka connection settings.
+     */
+    settings?: pulumi.Input<inputs.MdbClickhouseClusterClickhouseConfigKafkaTopicSettings>;
+}
+
+export interface MdbClickhouseClusterClickhouseConfigKafkaTopicSettings {
+    /**
+     * Action to take when there is no initial offset in offset store or the desired offset is out of range: 'smallest','earliest' - automatically reset the offset to the smallest offset, 'largest','latest' - automatically reset the offset to the largest offset, 'error' - trigger an error (ERR__AUTO_OFFSET_RESET) which is retrieved by consuming messages and checking 'message->err'.
+     */
+    autoOffsetReset?: pulumi.Input<string>;
+    /**
+     * A comma-separated list of debug contexts to enable.
+     */
+    debug?: pulumi.Input<string>;
+    /**
+     * Enable verification of SSL certificates.
+     */
+    enableSslCertificateVerification?: pulumi.Input<boolean>;
+    /**
+     * Maximum allowed time between calls to consume messages (e.g., `rd_kafka_consumer_poll()` for high-level consumers. If this interval is exceeded the consumer is considered failed and the group will rebalance in order to reassign the partitions to another consumer group member.
+     */
+    maxPollIntervalMs?: pulumi.Input<number>;
+    /**
+     * SASL mechanism used in kafka authentication.
+     */
+    saslMechanism?: pulumi.Input<string>;
+    /**
+     * User password on kafka server.
+     */
+    saslPassword?: pulumi.Input<string>;
+    /**
+     * Username on kafka server.
+     */
+    saslUsername?: pulumi.Input<string>;
+    /**
+     * Security protocol used to connect to kafka server.
+     */
+    securityProtocol?: pulumi.Input<string>;
+    /**
+     * Client group session and failure detection timeout. The consumer sends periodic heartbeats (heartbeat.interval.ms) to indicate its liveness to the broker. If no hearts are received by the broker for a group member within the session timeout, the broker will remove the consumer from the group and trigger a rebalance.
+     */
+    sessionTimeoutMs?: pulumi.Input<number>;
+}
+
+export interface MdbClickhouseClusterClickhouseConfigMergeTree {
+    /**
+     * When this setting has a value greater than zero only a single replica starts the merge immediately if merged part on shared storage and allowRemoteFsZeroCopyReplication is enabled.
+     */
+    allowRemoteFsZeroCopyReplication?: pulumi.Input<boolean>;
+    /**
+     * Enables the check at table creation, that the data type of a column for sampling or sampling expression is correct. The data type must be one of unsigned integer types: UInt8, UInt16, UInt32, UInt64. Default value: true.
+     */
+    checkSampleColumnIsCorrect?: pulumi.Input<boolean>;
+    /**
+     * Minimum period to clean old queue logs, blocks hashes and parts.
+     */
+    cleanupDelayPeriod?: pulumi.Input<number>;
+    /**
+     * If the number of inactive parts in a single partition in the table at least that many the inactivePartsToDelayInsert value, an INSERT artificially slows down. It is useful when a server fails to clean up parts quickly enough.
+     */
+    inactivePartsToDelayInsert?: pulumi.Input<number>;
+    /**
+     * If the number of inactive parts in a single partition more than the inactivePartsToThrowInsert value, INSERT is interrupted with the `Too many inactive parts (N). Parts cleaning are processing significantly slower than inserts` exception.
+     */
+    inactivePartsToThrowInsert?: pulumi.Input<number>;
+    /**
+     * The `too many parts` check according to `partsToDelayInsert` and `partsToThrowInsert` will be active only if the average part size (in the relevant partition) is not larger than the specified threshold. If it is larger than the specified threshold, the INSERTs will be neither delayed or rejected. This allows to have hundreds of terabytes in a single table on a single server if the parts are successfully merged to larger parts. This does not affect the thresholds on inactive parts or total parts.
+     */
+    maxAvgPartSizeForTooManyParts?: pulumi.Input<number>;
+    /**
+     * The maximum total parts size (in bytes) to be merged into one part, if there are enough resources available. maxBytesToMergeAtMaxSpaceInPool -- roughly corresponds to the maximum possible part size created by an automatic background merge.
+     */
+    maxBytesToMergeAtMaxSpaceInPool?: pulumi.Input<number>;
+    /**
+     * Max bytes to merge at min space in pool: Maximum total size of a data part to merge when the number of free threads in the background pool is minimum.
+     */
+    maxBytesToMergeAtMinSpaceInPool?: pulumi.Input<number>;
+    /**
+     * Maximum period to clean old queue logs, blocks hashes and parts. Default value: 300 seconds.
+     */
+    maxCleanupDelayPeriod?: pulumi.Input<number>;
+    /**
+     * Maximum sleep time for merge selecting, a lower setting will trigger selecting tasks in backgroundSchedulePool frequently which result in large amount of requests to zookeeper in large-scale clusters. Default value: 60000 milliseconds (60 seconds).
+     */
+    maxMergeSelectingSleepMs?: pulumi.Input<number>;
+    /**
+     * When there is more than specified number of merges with TTL entries in pool, do not assign new merge with TTL.
+     */
+    maxNumberOfMergesWithTtlInPool?: pulumi.Input<number>;
+    /**
+     * Maximum number of parts in all partitions.
+     */
+    maxPartsInTotal?: pulumi.Input<number>;
+    /**
+     * Max replicated merges in queue: Maximum number of merge tasks that can be in the ReplicatedMergeTree queue at the same time.
+     */
+    maxReplicatedMergesInQueue?: pulumi.Input<number>;
+    /**
+     * The number of rows that are read from the merged parts into memory. Default value: 8192.
+     */
+    mergeMaxBlockSize?: pulumi.Input<number>;
+    /**
+     * Sleep time for merge selecting when no part is selected. A lower setting triggers selecting tasks in backgroundSchedulePool frequently, which results in a large number of requests to ClickHouse Keeper in large-scale clusters.
+     */
+    mergeSelectingSleepMs?: pulumi.Input<number>;
+    /**
+     * Minimum delay in seconds before repeating a merge with recompression TTL. Default value: 14400 seconds (4 hours).
+     */
+    mergeWithRecompressionTtlTimeout?: pulumi.Input<number>;
+    /**
+     * Minimum delay in seconds before repeating a merge with delete TTL. Default value: 14400 seconds (4 hours).
+     */
+    mergeWithTtlTimeout?: pulumi.Input<number>;
+    /**
+     * Whether minAgeToForceMergeSeconds should be applied only on the entire partition and not on subset.
+     */
+    minAgeToForceMergeOnPartitionOnly?: pulumi.Input<boolean>;
+    /**
+     * Merge parts if every part in the range is older than the value of `minAgeToForceMergeSeconds`.
+     */
+    minAgeToForceMergeSeconds?: pulumi.Input<number>;
+    /**
+     * Minimum number of bytes in a data part that can be stored in Wide format. You can set one, both or none of these settings.
+     */
+    minBytesForWidePart?: pulumi.Input<number>;
+    /**
+     * Minimum number of rows in a data part that can be stored in Wide format. You can set one, both or none of these settings.
+     */
+    minRowsForWidePart?: pulumi.Input<number>;
+    /**
+     * When there is less than specified number of free entries in pool, do not execute part mutations. This is to leave free threads for regular merges and avoid `Too many parts`. Default value: 20.
+     */
+    numberOfFreeEntriesInPoolToExecuteMutation?: pulumi.Input<number>;
+    /**
+     * Number of free entries in pool to lower max size of merge: Threshold value of free entries in the pool. If the number of entries in the pool falls below this value, ClickHouse reduces the maximum size of a data part to merge. This helps handle small merges faster, rather than filling the pool with lengthy merges.
+     */
+    numberOfFreeEntriesInPoolToLowerMaxSizeOfMerge?: pulumi.Input<number>;
+    /**
+     * Parts to delay insert: Number of active data parts in a table, on exceeding which ClickHouse starts artificially reduce the rate of inserting data into the table
+     */
+    partsToDelayInsert?: pulumi.Input<number>;
+    /**
+     * Parts to throw insert: Threshold value of active data parts in a table, on exceeding which ClickHouse throws the 'Too many parts ...' exception.
+     */
+    partsToThrowInsert?: pulumi.Input<number>;
+    /**
+     * Replicated deduplication window: Number of recent hash blocks that ZooKeeper will store (the old ones will be deleted).
+     */
+    replicatedDeduplicationWindow?: pulumi.Input<number>;
+    /**
+     * Replicated deduplication window seconds: Time during which ZooKeeper stores the hash blocks (the old ones wil be deleted).
+     */
+    replicatedDeduplicationWindowSeconds?: pulumi.Input<number>;
+    /**
+     * Enables zero-copy replication when a replica is located on a remote filesystem.
+     */
+    ttlOnlyDropParts?: pulumi.Input<boolean>;
+}
+
+export interface MdbClickhouseClusterClickhouseConfigQueryCache {
+    /**
+     * The maximum number of SELECT query results stored in the cache. Default value: 1024.
+     */
+    maxEntries?: pulumi.Input<number>;
+    /**
+     * The maximum size in bytes SELECT query results may have to be saved in the cache. Default value: 1048576 (1 MiB).
+     */
+    maxEntrySizeInBytes?: pulumi.Input<number>;
+    /**
+     * The maximum number of rows SELECT query results may have to be saved in the cache. Default value: 30000000 (30 mil).
+     */
+    maxEntrySizeInRows?: pulumi.Input<number>;
+    /**
+     * The maximum cache size in bytes. 0 means the query cache is disabled. Default value: 1073741824 (1 GiB).
+     */
+    maxSizeInBytes?: pulumi.Input<number>;
+}
+
+export interface MdbClickhouseClusterClickhouseConfigQueryMaskingRule {
+    /**
+     * Name for the rule.
+     */
+    name?: pulumi.Input<string>;
+    /**
+     * RE2 compatible regular expression.
+     */
+    regexp: pulumi.Input<string>;
+    /**
+     * Substitution string for sensitive data. Default value: six asterisks.
+     */
+    replace?: pulumi.Input<string>;
+}
+
+export interface MdbClickhouseClusterClickhouseConfigRabbitmq {
+    /**
+     * RabbitMQ user password.
+     */
+    password?: pulumi.Input<string>;
+    /**
+     * RabbitMQ username.
+     */
+    username?: pulumi.Input<string>;
+    /**
+     * RabbitMQ vhost. Default: `\`.
+     */
+    vhost?: pulumi.Input<string>;
+}
+
+export interface MdbClickhouseClusterClickhouseResources {
+    /**
+     * Volume of the storage available to a ClickHouse host, in gigabytes.
+     */
+    diskSize?: pulumi.Input<number>;
+    /**
+     * Type of the storage of ClickHouse hosts. For more information see [the official documentation](https://yandex.cloud/docs/managed-clickhouse/concepts/storage).
+     */
+    diskTypeId?: pulumi.Input<string>;
+    /**
+     * The ID of the preset for computational resources available to a ClickHouse host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-clickhouse/concepts).
+     */
+    resourcePresetId?: pulumi.Input<string>;
+}
+
+export interface MdbClickhouseClusterCloudStorage {
+    /**
+     * Enables temporary storage in the cluster repository of data requested from the object repository.
+     */
+    dataCacheEnabled?: pulumi.Input<boolean>;
+    /**
+     * Defines the maximum amount of memory (in bytes) allocated in the cluster storage for temporary storage of data requested from the object storage.
+     */
+    dataCacheMaxSize?: pulumi.Input<number>;
+    /**
+     * Whether to use Yandex Object Storage for storing ClickHouse data. Can be either `true` or `false`.
+     */
+    enabled: pulumi.Input<boolean>;
+    /**
+     * Sets the minimum free space ratio in the cluster storage. If the free space is lower than this value, the data is transferred to Yandex Object Storage. Acceptable values are 0 to 1, inclusive.
+     */
+    moveFactor?: pulumi.Input<number>;
+    /**
+     * Disables merging of data parts in `Yandex Object Storage`.
+     */
+    preferNotToMerge?: pulumi.Input<boolean>;
+}
+
+export interface MdbClickhouseClusterDatabase {
+    /**
+     * The name of the database.
+     */
+    name: pulumi.Input<string>;
+}
+
+export interface MdbClickhouseClusterFormatSchema {
+    /**
+     * The name of the format schema.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * Type of the format schema.
+     */
+    type: pulumi.Input<string>;
+    /**
+     * Format schema file URL. You can only use format schemas stored in Yandex Object Storage.
+     */
+    uri: pulumi.Input<string>;
+}
+
+export interface MdbClickhouseClusterHost {
+    /**
+     * Sets whether the host should get a public IP address on creation. Can be either `true` or `false`.
+     */
+    assignPublicIp?: pulumi.Input<boolean>;
+    /**
+     * The fully qualified domain name of the host.
+     */
+    fqdn?: pulumi.Input<string>;
+    /**
+     * The name of the shard to which the host belongs.
+     */
+    shardName?: pulumi.Input<string>;
+    /**
+     * The ID of the subnet, to which the host belongs. The subnet must be a part of the network to which the cluster belongs.
+     */
+    subnetId?: pulumi.Input<string>;
+    /**
+     * The type of the host to be deployed. Can be either `CLICKHOUSE` or `ZOOKEEPER`.
+     */
+    type: pulumi.Input<string>;
+    /**
+     * The [availability zone](https://yandex.cloud/docs/overview/concepts/geo-scope) where resource is located. If it is not provided, the default provider zone will be used.
+     */
+    zone: pulumi.Input<string>;
+}
+
+export interface MdbClickhouseClusterMaintenanceWindow {
+    /**
+     * Day of week for maintenance window if window type is weekly. Possible values: `MON`, `TUE`, `WED`, `THU`, `FRI`, `SAT`, `SUN`.
+     */
+    day?: pulumi.Input<string>;
+    /**
+     * Hour of day in UTC time zone (1-24) for maintenance window if window type is weekly.
+     */
+    hour?: pulumi.Input<number>;
+    /**
+     * Type of maintenance window. Can be either `ANYTIME` or `WEEKLY`. A day and hour of window need to be specified with weekly window.
+     */
+    type: pulumi.Input<string>;
+}
+
+export interface MdbClickhouseClusterMlModel {
+    /**
+     * The name of the ml model.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * Type of the model.
+     */
+    type: pulumi.Input<string>;
+    /**
+     * Model file URL. You can only use models stored in Yandex Object Storage.
+     */
+    uri: pulumi.Input<string>;
+}
+
+export interface MdbClickhouseClusterShard {
+    /**
+     * The name of shard.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * Resources allocated to host of the shard. The resources specified for the shard takes precedence over the resources specified for the cluster.
+     */
+    resources?: pulumi.Input<inputs.MdbClickhouseClusterShardResources>;
+    /**
+     * The weight of shard.
+     */
+    weight?: pulumi.Input<number>;
+}
+
+export interface MdbClickhouseClusterShardGroup {
+    /**
+     * Description of the shard group.
+     */
+    description?: pulumi.Input<string>;
+    /**
+     * The name of the shard group, used as cluster name in Distributed tables.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * List of shards names that belong to the shard group.
+     */
+    shardNames: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface MdbClickhouseClusterShardResources {
+    /**
+     * Volume of the storage available to a ClickHouse host, in gigabytes.
+     */
+    diskSize?: pulumi.Input<number>;
+    /**
+     * Type of the storage of ClickHouse hosts. For more information see [the official documentation](https://yandex.cloud/docs/managed-clickhouse/concepts/storage).
+     */
+    diskTypeId?: pulumi.Input<string>;
+    /**
+     * The ID of the preset for computational resources available to a ClickHouse host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-clickhouse/concepts).
+     */
+    resourcePresetId?: pulumi.Input<string>;
+}
+
+export interface MdbClickhouseClusterUser {
+    /**
+     * Connection Manager connection configuration. Filled in by the server automatically.
+     */
+    connectionManager?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    /**
+     * Generate password using Connection Manager. Allowed values: `true` or `false`. It's used only during user creation and is ignored during updating.
+     *
+     * > **Must specify either password or generate_password**.
+     */
+    generatePassword?: pulumi.Input<boolean>;
+    /**
+     * The name of the user.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * The password of the user.
+     */
+    password?: pulumi.Input<string>;
+    /**
+     * Set of permissions granted to the user.
+     */
+    permissions?: pulumi.Input<pulumi.Input<inputs.MdbClickhouseClusterUserPermission>[]>;
+    /**
+     * Set of user quotas.
+     */
+    quotas?: pulumi.Input<pulumi.Input<inputs.MdbClickhouseClusterUserQuota>[]>;
+    /**
+     * Custom settings for user.
+     */
+    settings?: pulumi.Input<inputs.MdbClickhouseClusterUserSettings>;
+}
+
+export interface MdbClickhouseClusterUserPermission {
+    /**
+     * The name of the database that the permission grants access to.
+     */
+    databaseName: pulumi.Input<string>;
+}
+
+export interface MdbClickhouseClusterUserQuota {
+    /**
+     * The number of queries that threw exception.
+     */
+    errors?: pulumi.Input<number>;
+    /**
+     * The total query execution time, in milliseconds (wall time).
+     */
+    executionTime?: pulumi.Input<number>;
+    /**
+     * Duration of interval for quota in milliseconds.
+     */
+    intervalDuration: pulumi.Input<number>;
+    /**
+     * The total number of queries.
+     */
+    queries?: pulumi.Input<number>;
+    /**
+     * The total number of source rows read from tables for running the query, on all remote servers.
+     */
+    readRows?: pulumi.Input<number>;
+    /**
+     * The total number of rows given as the result.
+     */
+    resultRows?: pulumi.Input<number>;
+}
+
+export interface MdbClickhouseClusterUserSettings {
+    /**
+     * Include CORS headers in HTTP responses.
+     */
+    addHttpCorsHeader?: pulumi.Input<boolean>;
+    /**
+     * Allows or denies DDL queries.
+     */
+    allowDdl?: pulumi.Input<boolean>;
+    /**
+     * Enables introspections functions for query profiling.
+     */
+    allowIntrospectionFunctions?: pulumi.Input<boolean>;
+    /**
+     * Allows specifying LowCardinality modifier for types of small fixed size (8 or less) in CREATE TABLE statements. Enabling this may increase merge times and memory consumption.
+     */
+    allowSuspiciousLowCardinalityTypes?: pulumi.Input<boolean>;
+    /**
+     * Enables legacy ClickHouse server behavior in ANY INNER|LEFT JOIN operations.
+     */
+    anyJoinDistinctRightTableKeys?: pulumi.Input<boolean>;
+    /**
+     * Enables asynchronous inserts. Disabled by default.
+     */
+    asyncInsert?: pulumi.Input<boolean>;
+    /**
+     * The maximum timeout in milliseconds since the first INSERT query before inserting collected data. If the parameter is set to 0, the timeout is disabled. Default value: 200.
+     */
+    asyncInsertBusyTimeout?: pulumi.Input<number>;
+    /**
+     * The maximum size of the unparsed data in bytes collected per query before being inserted. If the parameter is set to 0, asynchronous insertions are disabled. Default value: 100000.
+     */
+    asyncInsertMaxDataSize?: pulumi.Input<number>;
+    /**
+     * The maximum timeout in milliseconds since the last INSERT query before dumping collected data. If enabled, the settings prolongs the asyncInsertBusyTimeout with every INSERT query as long as asyncInsertMaxDataSize is not exceeded.
+     */
+    asyncInsertStaleTimeout?: pulumi.Input<number>;
+    /**
+     * The maximum number of threads for background data parsing and insertion. If the parameter is set to 0, asynchronous insertions are disabled. Default value: 16.
+     */
+    asyncInsertThreads?: pulumi.Input<number>;
+    /**
+     * Cancels HTTP read-only queries (e.g. SELECT) when a client closes the connection without waiting for the response. Default value: false.
+     */
+    cancelHttpReadonlyQueriesOnClientClose?: pulumi.Input<boolean>;
+    /**
+     * Enable compilation of queries.
+     */
+    compile?: pulumi.Input<boolean>;
+    /**
+     * Turn on expression compilation.
+     */
+    compileExpressions?: pulumi.Input<boolean>;
+    /**
+     * Connect timeout in milliseconds on the socket used for communicating with the client.
+     */
+    connectTimeout?: pulumi.Input<number>;
+    /**
+     * The timeout in milliseconds for connecting to a remote server for a Distributed table engine, if the ‘shard’ and ‘replica’ sections are used in the cluster definition. If unsuccessful, several attempts are made to connect to various replicas. Default value: 50.
+     */
+    connectTimeoutWithFailover?: pulumi.Input<number>;
+    /**
+     * Specifies which of the uniq* functions should be used to perform the COUNT(DISTINCT …) construction.
+     */
+    countDistinctImplementation?: pulumi.Input<string>;
+    /**
+     * Allows choosing a parser of the text representation of date and time, one of: `bestEffort`, `basic`, `bestEffortUs`. Default value: `basic`. Cloud default value: `bestEffort`.
+     */
+    dateTimeInputFormat?: pulumi.Input<string>;
+    /**
+     * Allows choosing different output formats of the text representation of date and time, one of: `simple`, `iso`, `unixTimestamp`. Default value: `simple`.
+     */
+    dateTimeOutputFormat?: pulumi.Input<string>;
+    /**
+     * Enables or disables the deduplication check for materialized views that receive data from `Replicated` tables.
+     */
+    deduplicateBlocksInDependentMaterializedViews?: pulumi.Input<boolean>;
+    /**
+     * Sets behavior on overflow when using DISTINCT. Possible values:
+     * * `throw` - abort query execution, return an error.
+     * * `break` - stop query execution, return partial result.
+     */
+    distinctOverflowMode?: pulumi.Input<string>;
+    /**
+     * Determine the behavior of distributed subqueries.
+     */
+    distributedAggregationMemoryEfficient?: pulumi.Input<boolean>;
+    /**
+     * Timeout for DDL queries, in milliseconds.
+     */
+    distributedDdlTaskTimeout?: pulumi.Input<number>;
+    /**
+     * Changes the behavior of distributed subqueries.
+     */
+    distributedProductMode?: pulumi.Input<string>;
+    /**
+     * Allows to return empty result.
+     */
+    emptyResultForAggregationByEmptySet?: pulumi.Input<boolean>;
+    /**
+     * Enables or disables data compression in the response to an HTTP request.
+     */
+    enableHttpCompression?: pulumi.Input<boolean>;
+    /**
+     * Forces a query to an out-of-date replica if updated data is not available.
+     */
+    fallbackToStaleReplicasForDistributedQueries?: pulumi.Input<boolean>;
+    /**
+     * Sets the data format of a nested columns.
+     */
+    flattenNested?: pulumi.Input<boolean>;
+    /**
+     * Disables query execution if the index can’t be used by date.
+     */
+    forceIndexByDate?: pulumi.Input<boolean>;
+    /**
+     * Disables query execution if indexing by the primary key is not possible.
+     */
+    forcePrimaryKey?: pulumi.Input<boolean>;
+    /**
+     * Regular expression (for Regexp format).
+     */
+    formatRegexp?: pulumi.Input<string>;
+    /**
+     * Skip lines unmatched by regular expression.
+     */
+    formatRegexpSkipUnmatched?: pulumi.Input<boolean>;
+    /**
+     * Sets behavior on overflow while GROUP BY operation. Possible values:
+     * * `throw` - abort query execution, return an error.
+     * * `break` - stop query execution, return partial result.
+     * * `any` - perform approximate GROUP BY operation by continuing aggregation for the keys that got into the set, but don’t add new keys to the set.
+     */
+    groupByOverflowMode?: pulumi.Input<string>;
+    /**
+     * Sets the threshold of the number of keys, after that the two-level aggregation should be used.
+     */
+    groupByTwoLevelThreshold?: pulumi.Input<number>;
+    /**
+     * Sets the threshold of the number of bytes, after that the two-level aggregation should be used.
+     */
+    groupByTwoLevelThresholdBytes?: pulumi.Input<number>;
+    /**
+     * Connection timeout for establishing connection with replica for Hedged requests. Default value: 50 milliseconds.
+     */
+    hedgedConnectionTimeoutMs?: pulumi.Input<number>;
+    /**
+     * Timeout for HTTP connection in milliseconds.
+     */
+    httpConnectionTimeout?: pulumi.Input<number>;
+    /**
+     * Sets minimal interval between notifications about request process in HTTP header X-ClickHouse-Progress.
+     */
+    httpHeadersProgressInterval?: pulumi.Input<number>;
+    /**
+     * Timeout for HTTP connection in milliseconds.
+     */
+    httpReceiveTimeout?: pulumi.Input<number>;
+    /**
+     * Timeout for HTTP connection in milliseconds.
+     */
+    httpSendTimeout?: pulumi.Input<number>;
+    /**
+     * Timeout to close idle TCP connections after specified number of seconds. Default value: 3600 seconds.
+     */
+    idleConnectionTimeout?: pulumi.Input<number>;
+    /**
+     * When performing INSERT queries, replace omitted input column values with default values of the respective columns.
+     */
+    inputFormatDefaultsForOmittedFields?: pulumi.Input<boolean>;
+    /**
+     * Enables or disables the insertion of JSON data with nested objects.
+     */
+    inputFormatImportNestedJson?: pulumi.Input<boolean>;
+    /**
+     * Enables or disables the initialization of NULL fields with default values, if data type of these fields is not nullable.
+     */
+    inputFormatNullAsDefault?: pulumi.Input<boolean>;
+    /**
+     * Enables or disables order-preserving parallel parsing of data formats. Supported only for TSV, TKSV, CSV and JSONEachRow formats.
+     */
+    inputFormatParallelParsing?: pulumi.Input<boolean>;
+    /**
+     * Enables or disables the full SQL parser if the fast stream parser can’t parse the data.
+     */
+    inputFormatValuesInterpretExpressions?: pulumi.Input<boolean>;
+    /**
+     * Enables or disables checking the column order when inserting data.
+     */
+    inputFormatWithNamesUseHeader?: pulumi.Input<boolean>;
+    /**
+     * The setting sets the maximum number of retries for ClickHouse Keeper (or ZooKeeper) requests during insert into replicated MergeTree. Only Keeper requests which failed due to network error, Keeper session timeout, or request timeout are considered for retries.
+     */
+    insertKeeperMaxRetries?: pulumi.Input<number>;
+    /**
+     * Enables the insertion of default values instead of NULL into columns with not nullable data type. Default value: true.
+     */
+    insertNullAsDefault?: pulumi.Input<boolean>;
+    /**
+     * Enables the quorum writes.
+     */
+    insertQuorum?: pulumi.Input<number>;
+    /**
+     * Enables or disables parallelism for quorum INSERT queries.
+     */
+    insertQuorumParallel?: pulumi.Input<boolean>;
+    /**
+     * Write to a quorum timeout in milliseconds.
+     */
+    insertQuorumTimeout?: pulumi.Input<number>;
+    /**
+     * Specifies which JOIN algorithm is used. Possible values:
+     * * `hash` - hash join algorithm is used. The most generic implementation that supports all combinations of kind and strictness and multiple join keys that are combined with OR in the JOIN ON section.
+     * * `parallelHash` - a variation of hash join that splits the data into buckets and builds several hash tables instead of one concurrently to speed up this process.
+     * * `partialMerge` - a variation of the sort-merge algorithm, where only the right table is fully sorted.
+     * * `direct` - this algorithm can be applied when the storage for the right table supports key-value requests.
+     * * `auto` - when set to auto, hash join is tried first, and the algorithm is switched on the fly to another algorithm if the memory limit is violated.
+     * * `fullSortingMerge` - sort-merge algorithm with full sorting joined tables before joining.
+     * * `preferPartialMerge` - clickHouse always tries to use partialMerge join if possible, otherwise, it uses hash. Deprecated, same as partial_merge,hash.
+     */
+    joinAlgorithms?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Sets behavior on overflow in JOIN. Possible values:
+     * * `throw` - abort query execution, return an error.
+     * * `break` - stop query execution, return partial result.
+     */
+    joinOverflowMode?: pulumi.Input<string>;
+    /**
+     * Sets the type of JOIN behavior. When merging tables, empty cells may appear. ClickHouse fills them differently based on this setting.
+     */
+    joinUseNulls?: pulumi.Input<boolean>;
+    /**
+     * Require aliases for subselects and table functions in FROM that more than one table is present.
+     */
+    joinedSubqueryRequiresAlias?: pulumi.Input<boolean>;
+    /**
+     * Specifies the algorithm of replicas selection that is used for distributed query processing, one of: random, nearest_hostname, in_order, first_or_random, round_robin. Default value: random.
+     */
+    loadBalancing?: pulumi.Input<string>;
+    /**
+     * Method of reading data from local filesystem. Possible values:
+     * * `read` - abort query execution, return an error.
+     * * `pread` - abort query execution, return an error.
+     * * `preadThreadpool` - stop query execution, return partial result. If the parameter is set to 0 (default), no hops is allowed.
+     */
+    localFilesystemReadMethod?: pulumi.Input<string>;
+    /**
+     * Setting up query threads logging. Query threads log into the system.query_thread_log table. This setting has effect only when logQueries is true. Queries’ threads run by ClickHouse with this setup are logged according to the rules in the queryThreadLog server configuration parameter. Default value: `true`.
+     */
+    logQueryThreads?: pulumi.Input<boolean>;
+    /**
+     * Allows or restricts using the LowCardinality data type with the Native format.
+     */
+    lowCardinalityAllowInNativeFormat?: pulumi.Input<boolean>;
+    /**
+     * Maximum abstract syntax tree depth.
+     */
+    maxAstDepth?: pulumi.Input<number>;
+    /**
+     * Maximum abstract syntax tree elements.
+     */
+    maxAstElements?: pulumi.Input<number>;
+    /**
+     * A recommendation for what size of the block (in a count of rows) to load from tables.
+     */
+    maxBlockSize?: pulumi.Input<number>;
+    /**
+     * Limit in bytes for using memory for GROUP BY before using swap on disk.
+     */
+    maxBytesBeforeExternalGroupBy?: pulumi.Input<number>;
+    /**
+     * This setting is equivalent of the maxBytesBeforeExternalGroupBy setting, except for it is for sort operation (ORDER BY), not aggregation.
+     */
+    maxBytesBeforeExternalSort?: pulumi.Input<number>;
+    /**
+     * Limits the maximum size of a hash table in bytes (uncompressed data) when using DISTINCT.
+     */
+    maxBytesInDistinct?: pulumi.Input<number>;
+    /**
+     * Limit on maximum size of the hash table for JOIN, in bytes.
+     */
+    maxBytesInJoin?: pulumi.Input<number>;
+    /**
+     * Limit on the number of bytes in the set resulting from the execution of the IN section.
+     */
+    maxBytesInSet?: pulumi.Input<number>;
+    /**
+     * Limits the maximum number of bytes (uncompressed data) that can be read from a table when running a query.
+     */
+    maxBytesToRead?: pulumi.Input<number>;
+    /**
+     * Limits the maximum number of bytes (uncompressed data) that can be read from a table for sorting.
+     */
+    maxBytesToSort?: pulumi.Input<number>;
+    /**
+     * Limits the maximum number of bytes (uncompressed data) that can be passed to a remote server or saved in a temporary table when using GLOBAL IN.
+     */
+    maxBytesToTransfer?: pulumi.Input<number>;
+    /**
+     * Limits the maximum number of columns that can be read from a table in a single query.
+     */
+    maxColumnsToRead?: pulumi.Input<number>;
+    /**
+     * The maximum number of concurrent requests per user. Default value: 0 (no limit).
+     */
+    maxConcurrentQueriesForUser?: pulumi.Input<number>;
+    /**
+     * Limits the maximum query execution time in milliseconds.
+     */
+    maxExecutionTime?: pulumi.Input<number>;
+    /**
+     * Maximum abstract syntax tree depth after after expansion of aliases.
+     */
+    maxExpandedAstElements?: pulumi.Input<number>;
+    /**
+     * Sets the maximum number of parallel threads for the SELECT query data read phase with the FINAL modifier.
+     */
+    maxFinalThreads?: pulumi.Input<number>;
+    /**
+     * Limits the maximum number of HTTP GET redirect hops for URL-engine tables.
+     */
+    maxHttpGetRedirects?: pulumi.Input<number>;
+    /**
+     * The size of blocks (in a count of rows) to form for insertion into a table.
+     */
+    maxInsertBlockSize?: pulumi.Input<number>;
+    /**
+     * The maximum number of threads to execute the INSERT SELECT query. Default value: 0.
+     */
+    maxInsertThreads?: pulumi.Input<number>;
+    /**
+     * Limits the maximum memory usage (in bytes) for processing queries on a single server.
+     */
+    maxMemoryUsage?: pulumi.Input<number>;
+    /**
+     * Limits the maximum memory usage (in bytes) for processing of user's queries on a single server.
+     */
+    maxMemoryUsageForUser?: pulumi.Input<number>;
+    /**
+     * Limits the speed of the data exchange over the network in bytes per second.
+     */
+    maxNetworkBandwidth?: pulumi.Input<number>;
+    /**
+     * Limits the speed of the data exchange over the network in bytes per second.
+     */
+    maxNetworkBandwidthForUser?: pulumi.Input<number>;
+    /**
+     * Limits maximum recursion depth in the recursive descent parser. Allows controlling the stack size. Zero means unlimited.
+     */
+    maxParserDepth?: pulumi.Input<number>;
+    /**
+     * The maximum part of a query that can be taken to RAM for parsing with the SQL parser.
+     */
+    maxQuerySize?: pulumi.Input<number>;
+    /**
+     * The maximum size of the buffer to read from the filesystem.
+     */
+    maxReadBufferSize?: pulumi.Input<number>;
+    /**
+     * Disables lagging replicas for distributed queries.
+     */
+    maxReplicaDelayForDistributedQueries?: pulumi.Input<number>;
+    /**
+     * Limits the number of bytes in the result.
+     */
+    maxResultBytes?: pulumi.Input<number>;
+    /**
+     * Limits the number of rows in the result.
+     */
+    maxResultRows?: pulumi.Input<number>;
+    /**
+     * Limits the maximum number of different rows when using DISTINCT.
+     */
+    maxRowsInDistinct?: pulumi.Input<number>;
+    /**
+     * Limit on maximum size of the hash table for JOIN, in rows.
+     */
+    maxRowsInJoin?: pulumi.Input<number>;
+    /**
+     * Limit on the number of rows in the set resulting from the execution of the IN section.
+     */
+    maxRowsInSet?: pulumi.Input<number>;
+    /**
+     * Limits the maximum number of unique keys received from aggregation function.
+     */
+    maxRowsToGroupBy?: pulumi.Input<number>;
+    /**
+     * Limits the maximum number of rows that can be read from a table when running a query.
+     */
+    maxRowsToRead?: pulumi.Input<number>;
+    /**
+     * Limits the maximum number of rows that can be read from a table for sorting.
+     */
+    maxRowsToSort?: pulumi.Input<number>;
+    /**
+     * Limits the maximum number of rows that can be passed to a remote server or saved in a temporary table when using GLOBAL IN.
+     */
+    maxRowsToTransfer?: pulumi.Input<number>;
+    /**
+     * Limits the maximum number of temporary columns that must be kept in RAM at the same time when running a query, including constant columns.
+     */
+    maxTemporaryColumns?: pulumi.Input<number>;
+    /**
+     * The maximum amount of data consumed by temporary files on disk in bytes for all concurrently running queries. Zero means unlimited.
+     */
+    maxTemporaryDataOnDiskSizeForQuery?: pulumi.Input<number>;
+    /**
+     * The maximum amount of data consumed by temporary files on disk in bytes for all concurrently running user queries. Zero means unlimited.
+     */
+    maxTemporaryDataOnDiskSizeForUser?: pulumi.Input<number>;
+    /**
+     * Limits the maximum number of temporary columns that must be kept in RAM at the same time when running a query, excluding constant columns.
+     */
+    maxTemporaryNonConstColumns?: pulumi.Input<number>;
+    /**
+     * The maximum number of query processing threads, excluding threads for retrieving data from remote servers.
+     */
+    maxThreads?: pulumi.Input<number>;
+    /**
+     * It represents soft memory limit in case when hard limit is reached on user level. This value is used to compute overcommit ratio for the query. Zero means skip the query.
+     */
+    memoryOvercommitRatioDenominator?: pulumi.Input<number>;
+    /**
+     * It represents soft memory limit in case when hard limit is reached on global level. This value is used to compute overcommit ratio for the query. Zero means skip the query.
+     */
+    memoryOvercommitRatioDenominatorForUser?: pulumi.Input<number>;
+    /**
+     * Collect random allocations and deallocations and write them into system.trace_log with 'MemorySample' trace_type. The probability is for every alloc/free regardless to the size of the allocation. Possible values: from 0 to 1. Default: 0.
+     */
+    memoryProfilerSampleProbability?: pulumi.Input<number>;
+    /**
+     * Memory profiler step (in bytes). If the next query step requires more memory than this parameter specifies, the memory profiler collects the allocating stack trace. Values lower than a few megabytes slow down query processing. Default value: 4194304 (4 MB). Zero means disabled memory profiler.
+     */
+    memoryProfilerStep?: pulumi.Input<number>;
+    /**
+     * Maximum time thread will wait for memory to be freed in the case of memory overcommit on a user level. If the timeout is reached and memory is not freed, an exception is thrown.
+     */
+    memoryUsageOvercommitMaxWaitMicroseconds?: pulumi.Input<number>;
+    /**
+     * If ClickHouse should read more than mergeTreeMaxBytesToUseCache bytes in one query, it doesn’t use the cache of uncompressed blocks.
+     */
+    mergeTreeMaxBytesToUseCache?: pulumi.Input<number>;
+    /**
+     * If ClickHouse should read more than mergeTreeMaxRowsToUseCache rows in one query, it doesn’t use the cache of uncompressed blocks.
+     */
+    mergeTreeMaxRowsToUseCache?: pulumi.Input<number>;
+    /**
+     * If the number of bytes to read from one file of a MergeTree-engine table exceeds merge_tree_min_bytes_for_concurrent_read, then ClickHouse tries to concurrently read from this file in several threads.
+     */
+    mergeTreeMinBytesForConcurrentRead?: pulumi.Input<number>;
+    /**
+     * If the number of rows to be read from a file of a MergeTree table exceeds mergeTreeMinRowsForConcurrentRead then ClickHouse tries to perform a concurrent reading from this file on several threads.
+     */
+    mergeTreeMinRowsForConcurrentRead?: pulumi.Input<number>;
+    /**
+     * The minimum data volume required for using direct I/O access to the storage disk.
+     */
+    minBytesToUseDirectIo?: pulumi.Input<number>;
+    /**
+     * How many times to potentially use a compiled chunk of code before running compilation.
+     */
+    minCountToCompile?: pulumi.Input<number>;
+    /**
+     * A query waits for expression compilation process to complete prior to continuing execution.
+     */
+    minCountToCompileExpression?: pulumi.Input<number>;
+    /**
+     * Minimal execution speed in rows per second.
+     */
+    minExecutionSpeed?: pulumi.Input<number>;
+    /**
+     * Minimal execution speed in bytes per second.
+     */
+    minExecutionSpeedBytes?: pulumi.Input<number>;
+    /**
+     * Sets the minimum number of bytes in the block which can be inserted into a table by an INSERT query.
+     */
+    minInsertBlockSizeBytes?: pulumi.Input<number>;
+    /**
+     * Sets the minimum number of rows in the block which can be inserted into a table by an INSERT query.
+     */
+    minInsertBlockSizeRows?: pulumi.Input<number>;
+    /**
+     * If the value is true, integers appear in quotes when using JSON* Int64 and UInt64 formats (for compatibility with most JavaScript implementations); otherwise, integers are output without the quotes.
+     */
+    outputFormatJsonQuote64bitIntegers?: pulumi.Input<boolean>;
+    /**
+     * Enables +nan, -nan, +inf, -inf outputs in JSON output format.
+     */
+    outputFormatJsonQuoteDenormals?: pulumi.Input<boolean>;
+    /**
+     * Enables/disables preferable using the localhost replica when processing distributed queries. Default value: true.
+     */
+    preferLocalhostReplica?: pulumi.Input<boolean>;
+    /**
+     * Query priority.
+     */
+    priority?: pulumi.Input<number>;
+    /**
+     * Quota accounting mode.
+     */
+    quotaMode?: pulumi.Input<string>;
+    /**
+     * Sets behavior on overflow while read. Possible values:
+     * * `throw` - abort query execution, return an error.
+     * * `break` - stop query execution, return partial result.
+     */
+    readOverflowMode?: pulumi.Input<string>;
+    /**
+     * Restricts permissions for reading data, write data and change settings queries.
+     */
+    readonly?: pulumi.Input<number>;
+    /**
+     * Receive timeout in milliseconds on the socket used for communicating with the client.
+     */
+    receiveTimeout?: pulumi.Input<number>;
+    /**
+     * Method of reading data from remote filesystem, one of: `read`, `threadpool`.
+     */
+    remoteFilesystemReadMethod?: pulumi.Input<string>;
+    /**
+     * For ALTER ... ATTACH|DETACH|DROP queries, you can use the replicationAlterPartitionsSync setting to set up waiting.
+     */
+    replicationAlterPartitionsSync?: pulumi.Input<number>;
+    /**
+     * Sets behavior on overflow in result. Possible values:
+     * * `throw` - abort query execution, return an error.
+     * * `break` - stop query execution, return partial result.
+     */
+    resultOverflowMode?: pulumi.Input<string>;
+    /**
+     * Enables or disables sequential consistency for SELECT queries.
+     */
+    selectSequentialConsistency?: pulumi.Input<boolean>;
+    /**
+     * Enables or disables `X-ClickHouse-Progress` HTTP response headers in clickhouse-server responses.
+     */
+    sendProgressInHttpHeaders?: pulumi.Input<boolean>;
+    /**
+     * Send timeout in milliseconds on the socket used for communicating with the client.
+     */
+    sendTimeout?: pulumi.Input<number>;
+    /**
+     * Sets behavior on overflow in the set resulting. Possible values:
+     *   * `throw` - abort query execution, return an error.
+     * * `break` - stop query execution, return partial result.
+     */
+    setOverflowMode?: pulumi.Input<string>;
+    /**
+     * Enables or disables silently skipping of unavailable shards.
+     */
+    skipUnavailableShards?: pulumi.Input<boolean>;
+    /**
+     * Sets behavior on overflow while sort. Possible values:
+     * * `throw` - abort query execution, return an error.
+     * * `break` - stop query execution, return partial result.
+     */
+    sortOverflowMode?: pulumi.Input<string>;
+    /**
+     * Timeout (in seconds) between checks of execution speed. It is checked that execution speed is not less that specified in minExecutionSpeed parameter. Must be at least 1000.
+     */
+    timeoutBeforeCheckingExecutionSpeed?: pulumi.Input<number>;
+    /**
+     * Sets behavior on overflow. Possible values:
+     * * `throw` - abort query execution, return an error.
+     * * `break` - stop query execution, return partial result.
+     */
+    timeoutOverflowMode?: pulumi.Input<string>;
+    /**
+     * Sets behavior on overflow. Possible values:
+     * * `throw` - abort query execution, return an error.
+     * * `break` - stop query execution, return partial result.
+     */
+    transferOverflowMode?: pulumi.Input<string>;
+    /**
+     * Enables equality of NULL values for IN operator.
+     */
+    transformNullIn?: pulumi.Input<boolean>;
+    /**
+     * Enables hedged requests logic for remote queries. It allows to establish many connections with different replicas for query. New connection is enabled in case existent connection(s) with replica(s) were not established within hedgedConnectionTimeout or no data was received within receive_data_timeout. Query uses the first connection which send non empty progress packet (or data packet, if allow_changing_replica_until_first_data_packet); other connections are cancelled. Queries with maxParallelReplicas > 1 are supported. Default value: true.
+     */
+    useHedgedRequests?: pulumi.Input<boolean>;
+    /**
+     * Whether to use a cache of uncompressed blocks.
+     */
+    useUncompressedCache?: pulumi.Input<boolean>;
+    /**
+     * Enables waiting for processing of asynchronous insertion. If enabled, server returns OK only after the data is inserted.
+     */
+    waitForAsyncInsert?: pulumi.Input<boolean>;
+    /**
+     * The timeout (in seconds) for waiting for processing of asynchronous insertion. Value must be at least 1000 (1 second).
+     */
+    waitForAsyncInsertTimeout?: pulumi.Input<number>;
+}
+
+export interface MdbClickhouseClusterZookeeper {
+    /**
+     * Resources allocated to hosts of the ZooKeeper subcluster.
+     */
+    resources?: pulumi.Input<inputs.MdbClickhouseClusterZookeeperResources>;
+}
+
+export interface MdbClickhouseClusterZookeeperResources {
+    /**
+     * Volume of the storage available to a ZooKeeper host, in gigabytes.
+     */
+    diskSize?: pulumi.Input<number>;
+    /**
+     * Type of the storage of ZooKeeper hosts. For more information see [the official documentation](https://yandex.cloud/docs/managed-clickhouse/concepts/storage).
+     */
+    diskTypeId?: pulumi.Input<string>;
+    /**
+     * The ID of the preset for computational resources available to a ZooKeeper host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-clickhouse/concepts).
+     */
+    resourcePresetId?: pulumi.Input<string>;
+}
+
+export interface MdbElasticsearchClusterConfig {
+    /**
+     * Password for admin user of Elasticsearch.
+     */
+    adminPassword: pulumi.Input<string>;
+    /**
+     * Configuration for Elasticsearch data nodes subcluster.
+     */
+    dataNode: pulumi.Input<inputs.MdbElasticsearchClusterConfigDataNode>;
+    /**
+     * Edition of Elasticsearch. For more information, see [the official documentation](https://yandex.cloud/docs/managed-elasticsearch/concepts/es-editions).
+     */
+    edition?: pulumi.Input<string>;
+    /**
+     * Configuration for Elasticsearch master nodes subcluster.
+     */
+    masterNode?: pulumi.Input<inputs.MdbElasticsearchClusterConfigMasterNode>;
+    /**
+     * A set of Elasticsearch plugins to install.
+     */
+    plugins?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Version of Elasticsearch.
+     */
+    version?: pulumi.Input<string>;
+}
+
+export interface MdbElasticsearchClusterConfigDataNode {
+    /**
+     * Resources allocated to hosts of the Elasticsearch data nodes subcluster.
+     */
+    resources: pulumi.Input<inputs.MdbElasticsearchClusterConfigDataNodeResources>;
+}
+
+export interface MdbElasticsearchClusterConfigDataNodeResources {
+    /**
+     * Volume of the storage available to a host, in gigabytes.
+     */
+    diskSize: pulumi.Input<number>;
+    /**
+     * Type of the storage of Elasticsearch hosts.
+     */
+    diskTypeId: pulumi.Input<string>;
+    /**
+     * The ID of the preset for computational resources available to a host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-elasticsearch/concepts).
+     */
+    resourcePresetId: pulumi.Input<string>;
+}
+
+export interface MdbElasticsearchClusterConfigMasterNode {
+    /**
+     * Resources allocated to hosts of the Elasticsearch master nodes subcluster.
+     */
+    resources: pulumi.Input<inputs.MdbElasticsearchClusterConfigMasterNodeResources>;
+}
+
+export interface MdbElasticsearchClusterConfigMasterNodeResources {
+    /**
+     * Volume of the storage available to a host, in gigabytes.
+     */
+    diskSize: pulumi.Input<number>;
+    /**
+     * Type of the storage of Elasticsearch hosts.
+     */
+    diskTypeId: pulumi.Input<string>;
+    /**
+     * The ID of the preset for computational resources available to a host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-elasticsearch/concepts).
+     */
+    resourcePresetId: pulumi.Input<string>;
+}
+
+export interface MdbElasticsearchClusterHost {
+    /**
+     * Sets whether the host should get a public IP address on creation. Can be either `true` or `false`.
+     */
+    assignPublicIp?: pulumi.Input<boolean>;
+    /**
+     * The fully qualified domain name of the host.
+     */
+    fqdn?: pulumi.Input<string>;
+    /**
+     * User defined host name.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * The ID of the subnet, to which the host belongs. The subnet must be a part of the network to which the cluster belongs.
+     */
+    subnetId?: pulumi.Input<string>;
+    /**
+     * The type of the host to be deployed. Can be either `DATA_NODE` or `MASTER_NODE`.
+     */
+    type: pulumi.Input<string>;
+    /**
+     * The [availability zone](https://yandex.cloud/docs/overview/concepts/geo-scope) where resource is located. If it is not provided, the default provider zone will be used.
+     */
+    zone: pulumi.Input<string>;
+}
+
+export interface MdbElasticsearchClusterMaintenanceWindow {
+    /**
+     * Day of week for maintenance window if window type is weekly. Possible values: `MON`, `TUE`, `WED`, `THU`, `FRI`, `SAT`, `SUN`.
+     */
+    day?: pulumi.Input<string>;
+    /**
+     * Hour of day in UTC time zone (1-24) for maintenance window if window type is weekly.
+     */
+    hour?: pulumi.Input<number>;
+    /**
+     * Type of maintenance window. Can be either `ANYTIME` or `WEEKLY`. A day and hour of window need to be specified with weekly window.
+     */
+    type: pulumi.Input<string>;
+}
+
+export interface MdbGreenplumClusterAccess {
+    /**
+     * Allow access for [Yandex DataLens](https://yandex.cloud/services/datalens).
+     */
+    dataLens?: pulumi.Input<boolean>;
+    /**
+     * Allow access for [DataTransfer](https://yandex.cloud/services/data-transfer)
+     */
+    dataTransfer?: pulumi.Input<boolean>;
+    /**
+     * Allows access for [SQL queries in the management console](https://yandex.cloud/docs/managed-mysql/operations/web-sql-query).
+     */
+    webSql?: pulumi.Input<boolean>;
+    /**
+     * Allow access for [Yandex Query](https://yandex.cloud/services/query)
+     */
+    yandexQuery?: pulumi.Input<boolean>;
+}
+
+export interface MdbGreenplumClusterBackgroundActivity {
+    /**
+     * Block to configure 'ANALYZE' and 'VACUUM' daily operations.
+     */
+    analyzeAndVacuums?: pulumi.Input<pulumi.Input<inputs.MdbGreenplumClusterBackgroundActivityAnalyzeAndVacuum>[]>;
+    /**
+     * Block to configure script that kills long running queries that are in `idle in transaction` state.
+     */
+    queryKillerIdleInTransactions?: pulumi.Input<pulumi.Input<inputs.MdbGreenplumClusterBackgroundActivityQueryKillerIdleInTransaction>[]>;
+    /**
+     * Block to configure script that kills long running queries that are in `idle` state.
+     */
+    queryKillerIdles?: pulumi.Input<pulumi.Input<inputs.MdbGreenplumClusterBackgroundActivityQueryKillerIdle>[]>;
+    /**
+     * Block to configure script that kills long running queries (in any state).
+     */
+    queryKillerLongRunnings?: pulumi.Input<pulumi.Input<inputs.MdbGreenplumClusterBackgroundActivityQueryKillerLongRunning>[]>;
+}
+
+export interface MdbGreenplumClusterBackgroundActivityAnalyzeAndVacuum {
+    /**
+     * Maximum duration of the `ANALYZE` operation, in seconds. The default value is `36000`. As soon as this period expires, the `ANALYZE` operation will be forced to terminate.
+     */
+    analyzeTimeout?: pulumi.Input<number>;
+    /**
+     * Time of day in 'HH:MM' format when scripts should run.
+     */
+    startTime?: pulumi.Input<string>;
+    /**
+     * Maximum duration of the `VACUUM` operation, in seconds. The default value is `36000`. As soon as this period expires, the `VACUUM` operation will be forced to terminate.
+     */
+    vacuumTimeout?: pulumi.Input<number>;
+}
+
+export interface MdbGreenplumClusterBackgroundActivityQueryKillerIdle {
+    /**
+     * Flag that indicates whether script is enabled.
+     */
+    enable?: pulumi.Input<boolean>;
+    /**
+     * List of users to ignore when considering queries to terminate.
+     */
+    ignoreUsers?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Maximum duration for this type of queries (in seconds).
+     */
+    maxAge?: pulumi.Input<number>;
+}
+
+export interface MdbGreenplumClusterBackgroundActivityQueryKillerIdleInTransaction {
+    /**
+     * Flag that indicates whether script is enabled.
+     */
+    enable?: pulumi.Input<boolean>;
+    /**
+     * List of users to ignore when considering queries to terminate.
+     */
+    ignoreUsers?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Maximum duration for this type of queries (in seconds).
+     */
+    maxAge?: pulumi.Input<number>;
+}
+
+export interface MdbGreenplumClusterBackgroundActivityQueryKillerLongRunning {
+    /**
+     * Flag that indicates whether script is enabled.
+     */
+    enable?: pulumi.Input<boolean>;
+    /**
+     * List of users to ignore when considering queries to terminate.
+     */
+    ignoreUsers?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Maximum duration for this type of queries (in seconds).
+     */
+    maxAge?: pulumi.Input<number>;
+}
+
+export interface MdbGreenplumClusterBackupWindowStart {
+    /**
+     * The hour at which backup will be started (UTC).
+     */
+    hours?: pulumi.Input<number>;
+    /**
+     * The minute at which backup will be started (UTC).
+     */
+    minutes?: pulumi.Input<number>;
+}
+
+export interface MdbGreenplumClusterCloudStorage {
+    /**
+     * Whether to use cloud storage or not.
+     */
+    enable?: pulumi.Input<boolean>;
+}
+
+export interface MdbGreenplumClusterLogging {
+    commandCenterEnabled?: pulumi.Input<boolean>;
+    enabled?: pulumi.Input<boolean>;
+    folderId?: pulumi.Input<string>;
+    greenplumEnabled?: pulumi.Input<boolean>;
+    logGroupId?: pulumi.Input<string>;
+    poolerEnabled?: pulumi.Input<boolean>;
+}
+
+export interface MdbGreenplumClusterMaintenanceWindow {
+    /**
+     * Day of the week (in `DDD` format). Allowed values: `MON`, `TUE`, `WED`, `THU`, `FRI`, `SAT`, `SUN`.
+     */
+    day?: pulumi.Input<string>;
+    /**
+     * Hour of the day in UTC (in `HH` format). Allowed value is between 0 and 23.
+     */
+    hour?: pulumi.Input<number>;
+    /**
+     * Type of maintenance window. Can be either `ANYTIME` or `WEEKLY`. A day and hour of window need to be specified with weekly window.
+     */
+    type: pulumi.Input<string>;
+}
+
+export interface MdbGreenplumClusterMasterHost {
+    /**
+     * Flag indicating that master hosts should be created with a public IP address.
+     */
+    assignPublicIp?: pulumi.Input<boolean>;
+    /**
+     * The fully qualified domain name of the host.
+     */
+    fqdn?: pulumi.Input<string>;
+}
+
+export interface MdbGreenplumClusterMasterSubcluster {
+    /**
+     * Resources allocated to hosts for master subcluster of the Greenplum cluster.
+     */
+    resources: pulumi.Input<inputs.MdbGreenplumClusterMasterSubclusterResources>;
+}
+
+export interface MdbGreenplumClusterMasterSubclusterResources {
+    diskSize: pulumi.Input<number>;
+    diskTypeId: pulumi.Input<string>;
+    resourcePresetId: pulumi.Input<string>;
+}
+
+export interface MdbGreenplumClusterPoolerConfig {
+    /**
+     * Value for `poolClientIdleTimeout` [parameter in Odyssey](https://github.com/yandex/odyssey/blob/master/documentation/configuration.md#pool_ttl-integer).
+     */
+    poolClientIdleTimeout?: pulumi.Input<number>;
+    /**
+     * Value for `poolSize` [parameter in Odyssey](https://github.com/yandex/odyssey/blob/master/documentation/configuration.md#pool_size-integer).
+     */
+    poolSize?: pulumi.Input<number>;
+    /**
+     * Mode that the connection pooler is working in. See descriptions of all modes in the [documentation for Odyssey](https://github.com/yandex/odyssey/blob/master/documentation/configuration.md#pool-string.
+     */
+    poolingMode?: pulumi.Input<string>;
+}
+
+export interface MdbGreenplumClusterPxfConfig {
+    /**
+     * The Tomcat server connection timeout for read operations in seconds. Value is between 5 and 600.
+     */
+    connectionTimeout?: pulumi.Input<number>;
+    /**
+     * The maximum number of PXF tomcat threads. Value is between 1 and 1024.
+     */
+    maxThreads?: pulumi.Input<number>;
+    /**
+     * Identifies whether or not core streaming threads are allowed to time out.
+     */
+    poolAllowCoreThreadTimeout?: pulumi.Input<boolean>;
+    /**
+     * The number of core streaming threads. Value is between 1 and 1024.
+     */
+    poolCoreSize?: pulumi.Input<number>;
+    /**
+     * The maximum allowed number of core streaming threads. Value is between 1 and 1024.
+     */
+    poolMaxSize?: pulumi.Input<number>;
+    /**
+     * The capacity of the core streaming thread pool queue. Value is positive.
+     */
+    poolQueueCapacity?: pulumi.Input<number>;
+    /**
+     * The Tomcat server connection timeout for write operations in seconds. Value is between 5 and 600.
+     */
+    uploadTimeout?: pulumi.Input<number>;
+    /**
+     * Maximum JVM heap size for PXF daemon. Value is between 64 and 16384.
+     */
+    xms?: pulumi.Input<number>;
+    /**
+     * Initial JVM heap size for PXF daemon. Value is between 64 and 16384.
+     */
+    xmx?: pulumi.Input<number>;
+}
+
+export interface MdbGreenplumClusterSegmentHost {
+    /**
+     * The fully qualified domain name of the host.
+     */
+    fqdn?: pulumi.Input<string>;
+}
+
+export interface MdbGreenplumClusterSegmentSubcluster {
+    /**
+     * Resources allocated to hosts for segment subcluster of the Greenplum cluster.
+     */
+    resources: pulumi.Input<inputs.MdbGreenplumClusterSegmentSubclusterResources>;
+}
+
+export interface MdbGreenplumClusterSegmentSubclusterResources {
+    diskSize: pulumi.Input<number>;
+    diskTypeId: pulumi.Input<string>;
+    resourcePresetId: pulumi.Input<string>;
+}
+
+export interface MdbKafkaClusterConfig {
+    /**
+     * Access policy to the Kafka cluster.
+     */
+    access?: pulumi.Input<inputs.MdbKafkaClusterConfigAccess>;
+    /**
+     * Determines whether each broker will be assigned a public IP address. The default is `false`.
+     */
+    assignPublicIp?: pulumi.Input<boolean>;
+    /**
+     * Count of brokers per availability zone. The default is `1`.
+     */
+    brokersCount?: pulumi.Input<number>;
+    /**
+     * Disk autoscaling settings of the Kafka cluster.
+     */
+    diskSizeAutoscaling?: pulumi.Input<inputs.MdbKafkaClusterConfigDiskSizeAutoscaling>;
+    /**
+     * Configuration of the Kafka subcluster.
+     */
+    kafka: pulumi.Input<inputs.MdbKafkaClusterConfigKafka>;
+    /**
+     * Configuration of the KRaft-controller subcluster.
+     */
+    kraft?: pulumi.Input<inputs.MdbKafkaClusterConfigKraft>;
+    /**
+     * REST API settings of the Kafka cluster.
+     */
+    restApi?: pulumi.Input<inputs.MdbKafkaClusterConfigRestApi>;
+    /**
+     * Enables managed schema registry on cluster. The default is `false`.
+     */
+    schemaRegistry?: pulumi.Input<boolean>;
+    /**
+     * @deprecated The 'unmanaged_topics' field has been deprecated, because feature enabled permanently and can't be disabled.
+     */
+    unmanagedTopics?: pulumi.Input<boolean>;
+    /**
+     * Version of the Kafka server software.
+     */
+    version: pulumi.Input<string>;
+    /**
+     * List of availability zones.
+     */
+    zones: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Configuration of the ZooKeeper subcluster.
+     */
+    zookeeper?: pulumi.Input<inputs.MdbKafkaClusterConfigZookeeper>;
+}
+
+export interface MdbKafkaClusterConfigAccess {
+    /**
+     * Allow access for [DataTransfer](https://yandex.cloud/services/data-transfer).
+     */
+    dataTransfer?: pulumi.Input<boolean>;
+}
+
+export interface MdbKafkaClusterConfigDiskSizeAutoscaling {
+    /**
+     * Maximum possible size of disk in bytes.
+     */
+    diskSizeLimit: pulumi.Input<number>;
+    /**
+     * Percent of disk utilization. Disk will autoscale immediately, if this threshold reached. Value is between 0 and 100. Default value is 0 (autoscaling disabled). Must be not less then 'planned_usage_threshold' value.
+     */
+    emergencyUsageThreshold?: pulumi.Input<number>;
+    /**
+     * Percent of disk utilization. During maintenance disk will autoscale, if this threshold reached. Value is between 0 and 100. Default value is 0 (autoscaling disabled).
+     */
+    plannedUsageThreshold?: pulumi.Input<number>;
+}
+
+export interface MdbKafkaClusterConfigKafka {
+    /**
+     * User-defined settings for the Kafka cluster. For more information, see [the official documentation](https://yandex.cloud/docs/managed-kafka/operations/cluster-update) and [the Kafka documentation](https://kafka.apache.org/documentation/#configuration).
+     */
+    kafkaConfig?: pulumi.Input<inputs.MdbKafkaClusterConfigKafkaKafkaConfig>;
+    /**
+     * Resources allocated to hosts of the Kafka subcluster.
+     */
+    resources: pulumi.Input<inputs.MdbKafkaClusterConfigKafkaResources>;
+}
+
+export interface MdbKafkaClusterConfigKafkaKafkaConfig {
+    /**
+     * Enable auto creation of topic on the server.
+     */
+    autoCreateTopicsEnable?: pulumi.Input<boolean>;
+    /**
+     * Compression type of kafka topics.
+     */
+    compressionType?: pulumi.Input<string>;
+    /**
+     * The replication factor for automatically created topics, and for topics created with -1 as the replication factor.
+     */
+    defaultReplicationFactor?: pulumi.Input<string>;
+    /**
+     * The number of messages accumulated on a log partition before messages are flushed to disk.
+     */
+    logFlushIntervalMessages?: pulumi.Input<string>;
+    /**
+     * The maximum time in ms that a message in any topic is kept in memory before flushed to disk. If not set, the value in log.flush.scheduler.interval.ms is used.
+     */
+    logFlushIntervalMs?: pulumi.Input<string>;
+    /**
+     * The frequency in ms that the log flusher checks whether any log needs to be flushed to disk.
+     */
+    logFlushSchedulerIntervalMs?: pulumi.Input<string>;
+    /**
+     * Should pre allocate file when create new segment?
+     */
+    logPreallocate?: pulumi.Input<boolean>;
+    /**
+     * The maximum size of the log before deleting it.
+     */
+    logRetentionBytes?: pulumi.Input<string>;
+    /**
+     * The number of hours to keep a log file before deleting it (in hours), tertiary to log.retention.ms property.
+     */
+    logRetentionHours?: pulumi.Input<string>;
+    /**
+     * The number of minutes to keep a log file before deleting it (in minutes), secondary to log.retention.ms property. If not set, the value in log.retention.hours is used.
+     */
+    logRetentionMinutes?: pulumi.Input<string>;
+    /**
+     * The number of milliseconds to keep a log file before deleting it (in milliseconds), If not set, the value in log.retention.minutes is used. If set to -1, no time limit is applied.
+     */
+    logRetentionMs?: pulumi.Input<string>;
+    /**
+     * The maximum size of a single log file.
+     */
+    logSegmentBytes?: pulumi.Input<string>;
+    /**
+     * The largest record batch size allowed by Kafka (after compression if compression is enabled).
+     */
+    messageMaxBytes?: pulumi.Input<string>;
+    /**
+     * The default number of log partitions per topic.
+     */
+    numPartitions?: pulumi.Input<string>;
+    /**
+     * For subscribed consumers, committed offset of a specific partition will be expired and discarded after this period of time.
+     */
+    offsetsRetentionMinutes?: pulumi.Input<string>;
+    /**
+     * The number of bytes of messages to attempt to fetch for each partition.
+     */
+    replicaFetchMaxBytes?: pulumi.Input<string>;
+    /**
+     * The list of SASL mechanisms enabled in the Kafka server.
+     */
+    saslEnabledMechanisms?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The SO_RCVBUF buffer of the socket server sockets. If the value is -1, the OS default will be used.
+     */
+    socketReceiveBufferBytes?: pulumi.Input<string>;
+    /**
+     * The SO_SNDBUF buffer of the socket server sockets. If the value is -1, the OS default will be used.
+     */
+    socketSendBufferBytes?: pulumi.Input<string>;
+    /**
+     * A list of cipher suites.
+     */
+    sslCipherSuites?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface MdbKafkaClusterConfigKafkaResources {
+    /**
+     * Volume of the storage available to a Kafka host, in gigabytes.
+     */
+    diskSize: pulumi.Input<number>;
+    /**
+     * Type of the storage of Kafka hosts. For more information see [the official documentation](https://yandex.cloud/docs/managed-kafka/concepts/storage).
+     */
+    diskTypeId: pulumi.Input<string>;
+    /**
+     * The ID of the preset for computational resources available to a Kafka host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-kafka/concepts).
+     */
+    resourcePresetId: pulumi.Input<string>;
+}
+
+export interface MdbKafkaClusterConfigKraft {
+    /**
+     * Resources allocated to hosts of the KRaft-controller subcluster.
+     */
+    resources?: pulumi.Input<inputs.MdbKafkaClusterConfigKraftResources>;
+}
+
+export interface MdbKafkaClusterConfigKraftResources {
+    /**
+     * Volume of the storage available to a KRaft-controller host, in gigabytes.
+     */
+    diskSize?: pulumi.Input<number>;
+    /**
+     * Type of the storage of KRaft-controller hosts. For more information see [the official documentation](https://yandex.cloud/docs/managed-kafka/concepts/storage).
+     */
+    diskTypeId?: pulumi.Input<string>;
+    /**
+     * The ID of the preset for computational resources available to a KRaft-controller host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-kafka/concepts).
+     */
+    resourcePresetId?: pulumi.Input<string>;
+}
+
+export interface MdbKafkaClusterConfigRestApi {
+    /**
+     * Enables REST API on cluster. The default is `false`.
+     */
+    enabled?: pulumi.Input<boolean>;
+}
+
+export interface MdbKafkaClusterConfigZookeeper {
+    /**
+     * Resources allocated to hosts of the ZooKeeper subcluster.
+     */
+    resources?: pulumi.Input<inputs.MdbKafkaClusterConfigZookeeperResources>;
+}
+
+export interface MdbKafkaClusterConfigZookeeperResources {
+    /**
+     * Volume of the storage available to a ZooKeeper host, in gigabytes.
+     */
+    diskSize?: pulumi.Input<number>;
+    /**
+     * Type of the storage of ZooKeeper hosts. For more information see [the official documentation](https://yandex.cloud/docs/managed-kafka/concepts/storage).
+     */
+    diskTypeId?: pulumi.Input<string>;
+    /**
+     * The ID of the preset for computational resources available to a ZooKeeper host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-kafka/concepts).
+     */
+    resourcePresetId?: pulumi.Input<string>;
+}
+
+export interface MdbKafkaClusterHost {
+    /**
+     * The flag that defines whether a public IP address is assigned to the node.
+     */
+    assignPublicIp?: pulumi.Input<boolean>;
+    /**
+     * Health of the host.
+     */
+    health?: pulumi.Input<string>;
+    /**
+     * The fully qualified domain name of the host.
+     */
+    name?: pulumi.Input<string>;
+    /**
+     * Role of the host in the cluster.
+     */
+    role?: pulumi.Input<string>;
+    /**
+     * The ID of the subnet, to which the host belongs.
+     */
+    subnetId?: pulumi.Input<string>;
+    /**
+     * The [availability zone](https://yandex.cloud/docs/overview/concepts/geo-scope) where resource is located. If it is not provided, the default provider zone will be used.
+     */
+    zoneId?: pulumi.Input<string>;
+}
+
+export interface MdbKafkaClusterMaintenanceWindow {
+    /**
+     * Day of the week (in `DDD` format). Allowed values: `MON`, `TUE`, `WED`, `THU`, `FRI`, `SAT`, `SUN`.
+     */
+    day?: pulumi.Input<string>;
+    /**
+     * Hour of the day in UTC (in `HH` format). Allowed value is between 1 and 24.
+     */
+    hour?: pulumi.Input<number>;
+    /**
+     * Type of maintenance window. Can be either `ANYTIME` or `WEEKLY`. A day and hour of window need to be specified with weekly window.
+     */
+    type: pulumi.Input<string>;
+}
+
+export interface MdbKafkaClusterTopic {
+    /**
+     * The name of the topic.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * The number of the topic's partitions.
+     */
+    partitions: pulumi.Input<number>;
+    /**
+     * Amount of data copies (replicas) for the topic in the cluster.
+     */
+    replicationFactor: pulumi.Input<number>;
+    /**
+     * User-defined settings for the topic. For more information, see [the official documentation](https://yandex.cloud/docs/managed-kafka/operations/cluster-topics#update-topic) and [the Kafka documentation](https://kafka.apache.org/documentation/#configuration).
+     */
+    topicConfig?: pulumi.Input<inputs.MdbKafkaClusterTopicTopicConfig>;
+}
+
+export interface MdbKafkaClusterTopicTopicConfig {
+    /**
+     * Retention policy to use on log segments.
+     */
+    cleanupPolicy?: pulumi.Input<string>;
+    /**
+     * Compression type of kafka topic.
+     */
+    compressionType?: pulumi.Input<string>;
+    /**
+     * The amount of time to retain delete tombstone markers for log compacted topics.
+     */
+    deleteRetentionMs?: pulumi.Input<string>;
+    /**
+     * The time to wait before deleting a file from the filesystem.
+     */
+    fileDeleteDelayMs?: pulumi.Input<string>;
+    /**
+     * This setting allows specifying an interval at which we will force an fsync of data written to the log.
+     */
+    flushMessages?: pulumi.Input<string>;
+    /**
+     * This setting allows specifying a time interval at which we will force an fsync of data written to the log.
+     */
+    flushMs?: pulumi.Input<string>;
+    /**
+     * The largest record batch size allowed by Kafka (after compression if compression is enabled).
+     */
+    maxMessageBytes?: pulumi.Input<string>;
+    /**
+     * The minimum time a message will remain uncompacted in the log. Only applicable for logs that are being compacted.
+     */
+    minCompactionLagMs?: pulumi.Input<string>;
+    /**
+     * When a producer sets acks to "all" (or "-1"), this configuration specifies the minimum number of replicas that must acknowledge a write for the write to be considered successful.
+     */
+    minInsyncReplicas?: pulumi.Input<string>;
+    /**
+     * True if we should preallocate the file on disk when creating a new log segment.
+     */
+    preallocate?: pulumi.Input<boolean>;
+    /**
+     * This configuration controls the maximum size a partition (which consists of log segments) can grow to before we will discard old log segments to free up space if we are using the "delete" retention policy.
+     */
+    retentionBytes?: pulumi.Input<string>;
+    /**
+     * This configuration controls the maximum time we will retain a log before we will discard old log segments to free up space if we are using the "delete" retention policy.
+     */
+    retentionMs?: pulumi.Input<string>;
+    /**
+     * This configuration controls the segment file size for the log.
+     */
+    segmentBytes?: pulumi.Input<string>;
+}
+
+export interface MdbKafkaClusterUser {
+    /**
+     * The name of the user.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * The password of the user.
+     */
+    password: pulumi.Input<string>;
+    /**
+     * Set of permissions granted to the user.
+     */
+    permissions?: pulumi.Input<pulumi.Input<inputs.MdbKafkaClusterUserPermission>[]>;
+}
+
+export interface MdbKafkaClusterUserPermission {
+    /**
+     * Set of hosts, to which this permission grants access to. Only ip-addresses allowed as value of single host.
+     */
+    allowHosts?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The role type to grant to the topic.
+     */
+    role: pulumi.Input<string>;
+    /**
+     * The name of the topic that the permission grants access to.
+     */
+    topicName: pulumi.Input<string>;
+}
+
+export interface MdbKafkaConnectorConnectorConfigMirrormaker {
+    /**
+     * Replication factor for topics created in target cluster.
+     */
+    replicationFactor: pulumi.Input<number>;
+    /**
+     * Settings for source cluster.
+     */
+    sourceCluster: pulumi.Input<inputs.MdbKafkaConnectorConnectorConfigMirrormakerSourceCluster>;
+    /**
+     * Settings for target cluster.
+     */
+    targetCluster: pulumi.Input<inputs.MdbKafkaConnectorConnectorConfigMirrormakerTargetCluster>;
+    /**
+     * The pattern for topic names to be replicated.
+     */
+    topics: pulumi.Input<string>;
+}
+
+export interface MdbKafkaConnectorConnectorConfigMirrormakerSourceCluster {
+    /**
+     * Name of the cluster. Used also as a topic prefix.
+     */
+    alias?: pulumi.Input<string>;
+    /**
+     * Connection settings for external cluster.
+     */
+    externalClusters?: pulumi.Input<pulumi.Input<inputs.MdbKafkaConnectorConnectorConfigMirrormakerSourceClusterExternalCluster>[]>;
+    /**
+     * Using this section in the cluster definition (source or target) means it's this cluster.
+     */
+    thisClusters?: pulumi.Input<pulumi.Input<inputs.MdbKafkaConnectorConnectorConfigMirrormakerSourceClusterThisCluster>[]>;
+}
+
+export interface MdbKafkaConnectorConnectorConfigMirrormakerSourceClusterExternalCluster {
+    /**
+     * List of bootstrap servers to connect to cluster.
+     */
+    bootstrapServers: pulumi.Input<string>;
+    /**
+     * Type of SASL authentification mechanism to use.
+     */
+    saslMechanism?: pulumi.Input<string>;
+    /**
+     * Password to use in SASL authentification mechanism
+     */
+    saslPassword?: pulumi.Input<string>;
+    /**
+     * Username to use in SASL authentification mechanism.
+     */
+    saslUsername?: pulumi.Input<string>;
+    /**
+     * Security protocol to use.
+     */
+    securityProtocol?: pulumi.Input<string>;
+}
+
+export interface MdbKafkaConnectorConnectorConfigMirrormakerSourceClusterThisCluster {
+}
+
+export interface MdbKafkaConnectorConnectorConfigMirrormakerTargetCluster {
+    /**
+     * Name of the cluster. Used also as a topic prefix.
+     */
+    alias?: pulumi.Input<string>;
+    /**
+     * Connection settings for external cluster.
+     */
+    externalClusters?: pulumi.Input<pulumi.Input<inputs.MdbKafkaConnectorConnectorConfigMirrormakerTargetClusterExternalCluster>[]>;
+    /**
+     * Using this section in the cluster definition (source or target) means it's this cluster.
+     */
+    thisClusters?: pulumi.Input<pulumi.Input<inputs.MdbKafkaConnectorConnectorConfigMirrormakerTargetClusterThisCluster>[]>;
+}
+
+export interface MdbKafkaConnectorConnectorConfigMirrormakerTargetClusterExternalCluster {
+    /**
+     * List of bootstrap servers to connect to cluster.
+     */
+    bootstrapServers: pulumi.Input<string>;
+    /**
+     * Type of SASL authentification mechanism to use.
+     */
+    saslMechanism?: pulumi.Input<string>;
+    /**
+     * Password to use in SASL authentification mechanism
+     */
+    saslPassword?: pulumi.Input<string>;
+    /**
+     * Username to use in SASL authentification mechanism.
+     */
+    saslUsername?: pulumi.Input<string>;
+    /**
+     * Security protocol to use.
+     */
+    securityProtocol?: pulumi.Input<string>;
+}
+
+export interface MdbKafkaConnectorConnectorConfigMirrormakerTargetClusterThisCluster {
+}
+
+export interface MdbKafkaConnectorConnectorConfigS3Sink {
+    /**
+     * Compression type for messages. Cannot be changed.
+     */
+    fileCompressionType: pulumi.Input<string>;
+    /**
+     * Max records per file.
+     */
+    fileMaxRecords?: pulumi.Input<number>;
+    /**
+     * Settings for connection to s3-compatible storage.
+     */
+    s3Connection: pulumi.Input<inputs.MdbKafkaConnectorConnectorConfigS3SinkS3Connection>;
+    /**
+     * The pattern for topic names to be copied to s3 bucket.
+     */
+    topics: pulumi.Input<string>;
+}
+
+export interface MdbKafkaConnectorConnectorConfigS3SinkS3Connection {
+    /**
+     * Name of the bucket in s3-compatible storage.
+     */
+    bucketName: pulumi.Input<string>;
+    /**
+     * Connection params for external s3-compatible storage.
+     */
+    externalS3s: pulumi.Input<pulumi.Input<inputs.MdbKafkaConnectorConnectorConfigS3SinkS3ConnectionExternalS3>[]>;
+}
+
+export interface MdbKafkaConnectorConnectorConfigS3SinkS3ConnectionExternalS3 {
+    /**
+     * ID of aws-compatible static key.
+     */
+    accessKeyId?: pulumi.Input<string>;
+    /**
+     * URL of s3-compatible storage.
+     */
+    endpoint: pulumi.Input<string>;
+    /**
+     * Region of s3-compatible storage. [Available region list](https://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/regions/Regions.html).
+     */
+    region?: pulumi.Input<string>;
+    /**
+     * Secret key of aws-compatible static key.
+     */
+    secretAccessKey?: pulumi.Input<string>;
+}
+
+export interface MdbKafkaTopicTopicConfig {
+    /**
+     * Retention policy to use on log segments.
+     */
+    cleanupPolicy?: pulumi.Input<string>;
+    /**
+     * Compression type of kafka topic.
+     */
+    compressionType?: pulumi.Input<string>;
+    /**
+     * The amount of time to retain delete tombstone markers for log compacted topics.
+     */
+    deleteRetentionMs?: pulumi.Input<string>;
+    /**
+     * The time to wait before deleting a file from the filesystem.
+     */
+    fileDeleteDelayMs?: pulumi.Input<string>;
+    /**
+     * This setting allows specifying an interval at which we will force an fsync of data written to the log.
+     */
+    flushMessages?: pulumi.Input<string>;
+    /**
+     * This setting allows specifying a time interval at which we will force an fsync of data written to the log.
+     */
+    flushMs?: pulumi.Input<string>;
+    /**
+     * The largest record batch size allowed by Kafka (after compression if compression is enabled).
+     */
+    maxMessageBytes?: pulumi.Input<string>;
+    /**
+     * The minimum time a message will remain uncompacted in the log. Only applicable for logs that are being compacted.
+     */
+    minCompactionLagMs?: pulumi.Input<string>;
+    /**
+     * When a producer sets acks to "all" (or "-1"), this configuration specifies the minimum number of replicas that must acknowledge a write for the write to be considered successful.
+     */
+    minInsyncReplicas?: pulumi.Input<string>;
+    /**
+     * True if we should preallocate the file on disk when creating a new log segment.
+     */
+    preallocate?: pulumi.Input<boolean>;
+    /**
+     * This configuration controls the maximum size a partition (which consists of log segments) can grow to before we will discard old log segments to free up space if we are using the "delete" retention policy.
+     */
+    retentionBytes?: pulumi.Input<string>;
+    /**
+     * This configuration controls the maximum time we will retain a log before we will discard old log segments to free up space if we are using the "delete" retention policy.
+     */
+    retentionMs?: pulumi.Input<string>;
+    /**
+     * This configuration controls the segment file size for the log.
+     */
+    segmentBytes?: pulumi.Input<string>;
+}
+
+export interface MdbKafkaUserPermission {
+    /**
+     * Set of hosts, to which this permission grants access to. Only ip-addresses allowed as value of single host.
+     */
+    allowHosts?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The role type to grant to the topic.
+     */
+    role: pulumi.Input<string>;
+    /**
+     * The name of the topic that the permission grants access to.
+     */
+    topicName: pulumi.Input<string>;
+}
+
+export interface MdbMongodbClusterClusterConfig {
+    /**
+     * Access policy to the MongoDB cluster.
+     */
+    access?: pulumi.Input<inputs.MdbMongodbClusterClusterConfigAccess>;
+    /**
+     * Retain period of automatically created backup in days.
+     */
+    backupRetainPeriodDays?: pulumi.Input<number>;
+    /**
+     * Time to start the daily backup, in the UTC timezone.
+     */
+    backupWindowStart?: pulumi.Input<inputs.MdbMongodbClusterClusterConfigBackupWindowStart>;
+    /**
+     * Feature compatibility version of MongoDB. If not provided version is taken. Can be either `6.0`, `5.0`, `4.4` and `4.2`.
+     */
+    featureCompatibilityVersion?: pulumi.Input<string>;
+    /**
+     * Configuration of the mongocfg service.
+     */
+    mongocfg?: pulumi.Input<inputs.MdbMongodbClusterClusterConfigMongocfg>;
+    /**
+     * Configuration of the mongod service.
+     */
+    mongod?: pulumi.Input<inputs.MdbMongodbClusterClusterConfigMongod>;
+    /**
+     * Configuration of the mongos service.
+     */
+    mongos?: pulumi.Input<inputs.MdbMongodbClusterClusterConfigMongos>;
+    /**
+     * Performance diagnostics to the MongoDB cluster.
+     */
+    performanceDiagnostics?: pulumi.Input<inputs.MdbMongodbClusterClusterConfigPerformanceDiagnostics>;
+    /**
+     * Version of the MongoDB server software. Can be either `4.2`, `4.4`, `4.4-enterprise`, `5.0`, `5.0-enterprise`, `6.0` and `6.0-enterprise`.
+     */
+    version: pulumi.Input<string>;
+}
+
+export interface MdbMongodbClusterClusterConfigAccess {
+    /**
+     * Allow access for [Yandex DataLens](https://yandex.cloud/services/datalens).
+     */
+    dataLens?: pulumi.Input<boolean>;
+    /**
+     * Allow access for [DataTransfer](https://yandex.cloud/services/data-transfer).
+     */
+    dataTransfer?: pulumi.Input<boolean>;
+    /**
+     * Allow access for [WebSQL](https://yandex.cloud/ru/docs/websql/).
+     */
+    webSql?: pulumi.Input<boolean>;
+}
+
+export interface MdbMongodbClusterClusterConfigBackupWindowStart {
+    /**
+     * The hour at which backup will be started.
+     */
+    hours?: pulumi.Input<number>;
+    /**
+     * The minute at which backup will be started.
+     */
+    minutes?: pulumi.Input<number>;
+}
+
+export interface MdbMongodbClusterClusterConfigMongocfg {
+    /**
+     * A set of network settings (see the [net](https://www.mongodb.com/docs/manual/reference/configuration-options/#net-options) option).
+     */
+    net?: pulumi.Input<inputs.MdbMongodbClusterClusterConfigMongocfgNet>;
+    /**
+     * A set of profiling settings (see the [operationProfiling](https://www.mongodb.com/docs/manual/reference/configuration-options/#operationprofiling-options) option).
+     */
+    operationProfiling?: pulumi.Input<inputs.MdbMongodbClusterClusterConfigMongocfgOperationProfiling>;
+    /**
+     * A set of storage settings (see the [storage](https://www.mongodb.com/docs/manual/reference/configuration-options/#storage-options) option).
+     */
+    storage?: pulumi.Input<inputs.MdbMongodbClusterClusterConfigMongocfgStorage>;
+}
+
+export interface MdbMongodbClusterClusterConfigMongocfgNet {
+    maxIncomingConnections?: pulumi.Input<number>;
+}
+
+export interface MdbMongodbClusterClusterConfigMongocfgOperationProfiling {
+    mode?: pulumi.Input<string>;
+    slowOpThreshold?: pulumi.Input<number>;
+}
+
+export interface MdbMongodbClusterClusterConfigMongocfgStorage {
+    wiredTiger?: pulumi.Input<inputs.MdbMongodbClusterClusterConfigMongocfgStorageWiredTiger>;
+}
+
+export interface MdbMongodbClusterClusterConfigMongocfgStorageWiredTiger {
+    cacheSizeGb?: pulumi.Input<number>;
+}
+
+export interface MdbMongodbClusterClusterConfigMongod {
+    /**
+     * A set of audit log settings (see the [auditLog](https://www.mongodb.com/docs/manual/reference/configuration-options/#auditlog-options) option). Available only in enterprise edition.
+     */
+    auditLog?: pulumi.Input<inputs.MdbMongodbClusterClusterConfigMongodAuditLog>;
+    /**
+     * A set of network settings (see the [net](https://www.mongodb.com/docs/manual/reference/configuration-options/#net-options) option).
+     */
+    net?: pulumi.Input<inputs.MdbMongodbClusterClusterConfigMongodNet>;
+    /**
+     * A set of profiling settings (see the [operationProfiling](https://www.mongodb.com/docs/manual/reference/configuration-options/#operationprofiling-options) option).
+     */
+    operationProfiling?: pulumi.Input<inputs.MdbMongodbClusterClusterConfigMongodOperationProfiling>;
+    /**
+     * A set of MongoDB Security settings (see the [security](https://www.mongodb.com/docs/manual/reference/configuration-options/#security-options) option). Available only in enterprise edition.
+     */
+    security?: pulumi.Input<inputs.MdbMongodbClusterClusterConfigMongodSecurity>;
+    /**
+     * A set of MongoDB Server Parameters (see the [setParameter](https://www.mongodb.com/docs/manual/reference/configuration-options/#setparameter-option) option).
+     */
+    setParameter?: pulumi.Input<inputs.MdbMongodbClusterClusterConfigMongodSetParameter>;
+    /**
+     * A set of storage settings (see the [storage](https://www.mongodb.com/docs/manual/reference/configuration-options/#storage-options) option).
+     */
+    storage?: pulumi.Input<inputs.MdbMongodbClusterClusterConfigMongodStorage>;
+}
+
+export interface MdbMongodbClusterClusterConfigMongodAuditLog {
+    /**
+     * Configuration of the audit log filter in JSON format. For more information see [auditLog.filter](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-auditLog.filter) description in the official documentation. Available only in enterprise edition.
+     */
+    filter?: pulumi.Input<string>;
+    /**
+     * Specifies if a node allows runtime configuration of audit filters and the auditAuthorizationSuccess variable. For more information see [auditLog.runtimeConfiguration](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-auditLog.runtimeConfiguration) description in the official documentation. Available only in enterprise edition.
+     */
+    runtimeConfiguration?: pulumi.Input<boolean>;
+}
+
+export interface MdbMongodbClusterClusterConfigMongodNet {
+    /**
+     * Specifies the default compressor(s) to use for communication between this mongod or mongos. Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd, disabled. To disable network compression, make `disabled` the only value. For more information, see the [net.Compression.Compressors](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-net.compression.compressors) description in the official documentation.
+     */
+    compressors?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The maximum number of simultaneous connections that host will accept. For more information, see the [net.maxIncomingConnections](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-net.maxIncomingConnections) description in the official documentation.
+     */
+    maxIncomingConnections?: pulumi.Input<number>;
+}
+
+export interface MdbMongodbClusterClusterConfigMongodOperationProfiling {
+    /**
+     * Specifies which operations should be profiled. The following profiler levels are available: off, slow_op, all. For more information, see the [operationProfiling.mode](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-operationProfiling.mode) description in the official documentation.
+     */
+    mode?: pulumi.Input<string>;
+    /**
+     * The fraction of slow operations that should be profiled or logged. Accepts values between 0 and 1, inclusive. For more information, see the [operationProfiling.slowOpSampleRate](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-operationProfiling.slowOpSampleRate) description in the official documentation.
+     */
+    slowOpSampleRate?: pulumi.Input<number>;
+    /**
+     * The slow operation time threshold, in milliseconds. Operations that run for longer than this threshold are considered slow. For more information, see the [operationProfiling.slowOpThresholdMs](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-operationProfiling.slowOpThresholdMs) description in the official documentation.
+     */
+    slowOpThreshold?: pulumi.Input<number>;
+}
+
+export interface MdbMongodbClusterClusterConfigMongodSecurity {
+    /**
+     * Enables the encryption for the WiredTiger storage engine. Can be either true or false. For more information see [security.enableEncryption](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-security.enableEncryption) description in the official documentation. Available only in enterprise edition.
+     */
+    enableEncryption?: pulumi.Input<boolean>;
+    /**
+     * Configuration of the third party key management appliance via the Key Management Interoperability Protocol (KMIP) (see [Encryption tutorial](https://www.mongodb.com/docs/rapid/tutorial/configure-encryption) ). Requires `enableEncryption` to be true. The structure is documented below. Available only in enterprise edition.
+     */
+    kmip?: pulumi.Input<inputs.MdbMongodbClusterClusterConfigMongodSecurityKmip>;
+}
+
+export interface MdbMongodbClusterClusterConfigMongodSecurityKmip {
+    /**
+     * String containing the client certificate used for authenticating MongoDB to the KMIP server. For more information see [security.kmip.clientCertificateFile](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-security.kmip.clientCertificateFile) description in the official documentation.
+     */
+    clientCertificate?: pulumi.Input<string>;
+    /**
+     * Unique KMIP identifier for an existing key within the KMIP server. For more information see [security.kmip.keyIdentifier](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-security.kmip.keyIdentifier) description in the official documentation.
+     */
+    keyIdentifier?: pulumi.Input<string>;
+    /**
+     * Port number to use to communicate with the KMIP server. Default: 5696 For more information see [security.kmip.port](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-security.kmip.port) description in the official documentation.
+     */
+    port?: pulumi.Input<number>;
+    /**
+     * Path to CA File. Used for validating secure client connection to KMIP server. For more information see [security.kmip.serverCAFile](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-security.kmip.serverCAFile) description in the official documentation.
+     */
+    serverCa?: pulumi.Input<string>;
+    /**
+     * Hostname or IP address of the KMIP server to connect to. For more information see [security.kmip.serverName](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-security.kmip.serverName) description in the official documentation.
+     */
+    serverName?: pulumi.Input<string>;
+}
+
+export interface MdbMongodbClusterClusterConfigMongodSetParameter {
+    /**
+     * Enables the auditing of authorization successes. Can be either true or false. For more information, see the [auditAuthorizationSuccess](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.auditAuthorizationSuccess) description in the official documentation. Available only in enterprise edition.
+     */
+    auditAuthorizationSuccess?: pulumi.Input<boolean>;
+    /**
+     * Enables the flow control. Can be either true or false. For more information, see the [enableFlowControl](https://www.mongodb.com/docs/rapid/reference/parameters/#mongodb-parameter-param.enableFlowControl) description in the official documentation.
+     */
+    enableFlowControl?: pulumi.Input<boolean>;
+    /**
+     * The minimum time window in seconds for which the storage engine keeps the snapshot history. For more information, see the [minSnapshotHistoryWindowInSeconds](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.minSnapshotHistoryWindowInSeconds) description in the official documentation.
+     */
+    minSnapshotHistoryWindowInSeconds?: pulumi.Input<number>;
+}
+
+export interface MdbMongodbClusterClusterConfigMongodStorage {
+    /**
+     * The durability journal to ensure data files remain valid and recoverable.
+     */
+    journal?: pulumi.Input<inputs.MdbMongodbClusterClusterConfigMongodStorageJournal>;
+    /**
+     * The WiredTiger engine settings. (see the [storage.wiredTiger](https://www.mongodb.com/docs/manual/reference/configuration-options/#storage.wiredtiger-options) option). These settings available only on `mongod` hosts.
+     */
+    wiredTiger?: pulumi.Input<inputs.MdbMongodbClusterClusterConfigMongodStorageWiredTiger>;
+}
+
+export interface MdbMongodbClusterClusterConfigMongodStorageJournal {
+    /**
+     * The maximum amount of time in milliseconds that the mongod process allows between journal operations. For more information, see the [storage.journal.commitIntervalMs](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-storage.journal.commitIntervalMs) description in the official documentation.
+     */
+    commitInterval?: pulumi.Input<number>;
+}
+
+export interface MdbMongodbClusterClusterConfigMongodStorageWiredTiger {
+    /**
+     * Specifies the default compression for collection data. You can override this on a per-collection basis when creating collections. Available compressors are: none, snappy, zlib, zstd. This setting available only on `mongod` hosts. For more information, see the [storage.wiredTiger.collectionConfig.blockCompressor](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-storage.wiredTiger.collectionConfig.blockCompressor) description in the official documentation.
+     */
+    blockCompressor?: pulumi.Input<string>;
+    /**
+     * Defines the maximum size of the internal cache that WiredTiger will use for all data. For more information, see the [storage.wiredTiger.engineConfig.cacheSizeGB](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-storage.wiredTiger.engineConfig.cacheSizeGB) description in the official documentation.
+     */
+    cacheSizeGb?: pulumi.Input<number>;
+    /**
+     * Enables or disables prefix compression for index data. Сan be either true or false. For more information, see the [storage.wiredTiger.indexConfig.prefixCompression](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-storage.wiredTiger.indexConfig.prefixCompression) description in the official documentation.
+     */
+    prefixCompression?: pulumi.Input<boolean>;
+}
+
+export interface MdbMongodbClusterClusterConfigMongos {
+    /**
+     * A set of network settings (see the [net](https://www.mongodb.com/docs/manual/reference/configuration-options/#net-options) option).
+     */
+    net?: pulumi.Input<inputs.MdbMongodbClusterClusterConfigMongosNet>;
+}
+
+export interface MdbMongodbClusterClusterConfigMongosNet {
+    compressors?: pulumi.Input<pulumi.Input<string>[]>;
+    maxIncomingConnections?: pulumi.Input<number>;
+}
+
+export interface MdbMongodbClusterClusterConfigPerformanceDiagnostics {
+    /**
+     * Enable or disable performance diagnostics.
+     */
+    enabled?: pulumi.Input<boolean>;
+}
+
+export interface MdbMongodbClusterDatabase {
+    /**
+     * The name of the database.
+     */
+    name: pulumi.Input<string>;
+}
+
+export interface MdbMongodbClusterDiskSizeAutoscalingMongocfg {
+    /**
+     * Limit of disk size after autoscaling (GiB).
+     */
+    diskSizeLimit: pulumi.Input<number>;
+    /**
+     * Immediate autoscaling disk usage (percent).
+     */
+    emergencyUsageThreshold?: pulumi.Input<number>;
+    /**
+     * Maintenance window autoscaling disk usage (percent).
+     */
+    plannedUsageThreshold?: pulumi.Input<number>;
+}
+
+export interface MdbMongodbClusterDiskSizeAutoscalingMongod {
+    /**
+     * Limit of disk size after autoscaling (GiB).
+     */
+    diskSizeLimit: pulumi.Input<number>;
+    /**
+     * Immediate autoscaling disk usage (percent).
+     */
+    emergencyUsageThreshold?: pulumi.Input<number>;
+    /**
+     * Maintenance window autoscaling disk usage (percent).
+     */
+    plannedUsageThreshold?: pulumi.Input<number>;
+}
+
+export interface MdbMongodbClusterDiskSizeAutoscalingMongoinfra {
+    /**
+     * Limit of disk size after autoscaling (GiB).
+     */
+    diskSizeLimit: pulumi.Input<number>;
+    /**
+     * Immediate autoscaling disk usage (percent).
+     */
+    emergencyUsageThreshold?: pulumi.Input<number>;
+    /**
+     * Maintenance window autoscaling disk usage (percent).
+     */
+    plannedUsageThreshold?: pulumi.Input<number>;
+}
+
+export interface MdbMongodbClusterDiskSizeAutoscalingMongos {
+    /**
+     * Limit of disk size after autoscaling (GiB).
+     */
+    diskSizeLimit: pulumi.Input<number>;
+    /**
+     * Immediate autoscaling disk usage (percent).
+     */
+    emergencyUsageThreshold?: pulumi.Input<number>;
+    /**
+     * Maintenance window autoscaling disk usage (percent).
+     */
+    plannedUsageThreshold?: pulumi.Input<number>;
+}
+
+export interface MdbMongodbClusterHost {
+    /**
+     * Should this host have assigned public IP assigned. Can be either `true` or `false`.
+     */
+    assignPublicIp?: pulumi.Input<boolean>;
+    /**
+     * The health of the host.
+     */
+    health?: pulumi.Input<string>;
+    /**
+     * The parameters of mongod host in replicaset.
+     */
+    hostParameters?: pulumi.Input<inputs.MdbMongodbClusterHostHostParameters>;
+    /**
+     * The fully qualified domain name of the host. Computed on server side.
+     */
+    name?: pulumi.Input<string>;
+    /**
+     * The role of the cluster (either PRIMARY or SECONDARY).
+     */
+    role?: pulumi.Input<string>;
+    /**
+     * The name of the shard to which the host belongs. Only for sharded cluster.
+     */
+    shardName?: pulumi.Input<string>;
+    /**
+     * The ID of the subnet, to which the host belongs. The subnet must be a part of the network to which the cluster belongs.
+     */
+    subnetId: pulumi.Input<string>;
+    /**
+     * Type of Mongo daemon which runs on this host (mongod, mongos, mongocfg, mongoinfra). Defaults to `mongod`.
+     */
+    type?: pulumi.Input<string>;
+    /**
+     * The [availability zone](https://yandex.cloud/docs/overview/concepts/geo-scope) where resource is located. If it is not provided, the default provider zone will be used.
+     */
+    zoneId: pulumi.Input<string>;
+}
+
+export interface MdbMongodbClusterHostHostParameters {
+    /**
+     * Should this host be hidden in replicaset. Can be either `true` of `false`. For more information see [the official documentation](https://www.mongodb.com/docs/current/reference/replica-configuration/#mongodb-rsconf-rsconf.members-n-.hidden).
+     */
+    hidden?: pulumi.Input<boolean>;
+    /**
+     * A floating point number that indicates the relative likelihood of a replica set member to become the primary. For more information see [the official documentation](https://www.mongodb.com/docs/current/reference/replica-configuration/#mongodb-rsconf-rsconf.members-n-.priority).
+     */
+    priority?: pulumi.Input<number>;
+    /**
+     * The number of seconds `behind` the primary that this replica set member should `lag`. For more information see [the official documentation](https://www.mongodb.com/docs/current/reference/replica-configuration/#mongodb-rsconf-rsconf.members-n-.secondaryDelaySecs).
+     */
+    secondaryDelaySecs?: pulumi.Input<number>;
+    /**
+     * A set of key/value pairs to assign for the replica set member. For more information see [the official documentation](https://www.mongodb.com/docs/current/reference/replica-configuration/#mongodb-rsconf-rsconf.members-n-.tags).
+     */
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+}
+
+export interface MdbMongodbClusterMaintenanceWindow {
+    /**
+     * Day of week for maintenance window if window type is weekly. Possible values: `MON`, `TUE`, `WED`, `THU`, `FRI`, `SAT`, `SUN`.
+     */
+    day?: pulumi.Input<string>;
+    /**
+     * Hour of day in UTC time zone (1-24) for maintenance window if window type is weekly.
+     */
+    hour?: pulumi.Input<number>;
+    /**
+     * Type of maintenance window. Can be either `ANYTIME` or `WEEKLY`. A day and hour of window need to be specified with weekly window.
+     */
+    type: pulumi.Input<string>;
+}
+
+export interface MdbMongodbClusterResources {
+    /**
+     * Volume of the storage available to a MongoDB host, in gigabytes.
+     */
+    diskSize: pulumi.Input<number>;
+    /**
+     * Type of the storage of MongoDB hosts. For more information see [the official documentation](https://yandex.cloud/docs/managed-clickhouse/concepts/storage).
+     */
+    diskTypeId: pulumi.Input<string>;
+    /**
+     * The ID of the preset for computational resources available to a MongoDB host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-mongodb/concepts).
+     */
+    resourcePresetId: pulumi.Input<string>;
+}
+
+export interface MdbMongodbClusterResourcesMongocfg {
+    /**
+     * Volume of the storage available to a MongoDB host, in gigabytes.
+     */
+    diskSize: pulumi.Input<number>;
+    /**
+     * Type of the storage of MongoDB hosts. For more information see [the official documentation](https://yandex.cloud/docs/managed-clickhouse/concepts/storage).
+     */
+    diskTypeId: pulumi.Input<string>;
+    /**
+     * The ID of the preset for computational resources available to a MongoDB host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-mongodb/concepts).
+     */
+    resourcePresetId: pulumi.Input<string>;
+}
+
+export interface MdbMongodbClusterResourcesMongod {
+    /**
+     * Volume of the storage available to a MongoDB host, in gigabytes.
+     */
+    diskSize: pulumi.Input<number>;
+    /**
+     * Type of the storage of MongoDB hosts. For more information see [the official documentation](https://yandex.cloud/docs/managed-clickhouse/concepts/storage).
+     */
+    diskTypeId: pulumi.Input<string>;
+    /**
+     * The ID of the preset for computational resources available to a MongoDB host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-mongodb/concepts).
+     */
+    resourcePresetId: pulumi.Input<string>;
+}
+
+export interface MdbMongodbClusterResourcesMongoinfra {
+    /**
+     * Volume of the storage available to a MongoDB host, in gigabytes.
+     */
+    diskSize: pulumi.Input<number>;
+    /**
+     * Type of the storage of MongoDB hosts. For more information see [the official documentation](https://yandex.cloud/docs/managed-clickhouse/concepts/storage).
+     */
+    diskTypeId: pulumi.Input<string>;
+    /**
+     * The ID of the preset for computational resources available to a MongoDB host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-mongodb/concepts).
+     */
+    resourcePresetId: pulumi.Input<string>;
+}
+
+export interface MdbMongodbClusterResourcesMongos {
+    /**
+     * Volume of the storage available to a MongoDB host, in gigabytes.
+     */
+    diskSize: pulumi.Input<number>;
+    /**
+     * Type of the storage of MongoDB hosts. For more information see [the official documentation](https://yandex.cloud/docs/managed-clickhouse/concepts/storage).
+     */
+    diskTypeId: pulumi.Input<string>;
+    /**
+     * The ID of the preset for computational resources available to a MongoDB host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-mongodb/concepts).
+     */
+    resourcePresetId: pulumi.Input<string>;
+}
+
+export interface MdbMongodbClusterRestore {
+    /**
+     * Backup ID. The cluster will be created from the specified backup. [How to get a list of PostgreSQL backups](https://yandex.cloud/docs/managed-mongodb/operations/cluster-backups).
+     */
+    backupId: pulumi.Input<string>;
+    /**
+     * Timestamp of the moment to which the MongoDB cluster should be restored. (Format: `2006-01-02T15:04:05` - UTC). When not set, current time is used.
+     */
+    time?: pulumi.Input<string>;
+}
+
+export interface MdbMongodbClusterUser {
+    /**
+     * The name of the user.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * The password of the user.
+     */
+    password: pulumi.Input<string>;
+    /**
+     * Set of permissions granted to the user.
+     */
+    permissions?: pulumi.Input<pulumi.Input<inputs.MdbMongodbClusterUserPermission>[]>;
+}
+
+export interface MdbMongodbClusterUserPermission {
+    /**
+     * The name of the database that the permission grants access to.
+     */
+    databaseName: pulumi.Input<string>;
+    /**
+     * The roles of the user in this database. For more information see [the official documentation](https://yandex.cloud/docs/managed-mongodb/concepts/users-and-roles).
+     */
+    roles?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface MdbMysqlClusterAccess {
+    /**
+     * Allow access for [Yandex DataLens](https://yandex.cloud/services/datalens).
+     */
+    dataLens?: pulumi.Input<boolean>;
+    /**
+     * Allow access for [DataTransfer](https://yandex.cloud/services/data-transfer).
+     */
+    dataTransfer?: pulumi.Input<boolean>;
+    /**
+     * Allows access for [SQL queries in the management console](https://yandex.cloud/docs/managed-mysql/operations/web-sql-query).
+     */
+    webSql?: pulumi.Input<boolean>;
+}
+
+export interface MdbMysqlClusterBackupWindowStart {
+    /**
+     * The hour at which backup will be started.
+     */
+    hours?: pulumi.Input<number>;
+    /**
+     * The minute at which backup will be started.
+     */
+    minutes?: pulumi.Input<number>;
+}
+
+export interface MdbMysqlClusterDatabase {
+    /**
+     * The name of the database.
+     */
+    name: pulumi.Input<string>;
+}
+
+export interface MdbMysqlClusterHost {
+    /**
+     * Sets whether the host should get a public IP address. It can be changed on the fly only when `name` is set.
+     */
+    assignPublicIp?: pulumi.Input<boolean>;
+    /**
+     * Host backup priority. Value is between 0 and 100, default is 0.
+     */
+    backupPriority?: pulumi.Input<number>;
+    /**
+     * The fully qualified domain name of the host.
+     */
+    fqdn?: pulumi.Input<string>;
+    /**
+     * Host state name. It should be set for all hosts or unset for all hosts. This field can be used by another host, to select which host will be its replication source. Please refer to `replicationSourceName` parameter.
+     */
+    name?: pulumi.Input<string>;
+    /**
+     * Host master promotion priority. Value is between 0 and 100, default is 0.
+     */
+    priority?: pulumi.Input<number>;
+    /**
+     * Host replication source (fqdn), when replicationSource is empty then host is in HA group.
+     */
+    replicationSource?: pulumi.Input<string>;
+    /**
+     * Host replication source name points to host's `name` from which this host should replicate. When not set then host in HA group. It works only when `name` is set.
+     */
+    replicationSourceName?: pulumi.Input<string>;
+    /**
+     * The ID of the subnet, to which the host belongs. The subnet must be a part of the network to which the cluster belongs.
+     */
+    subnetId?: pulumi.Input<string>;
+    /**
+     * The [availability zone](https://yandex.cloud/docs/overview/concepts/geo-scope) where resource is located. If it is not provided, the default provider zone will be used.
+     */
+    zone: pulumi.Input<string>;
+}
+
+export interface MdbMysqlClusterMaintenanceWindow {
+    /**
+     * Day of the week (in `DDD` format). Allowed values: `MON`, `TUE`, `WED`, `THU`, `FRI`, `SAT`, `SUN`
+     */
+    day?: pulumi.Input<string>;
+    /**
+     * Hour of the day in UTC (in `HH` format). Allowed value is between 0 and 23.
+     */
+    hour?: pulumi.Input<number>;
+    /**
+     * Type of maintenance window. Can be either `ANYTIME` or `WEEKLY`. A day and hour of window need to be specified with weekly window.
+     */
+    type: pulumi.Input<string>;
+}
+
+export interface MdbMysqlClusterPerformanceDiagnostics {
+    /**
+     * Enable performance diagnostics.
+     */
+    enabled?: pulumi.Input<boolean>;
+    /**
+     * Interval (in seconds) for myStatActivity sampling Acceptable values are 1 to 86400, inclusive.
+     */
+    sessionsSamplingInterval: pulumi.Input<number>;
+    /**
+     * Interval (in seconds) for myStatStatements sampling Acceptable values are 1 to 86400, inclusive.
+     */
+    statementsSamplingInterval: pulumi.Input<number>;
+}
+
+export interface MdbMysqlClusterResources {
+    /**
+     * Volume of the storage available to a MySQL host, in gigabytes.
+     */
+    diskSize: pulumi.Input<number>;
+    /**
+     * Type of the storage of MySQL hosts.
+     */
+    diskTypeId: pulumi.Input<string>;
+    /**
+     * The ID of the preset for computational resources available to a MySQL host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-mysql/concepts/instance-types).
+     */
+    resourcePresetId: pulumi.Input<string>;
+}
+
+export interface MdbMysqlClusterRestore {
+    /**
+     * Backup ID. The cluster will be created from the specified backup. [How to get a list of MySQL backups](https://yandex.cloud/docs/managed-mysql/operations/cluster-backups).
+     */
+    backupId: pulumi.Input<string>;
+    /**
+     * Timestamp of the moment to which the MySQL cluster should be restored. (Format: `2006-01-02T15:04:05` - UTC). When not set, current time is used.
+     */
+    time?: pulumi.Input<string>;
+}
+
+export interface MdbMysqlClusterUser {
+    /**
+     * Authentication plugin. Allowed values: `MYSQL_NATIVE_PASSWORD`, `CACHING_SHA2_PASSWORD`, `SHA256_PASSWORD` (for version 5.7 `MYSQL_NATIVE_PASSWORD`, `SHA256_PASSWORD`).
+     */
+    authenticationPlugin?: pulumi.Input<string>;
+    /**
+     * User's connection limits. If not specified there will be no changes. Default value is -1. When these parameters are set to -1, backend default values will be actually used.
+     */
+    connectionLimits?: pulumi.Input<inputs.MdbMysqlClusterUserConnectionLimits>;
+    /**
+     * List user's global permissions. Allowed permissions: `REPLICATION_CLIENT`, `REPLICATION_SLAVE`, `PROCESS` for clear list use empty list. If the attribute is not specified there will be no changes.
+     */
+    globalPermissions?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The name of the user.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * The password of the user.
+     */
+    password: pulumi.Input<string>;
+    /**
+     * Set of permissions granted to the user.
+     */
+    permissions?: pulumi.Input<pulumi.Input<inputs.MdbMysqlClusterUserPermission>[]>;
+}
+
+export interface MdbMysqlClusterUserConnectionLimits {
+    /**
+     * Max connections per hour.
+     */
+    maxConnectionsPerHour?: pulumi.Input<number>;
+    /**
+     * Max questions per hour.
+     */
+    maxQuestionsPerHour?: pulumi.Input<number>;
+    /**
+     * Max updates per hour.
+     */
+    maxUpdatesPerHour?: pulumi.Input<number>;
+    /**
+     * Max user connections.
+     */
+    maxUserConnections?: pulumi.Input<number>;
+}
+
+export interface MdbMysqlClusterUserPermission {
+    /**
+     * The name of the database that the permission grants access to.
+     */
+    databaseName: pulumi.Input<string>;
+    /**
+     * List user's roles in the database. Allowed roles: `ALL`,`ALTER`,`ALTER_ROUTINE`,`CREATE`,`CREATE_ROUTINE`,`CREATE_TEMPORARY_TABLES`, `CREATE_VIEW`,`DELETE`,`DROP`,`EVENT`,`EXECUTE`,`INDEX`,`INSERT`,`LOCK_TABLES`,`SELECT`,`SHOW_VIEW`,`TRIGGER`,`UPDATE`.
+     */
+    roles?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface MdbMysqlUserConnectionLimits {
+    /**
+     * Max connections per hour.
+     */
+    maxConnectionsPerHour?: pulumi.Input<number>;
+    /**
+     * Max questions per hour.
+     */
+    maxQuestionsPerHour?: pulumi.Input<number>;
+    /**
+     * Max updates per hour.
+     */
+    maxUpdatesPerHour?: pulumi.Input<number>;
+    /**
+     * Max user connections.
+     */
+    maxUserConnections?: pulumi.Input<number>;
+}
+
+export interface MdbMysqlUserPermission {
+    /**
+     * The name of the database that the permission grants access to.
+     */
+    databaseName: pulumi.Input<string>;
+    /**
+     * List user's roles in the database. Allowed roles: `ALL`,`ALTER`,`ALTER_ROUTINE`,`CREATE`,`CREATE_ROUTINE`,`CREATE_TEMPORARY_TABLES`, `CREATE_VIEW`,`DELETE`,`DROP`,`EVENT`,`EXECUTE`,`INDEX`,`INSERT`,`LOCK_TABLES`,`SELECT`,`SHOW_VIEW`,`TRIGGER`,`UPDATE`.
+     */
+    roles?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface MdbPostgresqlClusterConfig {
+    /**
+     * Access policy to the PostgreSQL cluster.
+     */
+    access?: pulumi.Input<inputs.MdbPostgresqlClusterConfigAccess>;
+    /**
+     * Configuration setting which enables/disables autofailover in cluster.
+     */
+    autofailover?: pulumi.Input<boolean>;
+    /**
+     * The period in days during which backups are stored.
+     */
+    backupRetainPeriodDays?: pulumi.Input<number>;
+    /**
+     * Time to start the daily backup, in the UTC timezone.
+     */
+    backupWindowStart?: pulumi.Input<inputs.MdbPostgresqlClusterConfigBackupWindowStart>;
+    /**
+     * Cluster disk size autoscaling settings.
+     */
+    diskSizeAutoscaling?: pulumi.Input<inputs.MdbPostgresqlClusterConfigDiskSizeAutoscaling>;
+    /**
+     * Cluster performance diagnostics settings. [YC Documentation](https://yandex.cloud/docs/managed-postgresql/api-ref/grpc/cluster_service#PerformanceDiagnostics).
+     */
+    performanceDiagnostics?: pulumi.Input<inputs.MdbPostgresqlClusterConfigPerformanceDiagnostics>;
+    /**
+     * Configuration of the connection pooler.
+     */
+    poolerConfig?: pulumi.Input<inputs.MdbPostgresqlClusterConfigPoolerConfig>;
+    /**
+     * PostgreSQL cluster config. Detail info in `postresql config` section.
+     */
+    postgresqlConfig?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    /**
+     * Resources allocated to hosts of the PostgreSQL cluster.
+     */
+    resources: pulumi.Input<inputs.MdbPostgresqlClusterConfigResources>;
+    /**
+     * Version of the PostgreSQL cluster. (allowed versions are: 10, 10-1c, 11, 11-1c, 12, 12-1c, 13, 13-1c, 14, 14-1c, 15, 15-1c, 16, 17).
+     */
+    version: pulumi.Input<string>;
+}
+
+export interface MdbPostgresqlClusterConfigAccess {
+    /**
+     * Allow access for [Yandex DataLens](https://yandex.cloud/services/datalens).
+     */
+    dataLens?: pulumi.Input<boolean>;
+    /**
+     * Allow access for [DataTransfer](https://yandex.cloud/services/data-transfer).
+     */
+    dataTransfer?: pulumi.Input<boolean>;
+    /**
+     * Allow access for [connection to managed databases from functions](https://yandex.cloud/docs/functions/operations/database-connection).
+     */
+    serverless?: pulumi.Input<boolean>;
+    /**
+     * Allow access for [SQL queries in the management console](https://yandex.cloud/docs/managed-postgresql/operations/web-sql-query).
+     */
+    webSql?: pulumi.Input<boolean>;
+}
+
+export interface MdbPostgresqlClusterConfigBackupWindowStart {
+    /**
+     * The hour at which backup will be started (UTC).
+     */
+    hours?: pulumi.Input<number>;
+    /**
+     * The hour at which backup will be started (UTC).
+     */
+    minutes?: pulumi.Input<number>;
+}
+
+export interface MdbPostgresqlClusterConfigDiskSizeAutoscaling {
+    /**
+     * Limit of disk size after autoscaling (GiB).
+     */
+    diskSizeLimit: pulumi.Input<number>;
+    /**
+     * Immediate autoscaling disk usage (percent).
+     */
+    emergencyUsageThreshold?: pulumi.Input<number>;
+    /**
+     * Maintenance window autoscaling disk usage (percent).
+     */
+    plannedUsageThreshold?: pulumi.Input<number>;
+}
+
+export interface MdbPostgresqlClusterConfigPerformanceDiagnostics {
+    /**
+     * Enable performance diagnostics.
+     */
+    enabled?: pulumi.Input<boolean>;
+    /**
+     * Interval (in seconds) for pgStatActivity sampling Acceptable values are 1 to 86400, inclusive.
+     */
+    sessionsSamplingInterval: pulumi.Input<number>;
+    /**
+     * Interval (in seconds) for pgStatStatements sampling Acceptable values are 1 to 86400, inclusive.
+     */
+    statementsSamplingInterval: pulumi.Input<number>;
+}
+
+export interface MdbPostgresqlClusterConfigPoolerConfig {
+    /**
+     * Setting `poolDiscard` [parameter in Odyssey](https://github.com/yandex/odyssey/blob/master/documentation/configuration.md#pool_discard-yesno).
+     */
+    poolDiscard?: pulumi.Input<boolean>;
+    /**
+     * Mode that the connection pooler is working in. See descriptions of all modes in the [documentation for Odyssey](https://github.com/yandex/odyssey/blob/master/documentation/configuration.md#pool-string.
+     */
+    poolingMode?: pulumi.Input<string>;
+}
+
+export interface MdbPostgresqlClusterConfigResources {
+    /**
+     * Volume of the storage available to a PostgreSQL host, in gigabytes.
+     */
+    diskSize: pulumi.Input<number>;
+    /**
+     * Type of the storage of PostgreSQL hosts.
+     */
+    diskTypeId?: pulumi.Input<string>;
+    /**
+     * The ID of the preset for computational resources available to a PostgreSQL host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-postgresql/concepts/instance-types).
+     */
+    resourcePresetId: pulumi.Input<string>;
+}
+
+export interface MdbPostgresqlClusterDatabase {
+    extensions?: pulumi.Input<pulumi.Input<inputs.MdbPostgresqlClusterDatabaseExtension>[]>;
+    lcCollate?: pulumi.Input<string>;
+    lcType?: pulumi.Input<string>;
+    name: pulumi.Input<string>;
+    owner: pulumi.Input<string>;
+    templateDb?: pulumi.Input<string>;
+}
+
+export interface MdbPostgresqlClusterDatabaseExtension {
+    name: pulumi.Input<string>;
+    version?: pulumi.Input<string>;
+}
+
+export interface MdbPostgresqlClusterHost {
+    /**
+     * Sets whether the host should get a public IP address on creation. It can be changed on the fly only when `name` is set.
+     */
+    assignPublicIp?: pulumi.Input<boolean>;
+    /**
+     * The fully qualified domain name of the host.
+     */
+    fqdn?: pulumi.Input<string>;
+    /**
+     * Host state name. It should be set for all hosts or unset for all hosts. This field can be used by another host, to select which host will be its replication source. Please see `replicationSourceName` parameter.
+     */
+    name?: pulumi.Input<string>;
+    /**
+     * Host priority in HA group. It works only when `name` is set.
+     *
+     * @deprecated The field has not affected anything. You can safely delete it.
+     */
+    priority?: pulumi.Input<number>;
+    /**
+     * Host replication source (fqdn), when replicationSource is empty then host is in HA group.
+     */
+    replicationSource?: pulumi.Input<string>;
+    /**
+     * Host replication source name points to host's `name` from which this host should replicate. When not set then host in HA group. It works only when `name` is set.
+     */
+    replicationSourceName?: pulumi.Input<string>;
+    role?: pulumi.Input<string>;
+    /**
+     * The ID of the subnet, to which the host belongs. The subnet must be a part of the network to which the cluster belongs.
+     */
+    subnetId?: pulumi.Input<string>;
+    /**
+     * The [availability zone](https://yandex.cloud/docs/overview/concepts/geo-scope) where resource is located. If it is not provided, the default provider zone will be used.
+     */
+    zone: pulumi.Input<string>;
+}
+
+export interface MdbPostgresqlClusterMaintenanceWindow {
+    /**
+     * Day of the week (in `DDD` format). Allowed values: `MON`, `TUE`, `WED`, `THU`, `FRI`, `SAT`, `SUN`
+     */
+    day?: pulumi.Input<string>;
+    /**
+     * Hour of the day in UTC (in `HH` format). Allowed value is between 1 and 24.
+     */
+    hour?: pulumi.Input<number>;
+    /**
+     * Type of maintenance window. Can be either `ANYTIME` or `WEEKLY`. A day and hour of window need to be specified with weekly window.
+     */
+    type: pulumi.Input<string>;
+}
+
+export interface MdbPostgresqlClusterRestore {
+    /**
+     * Backup ID. The cluster will be created from the specified backup. [How to get a list of PostgreSQL backups](https://yandex.cloud/docs/managed-postgresql/operations/cluster-backups).
+     */
+    backupId: pulumi.Input<string>;
+    /**
+     * Timestamp of the moment to which the PostgreSQL cluster should be restored. (Format: `2006-01-02T15:04:05` - UTC). When not set, current time is used.
+     */
+    time?: pulumi.Input<string>;
+    /**
+     * Flag that indicates whether a database should be restored to the first backup point available just after the timestamp specified in the [time] field instead of just before. Possible values:
+     * * `false` (default) — the restore point refers to the first backup moment before [time].
+     * * `true` — the restore point refers to the first backup point after [time].
+     */
+    timeInclusive?: pulumi.Input<boolean>;
+}
+
+export interface MdbPostgresqlClusterUser {
+    connLimit?: pulumi.Input<number>;
+    grants?: pulumi.Input<pulumi.Input<string>[]>;
+    login?: pulumi.Input<boolean>;
+    name: pulumi.Input<string>;
+    password: pulumi.Input<string>;
+    permissions?: pulumi.Input<pulumi.Input<inputs.MdbPostgresqlClusterUserPermission>[]>;
+    settings?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+}
+
+export interface MdbPostgresqlClusterUserPermission {
+    databaseName: pulumi.Input<string>;
+}
+
+export interface MdbPostgresqlDatabaseExtension {
+    /**
+     * Name of the database extension. For more information on available extensions see [the official documentation](https://yandex.cloud/docs/managed-postgresql/operations/cluster-extensions).
+     */
+    name: pulumi.Input<string>;
+    /**
+     * Version of the extension.
+     */
+    version?: pulumi.Input<string>;
+}
+
+export interface MdbPostgresqlUserPermission {
+    /**
+     * The name of the database that the permission grants access to.
+     */
+    databaseName: pulumi.Input<string>;
+}
+
+export interface MdbRedisClusterAccess {
+    /**
+     * Allow access for DataLens. Can be either `true` or `false`.
+     */
+    dataLens?: pulumi.Input<boolean>;
+    /**
+     * Allow access for Web SQL. Can be either `true` or `false`.
+     */
+    webSql?: pulumi.Input<boolean>;
+}
+
+export interface MdbRedisClusterConfig {
+    /**
+     * Allows some data to be lost in favor of faster switchover/restart by RDSync.
+     */
+    allowDataLoss?: pulumi.Input<boolean>;
+    /**
+     * Time to start the daily backup, in the UTC timezone.
+     */
+    backupWindowStart?: pulumi.Input<inputs.MdbRedisClusterConfigBackupWindowStart>;
+    /**
+     * Normal clients output buffer limits. See [redis config file](https://github.com/redis/redis/blob/6.2/redis.conf#L1841).
+     */
+    clientOutputBufferLimitNormal?: pulumi.Input<string>;
+    /**
+     * Pubsub clients output buffer limits. See [redis config file](https://github.com/redis/redis/blob/6.2/redis.conf#L1843).
+     */
+    clientOutputBufferLimitPubsub?: pulumi.Input<string>;
+    /**
+     * Permits Pub/Sub shard operations when cluster is down.
+     */
+    clusterAllowPubsubshardWhenDown?: pulumi.Input<boolean>;
+    /**
+     * Allows read operations when cluster is down.
+     */
+    clusterAllowReadsWhenDown?: pulumi.Input<boolean>;
+    /**
+     * Controls whether all hash slots must be covered by nodes.
+     */
+    clusterRequireFullCoverage?: pulumi.Input<boolean>;
+    /**
+     * Number of databases (changing requires redis-server restart).
+     */
+    databases?: pulumi.Input<number>;
+    /**
+     * Allow Redis to use io-threads.
+     */
+    ioThreadsAllowed?: pulumi.Input<boolean>;
+    /**
+     * The time, in minutes, that must elapse in order for the key counter to be divided by two (or decremented if it has a value less <= 10).
+     */
+    lfuDecayTime?: pulumi.Input<number>;
+    /**
+     * Determines how the frequency counter represents key hits.
+     */
+    lfuLogFactor?: pulumi.Input<number>;
+    /**
+     * Maximum time in milliseconds for Lua scripts.
+     */
+    luaTimeLimit?: pulumi.Input<number>;
+    /**
+     * Redis maxmemory usage in percent
+     */
+    maxmemoryPercent?: pulumi.Input<number>;
+    /**
+     * Redis key eviction policy for a dataset that reaches maximum memory. Can be any of the listed in [the official RedisDB documentation](https://docs.redislabs.com/latest/rs/administering/database-operations/eviction-policy/).
+     */
+    maxmemoryPolicy?: pulumi.Input<string>;
+    /**
+     * Select the events that Redis will notify among a set of classes.
+     */
+    notifyKeyspaceEvents?: pulumi.Input<string>;
+    /**
+     * Password for the Redis cluster.
+     */
+    password: pulumi.Input<string>;
+    /**
+     * Replication backlog size as a percentage of flavor maxmemory.
+     */
+    replBacklogSizePercent?: pulumi.Input<number>;
+    /**
+     * Log slow queries below this number in microseconds.
+     */
+    slowlogLogSlowerThan?: pulumi.Input<number>;
+    /**
+     * Slow queries log length.
+     */
+    slowlogMaxLen?: pulumi.Input<number>;
+    /**
+     * Close the connection after a client is idle for N seconds.
+     */
+    timeout?: pulumi.Input<number>;
+    /**
+     * Allows to turn before switchover in RDSync.
+     */
+    turnBeforeSwitchover?: pulumi.Input<boolean>;
+    /**
+     * Use JIT for lua scripts and functions.
+     */
+    useLuajit?: pulumi.Input<boolean>;
+    /**
+     * Version of Redis.
+     */
+    version: pulumi.Input<string>;
+    /**
+     * Controls max number of entries in zset before conversion from memory-efficient listpack to CPU-efficient hash table and skiplist
+     */
+    zsetMaxListpackEntries?: pulumi.Input<number>;
+}
+
+export interface MdbRedisClusterConfigBackupWindowStart {
+    /**
+     * The hour at which backup will be started.
+     */
+    hours?: pulumi.Input<number>;
+    /**
+     * The minute at which backup will be started.
+     */
+    minutes?: pulumi.Input<number>;
+}
+
+export interface MdbRedisClusterDiskSizeAutoscaling {
+    /**
+     * Limit of disk size after autoscaling (GiB).
+     */
+    diskSizeLimit: pulumi.Input<number>;
+    /**
+     * Immediate autoscaling disk usage (percent).
+     */
+    emergencyUsageThreshold?: pulumi.Input<number>;
+    /**
+     * Maintenance window autoscaling disk usage (percent).
+     */
+    plannedUsageThreshold?: pulumi.Input<number>;
+}
+
+export interface MdbRedisClusterHost {
+    /**
+     * Sets whether the host should get a public IP address or not.
+     */
+    assignPublicIp?: pulumi.Input<boolean>;
+    /**
+     * The fully qualified domain name of the host.
+     */
+    fqdn?: pulumi.Input<string>;
+    /**
+     * Replica priority of a current replica (usable for non-sharded only).
+     */
+    replicaPriority?: pulumi.Input<number>;
+    /**
+     * The name of the shard to which the host belongs.
+     */
+    shardName?: pulumi.Input<string>;
+    /**
+     * The ID of the subnet, to which the host belongs. The subnet must be a part of the network to which the cluster belongs.
+     */
+    subnetId?: pulumi.Input<string>;
+    /**
+     * The [availability zone](https://yandex.cloud/docs/overview/concepts/geo-scope) where resource is located. If it is not provided, the default provider zone will be used.
+     */
+    zone: pulumi.Input<string>;
+}
+
+export interface MdbRedisClusterMaintenanceWindow {
+    /**
+     * Day of week for maintenance window if window type is weekly. Possible values: `MON`, `TUE`, `WED`, `THU`, `FRI`, `SAT`, `SUN`.
+     */
+    day?: pulumi.Input<string>;
+    /**
+     * Hour of day in UTC time zone (1-24) for maintenance window if window type is weekly.
+     */
+    hour?: pulumi.Input<number>;
+    /**
+     * Type of maintenance window. Can be either `ANYTIME` or `WEEKLY`. A day and hour of window need to be specified with weekly window.
+     */
+    type: pulumi.Input<string>;
+}
+
+export interface MdbRedisClusterResources {
+    /**
+     * Volume of the storage available to a host, in gigabytes.
+     */
+    diskSize: pulumi.Input<number>;
+    /**
+     * Type of the storage of Redis hosts - environment default is used if missing.
+     */
+    diskTypeId?: pulumi.Input<string>;
+    /**
+     * The ID of the preset for computational resources available to a host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-redis/concepts).
+     */
+    resourcePresetId: pulumi.Input<string>;
+}
+
+export interface MdbSqlserverClusterBackupWindowStart {
+    /**
+     * The hour at which backup will be started.
+     */
+    hours?: pulumi.Input<number>;
+    /**
+     * The minute at which backup will be started.
+     */
+    minutes?: pulumi.Input<number>;
+}
+
+export interface MdbSqlserverClusterDatabase {
+    /**
+     * The name of the database.
+     */
+    name: pulumi.Input<string>;
+}
+
+export interface MdbSqlserverClusterHost {
+    /**
+     * Sets whether the host should get a public IP address on creation. Changing this parameter for an existing host is not supported at the moment.
+     */
+    assignPublicIp?: pulumi.Input<boolean>;
+    /**
+     * The fully qualified domain name of the host.
+     */
+    fqdn?: pulumi.Input<string>;
+    /**
+     * The ID of the subnet, to which the host belongs. The subnet must be a part of the network to which the cluster belongs.
+     */
+    subnetId?: pulumi.Input<string>;
+    /**
+     * The [availability zone](https://yandex.cloud/docs/overview/concepts/geo-scope) where resource is located. If it is not provided, the default provider zone will be used.
+     */
+    zone: pulumi.Input<string>;
+}
+
+export interface MdbSqlserverClusterResources {
+    /**
+     * Volume of the storage available to a SQLServer host, in gigabytes.
+     */
+    diskSize: pulumi.Input<number>;
+    /**
+     * Type of the storage of SQLServer hosts.
+     */
+    diskTypeId: pulumi.Input<string>;
+    /**
+     * The ID of the preset for computational resources available to a SQLServer host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-sqlserver/concepts/instance-types).
+     */
+    resourcePresetId: pulumi.Input<string>;
+}
+
+export interface MdbSqlserverClusterUser {
+    /**
+     * The name of the user.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * The password of the user.
+     */
+    password: pulumi.Input<string>;
+    /**
+     * Set of permissions granted to the user.
+     */
+    permissions?: pulumi.Input<pulumi.Input<inputs.MdbSqlserverClusterUserPermission>[]>;
+}
+
+export interface MdbSqlserverClusterUserPermission {
+    /**
+     * The name of the database that the permission grants access to.
+     */
+    databaseName: pulumi.Input<string>;
+    /**
+     * List user's roles in the database. Allowed roles: `OWNER`, `SECURITYADMIN`, `ACCESSADMIN`, `BACKUPOPERATOR`, `DDLADMIN`, `DATAWRITER`, `DATAREADER`, `DENYDATAWRITER`, `DENYDATAREADER`.
+     */
+    roles?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface MonitoringDashboardParametrization {
+    /**
+     * Dashboard parameters.
+     */
+    parameters?: pulumi.Input<pulumi.Input<inputs.MonitoringDashboardParametrizationParameter>[]>;
+    /**
+     * Dashboard predefined parameters selector.
+     */
+    selectors?: pulumi.Input<string>;
+}
+
+export interface MonitoringDashboardParametrizationParameter {
+    /**
+     * Custom values parameter. Oneof: label_values, custom, text.
+     */
+    customs?: pulumi.Input<pulumi.Input<inputs.MonitoringDashboardParametrizationParameterCustom>[]>;
+    /**
+     * Parameter description.
+     */
+    description?: pulumi.Input<string>;
+    /**
+     * UI-visibility
+     */
+    hidden?: pulumi.Input<boolean>;
+    /**
+     * Parameter identifier.
+     */
+    id: pulumi.Input<string>;
+    /**
+     * Label values parameter. Oneof: label_values, custom, text.
+     */
+    labelValues?: pulumi.Input<pulumi.Input<inputs.MonitoringDashboardParametrizationParameterLabelValue>[]>;
+    /**
+     * Text parameter. Oneof: label_values, custom, text.
+     */
+    texts?: pulumi.Input<pulumi.Input<inputs.MonitoringDashboardParametrizationParameterText>[]>;
+    /**
+     * UI-visible title of the parameter.
+     */
+    title?: pulumi.Input<string>;
+}
+
+export interface MonitoringDashboardParametrizationParameterCustom {
+    /**
+     * Default value.
+     */
+    defaultValues?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Specifies the multiselectable values of parameter.
+     */
+    multiselectable?: pulumi.Input<boolean>;
+    /**
+     * Parameter values.
+     */
+    values?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface MonitoringDashboardParametrizationParameterLabelValue {
+    /**
+     * Default value.
+     */
+    defaultValues?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Folder ID.
+     */
+    folderId?: pulumi.Input<string>;
+    /**
+     * Label key to list label values.
+     */
+    labelKey: pulumi.Input<string>;
+    /**
+     * Specifies the multiselectable values of parameter.
+     */
+    multiselectable?: pulumi.Input<boolean>;
+    /**
+     * Selectors to select metric label values.
+     */
+    selectors?: pulumi.Input<string>;
+}
+
+export interface MonitoringDashboardParametrizationParameterText {
+    /**
+     * Default value.
+     */
+    defaultValue?: pulumi.Input<string>;
+}
+
+export interface MonitoringDashboardWidget {
+    /**
+     * Chart widget settings.
+     */
+    charts?: pulumi.Input<pulumi.Input<inputs.MonitoringDashboardWidgetChart>[]>;
+    /**
+     * Widget layout position.
+     */
+    positions?: pulumi.Input<pulumi.Input<inputs.MonitoringDashboardWidgetPosition>[]>;
+    /**
+     * Text widget settings.
+     */
+    texts?: pulumi.Input<pulumi.Input<inputs.MonitoringDashboardWidgetText>[]>;
+    /**
+     * Title widget settings.
+     */
+    titles?: pulumi.Input<pulumi.Input<inputs.MonitoringDashboardWidgetTitle>[]>;
+}
+
+export interface MonitoringDashboardWidgetChart {
+    /**
+     * Chart ID.
+     */
+    chartId?: pulumi.Input<string>;
+    /**
+     * Chart description in dashboard (not enabled in UI).
+     */
+    description?: pulumi.Input<string>;
+    /**
+     * Enable legend under chart.
+     */
+    displayLegend?: pulumi.Input<boolean>;
+    /**
+     * Fixed time interval for chart. Values:
+     * - FREEZE_DURATION_HOUR: Last hour.
+     * - FREEZE_DURATION_DAY: Last day = last 24 hours.
+     * - FREEZE_DURATION_WEEK: Last 7 days.
+     * - FREEZE_DURATION_MONTH: Last 31 days.
+     */
+    freeze?: pulumi.Input<string>;
+    /**
+     * Name hiding settings
+     */
+    nameHidingSettings?: pulumi.Input<pulumi.Input<inputs.MonitoringDashboardWidgetChartNameHidingSetting>[]>;
+    /**
+     * Queries settings.
+     */
+    queries?: pulumi.Input<pulumi.Input<inputs.MonitoringDashboardWidgetChartQuery>[]>;
+    /**
+     * Time series settings.
+     */
+    seriesOverrides?: pulumi.Input<pulumi.Input<inputs.MonitoringDashboardWidgetChartSeriesOverride>[]>;
+    /**
+     * Chart widget title.
+     */
+    title?: pulumi.Input<string>;
+    /**
+     * Visualization settings.
+     */
+    visualizationSettings?: pulumi.Input<pulumi.Input<inputs.MonitoringDashboardWidgetChartVisualizationSetting>[]>;
+}
+
+export interface MonitoringDashboardWidgetChartNameHidingSetting {
+    names?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * True if we want to show concrete series names only, false if we want to hide concrete series names
+     */
+    positive?: pulumi.Input<boolean>;
+}
+
+export interface MonitoringDashboardWidgetChartQuery {
+    /**
+     * Downsampling settings
+     */
+    downsamplings?: pulumi.Input<pulumi.Input<inputs.MonitoringDashboardWidgetChartQueryDownsampling>[]>;
+    /**
+     * Downsampling settings
+     */
+    targets?: pulumi.Input<pulumi.Input<inputs.MonitoringDashboardWidgetChartQueryTarget>[]>;
+}
+
+export interface MonitoringDashboardWidgetChartQueryDownsampling {
+    /**
+     * Disable downsampling
+     */
+    disabled?: pulumi.Input<boolean>;
+    /**
+     * Parameters for filling gaps in data
+     */
+    gapFilling?: pulumi.Input<string>;
+    /**
+     * Function that is used for downsampling
+     */
+    gridAggregation?: pulumi.Input<string>;
+    /**
+     * Time interval (grid) for downsampling in milliseconds. Points in the specified range are aggregated into one time point
+     */
+    gridInterval?: pulumi.Input<number>;
+    /**
+     * Maximum number of points to be returned
+     */
+    maxPoints?: pulumi.Input<number>;
+}
+
+export interface MonitoringDashboardWidgetChartQueryTarget {
+    /**
+     * Checks that target is visible or invisible
+     */
+    hidden?: pulumi.Input<boolean>;
+    /**
+     * Required. Query
+     */
+    query?: pulumi.Input<string>;
+    /**
+     * Text mode
+     */
+    textMode?: pulumi.Input<boolean>;
+}
+
+export interface MonitoringDashboardWidgetChartSeriesOverride {
+    /**
+     * Series name
+     */
+    name?: pulumi.Input<string>;
+    /**
+     * Override settings
+     */
+    settings?: pulumi.Input<pulumi.Input<inputs.MonitoringDashboardWidgetChartSeriesOverrideSetting>[]>;
+    /**
+     * Target index
+     */
+    targetIndex?: pulumi.Input<string>;
+}
+
+export interface MonitoringDashboardWidgetChartSeriesOverrideSetting {
+    /**
+     * Series color or empty
+     */
+    color?: pulumi.Input<string>;
+    /**
+     * Stack grow down
+     */
+    growDown?: pulumi.Input<boolean>;
+    /**
+     * Series name or empty
+     */
+    name?: pulumi.Input<string>;
+    /**
+     * Stack name or empty
+     */
+    stackName?: pulumi.Input<string>;
+    /**
+     * Type
+     */
+    type?: pulumi.Input<string>;
+    /**
+     * Yaxis position
+     */
+    yaxisPosition?: pulumi.Input<string>;
+}
+
+export interface MonitoringDashboardWidgetChartVisualizationSetting {
+    /**
+     * Aggregation
+     */
+    aggregation?: pulumi.Input<string>;
+    /**
+     * Color scheme settings
+     */
+    colorSchemeSettings?: pulumi.Input<pulumi.Input<inputs.MonitoringDashboardWidgetChartVisualizationSettingColorSchemeSetting>[]>;
+    /**
+     * Heatmap settings
+     */
+    heatmapSettings?: pulumi.Input<pulumi.Input<inputs.MonitoringDashboardWidgetChartVisualizationSettingHeatmapSetting>[]>;
+    /**
+     * Interpolate
+     */
+    interpolate?: pulumi.Input<string>;
+    /**
+     * Normalize
+     */
+    normalize?: pulumi.Input<boolean>;
+    /**
+     * Show chart labels
+     */
+    showLabels?: pulumi.Input<boolean>;
+    /**
+     * Inside chart title
+     */
+    title?: pulumi.Input<string>;
+    /**
+     * Visualization type
+     */
+    type?: pulumi.Input<string>;
+    /**
+     * Y axis settings
+     */
+    yaxisSettings?: pulumi.Input<pulumi.Input<inputs.MonitoringDashboardWidgetChartVisualizationSettingYaxisSetting>[]>;
+}
+
+export interface MonitoringDashboardWidgetChartVisualizationSettingColorSchemeSetting {
+    /**
+     * Automatic color scheme
+     */
+    automatics?: pulumi.Input<pulumi.Input<inputs.MonitoringDashboardWidgetChartVisualizationSettingColorSchemeSettingAutomatic>[]>;
+    /**
+     * Gradient color scheme
+     */
+    gradients?: pulumi.Input<pulumi.Input<inputs.MonitoringDashboardWidgetChartVisualizationSettingColorSchemeSettingGradient>[]>;
+    /**
+     * Standard color scheme
+     */
+    standards?: pulumi.Input<pulumi.Input<inputs.MonitoringDashboardWidgetChartVisualizationSettingColorSchemeSettingStandard>[]>;
+}
+
+export interface MonitoringDashboardWidgetChartVisualizationSettingColorSchemeSettingAutomatic {
+}
+
+export interface MonitoringDashboardWidgetChartVisualizationSettingColorSchemeSettingGradient {
+    /**
+     * Gradient green value
+     */
+    greenValue?: pulumi.Input<string>;
+    /**
+     * Gradient red value
+     */
+    redValue?: pulumi.Input<string>;
+    /**
+     * Gradient violet_value
+     */
+    violetValue?: pulumi.Input<string>;
+    /**
+     * Gradient yellow value
+     */
+    yellowValue?: pulumi.Input<string>;
+}
+
+export interface MonitoringDashboardWidgetChartVisualizationSettingColorSchemeSettingStandard {
+}
+
+export interface MonitoringDashboardWidgetChartVisualizationSettingHeatmapSetting {
+    /**
+     * Heatmap green value
+     */
+    greenValue?: pulumi.Input<string>;
+    /**
+     * Heatmap red value
+     */
+    redValue?: pulumi.Input<string>;
+    /**
+     * Heatmap violet_value
+     */
+    violetValue?: pulumi.Input<string>;
+    /**
+     * Heatmap yellow value
+     */
+    yellowValue?: pulumi.Input<string>;
+}
+
+export interface MonitoringDashboardWidgetChartVisualizationSettingYaxisSetting {
+    /**
+     * Left Y axis settings
+     */
+    lefts?: pulumi.Input<pulumi.Input<inputs.MonitoringDashboardWidgetChartVisualizationSettingYaxisSettingLeft>[]>;
+    /**
+     * Right Y axis settings
+     */
+    rights?: pulumi.Input<pulumi.Input<inputs.MonitoringDashboardWidgetChartVisualizationSettingYaxisSettingRight>[]>;
+}
+
+export interface MonitoringDashboardWidgetChartVisualizationSettingYaxisSettingLeft {
+    /**
+     * Max value in extended number format or empty
+     */
+    max?: pulumi.Input<string>;
+    /**
+     * Min value in extended number format or empty
+     */
+    min?: pulumi.Input<string>;
+    /**
+     * Tick value precision (null as default, 0-7 in other cases)
+     */
+    precision?: pulumi.Input<number>;
+    /**
+     * Title or empty
+     */
+    title?: pulumi.Input<string>;
+    /**
+     * Type
+     */
+    type?: pulumi.Input<string>;
+    /**
+     * Unit format
+     */
+    unitFormat?: pulumi.Input<string>;
+}
+
+export interface MonitoringDashboardWidgetChartVisualizationSettingYaxisSettingRight {
+    /**
+     * Max value in extended number format or empty
+     */
+    max?: pulumi.Input<string>;
+    /**
+     * Min value in extended number format or empty
+     */
+    min?: pulumi.Input<string>;
+    /**
+     * Tick value precision (null as default, 0-7 in other cases)
+     */
+    precision?: pulumi.Input<number>;
+    /**
+     * Title or empty
+     */
+    title?: pulumi.Input<string>;
+    /**
+     * Type
+     */
+    type?: pulumi.Input<string>;
+    /**
+     * Unit format
+     */
+    unitFormat?: pulumi.Input<string>;
+}
+
+export interface MonitoringDashboardWidgetPosition {
+    /**
+     * Height.
+     */
+    h?: pulumi.Input<number>;
+    /**
+     * Weight.
+     */
+    w?: pulumi.Input<number>;
+    /**
+     * X-axis top-left corner coordinate.
+     */
+    x?: pulumi.Input<number>;
+    /**
+     * Y-axis top-left corner coordinate.
+     */
+    y?: pulumi.Input<number>;
+}
+
+export interface MonitoringDashboardWidgetText {
+    /**
+     * Widget text.
+     */
+    text?: pulumi.Input<string>;
+}
+
+export interface MonitoringDashboardWidgetTitle {
+    /**
+     * Title size.
+     * Title size. Values:
+     * - TITLE_SIZE_XS: Extra small size.
+     * - TITLE_SIZE_S: Small size.
+     * - TITLE_SIZE_M: Middle size.
+     * - TITLE_SIZE_L: Large size.
+     */
+    size?: pulumi.Input<string>;
+    /**
+     * Title text.
+     */
+    text: pulumi.Input<string>;
+}
+
+export interface OrganizationmanagerOsLoginSettingsSshCertificateSettings {
+    /**
+     * Enables or disables usage of SSH certificates signed by trusted Certification Authority (CA).
+     */
+    enabled?: pulumi.Input<boolean>;
+}
+
+export interface OrganizationmanagerOsLoginSettingsUserSshKeySettings {
+    /**
+     * If set to true subject is allowed to manage own ssh keys without having to be assigned specific permissions.
+     */
+    allowManageOwnKeys?: pulumi.Input<boolean>;
+    /**
+     * Enables or disables usage of ssh keys assigned to a specific subject.
+     */
+    enabled?: pulumi.Input<boolean>;
+}
+
+export interface OrganizationmanagerSamlFederationSecuritySettings {
+    /**
+     * Enable encrypted assertions.
+     */
+    encryptedAssertions?: pulumi.Input<boolean>;
+    /**
+     * Force authentication on session expiration
+     */
+    forceAuthn?: pulumi.Input<boolean>;
+}
+
+export interface ServerlessContainerConnectivity {
+    /**
+     * Network the revision will have access to.
+     */
+    networkId: pulumi.Input<string>;
+}
+
+export interface ServerlessContainerImage {
+    /**
+     * List of arguments for Yandex Cloud Serverless Container.
+     */
+    args?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * List of commands for Yandex Cloud Serverless Container.
+     */
+    commands?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Digest of image that will be deployed as Yandex Cloud Serverless Container. If presented, should be equal to digest that will be resolved at server side by URL. Container will be updated on digest change even if `image.0.url` stays the same. If field not specified then its value will be computed.
+     */
+    digest?: pulumi.Input<string>;
+    /**
+     * A set of key/value environment variable pairs for Yandex Cloud Serverless Container. Each key must begin with a letter (A-Z, a-z).
+     */
+    environment?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    /**
+     * URL of image that will be deployed as Yandex Cloud Serverless Container.
+     */
+    url: pulumi.Input<string>;
+    /**
+     * Working directory for Yandex Cloud Serverless Container.
+     */
+    workDir?: pulumi.Input<string>;
+}
+
+export interface ServerlessContainerLogOptions {
+    /**
+     * Is logging from container disabled.
+     */
+    disabled?: pulumi.Input<boolean>;
+    /**
+     * Log entries are written to default log group for specified folder.
+     */
+    folderId?: pulumi.Input<string>;
+    /**
+     * Log entries are written to specified log group.
+     */
+    logGroupId?: pulumi.Input<string>;
+    /**
+     * Minimum log entry level.
+     */
+    minLevel?: pulumi.Input<string>;
+}
+
+export interface ServerlessContainerMetadataOptions {
+    /**
+     * Enables access to AWS flavored metadata (IMDSv1). Values: `0` - default, `1` - enabled, `2` - disabled.
+     */
+    awsV1HttpEndpoint?: pulumi.Input<number>;
+    /**
+     * Enables access to GCE flavored metadata. Values: `0`- default, `1` - enabled, `2` - disabled.
+     */
+    gceHttpEndpoint?: pulumi.Input<number>;
+}
+
+export interface ServerlessContainerMount {
+    /**
+     * One of the available mount types. Disk available during the function execution time.
+     */
+    ephemeralDisk?: pulumi.Input<inputs.ServerlessContainerMountEphemeralDisk>;
+    /**
+     * Mount’s accessibility mode. Valid values are `ro` and `rw`.
+     */
+    mode?: pulumi.Input<string>;
+    /**
+     * Path inside the container to access the directory in which the target is mounted.
+     */
+    mountPointPath: pulumi.Input<string>;
+    /**
+     * Available mount types. Object storage as a mount.
+     */
+    objectStorage?: pulumi.Input<inputs.ServerlessContainerMountObjectStorage>;
+}
+
+export interface ServerlessContainerMountEphemeralDisk {
+    /**
+     * Block size of the ephemeral disk in KB.
+     */
+    blockSizeKb?: pulumi.Input<number>;
+    /**
+     * Size of the ephemeral disk in GB.
+     */
+    sizeGb: pulumi.Input<number>;
+}
+
+export interface ServerlessContainerMountObjectStorage {
+    /**
+     * Name of the mounting bucket.
+     */
+    bucket: pulumi.Input<string>;
+    /**
+     * Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted.
+     */
+    prefix?: pulumi.Input<string>;
+}
+
+export interface ServerlessContainerProvisionPolicy {
+    /**
+     * Minimum number of prepared instances that are always ready to serve requests.
+     */
+    minInstances: pulumi.Input<number>;
+}
+
+export interface ServerlessContainerRuntime {
+    /**
+     * Type of the runtime for Yandex Cloud Serverless Container. Valid values are `http` and `task`.
+     */
+    type: pulumi.Input<string>;
+}
+
+export interface ServerlessContainerSecret {
+    /**
+     * Container's environment variable in which secret's value will be stored. Must begin with a letter (A-Z, a-z).
+     */
+    environmentVariable: pulumi.Input<string>;
+    /**
+     * Secret's ID.
+     */
+    id: pulumi.Input<string>;
+    /**
+     * Secret's entries key which value will be stored in environment variable.
+     */
+    key: pulumi.Input<string>;
+    /**
+     * Secret's version ID.
+     */
+    versionId: pulumi.Input<string>;
+}
+
+export interface ServerlessContainerStorageMount {
+    /**
+     * Name of the mounting bucket.
+     */
+    bucket: pulumi.Input<string>;
+    /**
+     * Path inside the container to access the directory in which the bucket is mounted.
+     */
+    mountPointPath: pulumi.Input<string>;
+    /**
+     * Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted.
+     */
+    prefix?: pulumi.Input<string>;
+    /**
+     * Mount the bucket in read-only mode.
+     */
+    readOnly?: pulumi.Input<boolean>;
+}
+
+export interface ServerlessEventrouterConnectorYd {
+    /**
+     * Consumer name
+     */
+    consumer: pulumi.Input<string>;
+    /**
+     * Stream database
+     */
+    database: pulumi.Input<string>;
+    /**
+     * Service account which has read permission on the stream
+     */
+    serviceAccountId: pulumi.Input<string>;
+    /**
+     * Stream name, absolute or relative
+     */
+    streamName: pulumi.Input<string>;
+}
+
+export interface ServerlessEventrouterConnectorYmq {
+    /**
+     * Batch size for polling
+     */
+    batchSize?: pulumi.Input<number>;
+    /**
+     * Queue polling timeout
+     */
+    pollingTimeout?: pulumi.Input<string>;
+    /**
+     * Queue ARN. Example: yrn:yc:ymq:ru-central1:aoe***:test
+     */
+    queueArn: pulumi.Input<string>;
+    /**
+     * Service account which has read access to the queue
+     */
+    serviceAccountId: pulumi.Input<string>;
+    /**
+     * Queue visibility timeout override
+     */
+    visibilityTimeout?: pulumi.Input<string>;
+}
+
+export interface ServerlessEventrouterRuleContainer {
+    /**
+     * Batch settings
+     */
+    batchSettings?: pulumi.Input<inputs.ServerlessEventrouterRuleContainerBatchSettings>;
+    /**
+     * Container ID
+     */
+    containerId: pulumi.Input<string>;
+    /**
+     * Container revision ID
+     */
+    containerRevisionId?: pulumi.Input<string>;
+    /**
+     * Endpoint HTTP path to invoke
+     */
+    path?: pulumi.Input<string>;
+    /**
+     * Service account which should be used to call a container
+     */
+    serviceAccountId?: pulumi.Input<string>;
+}
+
+export interface ServerlessEventrouterRuleContainerBatchSettings {
+    /**
+     * Maximum batch size: rule will send a batch if its lifetime exceeds this value
+     */
+    cutoff: pulumi.Input<string>;
+    /**
+     * Maximum batch size: rule will send a batch if total size of events exceeds this value
+     */
+    maxBytes?: pulumi.Input<number>;
+    /**
+     * Maximum batch size: rule will send a batch if number of events exceeds this value
+     */
+    maxCount?: pulumi.Input<number>;
+}
+
+export interface ServerlessEventrouterRuleFunction {
+    /**
+     * Batch settings
+     */
+    batchSettings?: pulumi.Input<inputs.ServerlessEventrouterRuleFunctionBatchSettings>;
+    /**
+     * Function ID
+     */
+    functionId: pulumi.Input<string>;
+    /**
+     * Function tag
+     */
+    functionTag?: pulumi.Input<string>;
+    /**
+     * Service account which has call permission on the function
+     */
+    serviceAccountId?: pulumi.Input<string>;
+}
+
+export interface ServerlessEventrouterRuleFunctionBatchSettings {
+    /**
+     * Maximum batch size: rule will send a batch if its lifetime exceeds this value
+     */
+    cutoff: pulumi.Input<string>;
+    /**
+     * Maximum batch size: rule will send a batch if total size of events exceeds this value
+     */
+    maxBytes?: pulumi.Input<number>;
+    /**
+     * Maximum batch size: rule will send a batch if number of events exceeds this value
+     */
+    maxCount?: pulumi.Input<number>;
+}
+
+export interface ServerlessEventrouterRuleGatewayWebsocketBroadcast {
+    /**
+     * Batch settings
+     */
+    batchSettings?: pulumi.Input<inputs.ServerlessEventrouterRuleGatewayWebsocketBroadcastBatchSettings>;
+    /**
+     * Gateway ID
+     */
+    gatewayId: pulumi.Input<string>;
+    /**
+     * Path
+     */
+    path: pulumi.Input<string>;
+    /**
+     * Service account which has permission for writing to websockets
+     */
+    serviceAccountId: pulumi.Input<string>;
+}
+
+export interface ServerlessEventrouterRuleGatewayWebsocketBroadcastBatchSettings {
+    /**
+     * Maximum batch size: rule will send a batch if its lifetime exceeds this value
+     */
+    cutoff: pulumi.Input<string>;
+    /**
+     * Maximum batch size: rule will send a batch if total size of events exceeds this value
+     */
+    maxBytes?: pulumi.Input<number>;
+    /**
+     * Maximum batch size: rule will send a batch if number of events exceeds this value
+     */
+    maxCount?: pulumi.Input<number>;
+}
+
+export interface ServerlessEventrouterRuleLogging {
+    /**
+     * Folder ID
+     */
+    folderId?: pulumi.Input<string>;
+    /**
+     * Log group ID
+     */
+    logGroupId?: pulumi.Input<string>;
+    /**
+     * Service account which has permission for writing logs
+     */
+    serviceAccountId: pulumi.Input<string>;
+}
+
+export interface ServerlessEventrouterRuleWorkflow {
+    /**
+     * Batch settings
+     */
+    batchSettings?: pulumi.Input<inputs.ServerlessEventrouterRuleWorkflowBatchSettings>;
+    /**
+     * Service account which should be used to start workflow
+     */
+    serviceAccountId: pulumi.Input<string>;
+    /**
+     * Workflow ID
+     */
+    workflowId: pulumi.Input<string>;
+}
+
+export interface ServerlessEventrouterRuleWorkflowBatchSettings {
+    /**
+     * Maximum batch size: rule will send a batch if its lifetime exceeds this value
+     */
+    cutoff: pulumi.Input<string>;
+    /**
+     * Maximum batch size: rule will send a batch if total size of events exceeds this value
+     */
+    maxBytes?: pulumi.Input<number>;
+    /**
+     * Maximum batch size: rule will send a batch if number of events exceeds this value
+     */
+    maxCount?: pulumi.Input<number>;
+}
+
+export interface ServerlessEventrouterRuleYd {
+    /**
+     * Stream database
+     */
+    database: pulumi.Input<string>;
+    /**
+     * Service account, which has write permission on the stream
+     */
+    serviceAccountId: pulumi.Input<string>;
+    /**
+     * Full stream name, like /ru-central1/aoegtvhtp8ob********&#47;cc8004q4lbo6********&#47;test
+     */
+    streamName: pulumi.Input<string>;
+}
+
+export interface ServerlessEventrouterRuleYmq {
+    /**
+     * Queue ARN. Example: yrn:yc:ymq:ru-central1:aoe***:test
+     */
+    queueArn: pulumi.Input<string>;
+    /**
+     * Service account which has write access to the queue
+     */
+    serviceAccountId: pulumi.Input<string>;
+}
+
+export interface SmartcaptchaCaptchaOverrideVariant {
+    /**
+     * Additional task type of the captcha.
+     */
+    challengeType?: pulumi.Input<string>;
+    /**
+     * Complexity of the captcha.
+     */
+    complexity?: pulumi.Input<string>;
+    /**
+     * Optional description of the rule. 0-512 characters long.
+     */
+    description?: pulumi.Input<string>;
+    /**
+     * Basic check type of the captcha.
+     */
+    preCheckType?: pulumi.Input<string>;
+    /**
+     * Unique identifier of the variant.
+     */
+    uuid?: pulumi.Input<string>;
+}
+
+export interface SmartcaptchaCaptchaSecurityRule {
+    /**
+     * The condition for matching the rule. You can find all possibilities of condition in [gRPC specs](https://github.com/yandex-cloud/cloudapi/blob/master/yandex/cloud/smartcaptcha/v1/captcha.proto).
+     */
+    condition?: pulumi.Input<inputs.SmartcaptchaCaptchaSecurityRuleCondition>;
+    /**
+     * Description of the rule. 0-512 characters long.
+     */
+    description?: pulumi.Input<string>;
+    /**
+     * Name of the rule. The name is unique within the captcha. 1-50 characters long.
+     */
+    name?: pulumi.Input<string>;
+    /**
+     * Variant UUID to show in case of match the rule. Keep empty to use defaults.
+     */
+    overrideVariantUuid?: pulumi.Input<string>;
+    /**
+     * Priority of the rule. Lower value means higher priority.
+     */
+    priority?: pulumi.Input<number>;
+}
+
+export interface SmartcaptchaCaptchaSecurityRuleCondition {
+    headers?: pulumi.Input<pulumi.Input<inputs.SmartcaptchaCaptchaSecurityRuleConditionHeader>[]>;
+    host?: pulumi.Input<inputs.SmartcaptchaCaptchaSecurityRuleConditionHost>;
+    sourceIp?: pulumi.Input<inputs.SmartcaptchaCaptchaSecurityRuleConditionSourceIp>;
+    uri?: pulumi.Input<inputs.SmartcaptchaCaptchaSecurityRuleConditionUri>;
+}
+
+export interface SmartcaptchaCaptchaSecurityRuleConditionHeader {
+    name?: pulumi.Input<string>;
+    value: pulumi.Input<inputs.SmartcaptchaCaptchaSecurityRuleConditionHeaderValue>;
+}
+
+export interface SmartcaptchaCaptchaSecurityRuleConditionHeaderValue {
+    exactMatch?: pulumi.Input<string>;
+    exactNotMatch?: pulumi.Input<string>;
+    pireRegexMatch?: pulumi.Input<string>;
+    pireRegexNotMatch?: pulumi.Input<string>;
+    prefixMatch?: pulumi.Input<string>;
+    prefixNotMatch?: pulumi.Input<string>;
+}
+
+export interface SmartcaptchaCaptchaSecurityRuleConditionHost {
+    hosts?: pulumi.Input<pulumi.Input<inputs.SmartcaptchaCaptchaSecurityRuleConditionHostHost>[]>;
+}
+
+export interface SmartcaptchaCaptchaSecurityRuleConditionHostHost {
+    exactMatch?: pulumi.Input<string>;
+    exactNotMatch?: pulumi.Input<string>;
+    pireRegexMatch?: pulumi.Input<string>;
+    pireRegexNotMatch?: pulumi.Input<string>;
+    prefixMatch?: pulumi.Input<string>;
+    prefixNotMatch?: pulumi.Input<string>;
+}
+
+export interface SmartcaptchaCaptchaSecurityRuleConditionSourceIp {
+    geoIpMatch?: pulumi.Input<inputs.SmartcaptchaCaptchaSecurityRuleConditionSourceIpGeoIpMatch>;
+    geoIpNotMatch?: pulumi.Input<inputs.SmartcaptchaCaptchaSecurityRuleConditionSourceIpGeoIpNotMatch>;
+    ipRangesMatch?: pulumi.Input<inputs.SmartcaptchaCaptchaSecurityRuleConditionSourceIpIpRangesMatch>;
+    ipRangesNotMatch?: pulumi.Input<inputs.SmartcaptchaCaptchaSecurityRuleConditionSourceIpIpRangesNotMatch>;
+}
+
+export interface SmartcaptchaCaptchaSecurityRuleConditionSourceIpGeoIpMatch {
+    locations?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface SmartcaptchaCaptchaSecurityRuleConditionSourceIpGeoIpNotMatch {
+    locations?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface SmartcaptchaCaptchaSecurityRuleConditionSourceIpIpRangesMatch {
+    ipRanges?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface SmartcaptchaCaptchaSecurityRuleConditionSourceIpIpRangesNotMatch {
+    ipRanges?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface SmartcaptchaCaptchaSecurityRuleConditionUri {
+    path?: pulumi.Input<inputs.SmartcaptchaCaptchaSecurityRuleConditionUriPath>;
+    queries?: pulumi.Input<pulumi.Input<inputs.SmartcaptchaCaptchaSecurityRuleConditionUriQuery>[]>;
+}
+
+export interface SmartcaptchaCaptchaSecurityRuleConditionUriPath {
+    exactMatch?: pulumi.Input<string>;
+    exactNotMatch?: pulumi.Input<string>;
+    pireRegexMatch?: pulumi.Input<string>;
+    pireRegexNotMatch?: pulumi.Input<string>;
+    prefixMatch?: pulumi.Input<string>;
+    prefixNotMatch?: pulumi.Input<string>;
+}
+
+export interface SmartcaptchaCaptchaSecurityRuleConditionUriQuery {
+    key: pulumi.Input<string>;
+    value: pulumi.Input<inputs.SmartcaptchaCaptchaSecurityRuleConditionUriQueryValue>;
+}
+
+export interface SmartcaptchaCaptchaSecurityRuleConditionUriQueryValue {
+    exactMatch?: pulumi.Input<string>;
+    exactNotMatch?: pulumi.Input<string>;
+    pireRegexMatch?: pulumi.Input<string>;
+    pireRegexNotMatch?: pulumi.Input<string>;
+    prefixMatch?: pulumi.Input<string>;
+    prefixNotMatch?: pulumi.Input<string>;
+}
+
+export interface StorageBucketAnonymousAccessFlags {
+    configRead?: pulumi.Input<boolean>;
+    /**
+     * Allows to list object in bucket anonymously.
+     */
+    list?: pulumi.Input<boolean>;
+    /**
+     * Allows to read objects in bucket anonymously.
+     */
+    read?: pulumi.Input<boolean>;
+}
+
+export interface StorageBucketCorsRule {
+    /**
+     * Specifies which headers are allowed.
+     */
+    allowedHeaders?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Specifies which methods are allowed. Can be `GET`, `PUT`, `POST`, `DELETE` or `HEAD`.
+     */
+    allowedMethods: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Specifies which origins are allowed.
+     */
+    allowedOrigins: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Specifies expose header in the response.
+     */
+    exposeHeaders?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Specifies time in seconds that browser can cache the response for a preflight request.
+     */
+    maxAgeSeconds?: pulumi.Input<number>;
+}
+
+export interface StorageBucketGrant {
+    /**
+     * Canonical user id to grant for. Used only when type is `CanonicalUser`.
+     */
+    id?: pulumi.Input<string>;
+    /**
+     * List of permissions to apply for grantee. Valid values are `READ`, `WRITE`, `FULL_CONTROL`.
+     */
+    permissions: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Type of grantee to apply for. Valid values are `CanonicalUser` and `Group`.
+     */
+    type: pulumi.Input<string>;
+    /**
+     * URI address to grant for. Used only when type is Group.
+     */
+    uri?: pulumi.Input<string>;
+}
+
+export interface StorageBucketHttps {
+    /**
+     * Id of the certificate in Certificate Manager, that will be used for bucket.
+     */
+    certificateId: pulumi.Input<string>;
+}
+
+export interface StorageBucketLifecycleRule {
+    /**
+     * Specifies the number of days after initiating a multipart upload when the multipart upload must be completed.
+     */
+    abortIncompleteMultipartUploadDays?: pulumi.Input<number>;
+    /**
+     * Specifies lifecycle rule status.
+     */
+    enabled: pulumi.Input<boolean>;
+    /**
+     * Specifies a period in the object's expire.
+     */
+    expiration?: pulumi.Input<inputs.StorageBucketLifecycleRuleExpiration>;
+    /**
+     * Filter block identifies one or more objects to which the rule applies. A Filter must have exactly one of Prefix, Tag, or And specified. The filter supports options listed below.
+     *
+     * At least one of `abortIncompleteMultipartUploadDays`, `expiration`, `transition`, `noncurrentVersionExpiration`, `noncurrentVersionTransition` must be specified.
+     */
+    filter?: pulumi.Input<inputs.StorageBucketLifecycleRuleFilter>;
+    /**
+     * Unique identifier for the rule. Must be less than or equal to 255 characters in length.
+     */
+    id?: pulumi.Input<string>;
+    /**
+     * Specifies when noncurrent object versions expire.
+     */
+    noncurrentVersionExpiration?: pulumi.Input<inputs.StorageBucketLifecycleRuleNoncurrentVersionExpiration>;
+    /**
+     * Specifies when noncurrent object versions transitions.
+     */
+    noncurrentVersionTransitions?: pulumi.Input<pulumi.Input<inputs.StorageBucketLifecycleRuleNoncurrentVersionTransition>[]>;
+    /**
+     * Object key prefix identifying one or more objects to which the rule applies.
+     *
+     * @deprecated Use filter instead
+     */
+    prefix?: pulumi.Input<string>;
+    /**
+     * Specifies a period in the object's transitions.
+     */
+    transitions?: pulumi.Input<pulumi.Input<inputs.StorageBucketLifecycleRuleTransition>[]>;
+}
+
+export interface StorageBucketLifecycleRuleExpiration {
+    /**
+     * Specifies the date after which you want the corresponding action to take effect.
+     */
+    date?: pulumi.Input<string>;
+    /**
+     * Specifies the number of days after object creation when the specific rule action takes effect.
+     */
+    days?: pulumi.Input<number>;
+    /**
+     * n a versioned bucket (versioning-enabled or versioning-suspended bucket), you can add this element in the lifecycle configuration to direct Object Storage to delete expired object delete markers.
+     */
+    expiredObjectDeleteMarker?: pulumi.Input<boolean>;
+}
+
+export interface StorageBucketLifecycleRuleFilter {
+    /**
+     * A logical `and` operator applied to one or more filter parameters. It should be used when two or more of the above parameters are used.
+     */
+    and?: pulumi.Input<inputs.StorageBucketLifecycleRuleFilterAnd>;
+    /**
+     * Minimum object size to which the rule applies.
+     */
+    objectSizeGreaterThan?: pulumi.Input<number>;
+    /**
+     * Maximum object size to which the rule applies.
+     */
+    objectSizeLessThan?: pulumi.Input<number>;
+    /**
+     * Object key prefix identifying one or more objects to which the rule applies.
+     */
+    prefix?: pulumi.Input<string>;
+    /**
+     * A key and value pair for filtering objects. E.g.: `key=key1, value=value1`.
+     */
+    tag?: pulumi.Input<inputs.StorageBucketLifecycleRuleFilterTag>;
+}
+
+export interface StorageBucketLifecycleRuleFilterAnd {
+    /**
+     * Minimum object size to which the rule applies.
+     */
+    objectSizeGreaterThan?: pulumi.Input<number>;
+    /**
+     * Maximum object size to which the rule applies.
+     */
+    objectSizeLessThan?: pulumi.Input<number>;
+    /**
+     * Object key prefix identifying one or more objects to which the rule applies.
+     */
+    prefix?: pulumi.Input<string>;
+    /**
+     * The `tags` object for setting tags (or labels) for bucket. See [Tags](https://yandex.cloud/docs/storage/concepts/tags) for more information.
+     */
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+}
+
+export interface StorageBucketLifecycleRuleFilterTag {
+    key: pulumi.Input<string>;
+    value: pulumi.Input<string>;
+}
+
+export interface StorageBucketLifecycleRuleNoncurrentVersionExpiration {
+    /**
+     * Specifies the number of days noncurrent object versions expire.
+     */
+    days?: pulumi.Input<number>;
+}
+
+export interface StorageBucketLifecycleRuleNoncurrentVersionTransition {
+    /**
+     * Specifies the number of days noncurrent object versions transition.
+     */
+    days?: pulumi.Input<number>;
+    /**
+     * Specifies the storage class to which you want the noncurrent object versions to transition. Supported values: [`STANDARD_IA`, `COLD`, `ICE`].
+     */
+    storageClass: pulumi.Input<string>;
+}
+
+export interface StorageBucketLifecycleRuleTransition {
+    /**
+     * Specifies the date after which you want the corresponding action to take effect.
+     */
+    date?: pulumi.Input<string>;
+    /**
+     * Specifies the number of days after object creation when the specific rule action takes effect.
+     */
+    days?: pulumi.Input<number>;
+    /**
+     * Specifies the storage class to which you want the object to transition. Supported values: [`STANDARD_IA`, `COLD`, `ICE`].
+     */
+    storageClass: pulumi.Input<string>;
+}
+
+export interface StorageBucketLogging {
+    /**
+     * The name of the bucket that will receive the log objects.
+     */
+    targetBucket: pulumi.Input<string>;
+    /**
+     * To specify a key prefix for log objects.
+     */
+    targetPrefix?: pulumi.Input<string>;
+}
+
+export interface StorageBucketObjectLockConfiguration {
+    /**
+     * Enable object locking in a bucket. Require versioning to be enabled.
+     */
+    objectLockEnabled?: pulumi.Input<string>;
+    /**
+     * Specifies a default locking configuration for added objects. Require objectLockEnabled to be enabled.
+     */
+    rule?: pulumi.Input<inputs.StorageBucketObjectLockConfigurationRule>;
+}
+
+export interface StorageBucketObjectLockConfigurationRule {
+    /**
+     * Default retention object.
+     */
+    defaultRetention: pulumi.Input<inputs.StorageBucketObjectLockConfigurationRuleDefaultRetention>;
+}
+
+export interface StorageBucketObjectLockConfigurationRuleDefaultRetention {
+    /**
+     * Specifies a retention period in days after uploading an object version. It must be a positive integer. You can't set it simultaneously with `years`.
+     */
+    days?: pulumi.Input<number>;
+    /**
+     * Specifies a type of object lock. One of `["GOVERNANCE", "COMPLIANCE"]`.
+     */
+    mode: pulumi.Input<string>;
+    /**
+     * Specifies a retention period in years after uploading an object version. It must be a positive integer. You can't set it simultaneously with `days`.
+     */
+    years?: pulumi.Input<number>;
+}
+
+export interface StorageBucketServerSideEncryptionConfiguration {
+    /**
+     * A single object for server-side encryption by default configuration.
+     */
+    rule: pulumi.Input<inputs.StorageBucketServerSideEncryptionConfigurationRule>;
+}
+
+export interface StorageBucketServerSideEncryptionConfigurationRule {
+    /**
+     * A single object for setting server-side encryption by default.
+     */
+    applyServerSideEncryptionByDefault: pulumi.Input<inputs.StorageBucketServerSideEncryptionConfigurationRuleApplyServerSideEncryptionByDefault>;
+}
+
+export interface StorageBucketServerSideEncryptionConfigurationRuleApplyServerSideEncryptionByDefault {
+    /**
+     * The KMS master key ID used for the SSE-KMS encryption.
+     */
+    kmsMasterKeyId: pulumi.Input<string>;
+    /**
+     * The server-side encryption algorithm to use. Single valid value is `aws:kms`.
+     */
+    sseAlgorithm: pulumi.Input<string>;
+}
+
+export interface StorageBucketVersioning {
+    /**
+     * Enable versioning. Once you version-enable a bucket, it can never return to an unversioned state. You can, however, suspend versioning on that bucket.
+     */
+    enabled?: pulumi.Input<boolean>;
+}
+
+export interface StorageBucketWebsite {
+    /**
+     * An absolute path to the document to return in case of a 4XX error.
+     */
+    errorDocument?: pulumi.Input<string>;
+    /**
+     * Storage returns this index document when requests are made to the root domain or any of the subfolders (unless using `redirectAllRequestsTo`).
+     */
+    indexDocument?: pulumi.Input<string>;
+    /**
+     * A hostname to redirect all website requests for this bucket to. Hostname can optionally be prefixed with a protocol (`http://` or `https://`) to use when redirecting requests. The default is the protocol that is used in the original request.
+     */
+    redirectAllRequestsTo?: pulumi.Input<string>;
+    /**
+     * A JSON array containing [routing rules](https://yandex.cloud/docs/storage/s3/api-ref/hosting/upload#request-scheme) describing redirect behavior and when redirects are applied.
+     */
+    routingRules?: pulumi.Input<string>;
+}
+
+export interface SwsAdvancedRateLimiterProfileAdvancedRateLimiterRule {
+    /**
+     * Description of the rule. 0-512 characters long.
+     */
+    description?: pulumi.Input<string>;
+    /**
+     * This allows you to evaluate backend capabilities and find the optimum limit values. Requests will not be blocked in this mode.
+     */
+    dryRun?: pulumi.Input<boolean>;
+    /**
+     * Dynamic quota. Grouping requests by a certain attribute and limiting the number of groups.
+     */
+    dynamicQuota?: pulumi.Input<inputs.SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleDynamicQuota>;
+    /**
+     * Name of the rule. The name is unique within the ARL profile. 1-50 characters long.
+     */
+    name?: pulumi.Input<string>;
+    /**
+     * Determines the priority in case there are several matched rules. Enter an integer within the range of 1 and 999999. The rule priority must be unique within the entire ARL profile. A lower numeric value means a higher priority.
+     */
+    priority?: pulumi.Input<number>;
+    /**
+     * Static quota. Counting each request individually.
+     */
+    staticQuota?: pulumi.Input<inputs.SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleStaticQuota>;
+}
+
+export interface SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleDynamicQuota {
+    /**
+     * Action in case of exceeding this quota. Possible values: `DENY`.
+     */
+    action?: pulumi.Input<string>;
+    /**
+     * List of characteristics.
+     *
+     * > Exactly one characteristic specifier: `simpleCharacteristic` or `keyCharacteristic` should be specified.
+     */
+    characteristics?: pulumi.Input<pulumi.Input<inputs.SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleDynamicQuotaCharacteristic>[]>;
+    /**
+     * The condition for matching the rule. You can find all possibilities of condition in [gRPC specs](https://github.com/yandex-cloud/cloudapi/blob/master/yandex/cloud/smartwebsecurity/v1/security_profile.proto).
+     */
+    condition?: pulumi.Input<inputs.SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleDynamicQuotaCondition>;
+    /**
+     * Desired maximum number of requests per period.
+     */
+    limit?: pulumi.Input<number>;
+    /**
+     * Period of time in seconds.
+     */
+    period?: pulumi.Input<number>;
+}
+
+export interface SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleDynamicQuotaCharacteristic {
+    /**
+     * Determines case-sensitive or case-insensitive keys matching.
+     */
+    caseInsensitive?: pulumi.Input<boolean>;
+    /**
+     * Characteristic based on key match in the Query params, HTTP header, and HTTP cookie attributes. See [Rules](https://yandex.cloud/docs/smartwebsecurity/concepts/arl#requests-counting) for more details.
+     */
+    keyCharacteristic?: pulumi.Input<inputs.SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleDynamicQuotaCharacteristicKeyCharacteristic>;
+    /**
+     * Characteristic automatically based on the Request path, HTTP method, IP address, Region, and Host attributes. See [Rules](https://yandex.cloud/docs/smartwebsecurity/concepts/arl#requests-counting) for more details.
+     */
+    simpleCharacteristic?: pulumi.Input<inputs.SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleDynamicQuotaCharacteristicSimpleCharacteristic>;
+}
+
+export interface SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleDynamicQuotaCharacteristicKeyCharacteristic {
+    /**
+     * Type of key characteristic. Possible values: `COOKIE_KEY`, `HEADER_KEY`, `QUERY_KEY`.
+     */
+    type?: pulumi.Input<string>;
+    /**
+     * String value of the key.
+     */
+    value?: pulumi.Input<string>;
+}
+
+export interface SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleDynamicQuotaCharacteristicSimpleCharacteristic {
+    /**
+     * Type of simple characteristic. Possible values: `REQUEST_PATH`, `HTTP_METHOD`, `IP`, `GEO`, `HOST`.
+     */
+    type?: pulumi.Input<string>;
+}
+
+export interface SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleDynamicQuotaCondition {
+    authority?: pulumi.Input<inputs.SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleDynamicQuotaConditionAuthority>;
+    headers?: pulumi.Input<pulumi.Input<inputs.SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleDynamicQuotaConditionHeader>[]>;
+    httpMethod?: pulumi.Input<inputs.SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleDynamicQuotaConditionHttpMethod>;
+    requestUri?: pulumi.Input<inputs.SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleDynamicQuotaConditionRequestUri>;
+    sourceIp?: pulumi.Input<inputs.SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleDynamicQuotaConditionSourceIp>;
+}
+
+export interface SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleDynamicQuotaConditionAuthority {
+    authorities?: pulumi.Input<pulumi.Input<inputs.SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleDynamicQuotaConditionAuthorityAuthority>[]>;
+}
+
+export interface SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleDynamicQuotaConditionAuthorityAuthority {
+    exactMatch?: pulumi.Input<string>;
+    exactNotMatch?: pulumi.Input<string>;
+    pireRegexMatch?: pulumi.Input<string>;
+    pireRegexNotMatch?: pulumi.Input<string>;
+    prefixMatch?: pulumi.Input<string>;
+    prefixNotMatch?: pulumi.Input<string>;
+}
+
+export interface SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleDynamicQuotaConditionHeader {
+    name?: pulumi.Input<string>;
+    value: pulumi.Input<inputs.SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleDynamicQuotaConditionHeaderValue>;
+}
+
+export interface SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleDynamicQuotaConditionHeaderValue {
+    exactMatch?: pulumi.Input<string>;
+    exactNotMatch?: pulumi.Input<string>;
+    pireRegexMatch?: pulumi.Input<string>;
+    pireRegexNotMatch?: pulumi.Input<string>;
+    prefixMatch?: pulumi.Input<string>;
+    prefixNotMatch?: pulumi.Input<string>;
+}
+
+export interface SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleDynamicQuotaConditionHttpMethod {
+    httpMethods?: pulumi.Input<pulumi.Input<inputs.SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleDynamicQuotaConditionHttpMethodHttpMethod>[]>;
+}
+
+export interface SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleDynamicQuotaConditionHttpMethodHttpMethod {
+    exactMatch?: pulumi.Input<string>;
+    exactNotMatch?: pulumi.Input<string>;
+    pireRegexMatch?: pulumi.Input<string>;
+    pireRegexNotMatch?: pulumi.Input<string>;
+    prefixMatch?: pulumi.Input<string>;
+    prefixNotMatch?: pulumi.Input<string>;
+}
+
+export interface SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleDynamicQuotaConditionRequestUri {
+    path?: pulumi.Input<inputs.SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleDynamicQuotaConditionRequestUriPath>;
+    queries?: pulumi.Input<pulumi.Input<inputs.SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleDynamicQuotaConditionRequestUriQuery>[]>;
+}
+
+export interface SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleDynamicQuotaConditionRequestUriPath {
+    exactMatch?: pulumi.Input<string>;
+    exactNotMatch?: pulumi.Input<string>;
+    pireRegexMatch?: pulumi.Input<string>;
+    pireRegexNotMatch?: pulumi.Input<string>;
+    prefixMatch?: pulumi.Input<string>;
+    prefixNotMatch?: pulumi.Input<string>;
+}
+
+export interface SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleDynamicQuotaConditionRequestUriQuery {
+    key: pulumi.Input<string>;
+    value: pulumi.Input<inputs.SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleDynamicQuotaConditionRequestUriQueryValue>;
+}
+
+export interface SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleDynamicQuotaConditionRequestUriQueryValue {
+    exactMatch?: pulumi.Input<string>;
+    exactNotMatch?: pulumi.Input<string>;
+    pireRegexMatch?: pulumi.Input<string>;
+    pireRegexNotMatch?: pulumi.Input<string>;
+    prefixMatch?: pulumi.Input<string>;
+    prefixNotMatch?: pulumi.Input<string>;
+}
+
+export interface SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleDynamicQuotaConditionSourceIp {
+    geoIpMatch?: pulumi.Input<inputs.SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleDynamicQuotaConditionSourceIpGeoIpMatch>;
+    geoIpNotMatch?: pulumi.Input<inputs.SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleDynamicQuotaConditionSourceIpGeoIpNotMatch>;
+    ipRangesMatch?: pulumi.Input<inputs.SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleDynamicQuotaConditionSourceIpIpRangesMatch>;
+    ipRangesNotMatch?: pulumi.Input<inputs.SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleDynamicQuotaConditionSourceIpIpRangesNotMatch>;
+}
+
+export interface SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleDynamicQuotaConditionSourceIpGeoIpMatch {
+    locations?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleDynamicQuotaConditionSourceIpGeoIpNotMatch {
+    locations?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleDynamicQuotaConditionSourceIpIpRangesMatch {
+    ipRanges?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleDynamicQuotaConditionSourceIpIpRangesNotMatch {
+    ipRanges?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleStaticQuota {
+    /**
+     * Action in case of exceeding this quota. Possible values: `DENY`.
+     */
+    action?: pulumi.Input<string>;
+    /**
+     * The condition for matching the rule. You can find all possibilities of condition in [gRPC specs](https://github.com/yandex-cloud/cloudapi/blob/master/yandex/cloud/smartwebsecurity/v1/security_profile.proto).
+     */
+    condition?: pulumi.Input<inputs.SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleStaticQuotaCondition>;
+    /**
+     * Desired maximum number of requests per period.
+     */
+    limit?: pulumi.Input<number>;
+    /**
+     * Period of time in seconds.
+     */
+    period?: pulumi.Input<number>;
+}
+
+export interface SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleStaticQuotaCondition {
+    authority?: pulumi.Input<inputs.SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleStaticQuotaConditionAuthority>;
+    headers?: pulumi.Input<pulumi.Input<inputs.SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleStaticQuotaConditionHeader>[]>;
+    httpMethod?: pulumi.Input<inputs.SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleStaticQuotaConditionHttpMethod>;
+    requestUri?: pulumi.Input<inputs.SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleStaticQuotaConditionRequestUri>;
+    sourceIp?: pulumi.Input<inputs.SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleStaticQuotaConditionSourceIp>;
+}
+
+export interface SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleStaticQuotaConditionAuthority {
+    authorities?: pulumi.Input<pulumi.Input<inputs.SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleStaticQuotaConditionAuthorityAuthority>[]>;
+}
+
+export interface SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleStaticQuotaConditionAuthorityAuthority {
+    exactMatch?: pulumi.Input<string>;
+    exactNotMatch?: pulumi.Input<string>;
+    pireRegexMatch?: pulumi.Input<string>;
+    pireRegexNotMatch?: pulumi.Input<string>;
+    prefixMatch?: pulumi.Input<string>;
+    prefixNotMatch?: pulumi.Input<string>;
+}
+
+export interface SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleStaticQuotaConditionHeader {
+    name?: pulumi.Input<string>;
+    value: pulumi.Input<inputs.SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleStaticQuotaConditionHeaderValue>;
+}
+
+export interface SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleStaticQuotaConditionHeaderValue {
+    exactMatch?: pulumi.Input<string>;
+    exactNotMatch?: pulumi.Input<string>;
+    pireRegexMatch?: pulumi.Input<string>;
+    pireRegexNotMatch?: pulumi.Input<string>;
+    prefixMatch?: pulumi.Input<string>;
+    prefixNotMatch?: pulumi.Input<string>;
+}
+
+export interface SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleStaticQuotaConditionHttpMethod {
+    httpMethods?: pulumi.Input<pulumi.Input<inputs.SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleStaticQuotaConditionHttpMethodHttpMethod>[]>;
+}
+
+export interface SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleStaticQuotaConditionHttpMethodHttpMethod {
+    exactMatch?: pulumi.Input<string>;
+    exactNotMatch?: pulumi.Input<string>;
+    pireRegexMatch?: pulumi.Input<string>;
+    pireRegexNotMatch?: pulumi.Input<string>;
+    prefixMatch?: pulumi.Input<string>;
+    prefixNotMatch?: pulumi.Input<string>;
+}
+
+export interface SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleStaticQuotaConditionRequestUri {
+    path?: pulumi.Input<inputs.SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleStaticQuotaConditionRequestUriPath>;
+    queries?: pulumi.Input<pulumi.Input<inputs.SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleStaticQuotaConditionRequestUriQuery>[]>;
+}
+
+export interface SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleStaticQuotaConditionRequestUriPath {
+    exactMatch?: pulumi.Input<string>;
+    exactNotMatch?: pulumi.Input<string>;
+    pireRegexMatch?: pulumi.Input<string>;
+    pireRegexNotMatch?: pulumi.Input<string>;
+    prefixMatch?: pulumi.Input<string>;
+    prefixNotMatch?: pulumi.Input<string>;
+}
+
+export interface SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleStaticQuotaConditionRequestUriQuery {
+    key: pulumi.Input<string>;
+    value: pulumi.Input<inputs.SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleStaticQuotaConditionRequestUriQueryValue>;
+}
+
+export interface SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleStaticQuotaConditionRequestUriQueryValue {
+    exactMatch?: pulumi.Input<string>;
+    exactNotMatch?: pulumi.Input<string>;
+    pireRegexMatch?: pulumi.Input<string>;
+    pireRegexNotMatch?: pulumi.Input<string>;
+    prefixMatch?: pulumi.Input<string>;
+    prefixNotMatch?: pulumi.Input<string>;
+}
+
+export interface SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleStaticQuotaConditionSourceIp {
+    geoIpMatch?: pulumi.Input<inputs.SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleStaticQuotaConditionSourceIpGeoIpMatch>;
+    geoIpNotMatch?: pulumi.Input<inputs.SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleStaticQuotaConditionSourceIpGeoIpNotMatch>;
+    ipRangesMatch?: pulumi.Input<inputs.SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleStaticQuotaConditionSourceIpIpRangesMatch>;
+    ipRangesNotMatch?: pulumi.Input<inputs.SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleStaticQuotaConditionSourceIpIpRangesNotMatch>;
+}
+
+export interface SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleStaticQuotaConditionSourceIpGeoIpMatch {
+    locations?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleStaticQuotaConditionSourceIpGeoIpNotMatch {
+    locations?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleStaticQuotaConditionSourceIpIpRangesMatch {
+    ipRanges?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface SwsAdvancedRateLimiterProfileAdvancedRateLimiterRuleStaticQuotaConditionSourceIpIpRangesNotMatch {
+    ipRanges?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface SwsSecurityProfileSecurityRule {
+    /**
+     * Optional description of the rule. 0-512 characters long.
+     */
+    description?: pulumi.Input<string>;
+    /**
+     * This mode allows you to test your security profile or a single rule.
+     */
+    dryRun?: pulumi.Input<boolean>;
+    /**
+     * Name of the rule. The name is unique within the security profile. 1-50 characters long.
+     */
+    name?: pulumi.Input<string>;
+    /**
+     * Determines the priority for checking the incoming traffic.
+     */
+    priority?: pulumi.Input<number>;
+    /**
+     * Rule actions, see [Rule actions](https://yandex.cloud/en/docs/smartwebsecurity/concepts/rules#rule-action).
+     */
+    ruleCondition?: pulumi.Input<inputs.SwsSecurityProfileSecurityRuleRuleCondition>;
+    /**
+     * Smart Protection rule, see [Smart Protection rules](https://yandex.cloud/en/docs/smartwebsecurity/concepts/rules#smart-protection-rules).
+     */
+    smartProtection?: pulumi.Input<inputs.SwsSecurityProfileSecurityRuleSmartProtection>;
+    /**
+     * Web Application Firewall (WAF) rule, see [WAF rules](https://yandex.cloud/en/docs/smartwebsecurity/concepts/rules#waf-rules).
+     */
+    waf?: pulumi.Input<inputs.SwsSecurityProfileSecurityRuleWaf>;
+}
+
+export interface SwsSecurityProfileSecurityRuleRuleCondition {
+    /**
+     * Action to perform if this rule matched. Possible values: `ALLOW` or `DENY`.
+     */
+    action?: pulumi.Input<string>;
+    /**
+     * The condition for matching the rule. You can find all possibilities of condition in [gRPC specs](https://github.com/yandex-cloud/cloudapi/blob/master/yandex/cloud/smartwebsecurity/v1/security_profile.proto).
+     */
+    condition?: pulumi.Input<inputs.SwsSecurityProfileSecurityRuleRuleConditionCondition>;
+}
+
+export interface SwsSecurityProfileSecurityRuleRuleConditionCondition {
+    authority?: pulumi.Input<inputs.SwsSecurityProfileSecurityRuleRuleConditionConditionAuthority>;
+    headers?: pulumi.Input<pulumi.Input<inputs.SwsSecurityProfileSecurityRuleRuleConditionConditionHeader>[]>;
+    httpMethod?: pulumi.Input<inputs.SwsSecurityProfileSecurityRuleRuleConditionConditionHttpMethod>;
+    requestUri?: pulumi.Input<inputs.SwsSecurityProfileSecurityRuleRuleConditionConditionRequestUri>;
+    sourceIp?: pulumi.Input<inputs.SwsSecurityProfileSecurityRuleRuleConditionConditionSourceIp>;
+}
+
+export interface SwsSecurityProfileSecurityRuleRuleConditionConditionAuthority {
+    authorities?: pulumi.Input<pulumi.Input<inputs.SwsSecurityProfileSecurityRuleRuleConditionConditionAuthorityAuthority>[]>;
+}
+
+export interface SwsSecurityProfileSecurityRuleRuleConditionConditionAuthorityAuthority {
+    exactMatch?: pulumi.Input<string>;
+    exactNotMatch?: pulumi.Input<string>;
+    pireRegexMatch?: pulumi.Input<string>;
+    pireRegexNotMatch?: pulumi.Input<string>;
+    prefixMatch?: pulumi.Input<string>;
+    prefixNotMatch?: pulumi.Input<string>;
+}
+
+export interface SwsSecurityProfileSecurityRuleRuleConditionConditionHeader {
+    name?: pulumi.Input<string>;
+    value: pulumi.Input<inputs.SwsSecurityProfileSecurityRuleRuleConditionConditionHeaderValue>;
+}
+
+export interface SwsSecurityProfileSecurityRuleRuleConditionConditionHeaderValue {
+    exactMatch?: pulumi.Input<string>;
+    exactNotMatch?: pulumi.Input<string>;
+    pireRegexMatch?: pulumi.Input<string>;
+    pireRegexNotMatch?: pulumi.Input<string>;
+    prefixMatch?: pulumi.Input<string>;
+    prefixNotMatch?: pulumi.Input<string>;
+}
+
+export interface SwsSecurityProfileSecurityRuleRuleConditionConditionHttpMethod {
+    httpMethods?: pulumi.Input<pulumi.Input<inputs.SwsSecurityProfileSecurityRuleRuleConditionConditionHttpMethodHttpMethod>[]>;
+}
+
+export interface SwsSecurityProfileSecurityRuleRuleConditionConditionHttpMethodHttpMethod {
+    exactMatch?: pulumi.Input<string>;
+    exactNotMatch?: pulumi.Input<string>;
+    pireRegexMatch?: pulumi.Input<string>;
+    pireRegexNotMatch?: pulumi.Input<string>;
+    prefixMatch?: pulumi.Input<string>;
+    prefixNotMatch?: pulumi.Input<string>;
+}
+
+export interface SwsSecurityProfileSecurityRuleRuleConditionConditionRequestUri {
+    path?: pulumi.Input<inputs.SwsSecurityProfileSecurityRuleRuleConditionConditionRequestUriPath>;
+    queries?: pulumi.Input<pulumi.Input<inputs.SwsSecurityProfileSecurityRuleRuleConditionConditionRequestUriQuery>[]>;
+}
+
+export interface SwsSecurityProfileSecurityRuleRuleConditionConditionRequestUriPath {
+    exactMatch?: pulumi.Input<string>;
+    exactNotMatch?: pulumi.Input<string>;
+    pireRegexMatch?: pulumi.Input<string>;
+    pireRegexNotMatch?: pulumi.Input<string>;
+    prefixMatch?: pulumi.Input<string>;
+    prefixNotMatch?: pulumi.Input<string>;
+}
+
+export interface SwsSecurityProfileSecurityRuleRuleConditionConditionRequestUriQuery {
+    key: pulumi.Input<string>;
+    value: pulumi.Input<inputs.SwsSecurityProfileSecurityRuleRuleConditionConditionRequestUriQueryValue>;
+}
+
+export interface SwsSecurityProfileSecurityRuleRuleConditionConditionRequestUriQueryValue {
+    exactMatch?: pulumi.Input<string>;
+    exactNotMatch?: pulumi.Input<string>;
+    pireRegexMatch?: pulumi.Input<string>;
+    pireRegexNotMatch?: pulumi.Input<string>;
+    prefixMatch?: pulumi.Input<string>;
+    prefixNotMatch?: pulumi.Input<string>;
+}
+
+export interface SwsSecurityProfileSecurityRuleRuleConditionConditionSourceIp {
+    geoIpMatch?: pulumi.Input<inputs.SwsSecurityProfileSecurityRuleRuleConditionConditionSourceIpGeoIpMatch>;
+    geoIpNotMatch?: pulumi.Input<inputs.SwsSecurityProfileSecurityRuleRuleConditionConditionSourceIpGeoIpNotMatch>;
+    ipRangesMatch?: pulumi.Input<inputs.SwsSecurityProfileSecurityRuleRuleConditionConditionSourceIpIpRangesMatch>;
+    ipRangesNotMatch?: pulumi.Input<inputs.SwsSecurityProfileSecurityRuleRuleConditionConditionSourceIpIpRangesNotMatch>;
+}
+
+export interface SwsSecurityProfileSecurityRuleRuleConditionConditionSourceIpGeoIpMatch {
+    locations?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface SwsSecurityProfileSecurityRuleRuleConditionConditionSourceIpGeoIpNotMatch {
+    locations?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface SwsSecurityProfileSecurityRuleRuleConditionConditionSourceIpIpRangesMatch {
+    ipRanges?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface SwsSecurityProfileSecurityRuleRuleConditionConditionSourceIpIpRangesNotMatch {
+    ipRanges?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface SwsSecurityProfileSecurityRuleSmartProtection {
+    /**
+     * The condition for matching the rule. You can find all possibilities of condition in [gRPC specs](https://github.com/yandex-cloud/cloudapi/blob/master/yandex/cloud/smartwebsecurity/v1/security_profile.proto).
+     */
+    condition?: pulumi.Input<inputs.SwsSecurityProfileSecurityRuleSmartProtectionCondition>;
+    /**
+     * Mode of protection. Possible values: `FULL` (full protection means that the traffic will be checked based on ML models and behavioral analysis, with suspicious requests being sent to SmartCaptcha) or `API` (API protection means checking the traffic based on ML models and behavioral analysis without sending suspicious requests to SmartCaptcha. The suspicious requests will be blocked).
+     */
+    mode?: pulumi.Input<string>;
+}
+
+export interface SwsSecurityProfileSecurityRuleSmartProtectionCondition {
+    authority?: pulumi.Input<inputs.SwsSecurityProfileSecurityRuleSmartProtectionConditionAuthority>;
+    headers?: pulumi.Input<pulumi.Input<inputs.SwsSecurityProfileSecurityRuleSmartProtectionConditionHeader>[]>;
+    httpMethod?: pulumi.Input<inputs.SwsSecurityProfileSecurityRuleSmartProtectionConditionHttpMethod>;
+    requestUri?: pulumi.Input<inputs.SwsSecurityProfileSecurityRuleSmartProtectionConditionRequestUri>;
+    sourceIp?: pulumi.Input<inputs.SwsSecurityProfileSecurityRuleSmartProtectionConditionSourceIp>;
+}
+
+export interface SwsSecurityProfileSecurityRuleSmartProtectionConditionAuthority {
+    authorities?: pulumi.Input<pulumi.Input<inputs.SwsSecurityProfileSecurityRuleSmartProtectionConditionAuthorityAuthority>[]>;
+}
+
+export interface SwsSecurityProfileSecurityRuleSmartProtectionConditionAuthorityAuthority {
+    exactMatch?: pulumi.Input<string>;
+    exactNotMatch?: pulumi.Input<string>;
+    pireRegexMatch?: pulumi.Input<string>;
+    pireRegexNotMatch?: pulumi.Input<string>;
+    prefixMatch?: pulumi.Input<string>;
+    prefixNotMatch?: pulumi.Input<string>;
+}
+
+export interface SwsSecurityProfileSecurityRuleSmartProtectionConditionHeader {
+    name?: pulumi.Input<string>;
+    value: pulumi.Input<inputs.SwsSecurityProfileSecurityRuleSmartProtectionConditionHeaderValue>;
+}
+
+export interface SwsSecurityProfileSecurityRuleSmartProtectionConditionHeaderValue {
+    exactMatch?: pulumi.Input<string>;
+    exactNotMatch?: pulumi.Input<string>;
+    pireRegexMatch?: pulumi.Input<string>;
+    pireRegexNotMatch?: pulumi.Input<string>;
+    prefixMatch?: pulumi.Input<string>;
+    prefixNotMatch?: pulumi.Input<string>;
+}
+
+export interface SwsSecurityProfileSecurityRuleSmartProtectionConditionHttpMethod {
+    httpMethods?: pulumi.Input<pulumi.Input<inputs.SwsSecurityProfileSecurityRuleSmartProtectionConditionHttpMethodHttpMethod>[]>;
+}
+
+export interface SwsSecurityProfileSecurityRuleSmartProtectionConditionHttpMethodHttpMethod {
+    exactMatch?: pulumi.Input<string>;
+    exactNotMatch?: pulumi.Input<string>;
+    pireRegexMatch?: pulumi.Input<string>;
+    pireRegexNotMatch?: pulumi.Input<string>;
+    prefixMatch?: pulumi.Input<string>;
+    prefixNotMatch?: pulumi.Input<string>;
+}
+
+export interface SwsSecurityProfileSecurityRuleSmartProtectionConditionRequestUri {
+    path?: pulumi.Input<inputs.SwsSecurityProfileSecurityRuleSmartProtectionConditionRequestUriPath>;
+    queries?: pulumi.Input<pulumi.Input<inputs.SwsSecurityProfileSecurityRuleSmartProtectionConditionRequestUriQuery>[]>;
+}
+
+export interface SwsSecurityProfileSecurityRuleSmartProtectionConditionRequestUriPath {
+    exactMatch?: pulumi.Input<string>;
+    exactNotMatch?: pulumi.Input<string>;
+    pireRegexMatch?: pulumi.Input<string>;
+    pireRegexNotMatch?: pulumi.Input<string>;
+    prefixMatch?: pulumi.Input<string>;
+    prefixNotMatch?: pulumi.Input<string>;
+}
+
+export interface SwsSecurityProfileSecurityRuleSmartProtectionConditionRequestUriQuery {
+    key: pulumi.Input<string>;
+    value: pulumi.Input<inputs.SwsSecurityProfileSecurityRuleSmartProtectionConditionRequestUriQueryValue>;
+}
+
+export interface SwsSecurityProfileSecurityRuleSmartProtectionConditionRequestUriQueryValue {
+    exactMatch?: pulumi.Input<string>;
+    exactNotMatch?: pulumi.Input<string>;
+    pireRegexMatch?: pulumi.Input<string>;
+    pireRegexNotMatch?: pulumi.Input<string>;
+    prefixMatch?: pulumi.Input<string>;
+    prefixNotMatch?: pulumi.Input<string>;
+}
+
+export interface SwsSecurityProfileSecurityRuleSmartProtectionConditionSourceIp {
+    geoIpMatch?: pulumi.Input<inputs.SwsSecurityProfileSecurityRuleSmartProtectionConditionSourceIpGeoIpMatch>;
+    geoIpNotMatch?: pulumi.Input<inputs.SwsSecurityProfileSecurityRuleSmartProtectionConditionSourceIpGeoIpNotMatch>;
+    ipRangesMatch?: pulumi.Input<inputs.SwsSecurityProfileSecurityRuleSmartProtectionConditionSourceIpIpRangesMatch>;
+    ipRangesNotMatch?: pulumi.Input<inputs.SwsSecurityProfileSecurityRuleSmartProtectionConditionSourceIpIpRangesNotMatch>;
+}
+
+export interface SwsSecurityProfileSecurityRuleSmartProtectionConditionSourceIpGeoIpMatch {
+    locations?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface SwsSecurityProfileSecurityRuleSmartProtectionConditionSourceIpGeoIpNotMatch {
+    locations?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface SwsSecurityProfileSecurityRuleSmartProtectionConditionSourceIpIpRangesMatch {
+    ipRanges?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface SwsSecurityProfileSecurityRuleSmartProtectionConditionSourceIpIpRangesNotMatch {
+    ipRanges?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface SwsSecurityProfileSecurityRuleWaf {
+    /**
+     * The condition for matching the rule. You can find all possibilities of condition in [gRPC specs](https://github.com/yandex-cloud/cloudapi/blob/master/yandex/cloud/smartwebsecurity/v1/security_profile.proto).
+     */
+    condition?: pulumi.Input<inputs.SwsSecurityProfileSecurityRuleWafCondition>;
+    /**
+     * Mode of protection. Possible values: `FULL` (full protection means that the traffic will be checked based on ML models and behavioral analysis, with suspicious requests being sent to SmartCaptcha) or `API` (API protection means checking the traffic based on ML models and behavioral analysis without sending suspicious requests to SmartCaptcha. The suspicious requests will be blocked).
+     */
+    mode?: pulumi.Input<string>;
+    /**
+     * ID of WAF profile to use in this rule.
+     */
+    wafProfileId: pulumi.Input<string>;
+}
+
+export interface SwsSecurityProfileSecurityRuleWafCondition {
+    authority?: pulumi.Input<inputs.SwsSecurityProfileSecurityRuleWafConditionAuthority>;
+    headers?: pulumi.Input<pulumi.Input<inputs.SwsSecurityProfileSecurityRuleWafConditionHeader>[]>;
+    httpMethod?: pulumi.Input<inputs.SwsSecurityProfileSecurityRuleWafConditionHttpMethod>;
+    requestUri?: pulumi.Input<inputs.SwsSecurityProfileSecurityRuleWafConditionRequestUri>;
+    sourceIp?: pulumi.Input<inputs.SwsSecurityProfileSecurityRuleWafConditionSourceIp>;
+}
+
+export interface SwsSecurityProfileSecurityRuleWafConditionAuthority {
+    authorities?: pulumi.Input<pulumi.Input<inputs.SwsSecurityProfileSecurityRuleWafConditionAuthorityAuthority>[]>;
+}
+
+export interface SwsSecurityProfileSecurityRuleWafConditionAuthorityAuthority {
+    exactMatch?: pulumi.Input<string>;
+    exactNotMatch?: pulumi.Input<string>;
+    pireRegexMatch?: pulumi.Input<string>;
+    pireRegexNotMatch?: pulumi.Input<string>;
+    prefixMatch?: pulumi.Input<string>;
+    prefixNotMatch?: pulumi.Input<string>;
+}
+
+export interface SwsSecurityProfileSecurityRuleWafConditionHeader {
+    name?: pulumi.Input<string>;
+    value: pulumi.Input<inputs.SwsSecurityProfileSecurityRuleWafConditionHeaderValue>;
+}
+
+export interface SwsSecurityProfileSecurityRuleWafConditionHeaderValue {
+    exactMatch?: pulumi.Input<string>;
+    exactNotMatch?: pulumi.Input<string>;
+    pireRegexMatch?: pulumi.Input<string>;
+    pireRegexNotMatch?: pulumi.Input<string>;
+    prefixMatch?: pulumi.Input<string>;
+    prefixNotMatch?: pulumi.Input<string>;
+}
+
+export interface SwsSecurityProfileSecurityRuleWafConditionHttpMethod {
+    httpMethods?: pulumi.Input<pulumi.Input<inputs.SwsSecurityProfileSecurityRuleWafConditionHttpMethodHttpMethod>[]>;
+}
+
+export interface SwsSecurityProfileSecurityRuleWafConditionHttpMethodHttpMethod {
+    exactMatch?: pulumi.Input<string>;
+    exactNotMatch?: pulumi.Input<string>;
+    pireRegexMatch?: pulumi.Input<string>;
+    pireRegexNotMatch?: pulumi.Input<string>;
+    prefixMatch?: pulumi.Input<string>;
+    prefixNotMatch?: pulumi.Input<string>;
+}
+
+export interface SwsSecurityProfileSecurityRuleWafConditionRequestUri {
+    path?: pulumi.Input<inputs.SwsSecurityProfileSecurityRuleWafConditionRequestUriPath>;
+    queries?: pulumi.Input<pulumi.Input<inputs.SwsSecurityProfileSecurityRuleWafConditionRequestUriQuery>[]>;
+}
+
+export interface SwsSecurityProfileSecurityRuleWafConditionRequestUriPath {
+    exactMatch?: pulumi.Input<string>;
+    exactNotMatch?: pulumi.Input<string>;
+    pireRegexMatch?: pulumi.Input<string>;
+    pireRegexNotMatch?: pulumi.Input<string>;
+    prefixMatch?: pulumi.Input<string>;
+    prefixNotMatch?: pulumi.Input<string>;
+}
+
+export interface SwsSecurityProfileSecurityRuleWafConditionRequestUriQuery {
+    key: pulumi.Input<string>;
+    value: pulumi.Input<inputs.SwsSecurityProfileSecurityRuleWafConditionRequestUriQueryValue>;
+}
+
+export interface SwsSecurityProfileSecurityRuleWafConditionRequestUriQueryValue {
+    exactMatch?: pulumi.Input<string>;
+    exactNotMatch?: pulumi.Input<string>;
+    pireRegexMatch?: pulumi.Input<string>;
+    pireRegexNotMatch?: pulumi.Input<string>;
+    prefixMatch?: pulumi.Input<string>;
+    prefixNotMatch?: pulumi.Input<string>;
+}
+
+export interface SwsSecurityProfileSecurityRuleWafConditionSourceIp {
+    geoIpMatch?: pulumi.Input<inputs.SwsSecurityProfileSecurityRuleWafConditionSourceIpGeoIpMatch>;
+    geoIpNotMatch?: pulumi.Input<inputs.SwsSecurityProfileSecurityRuleWafConditionSourceIpGeoIpNotMatch>;
+    ipRangesMatch?: pulumi.Input<inputs.SwsSecurityProfileSecurityRuleWafConditionSourceIpIpRangesMatch>;
+    ipRangesNotMatch?: pulumi.Input<inputs.SwsSecurityProfileSecurityRuleWafConditionSourceIpIpRangesNotMatch>;
+}
+
+export interface SwsSecurityProfileSecurityRuleWafConditionSourceIpGeoIpMatch {
+    locations?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface SwsSecurityProfileSecurityRuleWafConditionSourceIpGeoIpNotMatch {
+    locations?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface SwsSecurityProfileSecurityRuleWafConditionSourceIpIpRangesMatch {
+    ipRanges?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface SwsSecurityProfileSecurityRuleWafConditionSourceIpIpRangesNotMatch {
+    ipRanges?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface SwsWafProfileAnalyzeRequestBody {
+    /**
+     * Possible to turn analyzer on and turn if off.
+     */
+    isEnabled?: pulumi.Input<boolean>;
+    /**
+     * Maximum size of body to pass to analyzer. In kilobytes.
+     */
+    sizeLimit?: pulumi.Input<number>;
+    /**
+     * Action to perform if maximum size of body exceeded. Possible values: `IGNORE` and `DENY`.
+     */
+    sizeLimitAction?: pulumi.Input<string>;
+}
+
+export interface SwsWafProfileCoreRuleSet {
+    /**
+     * Anomaly score. Enter an integer within the range of 2 and 10000. The higher this value, the more likely it is that the request that satisfies the rule is an attack. See [Rules](https://yandex.cloud/en/docs/smartwebsecurity/concepts/waf#anomaly) for more details.
+     */
+    inboundAnomalyScore?: pulumi.Input<number>;
+    /**
+     * Paranoia level. Enter an integer within the range of 1 and 4. Paranoia level classifies rules according to their aggression. The higher the paranoia level, the better your protection, but also the higher the probability of WAF false positives. See [Rules](https://yandex.cloud/en/docs/smartwebsecurity/concepts/waf#paranoia) for more details. NOTE: this option has no effect on enabling or disabling rules, it is used only as recommendation for user to enable all rules with paranoiaLevel <= this value.
+     */
+    paranoiaLevel?: pulumi.Input<number>;
+    ruleSet: pulumi.Input<inputs.SwsWafProfileCoreRuleSetRuleSet>;
+}
+
+export interface SwsWafProfileCoreRuleSetRuleSet {
+    name?: pulumi.Input<string>;
+    version: pulumi.Input<string>;
+}
+
+export interface SwsWafProfileExclusionRule {
+    condition?: pulumi.Input<inputs.SwsWafProfileExclusionRuleCondition>;
+    /**
+     * Description of the rule. 0-512 characters long.
+     */
+    description?: pulumi.Input<string>;
+    /**
+     * Exclude rules.
+     */
+    excludeRules: pulumi.Input<inputs.SwsWafProfileExclusionRuleExcludeRules>;
+    /**
+     * Records the fact that an exception rule is triggered.
+     */
+    logExcluded?: pulumi.Input<boolean>;
+    /**
+     * Name of exclusion rule.
+     */
+    name?: pulumi.Input<string>;
+}
+
+export interface SwsWafProfileExclusionRuleCondition {
+    authority?: pulumi.Input<inputs.SwsWafProfileExclusionRuleConditionAuthority>;
+    headers?: pulumi.Input<pulumi.Input<inputs.SwsWafProfileExclusionRuleConditionHeader>[]>;
+    httpMethod?: pulumi.Input<inputs.SwsWafProfileExclusionRuleConditionHttpMethod>;
+    requestUri?: pulumi.Input<inputs.SwsWafProfileExclusionRuleConditionRequestUri>;
+    sourceIp?: pulumi.Input<inputs.SwsWafProfileExclusionRuleConditionSourceIp>;
+}
+
+export interface SwsWafProfileExclusionRuleConditionAuthority {
+    authorities?: pulumi.Input<pulumi.Input<inputs.SwsWafProfileExclusionRuleConditionAuthorityAuthority>[]>;
+}
+
+export interface SwsWafProfileExclusionRuleConditionAuthorityAuthority {
+    exactMatch?: pulumi.Input<string>;
+    exactNotMatch?: pulumi.Input<string>;
+    pireRegexMatch?: pulumi.Input<string>;
+    pireRegexNotMatch?: pulumi.Input<string>;
+    prefixMatch?: pulumi.Input<string>;
+    prefixNotMatch?: pulumi.Input<string>;
+}
+
+export interface SwsWafProfileExclusionRuleConditionHeader {
+    name?: pulumi.Input<string>;
+    value: pulumi.Input<inputs.SwsWafProfileExclusionRuleConditionHeaderValue>;
+}
+
+export interface SwsWafProfileExclusionRuleConditionHeaderValue {
+    exactMatch?: pulumi.Input<string>;
+    exactNotMatch?: pulumi.Input<string>;
+    pireRegexMatch?: pulumi.Input<string>;
+    pireRegexNotMatch?: pulumi.Input<string>;
+    prefixMatch?: pulumi.Input<string>;
+    prefixNotMatch?: pulumi.Input<string>;
+}
+
+export interface SwsWafProfileExclusionRuleConditionHttpMethod {
+    httpMethods?: pulumi.Input<pulumi.Input<inputs.SwsWafProfileExclusionRuleConditionHttpMethodHttpMethod>[]>;
+}
+
+export interface SwsWafProfileExclusionRuleConditionHttpMethodHttpMethod {
+    exactMatch?: pulumi.Input<string>;
+    exactNotMatch?: pulumi.Input<string>;
+    pireRegexMatch?: pulumi.Input<string>;
+    pireRegexNotMatch?: pulumi.Input<string>;
+    prefixMatch?: pulumi.Input<string>;
+    prefixNotMatch?: pulumi.Input<string>;
+}
+
+export interface SwsWafProfileExclusionRuleConditionRequestUri {
+    path?: pulumi.Input<inputs.SwsWafProfileExclusionRuleConditionRequestUriPath>;
+    queries?: pulumi.Input<pulumi.Input<inputs.SwsWafProfileExclusionRuleConditionRequestUriQuery>[]>;
+}
+
+export interface SwsWafProfileExclusionRuleConditionRequestUriPath {
+    exactMatch?: pulumi.Input<string>;
+    exactNotMatch?: pulumi.Input<string>;
+    pireRegexMatch?: pulumi.Input<string>;
+    pireRegexNotMatch?: pulumi.Input<string>;
+    prefixMatch?: pulumi.Input<string>;
+    prefixNotMatch?: pulumi.Input<string>;
+}
+
+export interface SwsWafProfileExclusionRuleConditionRequestUriQuery {
+    key: pulumi.Input<string>;
+    value: pulumi.Input<inputs.SwsWafProfileExclusionRuleConditionRequestUriQueryValue>;
+}
+
+export interface SwsWafProfileExclusionRuleConditionRequestUriQueryValue {
+    exactMatch?: pulumi.Input<string>;
+    exactNotMatch?: pulumi.Input<string>;
+    pireRegexMatch?: pulumi.Input<string>;
+    pireRegexNotMatch?: pulumi.Input<string>;
+    prefixMatch?: pulumi.Input<string>;
+    prefixNotMatch?: pulumi.Input<string>;
+}
+
+export interface SwsWafProfileExclusionRuleConditionSourceIp {
+    geoIpMatch?: pulumi.Input<inputs.SwsWafProfileExclusionRuleConditionSourceIpGeoIpMatch>;
+    geoIpNotMatch?: pulumi.Input<inputs.SwsWafProfileExclusionRuleConditionSourceIpGeoIpNotMatch>;
+    ipRangesMatch?: pulumi.Input<inputs.SwsWafProfileExclusionRuleConditionSourceIpIpRangesMatch>;
+    ipRangesNotMatch?: pulumi.Input<inputs.SwsWafProfileExclusionRuleConditionSourceIpIpRangesNotMatch>;
+}
+
+export interface SwsWafProfileExclusionRuleConditionSourceIpGeoIpMatch {
+    locations?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface SwsWafProfileExclusionRuleConditionSourceIpGeoIpNotMatch {
+    locations?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface SwsWafProfileExclusionRuleConditionSourceIpIpRangesMatch {
+    ipRanges?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface SwsWafProfileExclusionRuleConditionSourceIpIpRangesNotMatch {
+    ipRanges?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface SwsWafProfileExclusionRuleExcludeRules {
+    /**
+     * Set this option true to exclude all rules.
+     */
+    excludeAll?: pulumi.Input<boolean>;
+    /**
+     * List of rules to exclude.
+     */
+    ruleIds?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface SwsWafProfileRule {
+    /**
+     * Determines is it rule blocking or not.
+     */
+    isBlocking?: pulumi.Input<boolean>;
+    /**
+     * Determines is it rule enabled or not.
+     */
+    isEnabled?: pulumi.Input<boolean>;
+    /**
+     * Rule ID.
+     */
+    ruleId: pulumi.Input<string>;
+}
+
+export interface VpcAddressDnsRecord {
+    /**
+     * DNS zone id to create record at.
+     */
+    dnsZoneId: pulumi.Input<string>;
+    /**
+     * FQDN for record to address.
+     */
+    fqdn: pulumi.Input<string>;
+    /**
+     * If PTR record is needed.
+     */
+    ptr?: pulumi.Input<boolean>;
+    /**
+     * TTL of DNS record.
+     */
+    ttl?: pulumi.Input<number>;
+}
+
+export interface VpcAddressExternalIpv4Address {
+    /**
+     * Allocated IP address.
+     */
+    address?: pulumi.Input<string>;
+    /**
+     * Enable DDOS protection. Possible values are: `qrator`
+     */
+    ddosProtectionProvider?: pulumi.Input<string>;
+    /**
+     * Wanted outgoing smtp capability.
+     */
+    outgoingSmtpCapability?: pulumi.Input<string>;
+    /**
+     * The [availability zone](https://yandex.cloud/docs/overview/concepts/geo-scope) where resource is located. If it is not provided, the default provider zone will be used.
+     */
+    zoneId?: pulumi.Input<string>;
+}
+
+export interface VpcDefaultSecurityGroupEgress {
+    /**
+     * Description of the rule.
+     */
+    description?: pulumi.Input<string>;
+    /**
+     * Minimum port number.
+     */
+    fromPort?: pulumi.Input<number>;
+    /**
+     * The resource identifier.
+     */
+    id?: pulumi.Input<string>;
+    /**
+     * Labels to assign to this rule.
+     */
+    labels?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    /**
+     * Port number (if applied to a single port).
+     */
+    port?: pulumi.Input<number>;
+    /**
+     * Special-purpose targets. `selfSecurityGroup` refers to this particular security group. `loadbalancerHealthchecks` represents [loadbalancer health check nodes](https://yandex.cloud/docs/network-load-balancer/concepts/health-check).
+     */
+    predefinedTarget?: pulumi.Input<string>;
+    /**
+     * One of `ANY`, `TCP`, `UDP`, `ICMP`, `IPV6_ICMP`.
+     */
+    protocol: pulumi.Input<string>;
+    /**
+     * Target security group ID for this rule.
+     */
+    securityGroupId?: pulumi.Input<string>;
+    /**
+     * Maximum port number.
+     */
+    toPort?: pulumi.Input<number>;
+    /**
+     * The blocks of IPv4 addresses for this rule.
+     */
+    v4CidrBlocks?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The blocks of IPv6 addresses for this rule. `v6CidrBlocks` argument is currently not supported. It will be available in the future.
+     */
+    v6CidrBlocks?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface VpcDefaultSecurityGroupIngress {
+    /**
+     * Description of the rule.
+     */
+    description?: pulumi.Input<string>;
+    /**
+     * Minimum port number.
+     */
+    fromPort?: pulumi.Input<number>;
+    /**
+     * The resource identifier.
+     */
+    id?: pulumi.Input<string>;
+    /**
+     * Labels to assign to this rule.
+     */
+    labels?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    /**
+     * Port number (if applied to a single port).
+     */
+    port?: pulumi.Input<number>;
+    /**
+     * Special-purpose targets. `selfSecurityGroup` refers to this particular security group. `loadbalancerHealthchecks` represents [loadbalancer health check nodes](https://yandex.cloud/docs/network-load-balancer/concepts/health-check).
+     */
+    predefinedTarget?: pulumi.Input<string>;
+    /**
+     * One of `ANY`, `TCP`, `UDP`, `ICMP`, `IPV6_ICMP`.
+     */
+    protocol: pulumi.Input<string>;
+    /**
+     * Target security group ID for this rule.
+     */
+    securityGroupId?: pulumi.Input<string>;
+    /**
+     * Maximum port number.
+     */
+    toPort?: pulumi.Input<number>;
+    /**
+     * The blocks of IPv4 addresses for this rule.
+     */
+    v4CidrBlocks?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The blocks of IPv6 addresses for this rule. `v6CidrBlocks` argument is currently not supported. It will be available in the future.
+     */
+    v6CidrBlocks?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface VpcGatewaySharedEgressGateway {
+}
+
+export interface VpcPrivateEndpointDnsOptions {
+    /**
+     * If enabled - additional service DNS will be created.
+     */
+    privateDnsRecordsEnabled?: pulumi.Input<boolean>;
+}
+
+export interface VpcPrivateEndpointEndpointAddress {
+    /**
+     * Specifies IP address within `subnetId`.
+     */
+    address?: pulumi.Input<string>;
+    /**
+     * ID of the address.
+     */
+    addressId?: pulumi.Input<string>;
+    /**
+     * Subnet of the IP address.
+     */
+    subnetId?: pulumi.Input<string>;
+}
+
+export interface VpcPrivateEndpointObjectStorage {
+}
+
+export interface VpcRouteTableStaticRoute {
+    /**
+     * Route prefix in CIDR notation.
+     */
+    destinationPrefix?: pulumi.Input<string>;
+    /**
+     * ID of the gateway used ad next hop.
+     */
+    gatewayId?: pulumi.Input<string>;
+    /**
+     * Address of the next hop.
+     */
+    nextHopAddress?: pulumi.Input<string>;
+}
+
+export interface VpcSecurityGroupEgress {
+    /**
+     * Description of the rule.
+     */
+    description?: pulumi.Input<string>;
+    /**
+     * Minimum port number.
+     */
+    fromPort?: pulumi.Input<number>;
+    /**
+     * The resource identifier.
+     */
+    id?: pulumi.Input<string>;
+    /**
+     * Labels to assign to this rule.
+     */
+    labels?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    /**
+     * Port number (if applied to a single port).
+     */
+    port?: pulumi.Input<number>;
+    /**
+     * Special-purpose targets. `selfSecurityGroup` refers to this particular security group. `loadbalancerHealthchecks` represents [loadbalancer health check nodes](https://yandex.cloud/docs/network-load-balancer/concepts/health-check).
+     */
+    predefinedTarget?: pulumi.Input<string>;
+    /**
+     * One of `ANY`, `TCP`, `UDP`, `ICMP`, `IPV6_ICMP`.
+     */
+    protocol: pulumi.Input<string>;
+    /**
+     * Target security group ID for this rule.
+     */
+    securityGroupId?: pulumi.Input<string>;
+    /**
+     * Maximum port number.
+     */
+    toPort?: pulumi.Input<number>;
+    /**
+     * The blocks of IPv4 addresses for this rule.
+     */
+    v4CidrBlocks?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The blocks of IPv6 addresses for this rule. `v6CidrBlocks` argument is currently not supported. It will be available in the future.
+     */
+    v6CidrBlocks?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface VpcSecurityGroupIngress {
+    /**
+     * Description of the rule.
+     */
+    description?: pulumi.Input<string>;
+    /**
+     * Minimum port number.
+     */
+    fromPort?: pulumi.Input<number>;
+    /**
+     * The resource identifier.
+     */
+    id?: pulumi.Input<string>;
+    /**
+     * Labels to assign to this rule.
+     */
+    labels?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    /**
+     * Port number (if applied to a single port).
+     */
+    port?: pulumi.Input<number>;
+    /**
+     * Special-purpose targets. `selfSecurityGroup` refers to this particular security group. `loadbalancerHealthchecks` represents [loadbalancer health check nodes](https://yandex.cloud/docs/network-load-balancer/concepts/health-check).
+     */
+    predefinedTarget?: pulumi.Input<string>;
+    /**
+     * One of `ANY`, `TCP`, `UDP`, `ICMP`, `IPV6_ICMP`.
+     */
+    protocol: pulumi.Input<string>;
+    /**
+     * Target security group ID for this rule.
+     */
+    securityGroupId?: pulumi.Input<string>;
+    /**
+     * Maximum port number.
+     */
+    toPort?: pulumi.Input<number>;
+    /**
+     * The blocks of IPv4 addresses for this rule.
+     */
+    v4CidrBlocks?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The blocks of IPv6 addresses for this rule. `v6CidrBlocks` argument is currently not supported. It will be available in the future.
+     */
+    v6CidrBlocks?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface VpcSubnetDhcpOptions {
+    /**
+     * Domain name.
+     */
+    domainName?: pulumi.Input<string>;
+    /**
+     * Domain name server IP addresses.
+     */
+    domainNameServers?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * NTP server IP addresses.
+     */
+    ntpServers?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface YdbDatabaseDedicatedLocation {
+    /**
+     * Region for the Yandex Database cluster.
+     */
+    region?: pulumi.Input<inputs.YdbDatabaseDedicatedLocationRegion>;
+}
+
+export interface YdbDatabaseDedicatedLocationRegion {
+    /**
+     * Region ID for the Yandex Database cluster.
+     */
+    id: pulumi.Input<string>;
+}
+
+export interface YdbDatabaseDedicatedScalePolicy {
+    /**
+     * Fixed scaling policy for the Yandex Database cluster.
+     */
+    fixedScale: pulumi.Input<inputs.YdbDatabaseDedicatedScalePolicyFixedScale>;
+}
+
+export interface YdbDatabaseDedicatedScalePolicyFixedScale {
+    /**
+     * Number of instances for the Yandex Database cluster.
+     */
+    size: pulumi.Input<number>;
+}
+
+export interface YdbDatabaseDedicatedStorageConfig {
+    /**
+     * Amount of storage groups of selected type for the Yandex Database cluster.
+     */
+    groupCount: pulumi.Input<number>;
+    /**
+     * Storage type ID for the Yandex Database cluster. Available presets can be obtained via `yc ydb storage-type list` command.
+     */
+    storageTypeId: pulumi.Input<string>;
+}
+
+export interface YdbDatabaseServerlessServerlessDatabase {
+    enableThrottlingRcuLimit?: pulumi.Input<boolean>;
+    provisionedRcuLimit?: pulumi.Input<number>;
+    storageSizeLimit?: pulumi.Input<number>;
+    throttlingRcuLimit?: pulumi.Input<number>;
+}
+
+export interface YdbTableChangefeedConsumer {
+    important?: pulumi.Input<boolean>;
+    name: pulumi.Input<string>;
+    startingMessageTimestampMs?: pulumi.Input<number>;
+    supportedCodecs?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface YdbTableColumn {
+    family?: pulumi.Input<string>;
+    name: pulumi.Input<string>;
+    notNull?: pulumi.Input<boolean>;
+    type: pulumi.Input<string>;
+}
+
+export interface YdbTableFamily {
+    compression: pulumi.Input<string>;
+    data: pulumi.Input<string>;
+    name: pulumi.Input<string>;
+}
+
+export interface YdbTablePartitioningSettings {
+    autoPartitioningByLoad?: pulumi.Input<boolean>;
+    autoPartitioningBySizeEnabled?: pulumi.Input<boolean>;
+    autoPartitioningMaxPartitionsCount?: pulumi.Input<number>;
+    autoPartitioningMinPartitionsCount?: pulumi.Input<number>;
+    autoPartitioningPartitionSizeMb?: pulumi.Input<number>;
+    partitionAtKeys?: pulumi.Input<pulumi.Input<inputs.YdbTablePartitioningSettingsPartitionAtKey>[]>;
+    uniformPartitions?: pulumi.Input<number>;
+}
+
+export interface YdbTablePartitioningSettingsPartitionAtKey {
+    keys: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface YdbTableTtl {
+    columnName: pulumi.Input<string>;
+    expireInterval: pulumi.Input<string>;
+    unit?: pulumi.Input<string>;
+}
+
+export interface YdbTopicConsumer {
+    important?: pulumi.Input<boolean>;
+    name: pulumi.Input<string>;
+    startingMessageTimestampMs?: pulumi.Input<number>;
+    supportedCodecs?: pulumi.Input<pulumi.Input<string>[]>;
+}

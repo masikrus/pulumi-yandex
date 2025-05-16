@@ -1,13 +1,13 @@
 {
-    "name": "@pulumi/xyz",
-    "version": "1.0.0-alpha.0+dev",
-    "description": "A Pulumi package for creating and managing xyz cloud resources.",
+    "name": "pulumi-yandex",
+    "version": "1.0.0",
+    "description": "A Pulumi package for creating and managing yandex cloud resources.",
     "keywords": [
-        "xyz",
+        "yandex",
         "category/cloud"
     ],
     "homepage": "https://www.pulumi.com",
-    "repository": "https://github.com/pulumi/pulumi-xyz",
+    "repository": "https://github.com/masikrus/pulumi-yandex",
     "license": "Apache-2.0",
     "scripts": {
         "build": "tsc"
@@ -21,7 +21,7 @@
     },
     "pulumi": {
         "resource": true,
-        "name": "xyz",
-        "version": "1.0.0-alpha.0+dev"
+        "name": "yandex",
+        "version": "1.0.0"
     }
 }

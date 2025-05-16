@@ -2,21 +2,238 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import * as inputs from "../types/input";
-import * as outputs from "../types/output";
-import * as enums from "../types/enums";
 import * as utilities from "../utilities";
 
 declare var exports: any;
-const __config = new pulumi.Config("xyz");
+const __config = new pulumi.Config("yandex");
 
 /**
- * A region which should be used.
+ * The ID of the [Cloud](https://yandex.cloud/docs/resource-manager/concepts/resources-hierarchy#cloud) to apply any
+ * resources to. This can also be specified using environment variable `YC_CLOUD_ID`.
  */
-export declare const region: enums.region.Region | undefined;
-Object.defineProperty(exports, "region", {
+export declare const cloudId: string | undefined;
+Object.defineProperty(exports, "cloudId", {
     get() {
-        return __config.getObject<enums.region.Region>("region");
+        return __config.get("cloudId");
+    },
+    enumerable: true,
+});
+
+/**
+ * The endpoint for API calls, default value is **api.cloud.yandex.net:443**. This can also be defined by environment
+ * variable `YC_ENDPOINT`.
+ */
+export declare const endpoint: string | undefined;
+Object.defineProperty(exports, "endpoint", {
+    get() {
+        return __config.get("endpoint");
+    },
+    enumerable: true,
+});
+
+/**
+ * The ID of the [Folder](https://yandex.cloud/docs/resource-manager/concepts/resources-hierarchy#folder) to operate under,
+ * if not specified by a given resource. This can also be specified using environment variable `YC_FOLDER_ID`.
+ */
+export declare const folderId: string | undefined;
+Object.defineProperty(exports, "folderId", {
+    get() {
+        return __config.get("folderId");
+    },
+    enumerable: true,
+});
+
+/**
+ * Explicitly allow the provider to perform "insecure" SSL requests. If omitted, default value is `false`.
+ */
+export declare const insecure: boolean | undefined;
+Object.defineProperty(exports, "insecure", {
+    get() {
+        return __config.getObject<boolean>("insecure");
+    },
+    enumerable: true,
+});
+
+/**
+ * This is the maximum number of times an API call is retried, in the case where requests are being throttled or
+ * experiencing transient failures. The delay between the subsequent API calls increases exponentially.
+ */
+export declare const maxRetries: number | undefined;
+Object.defineProperty(exports, "maxRetries", {
+    get() {
+        return __config.getObject<number>("maxRetries");
+    },
+    enumerable: true,
+});
+
+/**
+ * The ID of the [Cloud Organization](https://yandex.cloud/docs/organization/quickstart) to operate under.
+ */
+export declare const organizationId: string | undefined;
+Object.defineProperty(exports, "organizationId", {
+    get() {
+        return __config.get("organizationId");
+    },
+    enumerable: true,
+});
+
+/**
+ * Disable use of TLS. Default value is `false`.
+ */
+export declare const plaintext: boolean | undefined;
+Object.defineProperty(exports, "plaintext", {
+    get() {
+        return __config.getObject<boolean>("plaintext");
+    },
+    enumerable: true,
+});
+
+/**
+ * Profile name to use in the shared credentials file. Default value is `default`.
+ */
+export declare const profile: string | undefined;
+Object.defineProperty(exports, "profile", {
+    get() {
+        return __config.get("profile");
+    },
+    enumerable: true,
+});
+
+/**
+ * [The region](https://yandex.cloud/docs/overview/concepts/region) where operations will take place. For example
+ * `ru-central1`.
+ */
+export declare const regionId: string | undefined;
+Object.defineProperty(exports, "regionId", {
+    get() {
+        return __config.get("regionId");
+    },
+    enumerable: true,
+});
+
+/**
+ * Contains either a path to or the contents of the [Service Account
+ * file](https://yandex.cloud/docs/iam/concepts/authorization/key) in JSON format. This can also be specified using
+ * environment variable `YC_SERVICE_ACCOUNT_KEY_FILE`. You can read how to create service account key file
+ * [here](https://yandex.cloud/docs/iam/operations/iam-token/create-for-sa#keys-create). > Only one of `token` or
+ * `serviceAccountKeyFile` must be specified. > One can authenticate via instance service account from inside a compute
+ * instance. In order to use this method, omit both `token`/`serviceAccountKeyFile` and attach service account to the
+ * instance. [Working with Yandex Cloud from inside an
+ * instance](https://yandex.cloud/docs/compute/operations/vm-connect/auth-inside-vm).
+ */
+export declare const serviceAccountKeyFile: string | undefined;
+Object.defineProperty(exports, "serviceAccountKeyFile", {
+    get() {
+        return __config.get("serviceAccountKeyFile");
+    },
+    enumerable: true,
+});
+
+/**
+ * Shared credentials file path. Supported keys: `storageAccessKey` and `storageSecretKey`. > The `storageAccessKey` and
+ * `storageSecretKey` attributes from the shared credentials file are used only when the provider and a storage
+ * data/resource do not have an access/secret keys explicitly specified.
+ */
+export declare const sharedCredentialsFile: string | undefined;
+Object.defineProperty(exports, "sharedCredentialsFile", {
+    get() {
+        return __config.get("sharedCredentialsFile");
+    },
+    enumerable: true,
+});
+
+/**
+ * Yandex Cloud Object Storage access key, which is used when a storage data/resource doesn't have an access key explicitly
+ * specified. This can also be specified using environment variable `YC_STORAGE_ACCESS_KEY`.
+ */
+export declare const storageAccessKey: string | undefined;
+Object.defineProperty(exports, "storageAccessKey", {
+    get() {
+        return __config.get("storageAccessKey");
+    },
+    enumerable: true,
+});
+
+/**
+ * Yandex Cloud [Object Storage Endpoint](https://yandex.cloud/docs/storage/s3/#request-url), which is used to connect to
+ * `S3 API`. Default value is **storage.yandexcloud.net**.
+ */
+export declare const storageEndpoint: string | undefined;
+Object.defineProperty(exports, "storageEndpoint", {
+    get() {
+        return __config.get("storageEndpoint");
+    },
+    enumerable: true,
+});
+
+/**
+ * Yandex Cloud Object Storage secret key, which is used when a storage data/resource doesn't have a secret key explicitly
+ * specified. This can also be specified using environment variable `YC_STORAGE_SECRET_KEY`.
+ */
+export declare const storageSecretKey: string | undefined;
+Object.defineProperty(exports, "storageSecretKey", {
+    get() {
+        return __config.get("storageSecretKey");
+    },
+    enumerable: true,
+});
+
+/**
+ * Security token or IAM token used for authentication in Yandex Cloud. Check
+ * [documentation](https://yandex.cloud/docs/iam/operations/iam-token/create) about how to create IAM token. This can also
+ * be specified using environment variable `YC_TOKEN`.
+ */
+export declare const token: string | undefined;
+Object.defineProperty(exports, "token", {
+    get() {
+        return __config.get("token");
+    },
+    enumerable: true,
+});
+
+/**
+ * Yandex Cloud Message Queue service access key, which is used when a YMQ queue resource doesn't have an access key
+ * explicitly specified. This can also be specified using environment variable `YC_MESSAGE_QUEUE_ACCESS_KEY`.
+ */
+export declare const ymqAccessKey: string | undefined;
+Object.defineProperty(exports, "ymqAccessKey", {
+    get() {
+        return __config.get("ymqAccessKey");
+    },
+    enumerable: true,
+});
+
+/**
+ * Yandex Cloud Message Queue service endpoint. Default value is **message-queue.api.cloud.yandex.net**.
+ */
+export declare const ymqEndpoint: string | undefined;
+Object.defineProperty(exports, "ymqEndpoint", {
+    get() {
+        return __config.get("ymqEndpoint");
+    },
+    enumerable: true,
+});
+
+/**
+ * Yandex Cloud Message Queue service secret key, which is used when a YMQ queue resource doesn't have a secret key
+ * explicitly specified. This can also be specified using environment variable `YC_MESSAGE_QUEUE_SECRET_KEY`.
+ */
+export declare const ymqSecretKey: string | undefined;
+Object.defineProperty(exports, "ymqSecretKey", {
+    get() {
+        return __config.get("ymqSecretKey");
+    },
+    enumerable: true,
+});
+
+/**
+ * The default [availability zone](https://yandex.cloud/docs/overview/concepts/geo-scope) to operate under, if not
+ * specified by a given resource. This can also be specified using environment variable `YC_ZONE`.
+ */
+export declare const zone: string | undefined;
+Object.defineProperty(exports, "zone", {
+    get() {
+        return __config.get("zone");
     },
     enumerable: true,
 });
