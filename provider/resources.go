@@ -23,7 +23,7 @@ import (
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge/tokens"
 	shimv2 "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim/sdk-v2"
-	yandex "github.com/yandex-cloud/terraform-provider-yandex/yandex" // Import the upstream provider
+	yandex "github.com/yandex-cloud/terraform-provider-yandex/yandex"
 
 	"github.com/masikrus/pulumi-yandex/provider/pkg/version"
 )
