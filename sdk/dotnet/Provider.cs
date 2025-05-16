@@ -343,6 +343,25 @@ namespace Pulumi.Yandex
 
         public ProviderArgs()
         {
+            CloudId = Utilities.GetEnv("YANDEX_CLOUD_CLOUD_ID");
+            Endpoint = Utilities.GetEnv("YANDEX_CLOUD_ENDPOINT");
+            FolderId = Utilities.GetEnv("YANDEX_CLOUD_FOLDER_ID");
+            Insecure = Utilities.GetEnvBoolean("YANDEX_CLOUD_INSECURE");
+            MaxRetries = Utilities.GetEnvInt32("YANDEX_CLOUD_MAX_RETRIES");
+            OrganizationId = Utilities.GetEnv("YANDEX_CLOUD_ORGANIZATION_ID");
+            Plaintext = Utilities.GetEnvBoolean("YANDEX_CLOUD_PLAINTEXT");
+            Profile = Utilities.GetEnv("YANDEX_CLOUD_PROFILE");
+            RegionId = Utilities.GetEnv("YANDEX_CLOUD_REGION_ID");
+            ServiceAccountKeyFile = Utilities.GetEnv("YANDEX_CLOUD_SERVICE_ACCOUNT_KEY_FILE");
+            SharedCredentialsFile = Utilities.GetEnv("YANDEX_CLOUD_SHARED_CREDENTIALS_FILE");
+            StorageAccessKey = Utilities.GetEnv("YANDEX_CLOUD_STORAGE_ACCESS_KEY");
+            StorageEndpoint = Utilities.GetEnv("YANDEX_CLOUD_STORAGE_ENDPOINT");
+            StorageSecretKey = Utilities.GetEnv("YANDEX_CLOUD_STORAGE_SECRET_KEY");
+            Token = Utilities.GetEnv("YANDEX_CLOUD_TOKEN");
+            YmqAccessKey = Utilities.GetEnv("YANDEX_CLOUD_YMQ_ACCESS_KEY");
+            YmqEndpoint = Utilities.GetEnv("YANDEX_CLOUD_YMQ_ENDPOINT");
+            YmqSecretKey = Utilities.GetEnv("YANDEX_CLOUD_YMQ_SECRET_KEY");
+            Zone = Utilities.GetEnv("YANDEX_CLOUD_ZONE");
         }
         public static new ProviderArgs Empty => new ProviderArgs();
     }

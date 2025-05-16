@@ -27,7 +27,7 @@ class _ExportableConfig(types.ModuleType):
         The ID of the [Cloud](https://yandex.cloud/docs/resource-manager/concepts/resources-hierarchy#cloud) to apply any
         resources to. This can also be specified using environment variable `YC_CLOUD_ID`.
         """
-        return __config__.get('cloudId')
+        return __config__.get('cloudId') or _utilities.get_env('YANDEX_CLOUD_CLOUD_ID')
 
     @property
     def endpoint(self) -> Optional[str]:
@@ -35,7 +35,7 @@ class _ExportableConfig(types.ModuleType):
         The endpoint for API calls, default value is **api.cloud.yandex.net:443**. This can also be defined by environment
         variable `YC_ENDPOINT`.
         """
-        return __config__.get('endpoint')
+        return __config__.get('endpoint') or _utilities.get_env('YANDEX_CLOUD_ENDPOINT')
 
     @property
     def folder_id(self) -> Optional[str]:
@@ -43,14 +43,14 @@ class _ExportableConfig(types.ModuleType):
         The ID of the [Folder](https://yandex.cloud/docs/resource-manager/concepts/resources-hierarchy#folder) to operate under,
         if not specified by a given resource. This can also be specified using environment variable `YC_FOLDER_ID`.
         """
-        return __config__.get('folderId')
+        return __config__.get('folderId') or _utilities.get_env('YANDEX_CLOUD_FOLDER_ID')
 
     @property
     def insecure(self) -> Optional[bool]:
         """
         Explicitly allow the provider to perform "insecure" SSL requests. If omitted, default value is `false`.
         """
-        return __config__.get_bool('insecure')
+        return __config__.get_bool('insecure') or _utilities.get_env_bool('YANDEX_CLOUD_INSECURE')
 
     @property
     def max_retries(self) -> Optional[int]:
@@ -58,28 +58,28 @@ class _ExportableConfig(types.ModuleType):
         This is the maximum number of times an API call is retried, in the case where requests are being throttled or
         experiencing transient failures. The delay between the subsequent API calls increases exponentially.
         """
-        return __config__.get_int('maxRetries')
+        return __config__.get_int('maxRetries') or _utilities.get_env_int('YANDEX_CLOUD_MAX_RETRIES')
 
     @property
     def organization_id(self) -> Optional[str]:
         """
         The ID of the [Cloud Organization](https://yandex.cloud/docs/organization/quickstart) to operate under.
         """
-        return __config__.get('organizationId')
+        return __config__.get('organizationId') or _utilities.get_env('YANDEX_CLOUD_ORGANIZATION_ID')
 
     @property
     def plaintext(self) -> Optional[bool]:
         """
         Disable use of TLS. Default value is `false`.
         """
-        return __config__.get_bool('plaintext')
+        return __config__.get_bool('plaintext') or _utilities.get_env_bool('YANDEX_CLOUD_PLAINTEXT')
 
     @property
     def profile(self) -> Optional[str]:
         """
         Profile name to use in the shared credentials file. Default value is `default`.
         """
-        return __config__.get('profile')
+        return __config__.get('profile') or _utilities.get_env('YANDEX_CLOUD_PROFILE')
 
     @property
     def region_id(self) -> Optional[str]:
@@ -87,7 +87,7 @@ class _ExportableConfig(types.ModuleType):
         [The region](https://yandex.cloud/docs/overview/concepts/region) where operations will take place. For example
         `ru-central1`.
         """
-        return __config__.get('regionId')
+        return __config__.get('regionId') or _utilities.get_env('YANDEX_CLOUD_REGION_ID')
 
     @property
     def service_account_key_file(self) -> Optional[str]:
@@ -101,7 +101,7 @@ class _ExportableConfig(types.ModuleType):
         instance. [Working with Yandex Cloud from inside an
         instance](https://yandex.cloud/docs/compute/operations/vm-connect/auth-inside-vm).
         """
-        return __config__.get('serviceAccountKeyFile')
+        return __config__.get('serviceAccountKeyFile') or _utilities.get_env('YANDEX_CLOUD_SERVICE_ACCOUNT_KEY_FILE')
 
     @property
     def shared_credentials_file(self) -> Optional[str]:
@@ -110,7 +110,7 @@ class _ExportableConfig(types.ModuleType):
         and `storage_secret_key` attributes from the shared credentials file are used only when the provider and a storage
         data/resource do not have an access/secret keys explicitly specified.
         """
-        return __config__.get('sharedCredentialsFile')
+        return __config__.get('sharedCredentialsFile') or _utilities.get_env('YANDEX_CLOUD_SHARED_CREDENTIALS_FILE')
 
     @property
     def storage_access_key(self) -> Optional[str]:
@@ -118,7 +118,7 @@ class _ExportableConfig(types.ModuleType):
         Yandex Cloud Object Storage access key, which is used when a storage data/resource doesn't have an access key explicitly
         specified. This can also be specified using environment variable `YC_STORAGE_ACCESS_KEY`.
         """
-        return __config__.get('storageAccessKey')
+        return __config__.get('storageAccessKey') or _utilities.get_env('YANDEX_CLOUD_STORAGE_ACCESS_KEY')
 
     @property
     def storage_endpoint(self) -> Optional[str]:
@@ -126,7 +126,7 @@ class _ExportableConfig(types.ModuleType):
         Yandex Cloud [Object Storage Endpoint](https://yandex.cloud/docs/storage/s3/#request-url), which is used to connect to
         `S3 API`. Default value is **storage.yandexcloud.net**.
         """
-        return __config__.get('storageEndpoint')
+        return __config__.get('storageEndpoint') or _utilities.get_env('YANDEX_CLOUD_STORAGE_ENDPOINT')
 
     @property
     def storage_secret_key(self) -> Optional[str]:
@@ -134,7 +134,7 @@ class _ExportableConfig(types.ModuleType):
         Yandex Cloud Object Storage secret key, which is used when a storage data/resource doesn't have a secret key explicitly
         specified. This can also be specified using environment variable `YC_STORAGE_SECRET_KEY`.
         """
-        return __config__.get('storageSecretKey')
+        return __config__.get('storageSecretKey') or _utilities.get_env('YANDEX_CLOUD_STORAGE_SECRET_KEY')
 
     @property
     def token(self) -> Optional[str]:
@@ -143,7 +143,7 @@ class _ExportableConfig(types.ModuleType):
         [documentation](https://yandex.cloud/docs/iam/operations/iam-token/create) about how to create IAM token. This can also
         be specified using environment variable `YC_TOKEN`.
         """
-        return __config__.get('token')
+        return __config__.get('token') or _utilities.get_env('YANDEX_CLOUD_TOKEN')
 
     @property
     def ymq_access_key(self) -> Optional[str]:
@@ -151,14 +151,14 @@ class _ExportableConfig(types.ModuleType):
         Yandex Cloud Message Queue service access key, which is used when a YMQ queue resource doesn't have an access key
         explicitly specified. This can also be specified using environment variable `YC_MESSAGE_QUEUE_ACCESS_KEY`.
         """
-        return __config__.get('ymqAccessKey')
+        return __config__.get('ymqAccessKey') or _utilities.get_env('YANDEX_CLOUD_YMQ_ACCESS_KEY')
 
     @property
     def ymq_endpoint(self) -> Optional[str]:
         """
         Yandex Cloud Message Queue service endpoint. Default value is **message-queue.api.cloud.yandex.net**.
         """
-        return __config__.get('ymqEndpoint')
+        return __config__.get('ymqEndpoint') or _utilities.get_env('YANDEX_CLOUD_YMQ_ENDPOINT')
 
     @property
     def ymq_secret_key(self) -> Optional[str]:
@@ -166,7 +166,7 @@ class _ExportableConfig(types.ModuleType):
         Yandex Cloud Message Queue service secret key, which is used when a YMQ queue resource doesn't have a secret key
         explicitly specified. This can also be specified using environment variable `YC_MESSAGE_QUEUE_SECRET_KEY`.
         """
-        return __config__.get('ymqSecretKey')
+        return __config__.get('ymqSecretKey') or _utilities.get_env('YANDEX_CLOUD_YMQ_SECRET_KEY')
 
     @property
     def zone(self) -> Optional[str]:
@@ -174,5 +174,5 @@ class _ExportableConfig(types.ModuleType):
         The default [availability zone](https://yandex.cloud/docs/overview/concepts/geo-scope) to operate under, if not
         specified by a given resource. This can also be specified using environment variable `YC_ZONE`.
         """
-        return __config__.get('zone')
+        return __config__.get('zone') or _utilities.get_env('YANDEX_CLOUD_ZONE')
 

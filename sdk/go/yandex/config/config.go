@@ -14,51 +14,123 @@ var _ = internal.GetEnvOrDefault
 // The ID of the [Cloud](https://yandex.cloud/docs/resource-manager/concepts/resources-hierarchy#cloud) to apply any
 // resources to. This can also be specified using environment variable `YC_CLOUD_ID`.
 func GetCloudId(ctx *pulumi.Context) string {
-	return config.Get(ctx, "yandex:cloudId")
+	v, err := config.Try(ctx, "yandex:cloudId")
+	if err == nil {
+		return v
+	}
+	var value string
+	if d := internal.GetEnvOrDefault(nil, nil, "YANDEX_CLOUD_CLOUD_ID"); d != nil {
+		value = d.(string)
+	}
+	return value
 }
 
 // The endpoint for API calls, default value is **api.cloud.yandex.net:443**. This can also be defined by environment
 // variable `YC_ENDPOINT`.
 func GetEndpoint(ctx *pulumi.Context) string {
-	return config.Get(ctx, "yandex:endpoint")
+	v, err := config.Try(ctx, "yandex:endpoint")
+	if err == nil {
+		return v
+	}
+	var value string
+	if d := internal.GetEnvOrDefault(nil, nil, "YANDEX_CLOUD_ENDPOINT"); d != nil {
+		value = d.(string)
+	}
+	return value
 }
 
 // The ID of the [Folder](https://yandex.cloud/docs/resource-manager/concepts/resources-hierarchy#folder) to operate under,
 // if not specified by a given resource. This can also be specified using environment variable `YC_FOLDER_ID`.
 func GetFolderId(ctx *pulumi.Context) string {
-	return config.Get(ctx, "yandex:folderId")
+	v, err := config.Try(ctx, "yandex:folderId")
+	if err == nil {
+		return v
+	}
+	var value string
+	if d := internal.GetEnvOrDefault(nil, nil, "YANDEX_CLOUD_FOLDER_ID"); d != nil {
+		value = d.(string)
+	}
+	return value
 }
 
 // Explicitly allow the provider to perform "insecure" SSL requests. If omitted, default value is `false`.
 func GetInsecure(ctx *pulumi.Context) bool {
-	return config.GetBool(ctx, "yandex:insecure")
+	v, err := config.TryBool(ctx, "yandex:insecure")
+	if err == nil {
+		return v
+	}
+	var value bool
+	if d := internal.GetEnvOrDefault(nil, internal.ParseEnvBool, "YANDEX_CLOUD_INSECURE"); d != nil {
+		value = d.(bool)
+	}
+	return value
 }
 
 // This is the maximum number of times an API call is retried, in the case where requests are being throttled or
 // experiencing transient failures. The delay between the subsequent API calls increases exponentially.
 func GetMaxRetries(ctx *pulumi.Context) int {
-	return config.GetInt(ctx, "yandex:maxRetries")
+	v, err := config.TryInt(ctx, "yandex:maxRetries")
+	if err == nil {
+		return v
+	}
+	var value int
+	if d := internal.GetEnvOrDefault(nil, internal.ParseEnvInt, "YANDEX_CLOUD_MAX_RETRIES"); d != nil {
+		value = d.(int)
+	}
+	return value
 }
 
 // The ID of the [Cloud Organization](https://yandex.cloud/docs/organization/quickstart) to operate under.
 func GetOrganizationId(ctx *pulumi.Context) string {
-	return config.Get(ctx, "yandex:organizationId")
+	v, err := config.Try(ctx, "yandex:organizationId")
+	if err == nil {
+		return v
+	}
+	var value string
+	if d := internal.GetEnvOrDefault(nil, nil, "YANDEX_CLOUD_ORGANIZATION_ID"); d != nil {
+		value = d.(string)
+	}
+	return value
 }
 
 // Disable use of TLS. Default value is `false`.
 func GetPlaintext(ctx *pulumi.Context) bool {
-	return config.GetBool(ctx, "yandex:plaintext")
+	v, err := config.TryBool(ctx, "yandex:plaintext")
+	if err == nil {
+		return v
+	}
+	var value bool
+	if d := internal.GetEnvOrDefault(nil, internal.ParseEnvBool, "YANDEX_CLOUD_PLAINTEXT"); d != nil {
+		value = d.(bool)
+	}
+	return value
 }
 
 // Profile name to use in the shared credentials file. Default value is `default`.
 func GetProfile(ctx *pulumi.Context) string {
-	return config.Get(ctx, "yandex:profile")
+	v, err := config.Try(ctx, "yandex:profile")
+	if err == nil {
+		return v
+	}
+	var value string
+	if d := internal.GetEnvOrDefault(nil, nil, "YANDEX_CLOUD_PROFILE"); d != nil {
+		value = d.(string)
+	}
+	return value
 }
 
 // [The region](https://yandex.cloud/docs/overview/concepts/region) where operations will take place. For example
 // `ru-central1`.
 func GetRegionId(ctx *pulumi.Context) string {
-	return config.Get(ctx, "yandex:regionId")
+	v, err := config.Try(ctx, "yandex:regionId")
+	if err == nil {
+		return v
+	}
+	var value string
+	if d := internal.GetEnvOrDefault(nil, nil, "YANDEX_CLOUD_REGION_ID"); d != nil {
+		value = d.(string)
+	}
+	return value
 }
 
 // Contains either a path to or the contents of the [Service Account
@@ -70,60 +142,140 @@ func GetRegionId(ctx *pulumi.Context) string {
 // instance. [Working with Yandex Cloud from inside an
 // instance](https://yandex.cloud/docs/compute/operations/vm-connect/auth-inside-vm).
 func GetServiceAccountKeyFile(ctx *pulumi.Context) string {
-	return config.Get(ctx, "yandex:serviceAccountKeyFile")
+	v, err := config.Try(ctx, "yandex:serviceAccountKeyFile")
+	if err == nil {
+		return v
+	}
+	var value string
+	if d := internal.GetEnvOrDefault(nil, nil, "YANDEX_CLOUD_SERVICE_ACCOUNT_KEY_FILE"); d != nil {
+		value = d.(string)
+	}
+	return value
 }
 
 // Shared credentials file path. Supported keys: `storageAccessKey` and `storageSecretKey`. > The `storageAccessKey` and
 // `storageSecretKey` attributes from the shared credentials file are used only when the provider and a storage
 // data/resource do not have an access/secret keys explicitly specified.
 func GetSharedCredentialsFile(ctx *pulumi.Context) string {
-	return config.Get(ctx, "yandex:sharedCredentialsFile")
+	v, err := config.Try(ctx, "yandex:sharedCredentialsFile")
+	if err == nil {
+		return v
+	}
+	var value string
+	if d := internal.GetEnvOrDefault(nil, nil, "YANDEX_CLOUD_SHARED_CREDENTIALS_FILE"); d != nil {
+		value = d.(string)
+	}
+	return value
 }
 
 // Yandex Cloud Object Storage access key, which is used when a storage data/resource doesn't have an access key explicitly
 // specified. This can also be specified using environment variable `YC_STORAGE_ACCESS_KEY`.
 func GetStorageAccessKey(ctx *pulumi.Context) string {
-	return config.Get(ctx, "yandex:storageAccessKey")
+	v, err := config.Try(ctx, "yandex:storageAccessKey")
+	if err == nil {
+		return v
+	}
+	var value string
+	if d := internal.GetEnvOrDefault(nil, nil, "YANDEX_CLOUD_STORAGE_ACCESS_KEY"); d != nil {
+		value = d.(string)
+	}
+	return value
 }
 
 // Yandex Cloud [Object Storage Endpoint](https://yandex.cloud/docs/storage/s3/#request-url), which is used to connect to
 // `S3 API`. Default value is **storage.yandexcloud.net**.
 func GetStorageEndpoint(ctx *pulumi.Context) string {
-	return config.Get(ctx, "yandex:storageEndpoint")
+	v, err := config.Try(ctx, "yandex:storageEndpoint")
+	if err == nil {
+		return v
+	}
+	var value string
+	if d := internal.GetEnvOrDefault(nil, nil, "YANDEX_CLOUD_STORAGE_ENDPOINT"); d != nil {
+		value = d.(string)
+	}
+	return value
 }
 
 // Yandex Cloud Object Storage secret key, which is used when a storage data/resource doesn't have a secret key explicitly
 // specified. This can also be specified using environment variable `YC_STORAGE_SECRET_KEY`.
 func GetStorageSecretKey(ctx *pulumi.Context) string {
-	return config.Get(ctx, "yandex:storageSecretKey")
+	v, err := config.Try(ctx, "yandex:storageSecretKey")
+	if err == nil {
+		return v
+	}
+	var value string
+	if d := internal.GetEnvOrDefault(nil, nil, "YANDEX_CLOUD_STORAGE_SECRET_KEY"); d != nil {
+		value = d.(string)
+	}
+	return value
 }
 
 // Security token or IAM token used for authentication in Yandex Cloud. Check
 // [documentation](https://yandex.cloud/docs/iam/operations/iam-token/create) about how to create IAM token. This can also
 // be specified using environment variable `YC_TOKEN`.
 func GetToken(ctx *pulumi.Context) string {
-	return config.Get(ctx, "yandex:token")
+	v, err := config.Try(ctx, "yandex:token")
+	if err == nil {
+		return v
+	}
+	var value string
+	if d := internal.GetEnvOrDefault(nil, nil, "YANDEX_CLOUD_TOKEN"); d != nil {
+		value = d.(string)
+	}
+	return value
 }
 
 // Yandex Cloud Message Queue service access key, which is used when a YMQ queue resource doesn't have an access key
 // explicitly specified. This can also be specified using environment variable `YC_MESSAGE_QUEUE_ACCESS_KEY`.
 func GetYmqAccessKey(ctx *pulumi.Context) string {
-	return config.Get(ctx, "yandex:ymqAccessKey")
+	v, err := config.Try(ctx, "yandex:ymqAccessKey")
+	if err == nil {
+		return v
+	}
+	var value string
+	if d := internal.GetEnvOrDefault(nil, nil, "YANDEX_CLOUD_YMQ_ACCESS_KEY"); d != nil {
+		value = d.(string)
+	}
+	return value
 }
 
 // Yandex Cloud Message Queue service endpoint. Default value is **message-queue.api.cloud.yandex.net**.
 func GetYmqEndpoint(ctx *pulumi.Context) string {
-	return config.Get(ctx, "yandex:ymqEndpoint")
+	v, err := config.Try(ctx, "yandex:ymqEndpoint")
+	if err == nil {
+		return v
+	}
+	var value string
+	if d := internal.GetEnvOrDefault(nil, nil, "YANDEX_CLOUD_YMQ_ENDPOINT"); d != nil {
+		value = d.(string)
+	}
+	return value
 }
 
 // Yandex Cloud Message Queue service secret key, which is used when a YMQ queue resource doesn't have a secret key
 // explicitly specified. This can also be specified using environment variable `YC_MESSAGE_QUEUE_SECRET_KEY`.
 func GetYmqSecretKey(ctx *pulumi.Context) string {
-	return config.Get(ctx, "yandex:ymqSecretKey")
+	v, err := config.Try(ctx, "yandex:ymqSecretKey")
+	if err == nil {
+		return v
+	}
+	var value string
+	if d := internal.GetEnvOrDefault(nil, nil, "YANDEX_CLOUD_YMQ_SECRET_KEY"); d != nil {
+		value = d.(string)
+	}
+	return value
 }
 
 // The default [availability zone](https://yandex.cloud/docs/overview/concepts/geo-scope) to operate under, if not
 // specified by a given resource. This can also be specified using environment variable `YC_ZONE`.
 func GetZone(ctx *pulumi.Context) string {
-	return config.Get(ctx, "yandex:zone")
+	v, err := config.Try(ctx, "yandex:zone")
+	if err == nil {
+		return v
+	}
+	var value string
+	if d := internal.GetEnvOrDefault(nil, nil, "YANDEX_CLOUD_ZONE"); d != nil {
+		value = d.(string)
+	}
+	return value
 }

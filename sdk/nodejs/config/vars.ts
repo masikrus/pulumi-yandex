@@ -14,7 +14,7 @@ const __config = new pulumi.Config("yandex");
 export declare const cloudId: string | undefined;
 Object.defineProperty(exports, "cloudId", {
     get() {
-        return __config.get("cloudId");
+        return __config.get("cloudId") ?? utilities.getEnv("YANDEX_CLOUD_CLOUD_ID");
     },
     enumerable: true,
 });
@@ -26,7 +26,7 @@ Object.defineProperty(exports, "cloudId", {
 export declare const endpoint: string | undefined;
 Object.defineProperty(exports, "endpoint", {
     get() {
-        return __config.get("endpoint");
+        return __config.get("endpoint") ?? utilities.getEnv("YANDEX_CLOUD_ENDPOINT");
     },
     enumerable: true,
 });
@@ -38,7 +38,7 @@ Object.defineProperty(exports, "endpoint", {
 export declare const folderId: string | undefined;
 Object.defineProperty(exports, "folderId", {
     get() {
-        return __config.get("folderId");
+        return __config.get("folderId") ?? utilities.getEnv("YANDEX_CLOUD_FOLDER_ID");
     },
     enumerable: true,
 });
@@ -49,7 +49,7 @@ Object.defineProperty(exports, "folderId", {
 export declare const insecure: boolean | undefined;
 Object.defineProperty(exports, "insecure", {
     get() {
-        return __config.getObject<boolean>("insecure");
+        return __config.getObject<boolean>("insecure") ?? utilities.getEnvBoolean("YANDEX_CLOUD_INSECURE");
     },
     enumerable: true,
 });
@@ -61,7 +61,7 @@ Object.defineProperty(exports, "insecure", {
 export declare const maxRetries: number | undefined;
 Object.defineProperty(exports, "maxRetries", {
     get() {
-        return __config.getObject<number>("maxRetries");
+        return __config.getObject<number>("maxRetries") ?? utilities.getEnvNumber("YANDEX_CLOUD_MAX_RETRIES");
     },
     enumerable: true,
 });
@@ -72,7 +72,7 @@ Object.defineProperty(exports, "maxRetries", {
 export declare const organizationId: string | undefined;
 Object.defineProperty(exports, "organizationId", {
     get() {
-        return __config.get("organizationId");
+        return __config.get("organizationId") ?? utilities.getEnv("YANDEX_CLOUD_ORGANIZATION_ID");
     },
     enumerable: true,
 });
@@ -83,7 +83,7 @@ Object.defineProperty(exports, "organizationId", {
 export declare const plaintext: boolean | undefined;
 Object.defineProperty(exports, "plaintext", {
     get() {
-        return __config.getObject<boolean>("plaintext");
+        return __config.getObject<boolean>("plaintext") ?? utilities.getEnvBoolean("YANDEX_CLOUD_PLAINTEXT");
     },
     enumerable: true,
 });
@@ -94,7 +94,7 @@ Object.defineProperty(exports, "plaintext", {
 export declare const profile: string | undefined;
 Object.defineProperty(exports, "profile", {
     get() {
-        return __config.get("profile");
+        return __config.get("profile") ?? utilities.getEnv("YANDEX_CLOUD_PROFILE");
     },
     enumerable: true,
 });
@@ -106,7 +106,7 @@ Object.defineProperty(exports, "profile", {
 export declare const regionId: string | undefined;
 Object.defineProperty(exports, "regionId", {
     get() {
-        return __config.get("regionId");
+        return __config.get("regionId") ?? utilities.getEnv("YANDEX_CLOUD_REGION_ID");
     },
     enumerable: true,
 });
@@ -124,7 +124,7 @@ Object.defineProperty(exports, "regionId", {
 export declare const serviceAccountKeyFile: string | undefined;
 Object.defineProperty(exports, "serviceAccountKeyFile", {
     get() {
-        return __config.get("serviceAccountKeyFile");
+        return __config.get("serviceAccountKeyFile") ?? utilities.getEnv("YANDEX_CLOUD_SERVICE_ACCOUNT_KEY_FILE");
     },
     enumerable: true,
 });
@@ -137,7 +137,7 @@ Object.defineProperty(exports, "serviceAccountKeyFile", {
 export declare const sharedCredentialsFile: string | undefined;
 Object.defineProperty(exports, "sharedCredentialsFile", {
     get() {
-        return __config.get("sharedCredentialsFile");
+        return __config.get("sharedCredentialsFile") ?? utilities.getEnv("YANDEX_CLOUD_SHARED_CREDENTIALS_FILE");
     },
     enumerable: true,
 });
@@ -149,7 +149,7 @@ Object.defineProperty(exports, "sharedCredentialsFile", {
 export declare const storageAccessKey: string | undefined;
 Object.defineProperty(exports, "storageAccessKey", {
     get() {
-        return __config.get("storageAccessKey");
+        return __config.get("storageAccessKey") ?? utilities.getEnv("YANDEX_CLOUD_STORAGE_ACCESS_KEY");
     },
     enumerable: true,
 });
@@ -161,7 +161,7 @@ Object.defineProperty(exports, "storageAccessKey", {
 export declare const storageEndpoint: string | undefined;
 Object.defineProperty(exports, "storageEndpoint", {
     get() {
-        return __config.get("storageEndpoint");
+        return __config.get("storageEndpoint") ?? utilities.getEnv("YANDEX_CLOUD_STORAGE_ENDPOINT");
     },
     enumerable: true,
 });
@@ -173,7 +173,7 @@ Object.defineProperty(exports, "storageEndpoint", {
 export declare const storageSecretKey: string | undefined;
 Object.defineProperty(exports, "storageSecretKey", {
     get() {
-        return __config.get("storageSecretKey");
+        return __config.get("storageSecretKey") ?? utilities.getEnv("YANDEX_CLOUD_STORAGE_SECRET_KEY");
     },
     enumerable: true,
 });
@@ -186,7 +186,7 @@ Object.defineProperty(exports, "storageSecretKey", {
 export declare const token: string | undefined;
 Object.defineProperty(exports, "token", {
     get() {
-        return __config.get("token");
+        return __config.get("token") ?? utilities.getEnv("YANDEX_CLOUD_TOKEN");
     },
     enumerable: true,
 });
@@ -198,7 +198,7 @@ Object.defineProperty(exports, "token", {
 export declare const ymqAccessKey: string | undefined;
 Object.defineProperty(exports, "ymqAccessKey", {
     get() {
-        return __config.get("ymqAccessKey");
+        return __config.get("ymqAccessKey") ?? utilities.getEnv("YANDEX_CLOUD_YMQ_ACCESS_KEY");
     },
     enumerable: true,
 });
@@ -209,7 +209,7 @@ Object.defineProperty(exports, "ymqAccessKey", {
 export declare const ymqEndpoint: string | undefined;
 Object.defineProperty(exports, "ymqEndpoint", {
     get() {
-        return __config.get("ymqEndpoint");
+        return __config.get("ymqEndpoint") ?? utilities.getEnv("YANDEX_CLOUD_YMQ_ENDPOINT");
     },
     enumerable: true,
 });
@@ -221,7 +221,7 @@ Object.defineProperty(exports, "ymqEndpoint", {
 export declare const ymqSecretKey: string | undefined;
 Object.defineProperty(exports, "ymqSecretKey", {
     get() {
-        return __config.get("ymqSecretKey");
+        return __config.get("ymqSecretKey") ?? utilities.getEnv("YANDEX_CLOUD_YMQ_SECRET_KEY");
     },
     enumerable: true,
 });
@@ -233,7 +233,7 @@ Object.defineProperty(exports, "ymqSecretKey", {
 export declare const zone: string | undefined;
 Object.defineProperty(exports, "zone", {
     get() {
-        return __config.get("zone");
+        return __config.get("zone") ?? utilities.getEnv("YANDEX_CLOUD_ZONE");
     },
     enumerable: true,
 });

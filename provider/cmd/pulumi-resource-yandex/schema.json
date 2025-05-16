@@ -49,82 +49,177 @@
         "variables": {
             "cloudId": {
                 "type": "string",
-                "description": "The ID of the [Cloud](https://yandex.cloud/docs/resource-manager/concepts/resources-hierarchy#cloud) to apply any\nresources to. This can also be specified using environment variable `YC_CLOUD_ID`.\n"
+                "description": "The ID of the [Cloud](https://yandex.cloud/docs/resource-manager/concepts/resources-hierarchy#cloud) to apply any\nresources to. This can also be specified using environment variable `YC_CLOUD_ID`.\n",
+                "defaultInfo": {
+                    "environment": [
+                        "YANDEX_CLOUD_CLOUD_ID"
+                    ]
+                }
             },
             "endpoint": {
                 "type": "string",
-                "description": "The endpoint for API calls, default value is **api.cloud.yandex.net:443**. This can also be defined by environment\nvariable `YC_ENDPOINT`.\n"
+                "description": "The endpoint for API calls, default value is **api.cloud.yandex.net:443**. This can also be defined by environment\nvariable `YC_ENDPOINT`.\n",
+                "defaultInfo": {
+                    "environment": [
+                        "YANDEX_CLOUD_ENDPOINT"
+                    ]
+                }
             },
             "folderId": {
                 "type": "string",
-                "description": "The ID of the [Folder](https://yandex.cloud/docs/resource-manager/concepts/resources-hierarchy#folder) to operate under,\nif not specified by a given resource. This can also be specified using environment variable `YC_FOLDER_ID`.\n"
+                "description": "The ID of the [Folder](https://yandex.cloud/docs/resource-manager/concepts/resources-hierarchy#folder) to operate under,\nif not specified by a given resource. This can also be specified using environment variable `YC_FOLDER_ID`.\n",
+                "defaultInfo": {
+                    "environment": [
+                        "YANDEX_CLOUD_FOLDER_ID"
+                    ]
+                }
             },
             "insecure": {
                 "type": "boolean",
-                "description": "Explicitly allow the provider to perform \"insecure\" SSL requests. If omitted, default value is `false`.\n"
+                "description": "Explicitly allow the provider to perform \"insecure\" SSL requests. If omitted, default value is `false`.\n",
+                "defaultInfo": {
+                    "environment": [
+                        "YANDEX_CLOUD_INSECURE"
+                    ]
+                }
             },
             "maxRetries": {
                 "type": "integer",
-                "description": "This is the maximum number of times an API call is retried, in the case where requests are being throttled or\nexperiencing transient failures. The delay between the subsequent API calls increases exponentially.\n"
+                "description": "This is the maximum number of times an API call is retried, in the case where requests are being throttled or\nexperiencing transient failures. The delay between the subsequent API calls increases exponentially.\n",
+                "defaultInfo": {
+                    "environment": [
+                        "YANDEX_CLOUD_MAX_RETRIES"
+                    ]
+                }
             },
             "organizationId": {
                 "type": "string",
-                "description": "The ID of the [Cloud Organization](https://yandex.cloud/docs/organization/quickstart) to operate under.\n"
+                "description": "The ID of the [Cloud Organization](https://yandex.cloud/docs/organization/quickstart) to operate under.\n",
+                "defaultInfo": {
+                    "environment": [
+                        "YANDEX_CLOUD_ORGANIZATION_ID"
+                    ]
+                }
             },
             "plaintext": {
                 "type": "boolean",
-                "description": "Disable use of TLS. Default value is `false`.\n"
+                "description": "Disable use of TLS. Default value is `false`.\n",
+                "defaultInfo": {
+                    "environment": [
+                        "YANDEX_CLOUD_PLAINTEXT"
+                    ]
+                }
             },
             "profile": {
                 "type": "string",
-                "description": "Profile name to use in the shared credentials file. Default value is `default`.\n"
+                "description": "Profile name to use in the shared credentials file. Default value is `default`.\n",
+                "defaultInfo": {
+                    "environment": [
+                        "YANDEX_CLOUD_PROFILE"
+                    ]
+                }
             },
             "regionId": {
                 "type": "string",
-                "description": "[The region](https://yandex.cloud/docs/overview/concepts/region) where operations will take place. For example\n`ru-central1`.\n"
+                "description": "[The region](https://yandex.cloud/docs/overview/concepts/region) where operations will take place. For example\n`ru-central1`.\n",
+                "defaultInfo": {
+                    "environment": [
+                        "YANDEX_CLOUD_REGION_ID"
+                    ]
+                }
             },
             "serviceAccountKeyFile": {
                 "type": "string",
-                "description": "Contains either a path to or the contents of the [Service Account\nfile](https://yandex.cloud/docs/iam/concepts/authorization/key) in JSON format. This can also be specified using\nenvironment variable `YC_SERVICE_ACCOUNT_KEY_FILE`. You can read how to create service account key file\n[here](https://yandex.cloud/docs/iam/operations/iam-token/create-for-sa#keys-create). \u003e Only one of `token` or\n`service_account_key_file` must be specified. \u003e One can authenticate via instance service account from inside a compute\ninstance. In order to use this method, omit both `token`/`service_account_key_file` and attach service account to the\ninstance. [Working with Yandex Cloud from inside an\ninstance](https://yandex.cloud/docs/compute/operations/vm-connect/auth-inside-vm).\n"
+                "description": "Contains either a path to or the contents of the [Service Account\nfile](https://yandex.cloud/docs/iam/concepts/authorization/key) in JSON format. This can also be specified using\nenvironment variable `YC_SERVICE_ACCOUNT_KEY_FILE`. You can read how to create service account key file\n[here](https://yandex.cloud/docs/iam/operations/iam-token/create-for-sa#keys-create). \u003e Only one of `token` or\n`service_account_key_file` must be specified. \u003e One can authenticate via instance service account from inside a compute\ninstance. In order to use this method, omit both `token`/`service_account_key_file` and attach service account to the\ninstance. [Working with Yandex Cloud from inside an\ninstance](https://yandex.cloud/docs/compute/operations/vm-connect/auth-inside-vm).\n",
+                "defaultInfo": {
+                    "environment": [
+                        "YANDEX_CLOUD_SERVICE_ACCOUNT_KEY_FILE"
+                    ]
+                }
             },
             "sharedCredentialsFile": {
                 "type": "string",
-                "description": "Shared credentials file path. Supported keys: `storage_access_key` and `storage_secret_key`. \u003e The `storage_access_key`\nand `storage_secret_key` attributes from the shared credentials file are used only when the provider and a storage\ndata/resource do not have an access/secret keys explicitly specified.\n"
+                "description": "Shared credentials file path. Supported keys: `storage_access_key` and `storage_secret_key`. \u003e The `storage_access_key`\nand `storage_secret_key` attributes from the shared credentials file are used only when the provider and a storage\ndata/resource do not have an access/secret keys explicitly specified.\n",
+                "defaultInfo": {
+                    "environment": [
+                        "YANDEX_CLOUD_SHARED_CREDENTIALS_FILE"
+                    ]
+                }
             },
             "storageAccessKey": {
                 "type": "string",
-                "description": "Yandex Cloud Object Storage access key, which is used when a storage data/resource doesn't have an access key explicitly\nspecified. This can also be specified using environment variable `YC_STORAGE_ACCESS_KEY`.\n"
+                "description": "Yandex Cloud Object Storage access key, which is used when a storage data/resource doesn't have an access key explicitly\nspecified. This can also be specified using environment variable `YC_STORAGE_ACCESS_KEY`.\n",
+                "defaultInfo": {
+                    "environment": [
+                        "YANDEX_CLOUD_STORAGE_ACCESS_KEY"
+                    ]
+                }
             },
             "storageEndpoint": {
                 "type": "string",
-                "description": "Yandex Cloud [Object Storage Endpoint](https://yandex.cloud/docs/storage/s3/#request-url), which is used to connect to\n`S3 API`. Default value is **storage.yandexcloud.net**.\n"
+                "description": "Yandex Cloud [Object Storage Endpoint](https://yandex.cloud/docs/storage/s3/#request-url), which is used to connect to\n`S3 API`. Default value is **storage.yandexcloud.net**.\n",
+                "defaultInfo": {
+                    "environment": [
+                        "YANDEX_CLOUD_STORAGE_ENDPOINT"
+                    ]
+                }
             },
             "storageSecretKey": {
                 "type": "string",
                 "description": "Yandex Cloud Object Storage secret key, which is used when a storage data/resource doesn't have a secret key explicitly\nspecified. This can also be specified using environment variable `YC_STORAGE_SECRET_KEY`.\n",
+                "defaultInfo": {
+                    "environment": [
+                        "YANDEX_CLOUD_STORAGE_SECRET_KEY"
+                    ]
+                },
                 "secret": true
             },
             "token": {
                 "type": "string",
                 "description": "Security token or IAM token used for authentication in Yandex Cloud. Check\n[documentation](https://yandex.cloud/docs/iam/operations/iam-token/create) about how to create IAM token. This can also\nbe specified using environment variable `YC_TOKEN`.\n",
+                "defaultInfo": {
+                    "environment": [
+                        "YANDEX_CLOUD_TOKEN"
+                    ]
+                },
                 "secret": true
             },
             "ymqAccessKey": {
                 "type": "string",
-                "description": "Yandex Cloud Message Queue service access key, which is used when a YMQ queue resource doesn't have an access key\nexplicitly specified. This can also be specified using environment variable `YC_MESSAGE_QUEUE_ACCESS_KEY`.\n"
+                "description": "Yandex Cloud Message Queue service access key, which is used when a YMQ queue resource doesn't have an access key\nexplicitly specified. This can also be specified using environment variable `YC_MESSAGE_QUEUE_ACCESS_KEY`.\n",
+                "defaultInfo": {
+                    "environment": [
+                        "YANDEX_CLOUD_YMQ_ACCESS_KEY"
+                    ]
+                }
             },
             "ymqEndpoint": {
                 "type": "string",
-                "description": "Yandex Cloud Message Queue service endpoint. Default value is **message-queue.api.cloud.yandex.net**.\n"
+                "description": "Yandex Cloud Message Queue service endpoint. Default value is **message-queue.api.cloud.yandex.net**.\n",
+                "defaultInfo": {
+                    "environment": [
+                        "YANDEX_CLOUD_YMQ_ENDPOINT"
+                    ]
+                }
             },
             "ymqSecretKey": {
                 "type": "string",
                 "description": "Yandex Cloud Message Queue service secret key, which is used when a YMQ queue resource doesn't have a secret key\nexplicitly specified. This can also be specified using environment variable `YC_MESSAGE_QUEUE_SECRET_KEY`.\n",
+                "defaultInfo": {
+                    "environment": [
+                        "YANDEX_CLOUD_YMQ_SECRET_KEY"
+                    ]
+                },
                 "secret": true
             },
             "zone": {
                 "type": "string",
-                "description": "The default [availability zone](https://yandex.cloud/docs/overview/concepts/geo-scope) to operate under, if not\nspecified by a given resource. This can also be specified using environment variable `YC_ZONE`.\n"
+                "description": "The default [availability zone](https://yandex.cloud/docs/overview/concepts/geo-scope) to operate under, if not\nspecified by a given resource. This can also be specified using environment variable `YC_ZONE`.\n",
+                "defaultInfo": {
+                    "environment": [
+                        "YANDEX_CLOUD_ZONE"
+                    ]
+                }
             }
         }
     },
@@ -39123,82 +39218,177 @@
         "inputProperties": {
             "cloudId": {
                 "type": "string",
-                "description": "The ID of the [Cloud](https://yandex.cloud/docs/resource-manager/concepts/resources-hierarchy#cloud) to apply any\nresources to. This can also be specified using environment variable `YC_CLOUD_ID`.\n"
+                "description": "The ID of the [Cloud](https://yandex.cloud/docs/resource-manager/concepts/resources-hierarchy#cloud) to apply any\nresources to. This can also be specified using environment variable `YC_CLOUD_ID`.\n",
+                "defaultInfo": {
+                    "environment": [
+                        "YANDEX_CLOUD_CLOUD_ID"
+                    ]
+                }
             },
             "endpoint": {
                 "type": "string",
-                "description": "The endpoint for API calls, default value is **api.cloud.yandex.net:443**. This can also be defined by environment\nvariable `YC_ENDPOINT`.\n"
+                "description": "The endpoint for API calls, default value is **api.cloud.yandex.net:443**. This can also be defined by environment\nvariable `YC_ENDPOINT`.\n",
+                "defaultInfo": {
+                    "environment": [
+                        "YANDEX_CLOUD_ENDPOINT"
+                    ]
+                }
             },
             "folderId": {
                 "type": "string",
-                "description": "The ID of the [Folder](https://yandex.cloud/docs/resource-manager/concepts/resources-hierarchy#folder) to operate under,\nif not specified by a given resource. This can also be specified using environment variable `YC_FOLDER_ID`.\n"
+                "description": "The ID of the [Folder](https://yandex.cloud/docs/resource-manager/concepts/resources-hierarchy#folder) to operate under,\nif not specified by a given resource. This can also be specified using environment variable `YC_FOLDER_ID`.\n",
+                "defaultInfo": {
+                    "environment": [
+                        "YANDEX_CLOUD_FOLDER_ID"
+                    ]
+                }
             },
             "insecure": {
                 "type": "boolean",
-                "description": "Explicitly allow the provider to perform \"insecure\" SSL requests. If omitted, default value is `false`.\n"
+                "description": "Explicitly allow the provider to perform \"insecure\" SSL requests. If omitted, default value is `false`.\n",
+                "defaultInfo": {
+                    "environment": [
+                        "YANDEX_CLOUD_INSECURE"
+                    ]
+                }
             },
             "maxRetries": {
                 "type": "integer",
-                "description": "This is the maximum number of times an API call is retried, in the case where requests are being throttled or\nexperiencing transient failures. The delay between the subsequent API calls increases exponentially.\n"
+                "description": "This is the maximum number of times an API call is retried, in the case where requests are being throttled or\nexperiencing transient failures. The delay between the subsequent API calls increases exponentially.\n",
+                "defaultInfo": {
+                    "environment": [
+                        "YANDEX_CLOUD_MAX_RETRIES"
+                    ]
+                }
             },
             "organizationId": {
                 "type": "string",
-                "description": "The ID of the [Cloud Organization](https://yandex.cloud/docs/organization/quickstart) to operate under.\n"
+                "description": "The ID of the [Cloud Organization](https://yandex.cloud/docs/organization/quickstart) to operate under.\n",
+                "defaultInfo": {
+                    "environment": [
+                        "YANDEX_CLOUD_ORGANIZATION_ID"
+                    ]
+                }
             },
             "plaintext": {
                 "type": "boolean",
-                "description": "Disable use of TLS. Default value is `false`.\n"
+                "description": "Disable use of TLS. Default value is `false`.\n",
+                "defaultInfo": {
+                    "environment": [
+                        "YANDEX_CLOUD_PLAINTEXT"
+                    ]
+                }
             },
             "profile": {
                 "type": "string",
-                "description": "Profile name to use in the shared credentials file. Default value is `default`.\n"
+                "description": "Profile name to use in the shared credentials file. Default value is `default`.\n",
+                "defaultInfo": {
+                    "environment": [
+                        "YANDEX_CLOUD_PROFILE"
+                    ]
+                }
             },
             "regionId": {
                 "type": "string",
-                "description": "[The region](https://yandex.cloud/docs/overview/concepts/region) where operations will take place. For example\n`ru-central1`.\n"
+                "description": "[The region](https://yandex.cloud/docs/overview/concepts/region) where operations will take place. For example\n`ru-central1`.\n",
+                "defaultInfo": {
+                    "environment": [
+                        "YANDEX_CLOUD_REGION_ID"
+                    ]
+                }
             },
             "serviceAccountKeyFile": {
                 "type": "string",
-                "description": "Contains either a path to or the contents of the [Service Account\nfile](https://yandex.cloud/docs/iam/concepts/authorization/key) in JSON format. This can also be specified using\nenvironment variable `YC_SERVICE_ACCOUNT_KEY_FILE`. You can read how to create service account key file\n[here](https://yandex.cloud/docs/iam/operations/iam-token/create-for-sa#keys-create). \u003e Only one of `token` or\n`service_account_key_file` must be specified. \u003e One can authenticate via instance service account from inside a compute\ninstance. In order to use this method, omit both `token`/`service_account_key_file` and attach service account to the\ninstance. [Working with Yandex Cloud from inside an\ninstance](https://yandex.cloud/docs/compute/operations/vm-connect/auth-inside-vm).\n"
+                "description": "Contains either a path to or the contents of the [Service Account\nfile](https://yandex.cloud/docs/iam/concepts/authorization/key) in JSON format. This can also be specified using\nenvironment variable `YC_SERVICE_ACCOUNT_KEY_FILE`. You can read how to create service account key file\n[here](https://yandex.cloud/docs/iam/operations/iam-token/create-for-sa#keys-create). \u003e Only one of `token` or\n`service_account_key_file` must be specified. \u003e One can authenticate via instance service account from inside a compute\ninstance. In order to use this method, omit both `token`/`service_account_key_file` and attach service account to the\ninstance. [Working with Yandex Cloud from inside an\ninstance](https://yandex.cloud/docs/compute/operations/vm-connect/auth-inside-vm).\n",
+                "defaultInfo": {
+                    "environment": [
+                        "YANDEX_CLOUD_SERVICE_ACCOUNT_KEY_FILE"
+                    ]
+                }
             },
             "sharedCredentialsFile": {
                 "type": "string",
-                "description": "Shared credentials file path. Supported keys: `storage_access_key` and `storage_secret_key`. \u003e The `storage_access_key`\nand `storage_secret_key` attributes from the shared credentials file are used only when the provider and a storage\ndata/resource do not have an access/secret keys explicitly specified.\n"
+                "description": "Shared credentials file path. Supported keys: `storage_access_key` and `storage_secret_key`. \u003e The `storage_access_key`\nand `storage_secret_key` attributes from the shared credentials file are used only when the provider and a storage\ndata/resource do not have an access/secret keys explicitly specified.\n",
+                "defaultInfo": {
+                    "environment": [
+                        "YANDEX_CLOUD_SHARED_CREDENTIALS_FILE"
+                    ]
+                }
             },
             "storageAccessKey": {
                 "type": "string",
-                "description": "Yandex Cloud Object Storage access key, which is used when a storage data/resource doesn't have an access key explicitly\nspecified. This can also be specified using environment variable `YC_STORAGE_ACCESS_KEY`.\n"
+                "description": "Yandex Cloud Object Storage access key, which is used when a storage data/resource doesn't have an access key explicitly\nspecified. This can also be specified using environment variable `YC_STORAGE_ACCESS_KEY`.\n",
+                "defaultInfo": {
+                    "environment": [
+                        "YANDEX_CLOUD_STORAGE_ACCESS_KEY"
+                    ]
+                }
             },
             "storageEndpoint": {
                 "type": "string",
-                "description": "Yandex Cloud [Object Storage Endpoint](https://yandex.cloud/docs/storage/s3/#request-url), which is used to connect to\n`S3 API`. Default value is **storage.yandexcloud.net**.\n"
+                "description": "Yandex Cloud [Object Storage Endpoint](https://yandex.cloud/docs/storage/s3/#request-url), which is used to connect to\n`S3 API`. Default value is **storage.yandexcloud.net**.\n",
+                "defaultInfo": {
+                    "environment": [
+                        "YANDEX_CLOUD_STORAGE_ENDPOINT"
+                    ]
+                }
             },
             "storageSecretKey": {
                 "type": "string",
                 "description": "Yandex Cloud Object Storage secret key, which is used when a storage data/resource doesn't have a secret key explicitly\nspecified. This can also be specified using environment variable `YC_STORAGE_SECRET_KEY`.\n",
+                "defaultInfo": {
+                    "environment": [
+                        "YANDEX_CLOUD_STORAGE_SECRET_KEY"
+                    ]
+                },
                 "secret": true
             },
             "token": {
                 "type": "string",
                 "description": "Security token or IAM token used for authentication in Yandex Cloud. Check\n[documentation](https://yandex.cloud/docs/iam/operations/iam-token/create) about how to create IAM token. This can also\nbe specified using environment variable `YC_TOKEN`.\n",
+                "defaultInfo": {
+                    "environment": [
+                        "YANDEX_CLOUD_TOKEN"
+                    ]
+                },
                 "secret": true
             },
             "ymqAccessKey": {
                 "type": "string",
-                "description": "Yandex Cloud Message Queue service access key, which is used when a YMQ queue resource doesn't have an access key\nexplicitly specified. This can also be specified using environment variable `YC_MESSAGE_QUEUE_ACCESS_KEY`.\n"
+                "description": "Yandex Cloud Message Queue service access key, which is used when a YMQ queue resource doesn't have an access key\nexplicitly specified. This can also be specified using environment variable `YC_MESSAGE_QUEUE_ACCESS_KEY`.\n",
+                "defaultInfo": {
+                    "environment": [
+                        "YANDEX_CLOUD_YMQ_ACCESS_KEY"
+                    ]
+                }
             },
             "ymqEndpoint": {
                 "type": "string",
-                "description": "Yandex Cloud Message Queue service endpoint. Default value is **message-queue.api.cloud.yandex.net**.\n"
+                "description": "Yandex Cloud Message Queue service endpoint. Default value is **message-queue.api.cloud.yandex.net**.\n",
+                "defaultInfo": {
+                    "environment": [
+                        "YANDEX_CLOUD_YMQ_ENDPOINT"
+                    ]
+                }
             },
             "ymqSecretKey": {
                 "type": "string",
                 "description": "Yandex Cloud Message Queue service secret key, which is used when a YMQ queue resource doesn't have a secret key\nexplicitly specified. This can also be specified using environment variable `YC_MESSAGE_QUEUE_SECRET_KEY`.\n",
+                "defaultInfo": {
+                    "environment": [
+                        "YANDEX_CLOUD_YMQ_SECRET_KEY"
+                    ]
+                },
                 "secret": true
             },
             "zone": {
                 "type": "string",
-                "description": "The default [availability zone](https://yandex.cloud/docs/overview/concepts/geo-scope) to operate under, if not\nspecified by a given resource. This can also be specified using environment variable `YC_ZONE`.\n"
+                "description": "The default [availability zone](https://yandex.cloud/docs/overview/concepts/geo-scope) to operate under, if not\nspecified by a given resource. This can also be specified using environment variable `YC_ZONE`.\n",
+                "defaultInfo": {
+                    "environment": [
+                        "YANDEX_CLOUD_ZONE"
+                    ]
+                }
             }
         },
         "methods": {

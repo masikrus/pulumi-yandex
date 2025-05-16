@@ -80,6 +80,101 @@ func NewProvider(ctx *pulumi.Context,
 		args = &ProviderArgs{}
 	}
 
+	if args.CloudId == nil {
+		if d := internal.GetEnvOrDefault(nil, nil, "YANDEX_CLOUD_CLOUD_ID"); d != nil {
+			args.CloudId = pulumi.StringPtr(d.(string))
+		}
+	}
+	if args.Endpoint == nil {
+		if d := internal.GetEnvOrDefault(nil, nil, "YANDEX_CLOUD_ENDPOINT"); d != nil {
+			args.Endpoint = pulumi.StringPtr(d.(string))
+		}
+	}
+	if args.FolderId == nil {
+		if d := internal.GetEnvOrDefault(nil, nil, "YANDEX_CLOUD_FOLDER_ID"); d != nil {
+			args.FolderId = pulumi.StringPtr(d.(string))
+		}
+	}
+	if args.Insecure == nil {
+		if d := internal.GetEnvOrDefault(nil, internal.ParseEnvBool, "YANDEX_CLOUD_INSECURE"); d != nil {
+			args.Insecure = pulumi.BoolPtr(d.(bool))
+		}
+	}
+	if args.MaxRetries == nil {
+		if d := internal.GetEnvOrDefault(nil, internal.ParseEnvInt, "YANDEX_CLOUD_MAX_RETRIES"); d != nil {
+			args.MaxRetries = pulumi.IntPtr(d.(int))
+		}
+	}
+	if args.OrganizationId == nil {
+		if d := internal.GetEnvOrDefault(nil, nil, "YANDEX_CLOUD_ORGANIZATION_ID"); d != nil {
+			args.OrganizationId = pulumi.StringPtr(d.(string))
+		}
+	}
+	if args.Plaintext == nil {
+		if d := internal.GetEnvOrDefault(nil, internal.ParseEnvBool, "YANDEX_CLOUD_PLAINTEXT"); d != nil {
+			args.Plaintext = pulumi.BoolPtr(d.(bool))
+		}
+	}
+	if args.Profile == nil {
+		if d := internal.GetEnvOrDefault(nil, nil, "YANDEX_CLOUD_PROFILE"); d != nil {
+			args.Profile = pulumi.StringPtr(d.(string))
+		}
+	}
+	if args.RegionId == nil {
+		if d := internal.GetEnvOrDefault(nil, nil, "YANDEX_CLOUD_REGION_ID"); d != nil {
+			args.RegionId = pulumi.StringPtr(d.(string))
+		}
+	}
+	if args.ServiceAccountKeyFile == nil {
+		if d := internal.GetEnvOrDefault(nil, nil, "YANDEX_CLOUD_SERVICE_ACCOUNT_KEY_FILE"); d != nil {
+			args.ServiceAccountKeyFile = pulumi.StringPtr(d.(string))
+		}
+	}
+	if args.SharedCredentialsFile == nil {
+		if d := internal.GetEnvOrDefault(nil, nil, "YANDEX_CLOUD_SHARED_CREDENTIALS_FILE"); d != nil {
+			args.SharedCredentialsFile = pulumi.StringPtr(d.(string))
+		}
+	}
+	if args.StorageAccessKey == nil {
+		if d := internal.GetEnvOrDefault(nil, nil, "YANDEX_CLOUD_STORAGE_ACCESS_KEY"); d != nil {
+			args.StorageAccessKey = pulumi.StringPtr(d.(string))
+		}
+	}
+	if args.StorageEndpoint == nil {
+		if d := internal.GetEnvOrDefault(nil, nil, "YANDEX_CLOUD_STORAGE_ENDPOINT"); d != nil {
+			args.StorageEndpoint = pulumi.StringPtr(d.(string))
+		}
+	}
+	if args.StorageSecretKey == nil {
+		if d := internal.GetEnvOrDefault(nil, nil, "YANDEX_CLOUD_STORAGE_SECRET_KEY"); d != nil {
+			args.StorageSecretKey = pulumi.StringPtr(d.(string))
+		}
+	}
+	if args.Token == nil {
+		if d := internal.GetEnvOrDefault(nil, nil, "YANDEX_CLOUD_TOKEN"); d != nil {
+			args.Token = pulumi.StringPtr(d.(string))
+		}
+	}
+	if args.YmqAccessKey == nil {
+		if d := internal.GetEnvOrDefault(nil, nil, "YANDEX_CLOUD_YMQ_ACCESS_KEY"); d != nil {
+			args.YmqAccessKey = pulumi.StringPtr(d.(string))
+		}
+	}
+	if args.YmqEndpoint == nil {
+		if d := internal.GetEnvOrDefault(nil, nil, "YANDEX_CLOUD_YMQ_ENDPOINT"); d != nil {
+			args.YmqEndpoint = pulumi.StringPtr(d.(string))
+		}
+	}
+	if args.YmqSecretKey == nil {
+		if d := internal.GetEnvOrDefault(nil, nil, "YANDEX_CLOUD_YMQ_SECRET_KEY"); d != nil {
+			args.YmqSecretKey = pulumi.StringPtr(d.(string))
+		}
+	}
+	if args.Zone == nil {
+		if d := internal.GetEnvOrDefault(nil, nil, "YANDEX_CLOUD_ZONE"); d != nil {
+			args.Zone = pulumi.StringPtr(d.(string))
+		}
+	}
 	if args.StorageSecretKey != nil {
 		args.StorageSecretKey = pulumi.ToSecret(args.StorageSecretKey).(pulumi.StringPtrInput)
 	}

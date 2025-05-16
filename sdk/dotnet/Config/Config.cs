@@ -32,7 +32,7 @@ namespace Pulumi.Yandex
 
         private static readonly global::Pulumi.Config __config = new global::Pulumi.Config("yandex");
 
-        private static readonly __Value<string?> _cloudId = new __Value<string?>(() => __config.Get("cloudId"));
+        private static readonly __Value<string?> _cloudId = new __Value<string?>(() => __config.Get("cloudId") ?? Utilities.GetEnv("YANDEX_CLOUD_CLOUD_ID"));
         /// <summary>
         /// The ID of the [Cloud](https://yandex.cloud/docs/resource-manager/concepts/resources-hierarchy#cloud) to apply any
         /// resources to. This can also be specified using environment variable `YC_CLOUD_ID`.
@@ -43,7 +43,7 @@ namespace Pulumi.Yandex
             set => _cloudId.Set(value);
         }
 
-        private static readonly __Value<string?> _endpoint = new __Value<string?>(() => __config.Get("endpoint"));
+        private static readonly __Value<string?> _endpoint = new __Value<string?>(() => __config.Get("endpoint") ?? Utilities.GetEnv("YANDEX_CLOUD_ENDPOINT"));
         /// <summary>
         /// The endpoint for API calls, default value is **api.cloud.yandex.net:443**. This can also be defined by environment
         /// variable `YC_ENDPOINT`.
@@ -54,7 +54,7 @@ namespace Pulumi.Yandex
             set => _endpoint.Set(value);
         }
 
-        private static readonly __Value<string?> _folderId = new __Value<string?>(() => __config.Get("folderId"));
+        private static readonly __Value<string?> _folderId = new __Value<string?>(() => __config.Get("folderId") ?? Utilities.GetEnv("YANDEX_CLOUD_FOLDER_ID"));
         /// <summary>
         /// The ID of the [Folder](https://yandex.cloud/docs/resource-manager/concepts/resources-hierarchy#folder) to operate under,
         /// if not specified by a given resource. This can also be specified using environment variable `YC_FOLDER_ID`.
@@ -65,7 +65,7 @@ namespace Pulumi.Yandex
             set => _folderId.Set(value);
         }
 
-        private static readonly __Value<bool?> _insecure = new __Value<bool?>(() => __config.GetBoolean("insecure"));
+        private static readonly __Value<bool?> _insecure = new __Value<bool?>(() => __config.GetBoolean("insecure") ?? Utilities.GetEnvBoolean("YANDEX_CLOUD_INSECURE"));
         /// <summary>
         /// Explicitly allow the provider to perform "insecure" SSL requests. If omitted, default value is `false`.
         /// </summary>
@@ -75,7 +75,7 @@ namespace Pulumi.Yandex
             set => _insecure.Set(value);
         }
 
-        private static readonly __Value<int?> _maxRetries = new __Value<int?>(() => __config.GetInt32("maxRetries"));
+        private static readonly __Value<int?> _maxRetries = new __Value<int?>(() => __config.GetInt32("maxRetries") ?? Utilities.GetEnvInt32("YANDEX_CLOUD_MAX_RETRIES"));
         /// <summary>
         /// This is the maximum number of times an API call is retried, in the case where requests are being throttled or
         /// experiencing transient failures. The delay between the subsequent API calls increases exponentially.
@@ -86,7 +86,7 @@ namespace Pulumi.Yandex
             set => _maxRetries.Set(value);
         }
 
-        private static readonly __Value<string?> _organizationId = new __Value<string?>(() => __config.Get("organizationId"));
+        private static readonly __Value<string?> _organizationId = new __Value<string?>(() => __config.Get("organizationId") ?? Utilities.GetEnv("YANDEX_CLOUD_ORGANIZATION_ID"));
         /// <summary>
         /// The ID of the [Cloud Organization](https://yandex.cloud/docs/organization/quickstart) to operate under.
         /// </summary>
@@ -96,7 +96,7 @@ namespace Pulumi.Yandex
             set => _organizationId.Set(value);
         }
 
-        private static readonly __Value<bool?> _plaintext = new __Value<bool?>(() => __config.GetBoolean("plaintext"));
+        private static readonly __Value<bool?> _plaintext = new __Value<bool?>(() => __config.GetBoolean("plaintext") ?? Utilities.GetEnvBoolean("YANDEX_CLOUD_PLAINTEXT"));
         /// <summary>
         /// Disable use of TLS. Default value is `false`.
         /// </summary>
@@ -106,7 +106,7 @@ namespace Pulumi.Yandex
             set => _plaintext.Set(value);
         }
 
-        private static readonly __Value<string?> _profile = new __Value<string?>(() => __config.Get("profile"));
+        private static readonly __Value<string?> _profile = new __Value<string?>(() => __config.Get("profile") ?? Utilities.GetEnv("YANDEX_CLOUD_PROFILE"));
         /// <summary>
         /// Profile name to use in the shared credentials file. Default value is `default`.
         /// </summary>
@@ -116,7 +116,7 @@ namespace Pulumi.Yandex
             set => _profile.Set(value);
         }
 
-        private static readonly __Value<string?> _regionId = new __Value<string?>(() => __config.Get("regionId"));
+        private static readonly __Value<string?> _regionId = new __Value<string?>(() => __config.Get("regionId") ?? Utilities.GetEnv("YANDEX_CLOUD_REGION_ID"));
         /// <summary>
         /// [The region](https://yandex.cloud/docs/overview/concepts/region) where operations will take place. For example
         /// `ru-central1`.
@@ -127,7 +127,7 @@ namespace Pulumi.Yandex
             set => _regionId.Set(value);
         }
 
-        private static readonly __Value<string?> _serviceAccountKeyFile = new __Value<string?>(() => __config.Get("serviceAccountKeyFile"));
+        private static readonly __Value<string?> _serviceAccountKeyFile = new __Value<string?>(() => __config.Get("serviceAccountKeyFile") ?? Utilities.GetEnv("YANDEX_CLOUD_SERVICE_ACCOUNT_KEY_FILE"));
         /// <summary>
         /// Contains either a path to or the contents of the [Service Account
         /// file](https://yandex.cloud/docs/iam/concepts/authorization/key) in JSON format. This can also be specified using
@@ -144,7 +144,7 @@ namespace Pulumi.Yandex
             set => _serviceAccountKeyFile.Set(value);
         }
 
-        private static readonly __Value<string?> _sharedCredentialsFile = new __Value<string?>(() => __config.Get("sharedCredentialsFile"));
+        private static readonly __Value<string?> _sharedCredentialsFile = new __Value<string?>(() => __config.Get("sharedCredentialsFile") ?? Utilities.GetEnv("YANDEX_CLOUD_SHARED_CREDENTIALS_FILE"));
         /// <summary>
         /// Shared credentials file path. Supported keys: `storage_access_key` and `storage_secret_key`. &gt; The `storage_access_key`
         /// and `storage_secret_key` attributes from the shared credentials file are used only when the provider and a storage
@@ -156,7 +156,7 @@ namespace Pulumi.Yandex
             set => _sharedCredentialsFile.Set(value);
         }
 
-        private static readonly __Value<string?> _storageAccessKey = new __Value<string?>(() => __config.Get("storageAccessKey"));
+        private static readonly __Value<string?> _storageAccessKey = new __Value<string?>(() => __config.Get("storageAccessKey") ?? Utilities.GetEnv("YANDEX_CLOUD_STORAGE_ACCESS_KEY"));
         /// <summary>
         /// Yandex Cloud Object Storage access key, which is used when a storage data/resource doesn't have an access key explicitly
         /// specified. This can also be specified using environment variable `YC_STORAGE_ACCESS_KEY`.
@@ -167,7 +167,7 @@ namespace Pulumi.Yandex
             set => _storageAccessKey.Set(value);
         }
 
-        private static readonly __Value<string?> _storageEndpoint = new __Value<string?>(() => __config.Get("storageEndpoint"));
+        private static readonly __Value<string?> _storageEndpoint = new __Value<string?>(() => __config.Get("storageEndpoint") ?? Utilities.GetEnv("YANDEX_CLOUD_STORAGE_ENDPOINT"));
         /// <summary>
         /// Yandex Cloud [Object Storage Endpoint](https://yandex.cloud/docs/storage/s3/#request-url), which is used to connect to
         /// `S3 API`. Default value is **storage.yandexcloud.net**.
@@ -178,7 +178,7 @@ namespace Pulumi.Yandex
             set => _storageEndpoint.Set(value);
         }
 
-        private static readonly __Value<string?> _storageSecretKey = new __Value<string?>(() => __config.Get("storageSecretKey"));
+        private static readonly __Value<string?> _storageSecretKey = new __Value<string?>(() => __config.Get("storageSecretKey") ?? Utilities.GetEnv("YANDEX_CLOUD_STORAGE_SECRET_KEY"));
         /// <summary>
         /// Yandex Cloud Object Storage secret key, which is used when a storage data/resource doesn't have a secret key explicitly
         /// specified. This can also be specified using environment variable `YC_STORAGE_SECRET_KEY`.
@@ -189,7 +189,7 @@ namespace Pulumi.Yandex
             set => _storageSecretKey.Set(value);
         }
 
-        private static readonly __Value<string?> _token = new __Value<string?>(() => __config.Get("token"));
+        private static readonly __Value<string?> _token = new __Value<string?>(() => __config.Get("token") ?? Utilities.GetEnv("YANDEX_CLOUD_TOKEN"));
         /// <summary>
         /// Security token or IAM token used for authentication in Yandex Cloud. Check
         /// [documentation](https://yandex.cloud/docs/iam/operations/iam-token/create) about how to create IAM token. This can also
@@ -201,7 +201,7 @@ namespace Pulumi.Yandex
             set => _token.Set(value);
         }
 
-        private static readonly __Value<string?> _ymqAccessKey = new __Value<string?>(() => __config.Get("ymqAccessKey"));
+        private static readonly __Value<string?> _ymqAccessKey = new __Value<string?>(() => __config.Get("ymqAccessKey") ?? Utilities.GetEnv("YANDEX_CLOUD_YMQ_ACCESS_KEY"));
         /// <summary>
         /// Yandex Cloud Message Queue service access key, which is used when a YMQ queue resource doesn't have an access key
         /// explicitly specified. This can also be specified using environment variable `YC_MESSAGE_QUEUE_ACCESS_KEY`.
@@ -212,7 +212,7 @@ namespace Pulumi.Yandex
             set => _ymqAccessKey.Set(value);
         }
 
-        private static readonly __Value<string?> _ymqEndpoint = new __Value<string?>(() => __config.Get("ymqEndpoint"));
+        private static readonly __Value<string?> _ymqEndpoint = new __Value<string?>(() => __config.Get("ymqEndpoint") ?? Utilities.GetEnv("YANDEX_CLOUD_YMQ_ENDPOINT"));
         /// <summary>
         /// Yandex Cloud Message Queue service endpoint. Default value is **message-queue.api.cloud.yandex.net**.
         /// </summary>
@@ -222,7 +222,7 @@ namespace Pulumi.Yandex
             set => _ymqEndpoint.Set(value);
         }
 
-        private static readonly __Value<string?> _ymqSecretKey = new __Value<string?>(() => __config.Get("ymqSecretKey"));
+        private static readonly __Value<string?> _ymqSecretKey = new __Value<string?>(() => __config.Get("ymqSecretKey") ?? Utilities.GetEnv("YANDEX_CLOUD_YMQ_SECRET_KEY"));
         /// <summary>
         /// Yandex Cloud Message Queue service secret key, which is used when a YMQ queue resource doesn't have a secret key
         /// explicitly specified. This can also be specified using environment variable `YC_MESSAGE_QUEUE_SECRET_KEY`.
@@ -233,7 +233,7 @@ namespace Pulumi.Yandex
             set => _ymqSecretKey.Set(value);
         }
 
-        private static readonly __Value<string?> _zone = new __Value<string?>(() => __config.Get("zone"));
+        private static readonly __Value<string?> _zone = new __Value<string?>(() => __config.Get("zone") ?? Utilities.GetEnv("YANDEX_CLOUD_ZONE"));
         /// <summary>
         /// The default [availability zone](https://yandex.cloud/docs/overview/concepts/geo-scope) to operate under, if not
         /// specified by a given resource. This can also be specified using environment variable `YC_ZONE`.

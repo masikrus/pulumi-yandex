@@ -83,42 +83,80 @@ class ProviderArgs:
         :param pulumi.Input[builtins.str] zone: The default [availability zone](https://yandex.cloud/docs/overview/concepts/geo-scope) to operate under, if not
                specified by a given resource. This can also be specified using environment variable `YC_ZONE`.
         """
+        if cloud_id is None:
+            cloud_id = _utilities.get_env('YANDEX_CLOUD_CLOUD_ID')
         if cloud_id is not None:
             pulumi.set(__self__, "cloud_id", cloud_id)
+        if endpoint is None:
+            endpoint = _utilities.get_env('YANDEX_CLOUD_ENDPOINT')
         if endpoint is not None:
             pulumi.set(__self__, "endpoint", endpoint)
+        if folder_id is None:
+            folder_id = _utilities.get_env('YANDEX_CLOUD_FOLDER_ID')
         if folder_id is not None:
             pulumi.set(__self__, "folder_id", folder_id)
+        if insecure is None:
+            insecure = _utilities.get_env_bool('YANDEX_CLOUD_INSECURE')
         if insecure is not None:
             pulumi.set(__self__, "insecure", insecure)
+        if max_retries is None:
+            max_retries = _utilities.get_env_int('YANDEX_CLOUD_MAX_RETRIES')
         if max_retries is not None:
             pulumi.set(__self__, "max_retries", max_retries)
+        if organization_id is None:
+            organization_id = _utilities.get_env('YANDEX_CLOUD_ORGANIZATION_ID')
         if organization_id is not None:
             pulumi.set(__self__, "organization_id", organization_id)
+        if plaintext is None:
+            plaintext = _utilities.get_env_bool('YANDEX_CLOUD_PLAINTEXT')
         if plaintext is not None:
             pulumi.set(__self__, "plaintext", plaintext)
+        if profile is None:
+            profile = _utilities.get_env('YANDEX_CLOUD_PROFILE')
         if profile is not None:
             pulumi.set(__self__, "profile", profile)
+        if region_id is None:
+            region_id = _utilities.get_env('YANDEX_CLOUD_REGION_ID')
         if region_id is not None:
             pulumi.set(__self__, "region_id", region_id)
+        if service_account_key_file is None:
+            service_account_key_file = _utilities.get_env('YANDEX_CLOUD_SERVICE_ACCOUNT_KEY_FILE')
         if service_account_key_file is not None:
             pulumi.set(__self__, "service_account_key_file", service_account_key_file)
+        if shared_credentials_file is None:
+            shared_credentials_file = _utilities.get_env('YANDEX_CLOUD_SHARED_CREDENTIALS_FILE')
         if shared_credentials_file is not None:
             pulumi.set(__self__, "shared_credentials_file", shared_credentials_file)
+        if storage_access_key is None:
+            storage_access_key = _utilities.get_env('YANDEX_CLOUD_STORAGE_ACCESS_KEY')
         if storage_access_key is not None:
             pulumi.set(__self__, "storage_access_key", storage_access_key)
+        if storage_endpoint is None:
+            storage_endpoint = _utilities.get_env('YANDEX_CLOUD_STORAGE_ENDPOINT')
         if storage_endpoint is not None:
             pulumi.set(__self__, "storage_endpoint", storage_endpoint)
+        if storage_secret_key is None:
+            storage_secret_key = _utilities.get_env('YANDEX_CLOUD_STORAGE_SECRET_KEY')
         if storage_secret_key is not None:
             pulumi.set(__self__, "storage_secret_key", storage_secret_key)
+        if token is None:
+            token = _utilities.get_env('YANDEX_CLOUD_TOKEN')
         if token is not None:
             pulumi.set(__self__, "token", token)
+        if ymq_access_key is None:
+            ymq_access_key = _utilities.get_env('YANDEX_CLOUD_YMQ_ACCESS_KEY')
         if ymq_access_key is not None:
             pulumi.set(__self__, "ymq_access_key", ymq_access_key)
+        if ymq_endpoint is None:
+            ymq_endpoint = _utilities.get_env('YANDEX_CLOUD_YMQ_ENDPOINT')
         if ymq_endpoint is not None:
             pulumi.set(__self__, "ymq_endpoint", ymq_endpoint)
+        if ymq_secret_key is None:
+            ymq_secret_key = _utilities.get_env('YANDEX_CLOUD_YMQ_SECRET_KEY')
         if ymq_secret_key is not None:
             pulumi.set(__self__, "ymq_secret_key", ymq_secret_key)
+        if zone is None:
+            zone = _utilities.get_env('YANDEX_CLOUD_ZONE')
         if zone is not None:
             pulumi.set(__self__, "zone", zone)
 
@@ -504,24 +542,62 @@ class Provider(pulumi.ProviderResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = ProviderArgs.__new__(ProviderArgs)
 
+            if cloud_id is None:
+                cloud_id = _utilities.get_env('YANDEX_CLOUD_CLOUD_ID')
             __props__.__dict__["cloud_id"] = cloud_id
+            if endpoint is None:
+                endpoint = _utilities.get_env('YANDEX_CLOUD_ENDPOINT')
             __props__.__dict__["endpoint"] = endpoint
+            if folder_id is None:
+                folder_id = _utilities.get_env('YANDEX_CLOUD_FOLDER_ID')
             __props__.__dict__["folder_id"] = folder_id
+            if insecure is None:
+                insecure = _utilities.get_env_bool('YANDEX_CLOUD_INSECURE')
             __props__.__dict__["insecure"] = pulumi.Output.from_input(insecure).apply(pulumi.runtime.to_json) if insecure is not None else None
+            if max_retries is None:
+                max_retries = _utilities.get_env_int('YANDEX_CLOUD_MAX_RETRIES')
             __props__.__dict__["max_retries"] = pulumi.Output.from_input(max_retries).apply(pulumi.runtime.to_json) if max_retries is not None else None
+            if organization_id is None:
+                organization_id = _utilities.get_env('YANDEX_CLOUD_ORGANIZATION_ID')
             __props__.__dict__["organization_id"] = organization_id
+            if plaintext is None:
+                plaintext = _utilities.get_env_bool('YANDEX_CLOUD_PLAINTEXT')
             __props__.__dict__["plaintext"] = pulumi.Output.from_input(plaintext).apply(pulumi.runtime.to_json) if plaintext is not None else None
+            if profile is None:
+                profile = _utilities.get_env('YANDEX_CLOUD_PROFILE')
             __props__.__dict__["profile"] = profile
+            if region_id is None:
+                region_id = _utilities.get_env('YANDEX_CLOUD_REGION_ID')
             __props__.__dict__["region_id"] = region_id
+            if service_account_key_file is None:
+                service_account_key_file = _utilities.get_env('YANDEX_CLOUD_SERVICE_ACCOUNT_KEY_FILE')
             __props__.__dict__["service_account_key_file"] = service_account_key_file
+            if shared_credentials_file is None:
+                shared_credentials_file = _utilities.get_env('YANDEX_CLOUD_SHARED_CREDENTIALS_FILE')
             __props__.__dict__["shared_credentials_file"] = shared_credentials_file
+            if storage_access_key is None:
+                storage_access_key = _utilities.get_env('YANDEX_CLOUD_STORAGE_ACCESS_KEY')
             __props__.__dict__["storage_access_key"] = storage_access_key
+            if storage_endpoint is None:
+                storage_endpoint = _utilities.get_env('YANDEX_CLOUD_STORAGE_ENDPOINT')
             __props__.__dict__["storage_endpoint"] = storage_endpoint
+            if storage_secret_key is None:
+                storage_secret_key = _utilities.get_env('YANDEX_CLOUD_STORAGE_SECRET_KEY')
             __props__.__dict__["storage_secret_key"] = None if storage_secret_key is None else pulumi.Output.secret(storage_secret_key)
+            if token is None:
+                token = _utilities.get_env('YANDEX_CLOUD_TOKEN')
             __props__.__dict__["token"] = None if token is None else pulumi.Output.secret(token)
+            if ymq_access_key is None:
+                ymq_access_key = _utilities.get_env('YANDEX_CLOUD_YMQ_ACCESS_KEY')
             __props__.__dict__["ymq_access_key"] = ymq_access_key
+            if ymq_endpoint is None:
+                ymq_endpoint = _utilities.get_env('YANDEX_CLOUD_YMQ_ENDPOINT')
             __props__.__dict__["ymq_endpoint"] = ymq_endpoint
+            if ymq_secret_key is None:
+                ymq_secret_key = _utilities.get_env('YANDEX_CLOUD_YMQ_SECRET_KEY')
             __props__.__dict__["ymq_secret_key"] = None if ymq_secret_key is None else pulumi.Output.secret(ymq_secret_key)
+            if zone is None:
+                zone = _utilities.get_env('YANDEX_CLOUD_ZONE')
             __props__.__dict__["zone"] = zone
         secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["storageSecretKey", "token", "ymqSecretKey"])
         opts = pulumi.ResourceOptions.merge(opts, secret_opts)

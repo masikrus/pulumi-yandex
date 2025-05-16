@@ -138,6 +138,104 @@ func Provider() tfbridge.ProviderInfo {
 		GitHubOrg:    "",
 		MetadataInfo: tfbridge.NewProviderMetadata(metadata),
 
+		Config: map[string]*tfbridge.SchemaInfo{
+			"endpoint": {
+				Default: &tfbridge.DefaultInfo{
+					EnvVars: []string{"YANDEX_CLOUD_ENDPOINT"},
+				},
+			},
+			"folder_id": {
+				Default: &tfbridge.DefaultInfo{
+					EnvVars: []string{"YANDEX_CLOUD_FOLDER_ID"},
+				},
+			},
+			"cloud_id": {
+				Default: &tfbridge.DefaultInfo{
+					EnvVars: []string{"YANDEX_CLOUD_CLOUD_ID"},
+				},
+			},
+			"organization_id": {
+				Default: &tfbridge.DefaultInfo{
+					EnvVars: []string{"YANDEX_CLOUD_ORGANIZATION_ID"},
+				},
+			},
+			"region_id": {
+				Default: &tfbridge.DefaultInfo{
+					EnvVars: []string{"YANDEX_CLOUD_REGION_ID"},
+				},
+			},
+			"zone": {
+				Default: &tfbridge.DefaultInfo{
+					EnvVars: []string{"YANDEX_CLOUD_ZONE"},
+				},
+			},
+			"token": {
+				Default: &tfbridge.DefaultInfo{
+					EnvVars: []string{"YANDEX_CLOUD_TOKEN"},
+				},
+			},
+			"service_account_key_file": {
+				Default: &tfbridge.DefaultInfo{
+					EnvVars: []string{"YANDEX_CLOUD_SERVICE_ACCOUNT_KEY_FILE"},
+				},
+			},
+			"storage_endpoint": {
+				Default: &tfbridge.DefaultInfo{
+					EnvVars: []string{"YANDEX_CLOUD_STORAGE_ENDPOINT"},
+				},
+			},
+			"storage_access_key": {
+				Default: &tfbridge.DefaultInfo{
+					EnvVars: []string{"YANDEX_CLOUD_STORAGE_ACCESS_KEY"},
+				},
+			},
+			"storage_secret_key": {
+				Default: &tfbridge.DefaultInfo{
+					EnvVars: []string{"YANDEX_CLOUD_STORAGE_SECRET_KEY"},
+				},
+			},
+			"insecure": {
+				Default: &tfbridge.DefaultInfo{
+					EnvVars: []string{"YANDEX_CLOUD_INSECURE"},
+				},
+			},
+			"plaintext": {
+				Default: &tfbridge.DefaultInfo{
+					EnvVars: []string{"YANDEX_CLOUD_PLAINTEXT"},
+				},
+			},
+			"max_retries": {
+				Default: &tfbridge.DefaultInfo{
+					EnvVars: []string{"YANDEX_CLOUD_MAX_RETRIES"},
+				},
+			},
+			"ymq_endpoint": {
+				Default: &tfbridge.DefaultInfo{
+					EnvVars: []string{"YANDEX_CLOUD_YMQ_ENDPOINT"},
+				},
+			},
+			"ymq_access_key": {
+				Default: &tfbridge.DefaultInfo{
+					EnvVars: []string{"YANDEX_CLOUD_YMQ_ACCESS_KEY"},
+				},
+			},
+			"ymq_secret_key": {
+				Default: &tfbridge.DefaultInfo{
+					EnvVars: []string{"YANDEX_CLOUD_YMQ_SECRET_KEY"},
+				},
+			},
+			"shared_credentials_file": {
+				Default: &tfbridge.DefaultInfo{
+					EnvVars: []string{"YANDEX_CLOUD_SHARED_CREDENTIALS_FILE"},
+				},
+			},
+			"profile": {
+				Default: &tfbridge.DefaultInfo{
+					EnvVars: []string{"YANDEX_CLOUD_PROFILE"},
+				},
+			},
+		},
+
 		JavaScript: &tfbridge.JavaScriptInfo{
 			// RespectSchemaVersion ensures the SDK is generated linking to the correct version of the provider.
 			PackageName:          "pulumi-yandex",
