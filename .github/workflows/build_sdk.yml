@@ -73,6 +73,7 @@ jobs:
         with:
           # Keep these in sync with the Renovate step below to avoid them getting checked in.
           allowed-changes: |
+            **/README.md
             sdk/**/pulumi-plugin.json
             sdk/dotnet/*.csproj
             sdk/go/**/pulumiUtilities.go
