@@ -219,6 +219,9 @@
                             }
                         }
                     },
+                    "auto_scale_policy": {
+                        "maxItemsOne": true
+                    },
                     "listener": {
                         "maxItemsOne": false,
                         "elem": {
@@ -489,6 +492,9 @@
                                                                 }
                                                             }
                                                         },
+                                                        "regex_rewrite": {
+                                                            "maxItemsOne": true
+                                                        },
                                                         "upgrade_types": {
                                                             "maxItemsOne": false
                                                         }
@@ -675,6 +681,9 @@
                                     "maxItemsOne": false,
                                     "elem": {
                                         "fields": {
+                                            "dns_filter": {
+                                                "maxItemsOne": true
+                                            },
                                             "excluded_events": {
                                                 "maxItemsOne": false
                                             },
@@ -832,6 +841,9 @@
                                 "cors": {
                                     "maxItemsOne": false
                                 },
+                                "edge_cache_settings_codes": {
+                                    "maxItemsOne": true
+                                },
                                 "ip_address_acl": {
                                     "maxItemsOne": true,
                                     "elem": {
@@ -846,6 +858,9 @@
                                     "maxItemsOne": false
                                 },
                                 "query_params_whitelist": {
+                                    "maxItemsOne": false
+                                },
+                                "stale": {
                                     "maxItemsOne": false
                                 }
                             }
@@ -884,19 +899,6 @@
                     }
                 }
             },
-            "yandex_cm_certificate_iam_binding": {
-                "current": "yandex:index/cmCertificateIamBinding:CmCertificateIamBinding",
-                "majorVersion": 1,
-                "fields": {
-                    "members": {
-                        "maxItemsOne": false
-                    }
-                }
-            },
-            "yandex_cm_certificate_iam_member": {
-                "current": "yandex:index/cmCertificateIamMember:CmCertificateIamMember",
-                "majorVersion": 1
-            },
             "yandex_compute_disk": {
                 "current": "yandex:index/computeDisk:ComputeDisk",
                 "majorVersion": 1,
@@ -921,18 +923,6 @@
                         "maxItemsOne": false
                     }
                 }
-            },
-            "yandex_compute_disk_placement_group": {
-                "current": "yandex:index/computeDiskPlacementGroup:ComputeDiskPlacementGroup",
-                "majorVersion": 1
-            },
-            "yandex_compute_filesystem": {
-                "current": "yandex:index/computeFilesystem:ComputeFilesystem",
-                "majorVersion": 1
-            },
-            "yandex_compute_gpu_cluster": {
-                "current": "yandex:index/computeGpuCluster:ComputeGpuCluster",
-                "majorVersion": 1
             },
             "yandex_compute_image": {
                 "current": "yandex:index/computeImage:ComputeImage",
@@ -1232,19 +1222,6 @@
                     }
                 }
             },
-            "yandex_container_registry": {
-                "current": "yandex:index/containerRegistry:ContainerRegistry",
-                "majorVersion": 1
-            },
-            "yandex_container_registry_iam_binding": {
-                "current": "yandex:index/containerRegistryIamBinding:ContainerRegistryIamBinding",
-                "majorVersion": 1,
-                "fields": {
-                    "members": {
-                        "maxItemsOne": false
-                    }
-                }
-            },
             "yandex_container_registry_ip_permission": {
                 "current": "yandex:index/containerRegistryIpPermission:ContainerRegistryIpPermission",
                 "majorVersion": 1,
@@ -1253,19 +1230,6 @@
                         "maxItemsOne": false
                     },
                     "push": {
-                        "maxItemsOne": false
-                    }
-                }
-            },
-            "yandex_container_repository": {
-                "current": "yandex:index/containerRepository:ContainerRepository",
-                "majorVersion": 1
-            },
-            "yandex_container_repository_iam_binding": {
-                "current": "yandex:index/containerRepositoryIamBinding:ContainerRepositoryIamBinding",
-                "majorVersion": 1,
-                "fields": {
-                    "members": {
                         "maxItemsOne": false
                     }
                 }
@@ -1334,1099 +1298,6 @@
                     }
                 }
             },
-            "yandex_datatransfer_endpoint": {
-                "current": "yandex:index/datatransferEndpoint:DatatransferEndpoint",
-                "majorVersion": 1,
-                "fields": {
-                    "settings": {
-                        "maxItemsOne": true,
-                        "elem": {
-                            "fields": {
-                                "clickhouse_source": {
-                                    "maxItemsOne": true,
-                                    "elem": {
-                                        "fields": {
-                                            "connection": {
-                                                "maxItemsOne": true,
-                                                "elem": {
-                                                    "fields": {
-                                                        "connection_options": {
-                                                            "maxItemsOne": true,
-                                                            "elem": {
-                                                                "fields": {
-                                                                    "on_premise": {
-                                                                        "maxItemsOne": true,
-                                                                        "elem": {
-                                                                            "fields": {
-                                                                                "shards": {
-                                                                                    "maxItemsOne": false,
-                                                                                    "elem": {
-                                                                                        "fields": {
-                                                                                            "hosts": {
-                                                                                                "maxItemsOne": false
-                                                                                            }
-                                                                                        }
-                                                                                    }
-                                                                                },
-                                                                                "tls_mode": {
-                                                                                    "maxItemsOne": true,
-                                                                                    "elem": {
-                                                                                        "fields": {
-                                                                                            "disabled": {
-                                                                                                "maxItemsOne": true
-                                                                                            },
-                                                                                            "enabled": {
-                                                                                                "maxItemsOne": true
-                                                                                            }
-                                                                                        }
-                                                                                    }
-                                                                                }
-                                                                            }
-                                                                        }
-                                                                    },
-                                                                    "password": {
-                                                                        "maxItemsOne": true
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            },
-                                            "exclude_tables": {
-                                                "maxItemsOne": false
-                                            },
-                                            "include_tables": {
-                                                "maxItemsOne": false
-                                            },
-                                            "security_groups": {
-                                                "maxItemsOne": false
-                                            }
-                                        }
-                                    }
-                                },
-                                "clickhouse_target": {
-                                    "maxItemsOne": true,
-                                    "elem": {
-                                        "fields": {
-                                            "alt_names": {
-                                                "maxItemsOne": false
-                                            },
-                                            "connection": {
-                                                "maxItemsOne": true,
-                                                "elem": {
-                                                    "fields": {
-                                                        "connection_options": {
-                                                            "maxItemsOne": true,
-                                                            "elem": {
-                                                                "fields": {
-                                                                    "on_premise": {
-                                                                        "maxItemsOne": true,
-                                                                        "elem": {
-                                                                            "fields": {
-                                                                                "shards": {
-                                                                                    "maxItemsOne": false,
-                                                                                    "elem": {
-                                                                                        "fields": {
-                                                                                            "hosts": {
-                                                                                                "maxItemsOne": false
-                                                                                            }
-                                                                                        }
-                                                                                    }
-                                                                                },
-                                                                                "tls_mode": {
-                                                                                    "maxItemsOne": true,
-                                                                                    "elem": {
-                                                                                        "fields": {
-                                                                                            "disabled": {
-                                                                                                "maxItemsOne": true
-                                                                                            },
-                                                                                            "enabled": {
-                                                                                                "maxItemsOne": true
-                                                                                            }
-                                                                                        }
-                                                                                    }
-                                                                                }
-                                                                            }
-                                                                        }
-                                                                    },
-                                                                    "password": {
-                                                                        "maxItemsOne": true
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            },
-                                            "security_groups": {
-                                                "maxItemsOne": false
-                                            },
-                                            "sharding": {
-                                                "maxItemsOne": true,
-                                                "elem": {
-                                                    "fields": {
-                                                        "column_value_hash": {
-                                                            "maxItemsOne": true
-                                                        },
-                                                        "custom_mapping": {
-                                                            "maxItemsOne": true,
-                                                            "elem": {
-                                                                "fields": {
-                                                                    "mapping": {
-                                                                        "maxItemsOne": false,
-                                                                        "elem": {
-                                                                            "fields": {
-                                                                                "column_value": {
-                                                                                    "maxItemsOne": true
-                                                                                }
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                }
-                                                            }
-                                                        },
-                                                        "round_robin": {
-                                                            "maxItemsOne": true
-                                                        },
-                                                        "transfer_id": {
-                                                            "maxItemsOne": true
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                },
-                                "kafka_source": {
-                                    "maxItemsOne": true,
-                                    "elem": {
-                                        "fields": {
-                                            "auth": {
-                                                "maxItemsOne": true,
-                                                "elem": {
-                                                    "fields": {
-                                                        "no_auth": {
-                                                            "maxItemsOne": true
-                                                        },
-                                                        "sasl": {
-                                                            "maxItemsOne": true,
-                                                            "elem": {
-                                                                "fields": {
-                                                                    "password": {
-                                                                        "maxItemsOne": true
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            },
-                                            "connection": {
-                                                "maxItemsOne": true,
-                                                "elem": {
-                                                    "fields": {
-                                                        "on_premise": {
-                                                            "maxItemsOne": true,
-                                                            "elem": {
-                                                                "fields": {
-                                                                    "broker_urls": {
-                                                                        "maxItemsOne": false
-                                                                    },
-                                                                    "tls_mode": {
-                                                                        "maxItemsOne": true,
-                                                                        "elem": {
-                                                                            "fields": {
-                                                                                "disabled": {
-                                                                                    "maxItemsOne": true
-                                                                                },
-                                                                                "enabled": {
-                                                                                    "maxItemsOne": true
-                                                                                }
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            },
-                                            "parser": {
-                                                "maxItemsOne": true,
-                                                "elem": {
-                                                    "fields": {
-                                                        "audit_trails_v1_parser": {
-                                                            "maxItemsOne": true
-                                                        },
-                                                        "cloud_logging_parser": {
-                                                            "maxItemsOne": true
-                                                        },
-                                                        "json_parser": {
-                                                            "maxItemsOne": true,
-                                                            "elem": {
-                                                                "fields": {
-                                                                    "data_schema": {
-                                                                        "maxItemsOne": true,
-                                                                        "elem": {
-                                                                            "fields": {
-                                                                                "fields": {
-                                                                                    "maxItemsOne": true,
-                                                                                    "elem": {
-                                                                                        "fields": {
-                                                                                            "fields": {
-                                                                                                "maxItemsOne": false
-                                                                                            }
-                                                                                        }
-                                                                                    }
-                                                                                }
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                }
-                                                            }
-                                                        },
-                                                        "tskv_parser": {
-                                                            "maxItemsOne": true,
-                                                            "elem": {
-                                                                "fields": {
-                                                                    "data_schema": {
-                                                                        "maxItemsOne": true,
-                                                                        "elem": {
-                                                                            "fields": {
-                                                                                "fields": {
-                                                                                    "maxItemsOne": true,
-                                                                                    "elem": {
-                                                                                        "fields": {
-                                                                                            "fields": {
-                                                                                                "maxItemsOne": false
-                                                                                            }
-                                                                                        }
-                                                                                    }
-                                                                                }
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            },
-                                            "security_groups": {
-                                                "maxItemsOne": false
-                                            },
-                                            "topic_names": {
-                                                "maxItemsOne": false
-                                            },
-                                            "transformer": {
-                                                "maxItemsOne": true
-                                            }
-                                        }
-                                    }
-                                },
-                                "kafka_target": {
-                                    "maxItemsOne": true,
-                                    "elem": {
-                                        "fields": {
-                                            "auth": {
-                                                "maxItemsOne": true,
-                                                "elem": {
-                                                    "fields": {
-                                                        "no_auth": {
-                                                            "maxItemsOne": true
-                                                        },
-                                                        "sasl": {
-                                                            "maxItemsOne": true,
-                                                            "elem": {
-                                                                "fields": {
-                                                                    "password": {
-                                                                        "maxItemsOne": true
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            },
-                                            "connection": {
-                                                "maxItemsOne": true,
-                                                "elem": {
-                                                    "fields": {
-                                                        "on_premise": {
-                                                            "maxItemsOne": true,
-                                                            "elem": {
-                                                                "fields": {
-                                                                    "broker_urls": {
-                                                                        "maxItemsOne": false
-                                                                    },
-                                                                    "tls_mode": {
-                                                                        "maxItemsOne": true,
-                                                                        "elem": {
-                                                                            "fields": {
-                                                                                "disabled": {
-                                                                                    "maxItemsOne": true
-                                                                                },
-                                                                                "enabled": {
-                                                                                    "maxItemsOne": true
-                                                                                }
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            },
-                                            "security_groups": {
-                                                "maxItemsOne": false
-                                            },
-                                            "serializer": {
-                                                "maxItemsOne": true,
-                                                "elem": {
-                                                    "fields": {
-                                                        "serializer_auto": {
-                                                            "maxItemsOne": true
-                                                        },
-                                                        "serializer_debezium": {
-                                                            "maxItemsOne": true,
-                                                            "elem": {
-                                                                "fields": {
-                                                                    "serializer_parameters": {
-                                                                        "maxItemsOne": false
-                                                                    }
-                                                                }
-                                                            }
-                                                        },
-                                                        "serializer_json": {
-                                                            "maxItemsOne": true
-                                                        }
-                                                    }
-                                                }
-                                            },
-                                            "topic_settings": {
-                                                "maxItemsOne": true,
-                                                "elem": {
-                                                    "fields": {
-                                                        "topic": {
-                                                            "maxItemsOne": true
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                },
-                                "metrika_source": {
-                                    "maxItemsOne": true,
-                                    "elem": {
-                                        "fields": {
-                                            "counter_ids": {
-                                                "maxItemsOne": false
-                                            },
-                                            "streams": {
-                                                "maxItemsOne": false,
-                                                "elem": {
-                                                    "fields": {
-                                                        "columns": {
-                                                            "maxItemsOne": false
-                                                        }
-                                                    }
-                                                }
-                                            },
-                                            "token": {
-                                                "maxItemsOne": true
-                                            }
-                                        }
-                                    }
-                                },
-                                "mongo_source": {
-                                    "maxItemsOne": true,
-                                    "elem": {
-                                        "fields": {
-                                            "collections": {
-                                                "maxItemsOne": false
-                                            },
-                                            "connection": {
-                                                "maxItemsOne": true,
-                                                "elem": {
-                                                    "fields": {
-                                                        "connection_options": {
-                                                            "maxItemsOne": true,
-                                                            "elem": {
-                                                                "fields": {
-                                                                    "on_premise": {
-                                                                        "maxItemsOne": true,
-                                                                        "elem": {
-                                                                            "fields": {
-                                                                                "hosts": {
-                                                                                    "maxItemsOne": false
-                                                                                },
-                                                                                "tls_mode": {
-                                                                                    "maxItemsOne": true,
-                                                                                    "elem": {
-                                                                                        "fields": {
-                                                                                            "disabled": {
-                                                                                                "maxItemsOne": true
-                                                                                            },
-                                                                                            "enabled": {
-                                                                                                "maxItemsOne": true
-                                                                                            }
-                                                                                        }
-                                                                                    }
-                                                                                }
-                                                                            }
-                                                                        }
-                                                                    },
-                                                                    "password": {
-                                                                        "maxItemsOne": true
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            },
-                                            "excluded_collections": {
-                                                "maxItemsOne": false
-                                            },
-                                            "security_groups": {
-                                                "maxItemsOne": false
-                                            }
-                                        }
-                                    }
-                                },
-                                "mongo_target": {
-                                    "maxItemsOne": true,
-                                    "elem": {
-                                        "fields": {
-                                            "connection": {
-                                                "maxItemsOne": true,
-                                                "elem": {
-                                                    "fields": {
-                                                        "connection_options": {
-                                                            "maxItemsOne": true,
-                                                            "elem": {
-                                                                "fields": {
-                                                                    "on_premise": {
-                                                                        "maxItemsOne": true,
-                                                                        "elem": {
-                                                                            "fields": {
-                                                                                "hosts": {
-                                                                                    "maxItemsOne": false
-                                                                                },
-                                                                                "tls_mode": {
-                                                                                    "maxItemsOne": true,
-                                                                                    "elem": {
-                                                                                        "fields": {
-                                                                                            "disabled": {
-                                                                                                "maxItemsOne": true
-                                                                                            },
-                                                                                            "enabled": {
-                                                                                                "maxItemsOne": true
-                                                                                            }
-                                                                                        }
-                                                                                    }
-                                                                                }
-                                                                            }
-                                                                        }
-                                                                    },
-                                                                    "password": {
-                                                                        "maxItemsOne": true
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            },
-                                            "security_groups": {
-                                                "maxItemsOne": false
-                                            }
-                                        }
-                                    }
-                                },
-                                "mysql_source": {
-                                    "maxItemsOne": true,
-                                    "elem": {
-                                        "fields": {
-                                            "connection": {
-                                                "maxItemsOne": true,
-                                                "elem": {
-                                                    "fields": {
-                                                        "on_premise": {
-                                                            "maxItemsOne": true,
-                                                            "elem": {
-                                                                "fields": {
-                                                                    "hosts": {
-                                                                        "maxItemsOne": false
-                                                                    },
-                                                                    "tls_mode": {
-                                                                        "maxItemsOne": true,
-                                                                        "elem": {
-                                                                            "fields": {
-                                                                                "disabled": {
-                                                                                    "maxItemsOne": true
-                                                                                },
-                                                                                "enabled": {
-                                                                                    "maxItemsOne": true
-                                                                                }
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            },
-                                            "exclude_tables_regex": {
-                                                "maxItemsOne": false
-                                            },
-                                            "include_tables_regex": {
-                                                "maxItemsOne": false
-                                            },
-                                            "object_transfer_settings": {
-                                                "maxItemsOne": true
-                                            },
-                                            "password": {
-                                                "maxItemsOne": true
-                                            },
-                                            "security_groups": {
-                                                "maxItemsOne": false
-                                            }
-                                        }
-                                    }
-                                },
-                                "mysql_target": {
-                                    "maxItemsOne": true,
-                                    "elem": {
-                                        "fields": {
-                                            "connection": {
-                                                "maxItemsOne": true,
-                                                "elem": {
-                                                    "fields": {
-                                                        "on_premise": {
-                                                            "maxItemsOne": true,
-                                                            "elem": {
-                                                                "fields": {
-                                                                    "hosts": {
-                                                                        "maxItemsOne": false
-                                                                    },
-                                                                    "tls_mode": {
-                                                                        "maxItemsOne": true,
-                                                                        "elem": {
-                                                                            "fields": {
-                                                                                "disabled": {
-                                                                                    "maxItemsOne": true
-                                                                                },
-                                                                                "enabled": {
-                                                                                    "maxItemsOne": true
-                                                                                }
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            },
-                                            "password": {
-                                                "maxItemsOne": true
-                                            },
-                                            "security_groups": {
-                                                "maxItemsOne": false
-                                            }
-                                        }
-                                    }
-                                },
-                                "postgres_source": {
-                                    "maxItemsOne": true,
-                                    "elem": {
-                                        "fields": {
-                                            "connection": {
-                                                "maxItemsOne": true,
-                                                "elem": {
-                                                    "fields": {
-                                                        "on_premise": {
-                                                            "maxItemsOne": true,
-                                                            "elem": {
-                                                                "fields": {
-                                                                    "hosts": {
-                                                                        "maxItemsOne": false
-                                                                    },
-                                                                    "tls_mode": {
-                                                                        "maxItemsOne": true,
-                                                                        "elem": {
-                                                                            "fields": {
-                                                                                "disabled": {
-                                                                                    "maxItemsOne": true
-                                                                                },
-                                                                                "enabled": {
-                                                                                    "maxItemsOne": true
-                                                                                }
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            },
-                                            "exclude_tables": {
-                                                "maxItemsOne": false
-                                            },
-                                            "include_tables": {
-                                                "maxItemsOne": false
-                                            },
-                                            "object_transfer_settings": {
-                                                "maxItemsOne": true
-                                            },
-                                            "password": {
-                                                "maxItemsOne": true
-                                            },
-                                            "security_groups": {
-                                                "maxItemsOne": false
-                                            }
-                                        }
-                                    }
-                                },
-                                "postgres_target": {
-                                    "maxItemsOne": true,
-                                    "elem": {
-                                        "fields": {
-                                            "connection": {
-                                                "maxItemsOne": true,
-                                                "elem": {
-                                                    "fields": {
-                                                        "on_premise": {
-                                                            "maxItemsOne": true,
-                                                            "elem": {
-                                                                "fields": {
-                                                                    "hosts": {
-                                                                        "maxItemsOne": false
-                                                                    },
-                                                                    "tls_mode": {
-                                                                        "maxItemsOne": true,
-                                                                        "elem": {
-                                                                            "fields": {
-                                                                                "disabled": {
-                                                                                    "maxItemsOne": true
-                                                                                },
-                                                                                "enabled": {
-                                                                                    "maxItemsOne": true
-                                                                                }
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            },
-                                            "password": {
-                                                "maxItemsOne": true
-                                            },
-                                            "security_groups": {
-                                                "maxItemsOne": false
-                                            }
-                                        }
-                                    }
-                                },
-                                "ydb_source": {
-                                    "maxItemsOne": true,
-                                    "elem": {
-                                        "fields": {
-                                            "paths": {
-                                                "maxItemsOne": false
-                                            },
-                                            "security_groups": {
-                                                "maxItemsOne": false
-                                            }
-                                        }
-                                    }
-                                },
-                                "ydb_target": {
-                                    "maxItemsOne": true,
-                                    "elem": {
-                                        "fields": {
-                                            "security_groups": {
-                                                "maxItemsOne": false
-                                            }
-                                        }
-                                    }
-                                },
-                                "yds_source": {
-                                    "maxItemsOne": true,
-                                    "elem": {
-                                        "fields": {
-                                            "parser": {
-                                                "maxItemsOne": true,
-                                                "elem": {
-                                                    "fields": {
-                                                        "audit_trails_v1_parser": {
-                                                            "maxItemsOne": true
-                                                        },
-                                                        "cloud_logging_parser": {
-                                                            "maxItemsOne": true
-                                                        },
-                                                        "json_parser": {
-                                                            "maxItemsOne": true,
-                                                            "elem": {
-                                                                "fields": {
-                                                                    "data_schema": {
-                                                                        "maxItemsOne": true,
-                                                                        "elem": {
-                                                                            "fields": {
-                                                                                "fields": {
-                                                                                    "maxItemsOne": true,
-                                                                                    "elem": {
-                                                                                        "fields": {
-                                                                                            "fields": {
-                                                                                                "maxItemsOne": false
-                                                                                            }
-                                                                                        }
-                                                                                    }
-                                                                                }
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                }
-                                                            }
-                                                        },
-                                                        "tskv_parser": {
-                                                            "maxItemsOne": true,
-                                                            "elem": {
-                                                                "fields": {
-                                                                    "data_schema": {
-                                                                        "maxItemsOne": true,
-                                                                        "elem": {
-                                                                            "fields": {
-                                                                                "fields": {
-                                                                                    "maxItemsOne": true,
-                                                                                    "elem": {
-                                                                                        "fields": {
-                                                                                            "fields": {
-                                                                                                "maxItemsOne": false
-                                                                                            }
-                                                                                        }
-                                                                                    }
-                                                                                }
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            },
-                                            "security_groups": {
-                                                "maxItemsOne": false
-                                            },
-                                            "supported_codecs": {
-                                                "maxItemsOne": false
-                                            }
-                                        }
-                                    }
-                                },
-                                "yds_target": {
-                                    "maxItemsOne": true,
-                                    "elem": {
-                                        "fields": {
-                                            "security_groups": {
-                                                "maxItemsOne": false
-                                            },
-                                            "serializer": {
-                                                "maxItemsOne": true,
-                                                "elem": {
-                                                    "fields": {
-                                                        "serializer_auto": {
-                                                            "maxItemsOne": true
-                                                        },
-                                                        "serializer_debezium": {
-                                                            "maxItemsOne": true,
-                                                            "elem": {
-                                                                "fields": {
-                                                                    "serializer_parameters": {
-                                                                        "maxItemsOne": false
-                                                                    }
-                                                                }
-                                                            }
-                                                        },
-                                                        "serializer_json": {
-                                                            "maxItemsOne": true
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "yandex_datatransfer_transfer": {
-                "current": "yandex:index/datatransferTransfer:DatatransferTransfer",
-                "majorVersion": 1,
-                "fields": {
-                    "runtime": {
-                        "maxItemsOne": true,
-                        "elem": {
-                            "fields": {
-                                "yc_runtime": {
-                                    "maxItemsOne": true,
-                                    "elem": {
-                                        "fields": {
-                                            "upload_shard_params": {
-                                                "maxItemsOne": true
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "transformation": {
-                        "maxItemsOne": true,
-                        "elem": {
-                            "fields": {
-                                "transformers": {
-                                    "maxItemsOne": false,
-                                    "elem": {
-                                        "fields": {
-                                            "convert_to_string": {
-                                                "maxItemsOne": true,
-                                                "elem": {
-                                                    "fields": {
-                                                        "columns": {
-                                                            "maxItemsOne": true,
-                                                            "elem": {
-                                                                "fields": {
-                                                                    "exclude_columns": {
-                                                                        "maxItemsOne": false
-                                                                    },
-                                                                    "include_columns": {
-                                                                        "maxItemsOne": false
-                                                                    }
-                                                                }
-                                                            }
-                                                        },
-                                                        "tables": {
-                                                            "maxItemsOne": true,
-                                                            "elem": {
-                                                                "fields": {
-                                                                    "exclude_tables": {
-                                                                        "maxItemsOne": false
-                                                                    },
-                                                                    "include_tables": {
-                                                                        "maxItemsOne": false
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            },
-                                            "filter_columns": {
-                                                "maxItemsOne": true,
-                                                "elem": {
-                                                    "fields": {
-                                                        "columns": {
-                                                            "maxItemsOne": true,
-                                                            "elem": {
-                                                                "fields": {
-                                                                    "exclude_columns": {
-                                                                        "maxItemsOne": false
-                                                                    },
-                                                                    "include_columns": {
-                                                                        "maxItemsOne": false
-                                                                    }
-                                                                }
-                                                            }
-                                                        },
-                                                        "tables": {
-                                                            "maxItemsOne": true,
-                                                            "elem": {
-                                                                "fields": {
-                                                                    "exclude_tables": {
-                                                                        "maxItemsOne": false
-                                                                    },
-                                                                    "include_tables": {
-                                                                        "maxItemsOne": false
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            },
-                                            "filter_rows": {
-                                                "maxItemsOne": true,
-                                                "elem": {
-                                                    "fields": {
-                                                        "tables": {
-                                                            "maxItemsOne": true,
-                                                            "elem": {
-                                                                "fields": {
-                                                                    "exclude_tables": {
-                                                                        "maxItemsOne": false
-                                                                    },
-                                                                    "include_tables": {
-                                                                        "maxItemsOne": false
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            },
-                                            "mask_field": {
-                                                "maxItemsOne": true,
-                                                "elem": {
-                                                    "fields": {
-                                                        "columns": {
-                                                            "maxItemsOne": false
-                                                        },
-                                                        "function": {
-                                                            "maxItemsOne": true,
-                                                            "elem": {
-                                                                "fields": {
-                                                                    "mask_function_hash": {
-                                                                        "maxItemsOne": true
-                                                                    }
-                                                                }
-                                                            }
-                                                        },
-                                                        "tables": {
-                                                            "maxItemsOne": true,
-                                                            "elem": {
-                                                                "fields": {
-                                                                    "exclude_tables": {
-                                                                        "maxItemsOne": false
-                                                                    },
-                                                                    "include_tables": {
-                                                                        "maxItemsOne": false
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            },
-                                            "rename_tables": {
-                                                "maxItemsOne": true,
-                                                "elem": {
-                                                    "fields": {
-                                                        "rename_tables": {
-                                                            "maxItemsOne": false,
-                                                            "elem": {
-                                                                "fields": {
-                                                                    "new_name": {
-                                                                        "maxItemsOne": true
-                                                                    },
-                                                                    "original_name": {
-                                                                        "maxItemsOne": true
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            },
-                                            "replace_primary_key": {
-                                                "maxItemsOne": true,
-                                                "elem": {
-                                                    "fields": {
-                                                        "keys": {
-                                                            "maxItemsOne": false
-                                                        },
-                                                        "tables": {
-                                                            "maxItemsOne": true,
-                                                            "elem": {
-                                                                "fields": {
-                                                                    "exclude_tables": {
-                                                                        "maxItemsOne": false
-                                                                    },
-                                                                    "include_tables": {
-                                                                        "maxItemsOne": false
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            },
-                                            "sharder_transformer": {
-                                                "maxItemsOne": true,
-                                                "elem": {
-                                                    "fields": {
-                                                        "columns": {
-                                                            "maxItemsOne": true,
-                                                            "elem": {
-                                                                "fields": {
-                                                                    "exclude_columns": {
-                                                                        "maxItemsOne": false
-                                                                    },
-                                                                    "include_columns": {
-                                                                        "maxItemsOne": false
-                                                                    }
-                                                                }
-                                                            }
-                                                        },
-                                                        "tables": {
-                                                            "maxItemsOne": true,
-                                                            "elem": {
-                                                                "fields": {
-                                                                    "exclude_tables": {
-                                                                        "maxItemsOne": false
-                                                                    },
-                                                                    "include_tables": {
-                                                                        "maxItemsOne": false
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            },
-                                            "table_splitter_transformer": {
-                                                "maxItemsOne": true,
-                                                "elem": {
-                                                    "fields": {
-                                                        "columns": {
-                                                            "maxItemsOne": false
-                                                        },
-                                                        "tables": {
-                                                            "maxItemsOne": true,
-                                                            "elem": {
-                                                                "fields": {
-                                                                    "exclude_tables": {
-                                                                        "maxItemsOne": false
-                                                                    },
-                                                                    "include_tables": {
-                                                                        "maxItemsOne": false
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
             "yandex_dns_recordset": {
                 "current": "yandex:index/dnsRecordset:DnsRecordset",
                 "majorVersion": 1,
@@ -2441,15 +1312,6 @@
                 "majorVersion": 1,
                 "fields": {
                     "private_networks": {
-                        "maxItemsOne": false
-                    }
-                }
-            },
-            "yandex_dns_zone_iam_binding": {
-                "current": "yandex:index/dnsZoneIamBinding:DnsZoneIamBinding",
-                "majorVersion": 1,
-                "fields": {
-                    "members": {
                         "maxItemsOne": false
                     }
                 }
@@ -2506,15 +1368,6 @@
                         "maxItemsOne": false
                     },
                     "tags": {
-                        "maxItemsOne": false
-                    }
-                }
-            },
-            "yandex_function_iam_binding": {
-                "current": "yandex:index/functionIamBinding:FunctionIamBinding",
-                "majorVersion": 1,
-                "fields": {
-                    "members": {
                         "maxItemsOne": false
                     }
                 }
@@ -2593,9 +1446,14 @@
                     }
                 }
             },
-            "yandex_iam_service_account": {
-                "current": "yandex:index/iamServiceAccount:IamServiceAccount",
-                "majorVersion": 1
+            "yandex_iam_oauth_client_secret": {
+                "current": "yandex:index/iamOauthClientSecret:IamOauthClientSecret",
+                "majorVersion": 1,
+                "fields": {
+                    "output_to_lockbox": {
+                        "maxItemsOne": true
+                    }
+                }
             },
             "yandex_iam_service_account_api_key": {
                 "current": "yandex:index/iamServiceAccountApiKey:IamServiceAccountApiKey",
@@ -2608,19 +1466,6 @@
                         "maxItemsOne": false
                     }
                 }
-            },
-            "yandex_iam_service_account_iam_binding": {
-                "current": "yandex:index/iamServiceAccountIamBinding:IamServiceAccountIamBinding",
-                "majorVersion": 1,
-                "fields": {
-                    "members": {
-                        "maxItemsOne": false
-                    }
-                }
-            },
-            "yandex_iam_service_account_iam_member": {
-                "current": "yandex:index/iamServiceAccountIamMember:IamServiceAccountIamMember",
-                "majorVersion": 1
             },
             "yandex_iam_service_account_iam_policy": {
                 "current": "yandex:index/iamServiceAccountIamPolicy:IamServiceAccountIamPolicy",
@@ -2641,28 +1486,6 @@
                 "fields": {
                     "output_to_lockbox": {
                         "maxItemsOne": true
-                    }
-                }
-            },
-            "yandex_iam_workload_identity_federated_credential": {
-                "current": "yandex:index/iamWorkloadIdentityFederatedCredential:IamWorkloadIdentityFederatedCredential",
-                "majorVersion": 1
-            },
-            "yandex_iam_workload_identity_oidc_federation": {
-                "current": "yandex:index/iamWorkloadIdentityOidcFederation:IamWorkloadIdentityOidcFederation",
-                "majorVersion": 1,
-                "fields": {
-                    "audiences": {
-                        "maxItemsOne": false
-                    }
-                }
-            },
-            "yandex_iam_workload_identity_oidc_federation_iam_binding": {
-                "current": "yandex:index/iamWorkloadIdentityOidcFederationIamBinding:IamWorkloadIdentityOidcFederationIamBinding",
-                "majorVersion": 1,
-                "fields": {
-                    "members": {
-                        "maxItemsOne": false
                     }
                 }
             },
@@ -2705,59 +1528,8 @@
                     }
                 }
             },
-            "yandex_kms_asymmetric_encryption_key": {
-                "current": "yandex:index/kmsAsymmetricEncryptionKey:KmsAsymmetricEncryptionKey",
-                "majorVersion": 1
-            },
-            "yandex_kms_asymmetric_encryption_key_iam_binding": {
-                "current": "yandex:index/kmsAsymmetricEncryptionKeyIamBinding:KmsAsymmetricEncryptionKeyIamBinding",
-                "majorVersion": 1,
-                "fields": {
-                    "members": {
-                        "maxItemsOne": false
-                    }
-                }
-            },
-            "yandex_kms_asymmetric_encryption_key_iam_member": {
-                "current": "yandex:index/kmsAsymmetricEncryptionKeyIamMember:KmsAsymmetricEncryptionKeyIamMember",
-                "majorVersion": 1
-            },
-            "yandex_kms_asymmetric_signature_key": {
-                "current": "yandex:index/kmsAsymmetricSignatureKey:KmsAsymmetricSignatureKey",
-                "majorVersion": 1
-            },
-            "yandex_kms_asymmetric_signature_key_iam_binding": {
-                "current": "yandex:index/kmsAsymmetricSignatureKeyIamBinding:KmsAsymmetricSignatureKeyIamBinding",
-                "majorVersion": 1,
-                "fields": {
-                    "members": {
-                        "maxItemsOne": false
-                    }
-                }
-            },
-            "yandex_kms_asymmetric_signature_key_iam_member": {
-                "current": "yandex:index/kmsAsymmetricSignatureKeyIamMember:KmsAsymmetricSignatureKeyIamMember",
-                "majorVersion": 1
-            },
             "yandex_kms_secret_ciphertext": {
                 "current": "yandex:index/kmsSecretCiphertext:KmsSecretCiphertext",
-                "majorVersion": 1
-            },
-            "yandex_kms_symmetric_key": {
-                "current": "yandex:index/kmsSymmetricKey:KmsSymmetricKey",
-                "majorVersion": 1
-            },
-            "yandex_kms_symmetric_key_iam_binding": {
-                "current": "yandex:index/kmsSymmetricKeyIamBinding:KmsSymmetricKeyIamBinding",
-                "majorVersion": 1,
-                "fields": {
-                    "members": {
-                        "maxItemsOne": false
-                    }
-                }
-            },
-            "yandex_kms_symmetric_key_iam_member": {
-                "current": "yandex:index/kmsSymmetricKeyIamMember:KmsSymmetricKeyIamMember",
                 "majorVersion": 1
             },
             "yandex_kubernetes_cluster": {
@@ -2797,6 +1569,16 @@
                                         }
                                     }
                                 },
+                                "scale_policy": {
+                                    "maxItemsOne": true,
+                                    "elem": {
+                                        "fields": {
+                                            "auto_scale": {
+                                                "maxItemsOne": true
+                                            }
+                                        }
+                                    }
+                                },
                                 "security_group_ids": {
                                     "maxItemsOne": false
                                 },
@@ -2818,6 +1600,9 @@
                                 }
                             }
                         }
+                    },
+                    "workload_identity_federation": {
+                        "maxItemsOne": true
                     }
                 }
             },
@@ -2958,15 +1743,6 @@
                     }
                 }
             },
-            "yandex_lb_target_group": {
-                "current": "yandex:index/lbTargetGroup:LbTargetGroup",
-                "majorVersion": 1,
-                "fields": {
-                    "target": {
-                        "maxItemsOne": false
-                    }
-                }
-            },
             "yandex_loadtesting_agent": {
                 "current": "yandex:index/loadtestingAgent:LoadtestingAgent",
                 "majorVersion": 1,
@@ -3015,19 +1791,6 @@
                     }
                 }
             },
-            "yandex_lockbox_secret_iam_binding": {
-                "current": "yandex:index/lockboxSecretIamBinding:LockboxSecretIamBinding",
-                "majorVersion": 1,
-                "fields": {
-                    "members": {
-                        "maxItemsOne": false
-                    }
-                }
-            },
-            "yandex_lockbox_secret_iam_member": {
-                "current": "yandex:index/lockboxSecretIamMember:LockboxSecretIamMember",
-                "majorVersion": 1
-            },
             "yandex_lockbox_secret_version": {
                 "current": "yandex:index/lockboxSecretVersion:LockboxSecretVersion",
                 "majorVersion": 1,
@@ -3053,10 +1816,6 @@
             },
             "yandex_lockbox_secret_version_hashed": {
                 "current": "yandex:index/lockboxSecretVersionHashed:LockboxSecretVersionHashed",
-                "majorVersion": 1
-            },
-            "yandex_logging_group": {
-                "current": "yandex:index/loggingGroup:LoggingGroup",
                 "majorVersion": 1
             },
             "yandex_mdb_clickhouse_cluster": {
@@ -3210,51 +1969,6 @@
                     }
                 }
             },
-            "yandex_mdb_elasticsearch_cluster": {
-                "current": "yandex:index/mdbElasticsearchCluster:MdbElasticsearchCluster",
-                "majorVersion": 1,
-                "fields": {
-                    "config": {
-                        "maxItemsOne": true,
-                        "elem": {
-                            "fields": {
-                                "data_node": {
-                                    "maxItemsOne": true,
-                                    "elem": {
-                                        "fields": {
-                                            "resources": {
-                                                "maxItemsOne": true
-                                            }
-                                        }
-                                    }
-                                },
-                                "master_node": {
-                                    "maxItemsOne": true,
-                                    "elem": {
-                                        "fields": {
-                                            "resources": {
-                                                "maxItemsOne": true
-                                            }
-                                        }
-                                    }
-                                },
-                                "plugins": {
-                                    "maxItemsOne": false
-                                }
-                            }
-                        }
-                    },
-                    "host": {
-                        "maxItemsOne": false
-                    },
-                    "maintenance_window": {
-                        "maxItemsOne": true
-                    },
-                    "security_group_ids": {
-                        "maxItemsOne": false
-                    }
-                }
-            },
             "yandex_mdb_greenplum_cluster": {
                 "current": "yandex:index/mdbGreenplumCluster:MdbGreenplumCluster",
                 "majorVersion": 1,
@@ -3393,6 +2107,9 @@
                                             }
                                         }
                                     }
+                                },
+                                "kafka_ui": {
+                                    "maxItemsOne": true
                                 },
                                 "kraft": {
                                     "maxItemsOne": true,
@@ -3566,11 +2283,20 @@
                                     "maxItemsOne": true,
                                     "elem": {
                                         "fields": {
+                                            "audit_log": {
+                                                "maxItemsOne": true
+                                            },
                                             "net": {
                                                 "maxItemsOne": true
                                             },
                                             "operation_profiling": {
                                                 "maxItemsOne": true
+                                            },
+                                            "oplog": {
+                                                "maxItemsOne": true
+                                            },
+                                            "set_parameter": {
+                                                "maxItemsOne": false
                                             },
                                             "storage": {
                                                 "maxItemsOne": true,
@@ -3605,6 +2331,9 @@
                                             "operation_profiling": {
                                                 "maxItemsOne": true
                                             },
+                                            "oplog": {
+                                                "maxItemsOne": true
+                                            },
                                             "security": {
                                                 "maxItemsOne": true,
                                                 "elem": {
@@ -3616,7 +2345,14 @@
                                                 }
                                             },
                                             "set_parameter": {
-                                                "maxItemsOne": true
+                                                "maxItemsOne": true,
+                                                "elem": {
+                                                    "fields": {
+                                                        "mirror_reads": {
+                                                            "maxItemsOne": true
+                                                        }
+                                                    }
+                                                }
                                             },
                                             "storage": {
                                                 "maxItemsOne": true,
@@ -3638,6 +2374,9 @@
                                     "maxItemsOne": true,
                                     "elem": {
                                         "fields": {
+                                            "audit_log": {
+                                                "maxItemsOne": true
+                                            },
                                             "net": {
                                                 "maxItemsOne": true,
                                                 "elem": {
@@ -3647,6 +2386,9 @@
                                                         }
                                                     }
                                                 }
+                                            },
+                                            "set_parameter": {
+                                                "maxItemsOne": true
                                             }
                                         }
                                     }
@@ -3737,6 +2479,9 @@
                     },
                     "database": {
                         "maxItemsOne": false
+                    },
+                    "disk_size_autoscaling": {
+                        "maxItemsOne": true
                     },
                     "host": {
                         "maxItemsOne": false
@@ -3934,47 +2679,6 @@
                     }
                 }
             },
-            "yandex_mdb_sqlserver_cluster": {
-                "current": "yandex:index/mdbSqlserverCluster:MdbSqlserverCluster",
-                "majorVersion": 1,
-                "fields": {
-                    "backup_window_start": {
-                        "maxItemsOne": true
-                    },
-                    "database": {
-                        "maxItemsOne": false
-                    },
-                    "host": {
-                        "maxItemsOne": false
-                    },
-                    "host_group_ids": {
-                        "maxItemsOne": false
-                    },
-                    "resources": {
-                        "maxItemsOne": true
-                    },
-                    "security_group_ids": {
-                        "maxItemsOne": false
-                    },
-                    "user": {
-                        "maxItemsOne": false,
-                        "elem": {
-                            "fields": {
-                                "permission": {
-                                    "maxItemsOne": false,
-                                    "elem": {
-                                        "fields": {
-                                            "roles": {
-                                                "maxItemsOne": false
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
             "yandex_message_queue": {
                 "current": "yandex:index/messageQueue:MessageQueue",
                 "majorVersion": 1
@@ -4120,14 +2824,6 @@
                     }
                 }
             },
-            "yandex_organizationmanager_group": {
-                "current": "yandex:index/organizationmanagerGroup:OrganizationmanagerGroup",
-                "majorVersion": 1
-            },
-            "yandex_organizationmanager_group_iam_member": {
-                "current": "yandex:index/organizationmanagerGroupIamMember:OrganizationmanagerGroupIamMember",
-                "majorVersion": 1
-            },
             "yandex_organizationmanager_group_mapping": {
                 "current": "yandex:index/organizationmanagerGroupMapping:OrganizationmanagerGroupMapping",
                 "majorVersion": 1
@@ -4144,19 +2840,6 @@
                         "maxItemsOne": false
                     }
                 }
-            },
-            "yandex_organizationmanager_organization_iam_binding": {
-                "current": "yandex:index/organizationmanagerOrganizationIamBinding:OrganizationmanagerOrganizationIamBinding",
-                "majorVersion": 1,
-                "fields": {
-                    "members": {
-                        "maxItemsOne": false
-                    }
-                }
-            },
-            "yandex_organizationmanager_organization_iam_member": {
-                "current": "yandex:index/organizationmanagerOrganizationIamMember:OrganizationmanagerOrganizationIamMember",
-                "majorVersion": 1
             },
             "yandex_organizationmanager_os_login_settings": {
                 "current": "yandex:index/organizationmanagerOsLoginSettings:OrganizationmanagerOsLoginSettings",
@@ -4183,44 +2866,6 @@
                 "current": "yandex:index/organizationmanagerSamlFederationUserAccount:OrganizationmanagerSamlFederationUserAccount",
                 "majorVersion": 1
             },
-            "yandex_organizationmanager_user_ssh_key": {
-                "current": "yandex:index/organizationmanagerUserSshKey:OrganizationmanagerUserSshKey",
-                "majorVersion": 1
-            },
-            "yandex_resourcemanager_cloud": {
-                "current": "yandex:index/resourcemanagerCloud:ResourcemanagerCloud",
-                "majorVersion": 1
-            },
-            "yandex_resourcemanager_cloud_iam_binding": {
-                "current": "yandex:index/resourcemanagerCloudIamBinding:ResourcemanagerCloudIamBinding",
-                "majorVersion": 1,
-                "fields": {
-                    "members": {
-                        "maxItemsOne": false
-                    }
-                }
-            },
-            "yandex_resourcemanager_cloud_iam_member": {
-                "current": "yandex:index/resourcemanagerCloudIamMember:ResourcemanagerCloudIamMember",
-                "majorVersion": 1
-            },
-            "yandex_resourcemanager_folder": {
-                "current": "yandex:index/resourcemanagerFolder:ResourcemanagerFolder",
-                "majorVersion": 1
-            },
-            "yandex_resourcemanager_folder_iam_binding": {
-                "current": "yandex:index/resourcemanagerFolderIamBinding:ResourcemanagerFolderIamBinding",
-                "majorVersion": 1,
-                "fields": {
-                    "members": {
-                        "maxItemsOne": false
-                    }
-                }
-            },
-            "yandex_resourcemanager_folder_iam_member": {
-                "current": "yandex:index/resourcemanagerFolderIamMember:ResourcemanagerFolderIamMember",
-                "majorVersion": 1
-            },
             "yandex_resourcemanager_folder_iam_policy": {
                 "current": "yandex:index/resourcemanagerFolderIamPolicy:ResourcemanagerFolderIamPolicy",
                 "majorVersion": 1
@@ -4229,6 +2874,9 @@
                 "current": "yandex:index/serverlessContainer:ServerlessContainer",
                 "majorVersion": 1,
                 "fields": {
+                    "async_invocation": {
+                        "maxItemsOne": true
+                    },
                     "connectivity": {
                         "maxItemsOne": true
                     },
@@ -4278,23 +2926,13 @@
                     }
                 }
             },
-            "yandex_serverless_container_iam_binding": {
-                "current": "yandex:index/serverlessContainerIamBinding:ServerlessContainerIamBinding",
-                "majorVersion": 1,
-                "fields": {
-                    "members": {
-                        "maxItemsOne": false
-                    }
-                }
-            },
-            "yandex_serverless_eventrouter_bus": {
-                "current": "yandex:index/serverlessEventrouterBus:ServerlessEventrouterBus",
-                "majorVersion": 1
-            },
             "yandex_serverless_eventrouter_connector": {
                 "current": "yandex:index/serverlessEventrouterConnector:ServerlessEventrouterConnector",
                 "majorVersion": 1,
                 "fields": {
+                    "timer": {
+                        "maxItemsOne": false
+                    },
                     "yds": {
                         "maxItemsOne": false
                     },
@@ -4355,119 +2993,6 @@
                     },
                     "ymq": {
                         "maxItemsOne": false
-                    }
-                }
-            },
-            "yandex_smartcaptcha_captcha": {
-                "current": "yandex:index/smartcaptchaCaptcha:SmartcaptchaCaptcha",
-                "majorVersion": 1,
-                "fields": {
-                    "allowed_sites": {
-                        "maxItemsOne": false
-                    },
-                    "override_variant": {
-                        "maxItemsOne": false
-                    },
-                    "security_rule": {
-                        "maxItemsOne": false,
-                        "elem": {
-                            "fields": {
-                                "condition": {
-                                    "maxItemsOne": true,
-                                    "elem": {
-                                        "fields": {
-                                            "headers": {
-                                                "maxItemsOne": false,
-                                                "elem": {
-                                                    "fields": {
-                                                        "value": {
-                                                            "maxItemsOne": true
-                                                        }
-                                                    }
-                                                }
-                                            },
-                                            "host": {
-                                                "maxItemsOne": true,
-                                                "elem": {
-                                                    "fields": {
-                                                        "hosts": {
-                                                            "maxItemsOne": false
-                                                        }
-                                                    }
-                                                }
-                                            },
-                                            "source_ip": {
-                                                "maxItemsOne": true,
-                                                "elem": {
-                                                    "fields": {
-                                                        "geo_ip_match": {
-                                                            "maxItemsOne": true,
-                                                            "elem": {
-                                                                "fields": {
-                                                                    "locations": {
-                                                                        "maxItemsOne": false
-                                                                    }
-                                                                }
-                                                            }
-                                                        },
-                                                        "geo_ip_not_match": {
-                                                            "maxItemsOne": true,
-                                                            "elem": {
-                                                                "fields": {
-                                                                    "locations": {
-                                                                        "maxItemsOne": false
-                                                                    }
-                                                                }
-                                                            }
-                                                        },
-                                                        "ip_ranges_match": {
-                                                            "maxItemsOne": true,
-                                                            "elem": {
-                                                                "fields": {
-                                                                    "ip_ranges": {
-                                                                        "maxItemsOne": false
-                                                                    }
-                                                                }
-                                                            }
-                                                        },
-                                                        "ip_ranges_not_match": {
-                                                            "maxItemsOne": true,
-                                                            "elem": {
-                                                                "fields": {
-                                                                    "ip_ranges": {
-                                                                        "maxItemsOne": false
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            },
-                                            "uri": {
-                                                "maxItemsOne": true,
-                                                "elem": {
-                                                    "fields": {
-                                                        "path": {
-                                                            "maxItemsOne": true
-                                                        },
-                                                        "queries": {
-                                                            "maxItemsOne": false,
-                                                            "elem": {
-                                                                "fields": {
-                                                                    "value": {
-                                                                        "maxItemsOne": true
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
                     }
                 }
             },
@@ -4843,6 +3368,9 @@
                 "current": "yandex:index/swsSecurityProfile:SwsSecurityProfile",
                 "majorVersion": 1,
                 "fields": {
+                    "analyze_request_body": {
+                        "maxItemsOne": true
+                    },
                     "security_rule": {
                         "maxItemsOne": false,
                         "elem": {
@@ -5325,6 +3853,49 @@
                     },
                     "rule": {
                         "maxItemsOne": false
+                    },
+                    "rule_set": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "core_rule_set": {
+                                    "maxItemsOne": true,
+                                    "elem": {
+                                        "fields": {
+                                            "rule_set": {
+                                                "maxItemsOne": true
+                                            }
+                                        }
+                                    }
+                                },
+                                "ml_rule_set": {
+                                    "maxItemsOne": true,
+                                    "elem": {
+                                        "fields": {
+                                            "rule_group": {
+                                                "maxItemsOne": false
+                                            },
+                                            "rule_set": {
+                                                "maxItemsOne": true
+                                            }
+                                        }
+                                    }
+                                },
+                                "ya_rule_set": {
+                                    "maxItemsOne": true,
+                                    "elem": {
+                                        "fields": {
+                                            "rule_group": {
+                                                "maxItemsOne": false
+                                            },
+                                            "rule_set": {
+                                                "maxItemsOne": true
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             },
@@ -5489,6 +4060,16 @@
                         "maxItemsOne": true,
                         "elem": {
                             "fields": {
+                                "auto_scale": {
+                                    "maxItemsOne": true,
+                                    "elem": {
+                                        "fields": {
+                                            "target_tracking": {
+                                                "maxItemsOne": true
+                                            }
+                                        }
+                                    }
+                                },
                                 "fixed_scale": {
                                     "maxItemsOne": true
                                 }
@@ -5502,15 +4083,6 @@
                         "maxItemsOne": true
                     },
                     "subnet_ids": {
-                        "maxItemsOne": false
-                    }
-                }
-            },
-            "yandex_ydb_database_iam_binding": {
-                "current": "yandex:index/ydbDatabaseIamBinding:YdbDatabaseIamBinding",
-                "majorVersion": 1,
-                "fields": {
-                    "members": {
                         "maxItemsOne": false
                     }
                 }
@@ -5547,6 +4119,9 @@
                                             }
                                         }
                                     }
+                                },
+                                "partition_by": {
+                                    "maxItemsOne": false
                                 }
                             }
                         }
@@ -5591,6 +4166,16 @@
                 "current": "yandex:index/ydbTopic:YdbTopic",
                 "majorVersion": 1,
                 "fields": {
+                    "auto_partitioning_settings": {
+                        "maxItemsOne": true,
+                        "elem": {
+                            "fields": {
+                                "auto_partitioning_write_speed_strategy": {
+                                    "maxItemsOne": true
+                                }
+                            }
+                        }
+                    },
                     "consumer": {
                         "maxItemsOne": false,
                         "elem": {
@@ -5825,6 +4410,9 @@
                                 }
                             }
                         }
+                    },
+                    "auto_scale_policy": {
+                        "maxItemsOne": false
                     },
                     "listener": {
                         "maxItemsOne": false,
@@ -6096,6 +4684,9 @@
                                                                 }
                                                             }
                                                         },
+                                                        "regex_rewrite": {
+                                                            "maxItemsOne": false
+                                                        },
                                                         "upgrade_types": {
                                                             "maxItemsOne": false
                                                         }
@@ -6282,6 +4873,9 @@
                                     "maxItemsOne": false,
                                     "elem": {
                                         "fields": {
+                                            "dns_filter": {
+                                                "maxItemsOne": false
+                                            },
                                             "excluded_events": {
                                                 "maxItemsOne": false
                                             },
@@ -6319,6 +4913,19 @@
                 "current": "yandex:index/getBackupPolicy:getBackupPolicy",
                 "majorVersion": 1,
                 "fields": {
+                    "file_filters": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "exclusion_masks": {
+                                    "maxItemsOne": false
+                                },
+                                "inclusion_masks": {
+                                    "maxItemsOne": false
+                                }
+                            }
+                        }
+                    },
                     "reattempts": {
                         "maxItemsOne": false
                     },
@@ -6403,6 +5010,9 @@
                                 "cors": {
                                     "maxItemsOne": false
                                 },
+                                "edge_cache_settings_codes": {
+                                    "maxItemsOne": true
+                                },
                                 "ip_address_acl": {
                                     "maxItemsOne": true,
                                     "elem": {
@@ -6417,6 +5027,9 @@
                                     "maxItemsOne": false
                                 },
                                 "query_params_whitelist": {
+                                    "maxItemsOne": false
+                                },
+                                "stale": {
                                     "maxItemsOne": false
                                 }
                             }
@@ -7051,10 +5664,6 @@
                 "current": "yandex:index/getIamUser:getIamUser",
                 "majorVersion": 1
             },
-            "yandex_iam_workload_identity_federated_credential": {
-                "current": "yandex:index/getIamWorkloadIdentityFederatedCredential:getIamWorkloadIdentityFederatedCredential",
-                "majorVersion": 1
-            },
             "yandex_iam_workload_identity_oidc_federation": {
                 "current": "yandex:index/getIamWorkloadIdentityOidcFederation:getIamWorkloadIdentityOidcFederation",
                 "majorVersion": 1,
@@ -7103,14 +5712,6 @@
                     }
                 }
             },
-            "yandex_kms_asymmetric_encryption_key": {
-                "current": "yandex:index/getKmsAsymmetricEncryptionKey:getKmsAsymmetricEncryptionKey",
-                "majorVersion": 1
-            },
-            "yandex_kms_asymmetric_signature_key": {
-                "current": "yandex:index/getKmsAsymmetricSignatureKey:getKmsAsymmetricSignatureKey",
-                "majorVersion": 1
-            },
             "yandex_kms_symmetric_key": {
                 "current": "yandex:index/getKmsSymmetricKey:getKmsSymmetricKey",
                 "majorVersion": 1
@@ -7145,6 +5746,16 @@
                                 "regional": {
                                     "maxItemsOne": false
                                 },
+                                "scale_policy": {
+                                    "maxItemsOne": false,
+                                    "elem": {
+                                        "fields": {
+                                            "auto_scale": {
+                                                "maxItemsOne": false
+                                            }
+                                        }
+                                    }
+                                },
                                 "security_group_ids": {
                                     "maxItemsOne": false
                                 },
@@ -7166,6 +5777,9 @@
                                 }
                             }
                         }
+                    },
+                    "workload_identity_federation": {
+                        "maxItemsOne": false
                     }
                 }
             },
@@ -7537,51 +6151,6 @@
                     }
                 }
             },
-            "yandex_mdb_elasticsearch_cluster": {
-                "current": "yandex:index/getMdbElasticsearchCluster:getMdbElasticsearchCluster",
-                "majorVersion": 1,
-                "fields": {
-                    "config": {
-                        "maxItemsOne": false,
-                        "elem": {
-                            "fields": {
-                                "data_node": {
-                                    "maxItemsOne": false,
-                                    "elem": {
-                                        "fields": {
-                                            "resources": {
-                                                "maxItemsOne": false
-                                            }
-                                        }
-                                    }
-                                },
-                                "master_node": {
-                                    "maxItemsOne": true,
-                                    "elem": {
-                                        "fields": {
-                                            "resources": {
-                                                "maxItemsOne": false
-                                            }
-                                        }
-                                    }
-                                },
-                                "plugins": {
-                                    "maxItemsOne": false
-                                }
-                            }
-                        }
-                    },
-                    "host": {
-                        "maxItemsOne": false
-                    },
-                    "maintenance_window": {
-                        "maxItemsOne": false
-                    },
-                    "security_group_ids": {
-                        "maxItemsOne": false
-                    }
-                }
-            },
             "yandex_mdb_greenplum_cluster": {
                 "current": "yandex:index/getMdbGreenplumCluster:getMdbGreenplumCluster",
                 "majorVersion": 1,
@@ -7720,6 +6289,9 @@
                                             }
                                         }
                                     }
+                                },
+                                "kafka_ui": {
+                                    "maxItemsOne": true
                                 },
                                 "kraft": {
                                     "maxItemsOne": true,
@@ -7893,11 +6465,20 @@
                                     "maxItemsOne": true,
                                     "elem": {
                                         "fields": {
+                                            "audit_log": {
+                                                "maxItemsOne": true
+                                            },
                                             "net": {
                                                 "maxItemsOne": true
                                             },
                                             "operation_profiling": {
                                                 "maxItemsOne": true
+                                            },
+                                            "oplog": {
+                                                "maxItemsOne": true
+                                            },
+                                            "set_parameter": {
+                                                "maxItemsOne": false
                                             },
                                             "storage": {
                                                 "maxItemsOne": true,
@@ -7932,6 +6513,9 @@
                                             "operation_profiling": {
                                                 "maxItemsOne": true
                                             },
+                                            "oplog": {
+                                                "maxItemsOne": true
+                                            },
                                             "security": {
                                                 "maxItemsOne": true,
                                                 "elem": {
@@ -7943,7 +6527,14 @@
                                                 }
                                             },
                                             "set_parameter": {
-                                                "maxItemsOne": true
+                                                "maxItemsOne": true,
+                                                "elem": {
+                                                    "fields": {
+                                                        "mirror_reads": {
+                                                            "maxItemsOne": true
+                                                        }
+                                                    }
+                                                }
                                             },
                                             "storage": {
                                                 "maxItemsOne": true,
@@ -7965,6 +6556,9 @@
                                     "maxItemsOne": true,
                                     "elem": {
                                         "fields": {
+                                            "audit_log": {
+                                                "maxItemsOne": true
+                                            },
                                             "net": {
                                                 "maxItemsOne": true,
                                                 "elem": {
@@ -7974,6 +6568,9 @@
                                                         }
                                                     }
                                                 }
+                                            },
+                                            "set_parameter": {
+                                                "maxItemsOne": true
                                             }
                                         }
                                     }
@@ -8063,6 +6660,9 @@
                         "maxItemsOne": false
                     },
                     "database": {
+                        "maxItemsOne": false
+                    },
+                    "disk_size_autoscaling": {
                         "maxItemsOne": false
                     },
                     "host": {
@@ -8252,47 +6852,6 @@
                     }
                 }
             },
-            "yandex_mdb_sqlserver_cluster": {
-                "current": "yandex:index/getMdbSqlserverCluster:getMdbSqlserverCluster",
-                "majorVersion": 1,
-                "fields": {
-                    "backup_window_start": {
-                        "maxItemsOne": false
-                    },
-                    "database": {
-                        "maxItemsOne": false
-                    },
-                    "host": {
-                        "maxItemsOne": false
-                    },
-                    "host_group_ids": {
-                        "maxItemsOne": false
-                    },
-                    "resources": {
-                        "maxItemsOne": false
-                    },
-                    "security_group_ids": {
-                        "maxItemsOne": false
-                    },
-                    "user": {
-                        "maxItemsOne": false,
-                        "elem": {
-                            "fields": {
-                                "permission": {
-                                    "maxItemsOne": false,
-                                    "elem": {
-                                        "fields": {
-                                            "roles": {
-                                                "maxItemsOne": false
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
             "yandex_message_queue": {
                 "current": "yandex:index/getMessageQueue:getMessageQueue",
                 "majorVersion": 1
@@ -8472,10 +7031,6 @@
                 "current": "yandex:index/getOrganizationmanagerSamlFederationUserAccount:getOrganizationmanagerSamlFederationUserAccount",
                 "majorVersion": 1
             },
-            "yandex_organizationmanager_user_ssh_key": {
-                "current": "yandex:index/getOrganizationmanagerUserSshKey:getOrganizationmanagerUserSshKey",
-                "majorVersion": 1
-            },
             "yandex_resourcemanager_cloud": {
                 "current": "yandex:index/getResourcemanagerCloud:getResourcemanagerCloud",
                 "majorVersion": 1
@@ -8488,6 +7043,9 @@
                 "current": "yandex:index/getServerlessContainer:getServerlessContainer",
                 "majorVersion": 1,
                 "fields": {
+                    "async_invocation": {
+                        "maxItemsOne": false
+                    },
                     "connectivity": {
                         "maxItemsOne": true
                     },
@@ -8542,6 +7100,9 @@
                 "current": "yandex:index/getServerlessEventrouterConnector:getServerlessEventrouterConnector",
                 "majorVersion": 1,
                 "fields": {
+                    "timer": {
+                        "maxItemsOne": false
+                    },
                     "yds": {
                         "maxItemsOne": false
                     },
@@ -8581,119 +7142,6 @@
                     },
                     "ymq": {
                         "maxItemsOne": false
-                    }
-                }
-            },
-            "yandex_smartcaptcha_captcha": {
-                "current": "yandex:index/getSmartcaptchaCaptcha:getSmartcaptchaCaptcha",
-                "majorVersion": 1,
-                "fields": {
-                    "allowed_sites": {
-                        "maxItemsOne": false
-                    },
-                    "override_variant": {
-                        "maxItemsOne": false
-                    },
-                    "security_rule": {
-                        "maxItemsOne": false,
-                        "elem": {
-                            "fields": {
-                                "condition": {
-                                    "maxItemsOne": false,
-                                    "elem": {
-                                        "fields": {
-                                            "headers": {
-                                                "maxItemsOne": false,
-                                                "elem": {
-                                                    "fields": {
-                                                        "value": {
-                                                            "maxItemsOne": false
-                                                        }
-                                                    }
-                                                }
-                                            },
-                                            "host": {
-                                                "maxItemsOne": false,
-                                                "elem": {
-                                                    "fields": {
-                                                        "hosts": {
-                                                            "maxItemsOne": false
-                                                        }
-                                                    }
-                                                }
-                                            },
-                                            "source_ip": {
-                                                "maxItemsOne": false,
-                                                "elem": {
-                                                    "fields": {
-                                                        "geo_ip_match": {
-                                                            "maxItemsOne": false,
-                                                            "elem": {
-                                                                "fields": {
-                                                                    "locations": {
-                                                                        "maxItemsOne": false
-                                                                    }
-                                                                }
-                                                            }
-                                                        },
-                                                        "geo_ip_not_match": {
-                                                            "maxItemsOne": false,
-                                                            "elem": {
-                                                                "fields": {
-                                                                    "locations": {
-                                                                        "maxItemsOne": false
-                                                                    }
-                                                                }
-                                                            }
-                                                        },
-                                                        "ip_ranges_match": {
-                                                            "maxItemsOne": false,
-                                                            "elem": {
-                                                                "fields": {
-                                                                    "ip_ranges": {
-                                                                        "maxItemsOne": false
-                                                                    }
-                                                                }
-                                                            }
-                                                        },
-                                                        "ip_ranges_not_match": {
-                                                            "maxItemsOne": false,
-                                                            "elem": {
-                                                                "fields": {
-                                                                    "ip_ranges": {
-                                                                        "maxItemsOne": false
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            },
-                                            "uri": {
-                                                "maxItemsOne": false,
-                                                "elem": {
-                                                    "fields": {
-                                                        "path": {
-                                                            "maxItemsOne": false
-                                                        },
-                                                        "queries": {
-                                                            "maxItemsOne": false,
-                                                            "elem": {
-                                                                "fields": {
-                                                                    "value": {
-                                                                        "maxItemsOne": false
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
                     }
                 }
             },
@@ -8949,6 +7397,9 @@
                 "current": "yandex:index/getSwsSecurityProfile:getSwsSecurityProfile",
                 "majorVersion": 1,
                 "fields": {
+                    "analyze_request_body": {
+                        "maxItemsOne": false
+                    },
                     "security_rule": {
                         "maxItemsOne": false,
                         "elem": {
@@ -9431,6 +7882,49 @@
                     },
                     "rule": {
                         "maxItemsOne": false
+                    },
+                    "rule_set": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "core_rule_set": {
+                                    "maxItemsOne": false,
+                                    "elem": {
+                                        "fields": {
+                                            "rule_set": {
+                                                "maxItemsOne": false
+                                            }
+                                        }
+                                    }
+                                },
+                                "ml_rule_set": {
+                                    "maxItemsOne": false,
+                                    "elem": {
+                                        "fields": {
+                                            "rule_group": {
+                                                "maxItemsOne": false
+                                            },
+                                            "rule_set": {
+                                                "maxItemsOne": false
+                                            }
+                                        }
+                                    }
+                                },
+                                "ya_rule_set": {
+                                    "maxItemsOne": false,
+                                    "elem": {
+                                        "fields": {
+                                            "rule_group": {
+                                                "maxItemsOne": false
+                                            },
+                                            "rule_set": {
+                                                "maxItemsOne": false
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             },
@@ -9564,9 +8058,6 @@
                             "fields": {
                                 "region": {
                                     "maxItemsOne": false
-                                },
-                                "zone": {
-                                    "maxItemsOne": false
                                 }
                             }
                         }
@@ -9575,6 +8066,16 @@
                         "maxItemsOne": false,
                         "elem": {
                             "fields": {
+                                "auto_scale": {
+                                    "maxItemsOne": false,
+                                    "elem": {
+                                        "fields": {
+                                            "target_tracking": {
+                                                "maxItemsOne": false
+                                            }
+                                        }
+                                    }
+                                },
                                 "fixed_scale": {
                                     "maxItemsOne": false
                                 }
@@ -9603,5 +8104,13 @@
             }
         }
     },
-    "auto-settings": {}
+    "auto-settings": {
+        "datasources": {
+            "yandex_cdn_resource": {
+                "maxItemsOneOverrides": {
+                    "ssl_certificate": true
+                }
+            }
+        }
+    }
 }

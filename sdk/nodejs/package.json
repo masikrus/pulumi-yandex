@@ -1,6 +1,6 @@
 {
     "name": "pulumi-yandex",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "A Pulumi package for creating and managing yandex cloud resources.",
     "keywords": [
         "yandex",
@@ -22,6 +22,6 @@
     "pulumi": {
         "resource": true,
         "name": "yandex",
-        "version": "1.0.0"
+        "version": "1.0.1"
     }
 }
