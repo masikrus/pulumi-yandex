@@ -8,6 +8,11 @@ linters:
     - nakedret
     - revive
     - unconvert
+  settings:
+    revive:
+      rules:
+        - name: var-naming
+          disabled: true
   exclusions:
     generated: lax
     presets:
